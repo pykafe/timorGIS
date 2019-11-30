@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.gis.utils import LayerMapping
-from map.models import Suco
+from ...models import Suco
 
 class Command(BaseCommand):
     help = 'Import models from shapefiles'
@@ -18,4 +18,4 @@ class Command(BaseCommand):
             lm.save(strict=True, verbose=True)
             self.stdout.write(self.style.SUCCESS('Successfully imported Sucos'))
         except:
-            raise CommandError('Erro importing Sucos')
+            raise CommandError('Error importing Sucos')

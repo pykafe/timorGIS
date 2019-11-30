@@ -1,0 +1,97 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# sqlite
+*.sqlite3
+
+# Pluma save files
+*.save
+*.save.*
+*.swp
+*.swo
+
+# MacOS X
+.DS_Store
+
+# gedit
+*~
+
+# local settings file
+catalpa_wagtail/catalpa_wagtail/local_settings.py
+
+# django public directories
+media/
+static/
+
+# tool artifacts
+tools/*.custom
+
+# NPM
+node_modules
+
+# pyenv
+.python-version
+
+# VSCode
+.vscode
+
+# dist
+dist
+!dist/.placeholder
+dist/4a37f8008959c75f619bf0a3a4e2d7a2.png
+dist/catalpa.css
+dist/catalpa.js
