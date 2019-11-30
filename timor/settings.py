@@ -80,7 +80,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'timor_db',
-        'PORT': 5433
     }
 }
 
@@ -122,3 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from .local_settings import *  # noqa
+except ImportError:
+    pass
