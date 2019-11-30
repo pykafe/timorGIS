@@ -9,3 +9,15 @@ class Suco(models.Model):
 
     def __str__(self):
         return '{} pk:{}'.format(self.name, self.pk)
+
+
+class Aldeia(models.Model):
+    name = models.CharField(max_length=425)
+    descriptio_name = models.CharField(max_length=425)
+    id_aldeia_name = models.CharField(max_length=425)
+    dist_code_name = models.IntegerField()
+
+    geom = models.PointField()
+
+    def __str__(self):
+        return '{} pk:{}'.format(self.name, self.pk)
