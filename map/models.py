@@ -12,6 +12,15 @@ class Suco(models.Model):
         return '{} pk:{}'.format(self.name, self.pk)
 
 
+class Aldeia(models.Model):
+    name = models.CharField(max_length=124)
+
+    geom = models.PointField()
+
+    def __str__(self):
+        return '{} pk:{}'.format(self.name, self.pk)
+
+      
 class District(models.Model):
     name = models.CharField(max_length=124)
 
