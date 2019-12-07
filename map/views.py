@@ -1,6 +1,6 @@
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
-from .models import Suco, District
+from .models import Aldeia, Suco, District
 
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
@@ -10,5 +10,6 @@ class MapView(TemplateView):
 
         context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
 
         return context
