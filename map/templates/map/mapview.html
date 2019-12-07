@@ -19,9 +19,16 @@
     </head>
     <body>
         <div class="container">
+            <h2>Mapa Timor</h2>
+            <div id="mapid">
+                <script>
+            var mymap = L.map('mapid').setView([-8.7849675, 124.6046892,8], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
+                </script>
+                    </div>
             <div class="row">
                 <div class="col-12">
-                    <h2>Lista Suco no area lokal</h2>
+                    <h4>Lista Suco no area lokal</h4>
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -45,12 +52,6 @@
                         </tbody>
                         </table>
 
-                    <div id="mapid">
-                        <script>
-                    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
-                        </script>
-                    </div>
                 </div>
             </div>
         </div>
