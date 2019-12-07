@@ -12,10 +12,7 @@ class Suco(models.Model):
 
 
 class Aldeia(models.Model):
-    name = models.CharField(max_length=425)
-    descriptio_name = models.CharField(max_length=425)
-    id_aldeia_name = models.CharField(max_length=425)
-    dist_code_name = models.IntegerField()
+    name = models.CharField(max_length=124)
 
     geom = models.PointField()
 

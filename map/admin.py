@@ -8,8 +8,8 @@ class SucoAdmin(admin.OSMGeoAdmin):
 
 
 class AldeiaAdmin(admin.OSMGeoAdmin):
-    list_display = ['name', 'descriptio_name', 'id_aldeia_name', 'dist_code_name']
-    list_filter = ['name', 'descriptio_name']
+    list_display = ['name']
+    list_filter = ['name']
 
 admin.site.register(Suco, SucoAdmin)
 admin.site.register(Aldeia, AldeiaAdmin)
