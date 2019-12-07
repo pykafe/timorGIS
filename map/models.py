@@ -20,8 +20,17 @@ class Aldeia(models.Model):
     def __str__(self):
         return '{} pk:{}'.format(self.name, self.pk)
 
-      
+
 class District(models.Model):
+    name = models.CharField(max_length=124)
+
+    geom = models.MultiPolygonField()
+
+    def __str__(self):
+        return '{} pk:{}'.format(self.name, self.pk)
+
+
+class Subdistrict(models.Model):
     name = models.CharField(max_length=124)
 
     geom = models.MultiPolygonField()

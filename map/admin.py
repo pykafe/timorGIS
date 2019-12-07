@@ -1,5 +1,5 @@
 from django.contrib.gis import admin
-from .models import Suco, Aldeia, District
+from .models import Suco, Aldeia, District, Subdistrict
 
 
 class SucoAdmin(admin.OSMGeoAdmin):
@@ -11,11 +11,18 @@ class AldeiaAdmin(admin.OSMGeoAdmin):
     list_display = ['name']
     list_filter = ['name']
 
-    
+
 class DistrictAdmin(admin.OSMGeoAdmin):
     list_display = ['name']
-    
-   
+    list_filter = ['name']
+
+
+class SubdistrictAdmin(admin.OSMGeoAdmin):
+    list_display = ['name']
+    list_filter = ['name']
+
+
 admin.site.register(Suco, SucoAdmin)
 admin.site.register(Aldeia, AldeiaAdmin)
 admin.site.register(District, DistrictAdmin)
+admin.site.register(Subdistrict, SubdistrictAdmin)
