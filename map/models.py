@@ -15,7 +15,7 @@ class Suco(models.Model):
 class District(models.Model):
     name = models.CharField(max_length=124)
 
-    geom = models.PolygonField()
+    geom = models.MultiPolygonField()
 
     def __str__(self):
         return '{} pk:{}'.format(self.name, self.pk)
