@@ -1,5 +1,23 @@
+body {
+    margin: 0px;
+    color: #000000c7;
+    font-family: 'Montserrat';
+}
+
 #mapid { 
     height: 450px; 
     width: 1300px;
     margin-bottom: 30px;
+}
+
+.container {
+    margin: 0px;
+}
+
+.logo {
+    font-size: 46px;
+}
+
+.text {
+    font-size: 18px;
 }

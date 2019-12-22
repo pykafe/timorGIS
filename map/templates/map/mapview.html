@@ -18,40 +18,16 @@
 
     </head>
     <body>
-        <h2>Mapa Timor</h2>
-        <div id="mapid">
-            <script>
-        var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
-            </script>
-        </div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h4>Lista Suco no area lokal</h4>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">SUCO</th>
-                            <th scope="col">SUB-DISTRICT</th>
-                            <th scope="col">DISTRICT</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                         <ul>
-                            {% for item in suco %}
-                            <tr>
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.subdistrict_name }}</td>
-                                <td>{{ item.district_name }}</td>
-                            </tr>
-                            {% endfor %}
-                            </ul>
-
-                        </tbody>
-                        </table>
-
+                    <span class="logo">Geo<span class="text">Timor</span></span>
+                    <div id="mapid">
+                        <script>
+                            var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
