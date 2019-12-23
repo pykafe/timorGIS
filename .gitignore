@@ -75,7 +75,6 @@ catalpa_wagtail/catalpa_wagtail/local_settings.py
 
 # django public directories
 media/
-#static/
 
 # tool artifacts
 tools/*.custom
