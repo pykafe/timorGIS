@@ -8,20 +8,24 @@
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
     <style>
-        #mapid { height: 180px; }
+        #mapid { height: 50%; }
     </style>
     </head>
     <body>
         HEllo world
-        
         <div id="mapid"></div>
-        
         <script>
-    const sucos = {{ sucos|safe }};
-    const districts = {{ districts|safe }};
-    const aldeias = {{ aldeias|safe }};
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
+          const sucos = {{ sucos|safe }};
+          const districts = {{ districts|safe }};
+          const aldeias = {{ aldeias|safe }};
+          var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
+          L.geoJSON(aldeias, {
+              style: function (feature) {
+                  return {color: 'red'};
+              }
+          }).bindPopup(function (layer) {
+              return layer.feature.properties.name;
+          }).addTo(mymap);
         </script>
     </body>
 </html>
