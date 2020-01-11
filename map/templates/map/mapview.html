@@ -15,16 +15,15 @@
         HEllo world
         <div id="mapid"></div>
         <script>
-          const sucos = {{ sucos|safe }};
           const districts = {{ districts|safe }};
-          const aldeias = {{ aldeias|safe }};
           var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
-          L.geoJSON(aldeias, {
+          L.geoJSON(districts, {
               style: function (feature) {
-                  return {color: 'red'};
+                  return {color: 'orange'};
               }
           }).bindPopup(function (layer) {
-              return layer.feature.properties.name;
+              var name = layer.feature.properties.name;
+              return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
           }).addTo(mymap);
         </script>
     </body>
