@@ -17,10 +17,10 @@ class MapView(TemplateView):
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
         # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
         context['points'] = serialize('geojson', Point.objects.all(), geometry_field='geom')
-        for  photo in PhotoTimor.objects.all():
-            photos = "media/"+str(photo)
-            get_data = get_exif_data(Image.open(photos))
-            (lat, lon) = get_lat_lon(get_data)
-            images.append({"lat": lat, "lon": lon, "photo": photos})
+        for photo in PhotoTimor.objects.all():
+            get_data = get_exif_data(Image.open(photo.image.path))
+            lat, lon = get_lat_lon(get_data)
+            if lat and lon:
+                images.append({"lat": lat, "lon": lon, "photo": photo.image.url})
         context['geoimages'] = images
         return context
