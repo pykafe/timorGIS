@@ -43,7 +43,7 @@
                         }).addTo(mymap);  
 
                         {%for photo in geoimages %}
-                            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90'>"+"</br><a target='_blank' href='https://www.google.com/maps?q={{photo.lat}},{{photo.lon}}'>Detail</a>").openPopup().addTo(mymap);
+                            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' width='100'>"+"</br><a target='_blank' href='https://www.google.com/maps?q={{photo.lat}},{{photo.lon}}'>Detail</a>").openPopup().addTo(mymap);
                         {%endfor%}
                     </script>
                 </div>
