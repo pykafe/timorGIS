@@ -52,3 +52,22 @@ class Istoriaviazen(models.Model):
 
     def __str__(self):
         return f'{self.tite}, {self.pk}'
+
+      
+class Point(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+
+    geom = models.PointField()
+
+    description = models.TextField()
+
+    def __str__(self):
+        return '{} '.format(self.name)
+
+      
+class PhotoTimor(models.Model):
+    image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
+
+
+    def __str__(self):
+        return "{photo}".format(photo=self.image)
