@@ -5,6 +5,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/timor.css' %}">
+
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 </head>
@@ -21,7 +24,7 @@
             return {color: 'orange'};
         }
     }).bindPopup(function (layer) {
-            var name = layer.feature.properties.name;
+        var name = layer.feature.properties.name;
             return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
     }).addTo(mymap);
     {%for photo in geoimages %}
@@ -43,12 +46,12 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-md-2 list-users">
-        <p>Mario</p>
-        <p>Mariano</p>
-        <p>Joanico</p>
-        <p>Ony</p>
-    </div>
+        <div class="col-md-2 list-users">
+            <p>Mario</p>
+            <p>Mariano</p>
+            <p>Joanico</p>
+            <p>Ony</p>
+        </div>
         <div class="col-md-10">
             <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
             <p>Title: Trip to Baguia</p>
@@ -65,10 +68,8 @@
                     <img src="{% static 'img/new_image.jpg' %}" class="gallery__img" width="300" height="240" alt="Image 3">
                 </figure>
             </div>
-
             <p>Description/comments: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
             <p>My trip from January 29 - February 02 2020</p>
-
             <p><img src="{% static 'img/ano.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mariano</span></p>
             <p>Title</p>
             <p>Description/comments</p>
