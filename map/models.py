@@ -1,4 +1,7 @@
 from django.contrib.gis.db import models
+from django.contrib.auth.models import User
+from django.contrib.postgres.fields import DateRangeField
+from psycopg2.extras import DateRange
 
 
 class Suco(models.Model):
@@ -37,3 +40,15 @@ class Subdistrict(models.Model):
 
     def __str__(self):
         return '{} pk:{}'.format(self.name, self.pk)
+
+
+class Istoriaviazen(models.Model):
+    title = models.CharField(max_length=80, null=False)
+    description = models.TextField(null=False)
+    date = DateRangeField()
+    upload_date = models.DateTimeField(null=False)
+    creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
+    people = models.ManyToManyField(User, related_name='subistoria')
+
+    def __str__(self):
+        return f'{self.tite}, {self.pk}'
