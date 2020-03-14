@@ -28,3 +28,7 @@ class MapView(TemplateView):
 
 class AnotherView(TemplateView):
     template_name = 'map/another.html'
+
+
+class AddPostView(TemplateView):
+    template_name = 'map/add_post.html'
