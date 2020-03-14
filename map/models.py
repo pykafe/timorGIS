@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import DateRangeField
@@ -53,7 +54,7 @@ class Istoriaviazen(models.Model):
     def __str__(self):
         return f'{self.tite}, {self.pk}'
 
-      
+
 class Point(models.Model):
     name = models.CharField(max_length=100, blank=False)
 
@@ -64,10 +65,25 @@ class Point(models.Model):
     def __str__(self):
         return '{} '.format(self.name)
 
-      
+
 class PhotoTimor(models.Model):
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
 
     def __str__(self):
         return "{photo}".format(photo=self.image)
+
+def user_photo_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_photo/<username>
+    return 'user_photo/{0}_{1}'.format(instance.user.username, filename)
+
+class UserPhoto(models.Model):
+    ''' add the ability to store photo of the user '''
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    photo = models.ImageField(upload_to=user_photo_path)
+
+
+

@@ -6,7 +6,6 @@ from PIL import Image
 from map.get_image_location import get_exif_data, get_lat_lon
 
 
-
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
 
@@ -25,6 +24,11 @@ class MapView(TemplateView):
                 images.append({"lat": lat, "lon": lon, "photo": photo.image.url})
         context['geoimages'] = images
         return context
+
+
+class AddUserView(TemplateView):
+    template_name = 'map/add_user.html'
+
 
 class AnotherView(TemplateView):
     template_name = 'map/another.html'
