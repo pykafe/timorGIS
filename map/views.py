@@ -26,5 +26,10 @@ class MapView(TemplateView):
         context['geoimages'] = images
         return context
 
+
 class AnotherView(TemplateView):
     template_name = 'map/another.html'
+
+
+class AddviazenView(TemplateView):
+    template_name = 'map/addviazenview.html'
