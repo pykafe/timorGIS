@@ -28,3 +28,7 @@ class MapView(TemplateView):
 
 class AnotherView(TemplateView):
     template_name = 'map/another.html'
+
+
+class KriaviajenView(TemplateView):
+    template_name = 'map/kria_viajen.html'
