@@ -4,6 +4,8 @@ from .models import Aldeia, Suco, District
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor
 from PIL import Image
 from map.get_image_location import get_exif_data, get_lat_lon
+from map.forms import IstoriaviazenForm
+from django.http import HttpResponse
 
 
 class MapView(TemplateView):
@@ -23,4 +25,11 @@ class MapView(TemplateView):
             if lat and lon:
                 images.append({"lat": lat, "lon": lon, "photo": photo.image.url})
         context['geoimages'] = images
+        context['istoriaviazen'] = IstoriaviazenForm()
         return context
+
+
+def viazenview(request):
+
+    return HttpResponse("Hello world")
+

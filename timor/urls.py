@@ -18,8 +18,10 @@ from django.urls import path
 from map.views import MapView
 from django.conf import settings
 from django.conf.urls.static import static
+from map.views import  viazenview
 
 urlpatterns = [
     path('', MapView.as_view()),
+    path('viazen/', viazenview, name="viazen" ),
     path('admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

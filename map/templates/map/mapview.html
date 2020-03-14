@@ -25,6 +25,12 @@
                     <h2>Geo Timor</h2>
                     
                     <div id="mapid"></div>
+
+                    <form method="POST" action="{% url 'viazen' %}">
+                    {% csrf_token %} 
+                        {{ istoriaviazen.as_p }}
+                        <button type="submit">Save</button>  
+                    </form>
                   
                     <script>
                         const districts = {{ districts|safe }};
