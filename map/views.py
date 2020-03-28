@@ -1,7 +1,8 @@
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 from .models import Aldeia, Suco, District
-from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor
+from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
 from PIL import Image
 from map.get_image_location import get_exif_data, get_lat_lon
 
@@ -31,5 +32,7 @@ class AnotherView(TemplateView):
     template_name = 'map/another.html'
 
 
-class HatamaViazenView(TemplateView):
+class HatamaViazenView(CreateView):
     template_name = 'map/hatamaviazenview.html'
+    model = Istoriaviazen
+    fields = ['title', 'description', 'date', 'creator', 'people']
