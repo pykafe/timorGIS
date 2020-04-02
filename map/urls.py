@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import MapView, AnotherView, HatamaViazenView, delete_viazenview
+from .views import MapView, AnotherView, HatamaViazenView, ViazenDeleteView
 
 urlpatterns = [
     path('', MapView.as_view(), name="home"),
     path('another', AnotherView.as_view()),
     path('hatama_viazen/', HatamaViazenView.as_view(), name='hatama_viazen'),
-    path('<viazen_id>/delete', delete_viazenview, name="delete_viazen"),
+    path('<int:pk>/delete', ViazenDeleteView.as_view(), name="delete_viazen"),
 ]
