@@ -54,7 +54,7 @@ class Istoriaviazen(models.Model):
     image_trip = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
     def __str__(self):
-        return f'{self.tite}, {self.pk}'
+        return f'{self.title}, {self.pk}'
 
 
 class Point(models.Model):

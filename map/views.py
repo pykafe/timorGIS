@@ -6,6 +6,7 @@ from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Isto
 from PIL import Image
 from map.get_image_location import get_exif_data, get_lat_lon
 from django.urls import reverse_lazy
+from django.shortcuts import (get_object_or_404, render, HttpResponseRedirect)
 
 
 
@@ -38,3 +39,12 @@ class HatamaViazenView(CreateView):
     model = Istoriaviazen
     fields = ['title', 'description', 'date', 'creator', 'people', 'image_trip']
     success_url = reverse_lazy('home')
+
+
+def delete_viazenview(request, viazen_id):
+    context ={}
+    obj = get_object_or_404(Istoriaviazen, id = viazen_id)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/")
+    return render(request, "map/delete_viazenview.html", context)
