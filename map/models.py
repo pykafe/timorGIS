@@ -2,9 +2,8 @@ from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import DateRangeField
 from psycopg2.extras import DateRange
-from map.get_image_location import get_exif_data, get_lat_lon
 from django.core.exceptions import ValidationError
-from PIL import Image
+from map.gps_images import ImageMetaData
 
 
 class Suco(models.Model):
@@ -78,7 +77,7 @@ class PhotoTimor(models.Model):
     def clean(self):
         """check image if it has longitude and latitude before upload to media file"""
         if self.image:
-            get_data = get_exif_data(Image.open(self.image))
-            lat, lon = get_lat_lon(get_data)
+            get_data = ImageMetaData(self.image)
+            lat, lon = get_data.get_lat_lng()
             if not lat and not lon:
                 raise ValidationError("This image don't have latitude and longitude" )
