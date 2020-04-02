@@ -5,6 +5,7 @@ from .models import Aldeia, Suco, District
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
 from PIL import Image
 from map.get_image_location import get_exif_data, get_lat_lon
+from django.urls import reverse_lazy
 
 
 
@@ -36,3 +37,4 @@ class HatamaViazenView(CreateView):
     template_name = 'map/hatamaviazenview.html'
     model = Istoriaviazen
     fields = ['title', 'description', 'date', 'creator', 'people']
+    success_url = reverse_lazy('home')
