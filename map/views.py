@@ -36,5 +36,5 @@ class AnotherView(TemplateView):
 class HatamaViazenView(CreateView):
     template_name = 'map/hatamaviazenview.html'
     model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator', 'people']
+    fields = ['title', 'description', 'date', 'creator', 'people', 'image_trip']
     success_url = reverse_lazy('home')
