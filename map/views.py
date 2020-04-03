@@ -17,6 +17,8 @@ class MapView(TemplateView):
 
         # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+
+        context['viazen'] = Istoriaviazen.objects.all()
         # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
         context['points'] = serialize('geojson', Point.objects.all(), geometry_field='geom')
         for photo in PhotoTimor.objects.all():
@@ -36,3 +38,10 @@ class HatamaViazenView(CreateView):
     template_name = 'map/hatamaviazenview.html'
     model = Istoriaviazen
     fields = ['title', 'description', 'date', 'creator', 'people']
+    success_url = "/"
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CreateView, self).get_context_data(*args, *kwargs)
+        context['viazen'] = Istoriaviazen.objects.all()
+        return context

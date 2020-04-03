@@ -52,8 +52,15 @@
                 <p>Ony</p>
             </div>
             <div class="col-md-10">
-                <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
-                <p>Title: Trip to Baguia</p>
+              <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
+                {% for via in viazen %}
+                <p>Title: {{ via.title }}</p>
+                <p>Deskrisaun: {{ via.description }}</p>
+                <p>Data: {{ via.date }}</p>
+                <p>Kriador: {{ via.creator }}</p>
+                <p>Ema: {{ via.people }}</p>
+                {% endfor %}
+                
                 <a href="#">Location: Baguia</a>
 
                 <div class="gallery">

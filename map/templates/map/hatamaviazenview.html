@@ -6,7 +6,9 @@
     <p>Hatama Istoria Viazen</p>
 
     <form method="post">{% csrf_token %}
-        {{ form.as_p }}
+      <table>
+        {{ form.as_table }}
+      </table>
         <input type="submit" value="Save">
     </form>
 {% endblock %}

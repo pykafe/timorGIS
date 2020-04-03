@@ -46,14 +46,14 @@ class Istoriaviazen(models.Model):
     title = models.CharField(max_length=80, null=False)
     description = models.TextField(null=False)
     date = DateRangeField()
-    upload_date = models.DateTimeField(null=False)
+    upload_date = models.DateTimeField(null=False, auto_now_add=True)
     creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
     people = models.ManyToManyField(User, related_name='subistoria')
 
     def __str__(self):
-        return f'{self.tite}, {self.pk}'
+        return f'{self.title}, {self.pk}'
 
-      
+
 class Point(models.Model):
     name = models.CharField(max_length=100, blank=False)
 
@@ -64,7 +64,7 @@ class Point(models.Model):
     def __str__(self):
         return '{} '.format(self.name)
 
-      
+
 class PhotoTimor(models.Model):
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
