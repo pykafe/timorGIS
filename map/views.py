@@ -1,6 +1,6 @@
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Aldeia, Suco, District
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
 from PIL import Image
@@ -41,7 +41,12 @@ class HatamaViazenView(CreateView):
     success_url = reverse_lazy('home')
 
 
+class ViazenUpdateView(UpdateView):
+    model = Istoriaviazen
+    fields = ['title', 'description', 'date', 'creator', 'people', 'image_trip']
+    success_url = reverse_lazy('home')
+
+
 class ViazenDeleteView(DeleteView):
     model = Istoriaviazen
     success_url = reverse_lazy('home')
-
