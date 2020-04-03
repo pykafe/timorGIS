@@ -41,7 +41,7 @@
             </div>
             <div class="col-md-10">
                 <h3>Ordering display by every news upload</h3>
-                <button class="btn btn-primary add-journey">Add my journey</button>
+                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">Add my journey</a>
             </div>
         </div>
         <div class="row">
@@ -53,6 +53,7 @@
             </div>
             <div class="col-md-10">
                 <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
+                <a href="{% url 'delete_viazen' 1 %}">Delete</a>
                 <p>Title: Trip to Baguia</p>
                 <a href="#">Location: Baguia</a>
 
