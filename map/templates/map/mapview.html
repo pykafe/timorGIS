@@ -58,13 +58,13 @@
                   <p>Deskrisaun: {{ via.description }}</p>
                   <p>Data: {{ via.date }}</p>
                   <p><img src="{{ via.image_trip.url }}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name"></span></p>
-                {% endfor %}
 
                 <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
-                <a href="{% url 'delete_viazen' 1 %}">Delete</a> <br/>
-                <a href="{% url 'update_viazen' 1 %}">Update</a>
+                <a href="{% url 'delete_viazen' via.pk %}">Delete</a> <br/>
+                <a href="{% url 'update_viazen' 1  %}">Update</a>
                 <p>Title: Trip to Baguia</p>
                 <a href="#">Location: Baguia</a>
+                {% endfor %}
 
                 <div class="gallery">
                     <figure class="gallery__item gallery__item--1">
