@@ -1,10 +1,12 @@
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Aldeia, Suco, District
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
 from PIL import Image
 from map.get_image_location import get_exif_data, get_lat_lon
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView
 
 
 
@@ -13,7 +15,7 @@ class MapView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         images = []
-        context = super(TemplateView, self).get_context_data(*args, *kwargs)
+        context = super(TemplateView, self).get_context_data(*args, **kwargs)
 
         # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
@@ -37,11 +39,16 @@ class AnotherView(TemplateView):
 class HatamaViazenView(CreateView):
     template_name = 'map/hatamaviazenview.html'
     model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator', 'people']
-    success_url = "/"
+    fields = ['title', 'description', 'date', 'image_trip']
+    success_url = reverse_lazy('home')
 
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(CreateView, self).get_context_data(*args, *kwargs)
-        context['viazen'] = Istoriaviazen.objects.all()
-        return context
+class ViazenUpdateView(UpdateView):
+    model = Istoriaviazen
+    fields = ['title', 'description', 'date', 'creator', 'people', 'image_trip']
+    success_url = reverse_lazy('home')
+
+
+class ViazenDeleteView(DeleteView):
+    model = Istoriaviazen
+    success_url = reverse_lazy('home')

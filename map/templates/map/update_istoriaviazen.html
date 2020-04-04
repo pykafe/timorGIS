@@ -1,0 +1,13 @@
+{% extends 'map/base.html' %}
+
+{% block title %}Hatama istoria viazen {% endblock %}
+
+{% block content %}
+    <p>Hadia Istoria Viazen</p>
+
+    <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+</form>
+{% endblock %}
+
