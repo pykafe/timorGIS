@@ -80,4 +80,4 @@ class PhotoTimor(models.Model):
             get_data = ImageMetaData(self.image)
             lat, lon = get_data.get_lat_lng()
             if not lat and not lon:
-                raise ValidationError("This image don't have latitude and longitude" )
+                raise ValidationError("Imajen nee laiha detailhu GPS" )
