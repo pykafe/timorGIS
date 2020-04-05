@@ -45,7 +45,7 @@ class HatamaViazenView(CreateView):
 
 class ViazenUpdateView(UpdateView):
     model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator', 'people', 'image_trip']
+    fields = ['title', 'description', 'date', 'creator', 'image_trip']
     success_url = reverse_lazy('home')
 
 
