@@ -61,7 +61,7 @@
 
                 <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
                 <a href="{% url 'delete_viazen' via.pk %}">Delete</a> <br/>
-                <a href="{% url 'update_viazen' 1  %}">Update</a>
+                <a href="{% url 'update_viazen' via.pk  %}">Update</a>
                 <p>Title: Trip to Baguia</p>
                 <a href="#">Location: Baguia</a>
                 {% endfor %}
