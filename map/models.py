@@ -50,7 +50,6 @@ class Istoriaviazen(models.Model):
     date = DateRangeField()
     upload_date = models.DateTimeField(null=False, blank=False, default=timezone.now())
     creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
-    people = models.ManyToManyField(User, related_name='subistoria')
     image_trip = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
     def __str__(self):
