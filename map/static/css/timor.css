@@ -6,11 +6,10 @@ body {
 
 #mapid { 
     height: 450px; 
-    width: 1300px;
     margin-bottom: 30px;
 }
 
-.container {
+.view-map {
     margin: 0px;
 }
 
@@ -20,4 +19,26 @@ body {
 
 .text {
     font-size: 18px;
+}
+
+.add-journey {
+    float: right;
+    background-color: white;
+    color: #0062cc;
+	margin-top: -39px;
+}
+
+.list-users {
+    border-right: 1px solid #dee2e6;
+    height: auto;
+}
+
+span.person-name {
+    padding: 8px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1px;
 }

@@ -1,0 +1,9 @@
+{% load static %}
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+      {% if user.is_authenticated %}
+          {% trans 'Welcome' %} {{ user.username }}
+      {% endif %}
+  </div>
+</nav>

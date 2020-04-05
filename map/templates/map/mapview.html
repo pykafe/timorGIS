@@ -1,59 +1,100 @@
-<html>
-    <head>
-        {% load static %}
-        {% load i18n %}
+{% extends 'map/base.html' %}
+{% load static %}
+{% load i18n %}
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block title %}MAP VIEW{% endblock %}
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+{% block content %}
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/timor.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 
-        <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <div id="mapid"></div>
 
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2>Geo Timor</h2>
-                    
-                    <div id="mapid"></div>
+    <script>
 
-                    <form method="POST" action="{% url 'viazen' %}">
-                    {% csrf_token %} 
-                        {{ istoriaviazen.as_p }}
-                        <button type="submit">Save</button>  
-                    </form>
-                  
-                    <script>
-                        const districts = {{ districts|safe }};
-                      
-                        var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
-                        
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
-                        
-                        L.geoJSON(districts, {
-                          style: function (feature) {
-                            return {color: 'orange'};
-                          }
-                        }).bindPopup(function (layer) {
-                          var name = layer.feature.properties.name;
-                          return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-                        }).addTo(mymap);  
+        const districts = {{ districts|safe }};
+        var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
+        L.geoJSON(districts, {
+            style: function (feature) {
+                return {color: 'orange'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(mymap);
+        {%for photo in geoimages %}
+            {% if photo.lon and photo.lat %}
+                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br><a target='_blank' href='https://www.google.com/maps?q={{photo.lat}},{{photo.lon}}'>Detail</a>").openPopup().addTo(mymap);
+            {% endif %}
+        {%endfor%}
 
-                        {%for photo in geoimages %}
-                            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' width='100'>"+"</br><a target='_blank' href='https://www.google.com/maps?q={{photo.lat}},{{photo.lon}}'>Detail</a>").openPopup().addTo(mymap);
-                        {%endfor%}
-                    </script>
-                </div>
+    </script>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <h3>All users</h3>
+            </div>
+            <div class="col-md-10">
+                <h3>Ordering display by every news upload</h3>
+                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">Add my journey</a>
             </div>
         </div>
-    </body>
-</html>
+        <div class="row">
+            <div class="col-md-2 list-users">
+                <p>Mario</p>
+                <p>Mariano</p>
+                <p>Joanico</p>
+                <p>Ony</p>
+            </div>
+            <div class="col-md-10">
+              <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
+                {% for via in viazen %}
+                  <p>Title: {{ via.title }}</p>
+                  <p>Deskrisaun: {{ via.description }}</p>
+                  <p>Data: {{ via.date }}</p>
+                  <p><img src="{{ via.image_trip.url }}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name"></span></p>
+
+                <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
+                <a href="{% url 'delete_viazen' via.pk %}">Delete</a> <br/>
+                <a href="{% url 'update_viazen' 1  %}">Update</a>
+                <p>Title: Trip to Baguia</p>
+                <a href="#">Location: Baguia</a>
+                {% endfor %}
+
+                <div class="gallery">
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="{% static 'img/20191119_182005.jpg' %}" class="gallery__img" width="300" height="240" alt="Image 1">
+                    </figure>
+                    <figure class="gallery__item gallery__item--2">
+                        <img src="{% static 'img/IMG_1822.JPG' %}" class="gallery__img" width="300" height="240" alt="Image 2">
+                    </figure>
+                    <figure class="gallery__item gallery__item--3">
+                        <img src="{% static 'img/new_image.jpg' %}" class="gallery__img" width="300" height="240" alt="Image 3">
+                    </figure>
+                </div>
+                <p>Description/comments: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <p>My trip from January 29 - February 02 2020</p>
+                <p><img src="{% static 'img/ano.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mariano</span></p>
+                <p>Title</p>
+                <p>Description/comments</p>
+                <p>Location</p>
+                <p>Images</p>
+                <p><img src="{% static 'img/niko.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Joanico</span></p>
+                <p>Title</p>
+                <p>Description/comments</p>
+                <p>Location</p>
+                <p>Images</p>
+                <p><img src="{% static 'img/ony.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Ony</span></p>
+                <p>Title</p>
+                <p>Description/comments</p>
+                <p>Location</p>
+                <p>Images</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
