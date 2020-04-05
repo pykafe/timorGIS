@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 from .models import Suco, Aldeia, District, Subdistrict
-from .models import Suco, Aldeia, District, Subdistrict, Point, PhotoTimor
+from .models import Suco, Aldeia, District, Subdistrict, Point, PhotoTimor, Istoriaviazen
 from leaflet.admin import LeafletGeoAdmin
 
 
@@ -28,6 +28,7 @@ admin.site.register(Suco, SucoAdmin)
 admin.site.register(Aldeia, AldeiaAdmin)
 admin.site.register(District, DistrictAdmin)
 admin.site.register(Subdistrict, SubdistrictAdmin)
+admin.site.register(Istoriaviazen)
 admin.site.register(
     Point,                      #<-- this is a model
     LeafletGeoAdmin,
