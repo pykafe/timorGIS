@@ -8,30 +8,57 @@
     <div class="container">
         <div class="form-row">
             <div class="row">
-                <div class="col-12">
+                <div class="form-group col-12">
                     <h2>Hatama Istoria Viazen</h2>
-                    <form method="post" novalidate>
+                    <form method="post" enctype="multipart/form-data" novalidate>
                       {% csrf_token %}
+
                       {% for hidden_field in form.hidden_fields %}
                         {{ hidden_field }}
                       {% endfor %}
 
+                      {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                          {% for error in form.non_field_errors %}
+                            {{ error }}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+
                       {% for field in form.visible_fields %}
                         <div class="form-group">
                           {{ field.label_tag }}
-                          {% render_field field class="form-control" %}
+
+                          {% if form.is_bound %}
+                            {% if field.errors %}
+                              {% render_field field class="form-control is-invalid" %}
+                              {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                  {{ error }}
+                                </div>
+                              {% endfor %}
+                            {% else %}
+                              {% render_field field class="form-control is-valid" %}
+                            {% endif %}
+                          {% else %}
+                            {% render_field field class="form-control" %}
+                          {% endif %}
+
                           {% if field.help_text %}
                             <small class="form-text text-muted">{{ field.help_text }}</small>
                           {% endif %}
                         </div>
-                        {% endfor %}
-                    </div>
-                      <div class="button-submit">
-                          <button type="submit" class="btn btn-primary" value="submit" onclick="return foo();">Submit</button>
+                      {% endfor %}
+
+                      <div class="form-group-button">
+                          <button type="submit" class="btn btn-success btn-lg">
+                            <span class="glyphicon glyphicon-ok"></span> Save
+                          </button>
+                          <a href="{% url 'home' %}" class="btn btn-default btn-lg">Cancel</a>
+                        </div>
                     </form>
+                </div>
             </div>
         </div>
     </div>
-    <script>
-    </script>
 {% endblock %}
