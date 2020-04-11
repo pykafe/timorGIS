@@ -1,6 +1,5 @@
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
-from .models import Aldeia, Suco, District
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor
 from map.gps_images import ImageMetaData
 
