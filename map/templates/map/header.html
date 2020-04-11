@@ -2,8 +2,9 @@
 {% load i18n %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
+      {% trans 'Welcome' %}
       {% if user.is_authenticated %}
-          {% trans 'Welcome' %} {{ user.username }}
+          {{ user.username }}
       {% endif %}
   </div>
 </nav>
