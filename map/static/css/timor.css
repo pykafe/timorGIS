@@ -42,3 +42,9 @@ span.person-name {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1px;
 }
+
+a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
