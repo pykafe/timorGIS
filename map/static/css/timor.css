@@ -113,3 +113,7 @@ h3 {
 .text-muted {
     font-size: 12px;
 }
+a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}

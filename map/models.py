@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import DateRangeField
 from django.utils.translation import gettext_lazy as _
 from psycopg2.extras import DateRange
+from django.core.exceptions import ValidationError
+from map.gps_images import ImageMetaData
 from django.utils import timezone
 
 
@@ -73,3 +75,11 @@ class PhotoTimor(models.Model):
 
     def __str__(self):
         return "{photo}".format(photo=self.image)
+
+    def clean(self):
+        """check image if it has longitude and latitude before upload to media file"""
+        if self.image:
+            get_data = ImageMetaData(self.image)
+            lat, lon = get_data.get_lat_lng()
+            if not lat and not lon:
+                raise ValidationError("Imajen nee laiha detailhu GPS" )
