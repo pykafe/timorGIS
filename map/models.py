@@ -1,9 +1,11 @@
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import DateRangeField
+from django.utils.translation import gettext_lazy as _
 from psycopg2.extras import DateRange
 from django.core.exceptions import ValidationError
 from map.gps_images import ImageMetaData
+from django.utils import timezone
 
 
 class Suco(models.Model):
@@ -48,12 +50,12 @@ class Istoriaviazen(models.Model):
     title = models.CharField(max_length=80, null=False)
     description = models.TextField(null=False)
     date = DateRangeField()
-    upload_date = models.DateTimeField(null=False)
+    upload_date = models.DateTimeField(null=False, blank=False, default=timezone.now())
     creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
-    people = models.ManyToManyField(User, related_name='subistoria')
+    image_trip = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
     def __str__(self):
-        return f'{self.tite}, {self.pk}'
+        return f'{self.title}, {self.pk}'
 
 
 class Point(models.Model):
