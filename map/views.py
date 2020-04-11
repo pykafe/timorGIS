@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
@@ -9,7 +10,6 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 
 
-
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
 
@@ -17,6 +17,7 @@ class MapView(TemplateView):
         images = []
         context = super(TemplateView, self).get_context_data(*args, **kwargs)
 
+        context['users'] = User.objects.all()
         # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
 
@@ -37,9 +38,9 @@ class AnotherView(TemplateView):
 
 
 class HatamaViazenView(CreateView):
-    template_name = 'map/hatamaviazenview.html'
+    template_name = 'map/viajen_form.html'
     model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'image_trip']
+    fields = ['title', 'description', 'date', 'image_trip', 'creator']
     success_url = reverse_lazy('home')
 
 
