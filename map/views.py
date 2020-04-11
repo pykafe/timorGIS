@@ -1,14 +1,10 @@
 from django.contrib.auth.models import User
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
-from .models import Aldeia, Suco, District
+from map.gps_images import ImageMetaData
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
-from PIL import Image
-from map.get_image_location import get_exif_data, get_lat_lon
 from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView
-
 
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
@@ -25,8 +21,8 @@ class MapView(TemplateView):
         # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
         context['points'] = serialize('geojson', Point.objects.all(), geometry_field='geom')
         for photo in PhotoTimor.objects.all():
-            get_data = get_exif_data(Image.open(photo.image.path))
-            lat, lon = get_lat_lon(get_data)
+            get_data = ImageMetaData(photo.image.path)
+            lat, lon = get_data.get_lat_lng()
             if lat and lon:
                 images.append({"lat": lat, "lon": lon, "photo": photo.image.url})
         context['geoimages'] = images
