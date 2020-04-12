@@ -61,8 +61,17 @@
 																						  </p>
                         <strong>{{ via.title }}</strong>
                         <div class="gallery">
+                            {%for photo in geoimages %}
+                                {% if photo.viazen_id == via.id %}
+                                    <figure class="gallery__item gallery__item--3">
+                                        <img src='{{ photo.photo }}' class="gallery__img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                    </figure>
+                                {% endif %}
+                            {% endfor %}
                             <figure class="gallery__item gallery__item--3">
-                                <img src='{{ via.image_trip.url }}' class="gallery__img" width="300" height="240" alt="Image 3">
+                                <a href="{% url "photo_viazen" %}">
+                                    <img src="{% static 'img/photo_add.png' %}" class="gallery__img icon_upload" align="center" width="200px" height="200px" alt="Image icon">
+                                </a>
                             </figure>
                         </div>
                         <p>{{ via.description }}</p>
