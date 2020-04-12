@@ -69,7 +69,7 @@
                                 {% endif %}
                             {% endfor %}
                             <figure class="gallery__item gallery__item--3">
-                                <a href="{% url "photo_viazen" %}">
+                                <a href="{% url "photo_viazen" via.id %}">
                                     <img src="{% static 'img/photo_add.png' %}" class="gallery__img icon_upload" align="center" width="200px" height="200px" alt="Image icon">
                                 </a>
                             </figure>

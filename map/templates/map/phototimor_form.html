@@ -5,7 +5,6 @@
 
 {% block content %}
     <p>Hatama Photo Istoria Viazen</p>
-
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <table>
@@ -13,4 +12,7 @@
       </table>
         <input type="submit" value="Save">
     </form>
+    <script>
+        $("#id_istoriaviazen").val(window.location.pathname[1]);
+    </script>
 {% endblock %}
