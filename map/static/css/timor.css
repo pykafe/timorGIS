@@ -55,6 +55,11 @@ span.person-name {
     grid-gap: 1px;
 }
 
+img.gallery-img {
+    max-width: 100%;
+    height: auto;
+}
+
 input[type=text] {
     width: 100%;
     padding-left: 12px;
