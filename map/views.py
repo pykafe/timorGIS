@@ -3,7 +3,7 @@ from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
+from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, IstoriaViazen
 from django.urls import reverse_lazy
 
 class MapView(TemplateView):
@@ -17,7 +17,7 @@ class MapView(TemplateView):
         # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
 
-        context['viazen'] = Istoriaviazen.objects.all()
+        context['viazen'] = IstoriaViazen.objects.all()
         # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
         context['points'] = serialize('geojson', Point.objects.all(), geometry_field='geom')
         for photo in PhotoTimor.objects.all():
@@ -35,8 +35,8 @@ class AnotherView(TemplateView):
 
 class HatamaViazenView(CreateView):
     template_name = 'map/viajen_form.html'
-    model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator']
+    model = IstoriaViazen
+    fields = ['title', 'description', 'aldeia', 'date', 'creator', 'people']
     success_url = reverse_lazy('home')
 
 
@@ -48,11 +48,11 @@ class PhotoViazenView(CreateView):
 
 
 class ViazenUpdateView(UpdateView):
-    model = Istoriaviazen
+    model = IstoriaViazen
     fields = ['title', 'description', 'date', 'creator']
     success_url = reverse_lazy('home')
 
 
 class ViazenDeleteView(DeleteView):
-    model = Istoriaviazen
+    model = IstoriaViazen
     success_url = reverse_lazy('home')

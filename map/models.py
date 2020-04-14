@@ -12,7 +12,6 @@ class Suco(models.Model):
     name = models.CharField(max_length=124)
     district_name = models.CharField(max_length=124)
     subdistrict_name = models.CharField(max_length=124)
-
     geom = models.PolygonField()
 
     def __str__(self):
@@ -21,16 +20,14 @@ class Suco(models.Model):
 
 class Aldeia(models.Model):
     name = models.CharField(max_length=124)
-
     geom = models.PointField()
 
     def __str__(self):
-        return '{} pk:{}'.format(self.name, self.pk)
+        return '{}'.format(self.name)
 
 
 class District(models.Model):
     name = models.CharField(max_length=124)
-
     geom = models.MultiPolygonField()
 
     def __str__(self):
@@ -39,38 +36,44 @@ class District(models.Model):
 
 class Subdistrict(models.Model):
     name = models.CharField(max_length=124)
-
     geom = models.MultiPolygonField()
 
     def __str__(self):
         return '{} pk:{}'.format(self.name, self.pk)
 
 
-class Istoriaviazen(models.Model):
+class IstoriaViazen(models.Model):
     title = models.CharField(max_length=80, null=False)
     description = models.TextField(null=False)
+    aldeia = models.ForeignKey(Aldeia, related_name='aldeialocation', on_delete=models.CASCADE)
     date = DateRangeField()
-    upload_date = models.DateTimeField(null=False, blank=False, default=timezone.now())
-    creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
+    date_sumbited = models.DateTimeField(null=False, blank=False, default=timezone.now())
+    creator = models.ForeignKey(User, related_name='useristoria', on_delete=models.CASCADE)
+    people = models.ManyToManyField(User, related_name='usersistoria')
+    modified_date = models.DateField(verbose_name=_('Last modified'), null=True, blank=True)
 
     def __str__(self):
-        return f'{self.title}, {self.pk}'
+        return f'{self.title}, {self.creator}'
+
+    def save(self, *args, **kwargs):
+        self.modified_date = timezone.now().date()
+        return super(IstoriaViazen, self).save(*args, **kwargs)
 
 
 class Point(models.Model):
     name = models.CharField(max_length=100, blank=False)
-
     geom = models.PointField()
-
     description = models.TextField()
 
     def __str__(self):
-        return '{} '.format(self.name)
+        return '{}'.format(self.name)
 
 
 class PhotoTimor(models.Model):
-    istoriaviazen = models.ForeignKey(Istoriaviazen, related_name='istoriaviazen', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
+    istoriaviazen = models.ForeignKey(IstoriaViazen, related_name='istoriaviazen', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='photos', verbose_name=_('Timor Photo'))
+    upload_date = models.DateTimeField(null=False, blank=False, default=timezone.now())
+    modified_date = models.DateField(verbose_name=_('Last modified'), null=True, blank=True)
 
 
     def __str__(self):
@@ -83,3 +86,7 @@ class PhotoTimor(models.Model):
             lat, lon = get_data.get_lat_lng()
             if not lat and not lon:
                 raise ValidationError("Imajen nee laiha detailhu GPS" )
+
+    def save(self, *args, **kwargs):
+        self.modified_date = timezone.now().date()
+        return super(PhotoTimor, self).save(*args, **kwargs)
