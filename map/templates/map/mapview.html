@@ -49,11 +49,7 @@
         <div class="row">
             <div class="col-md-2 list-users">
                 {% for user in users %}
-                    {% if user.first_name %}
-                    <span class="person-name">{{ user.first_name }}</span></p>
-                    {% else %}
-                    <span class="person-name">{{ user.username }}</span></p>
-                    {% endif %}
+                    <span class="person-name">{{ user.first_name|default:user.username }}</span>
                 {% endfor %}
             </div>
             <div class="col-md-10 display-all-post">
