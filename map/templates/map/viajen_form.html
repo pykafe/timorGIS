@@ -1,16 +1,64 @@
 {% extends 'map/base.html' %}
+{% load widget_tweaks %}
+
 
 {% block title %}Hatama istoria viazen {% endblock %}
 
 {% block content %}
-    <p>Hatama Istoria Viazen</p>
+    <div class="container">
+        <div class="form-row">
+            <div class="row">
+                <div class="form-group col-12">
+                    <h2>Hatama Istoria Viazen</h2>
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                      {% csrf_token %}
 
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <table>
-        {{ form.as_table }}
-      </table>
-        <input type="submit" value="Save">
-    </form>
+                      {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                      {% endfor %}
+
+                      {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                          {% for error in form.non_field_errors %}
+                            {{ error }}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+
+                      {% for field in form.visible_fields %}
+                        <div class="form-group">
+                          {{ field.label_tag }}
+
+                          {% if form.is_bound %}
+                            {% if field.errors %}
+                              {% render_field field class="form-control is-invalid" %}
+                              {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                  {{ error }}
+                                </div>
+                              {% endfor %}
+                            {% else %}
+                              {% render_field field class="form-control is-valid" %}
+                            {% endif %}
+                          {% else %}
+                            {% render_field field class="form-control" %}
+                          {% endif %}
+
+                          {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+
+                      <div class="form-group-button">
+                          <button type="submit" class="btn btn-success btn-lg">
+                            <span class="glyphicon glyphicon-ok"></span> Save
+                          </button>
+                          <a href="{% url 'home' %}" class="btn btn-default btn-lg">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-

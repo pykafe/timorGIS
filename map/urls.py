@@ -8,9 +8,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('', MapView.as_view(), name="home"),
     path('another', AnotherView.as_view()),
-    path('hatama_viajen/', HatamaViazenView.as_view(), name='hatama_viajen'),
+    path('hatama_viazen/', HatamaViazenView.as_view(), name='hatama_viazen'),
+    path('<int:pk>/update', ViazenUpdateView.as_view(), name='update_viazen'),
     path('<int:pk>/photo_viazen/', PhotoViazenView.as_view(), name='photo_viazen'),
-    path('<pk>/update', ViazenUpdateView.as_view(), name='update_viazen'),
     path('<int:pk>/delete', ViazenDeleteView.as_view(), name="delete_viazen"),
 
 ]
