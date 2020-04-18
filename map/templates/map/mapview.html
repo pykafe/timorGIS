@@ -35,65 +35,81 @@
     </script>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <h3>All users</h3>
+        <div class="row navbar-journey">
+            <div class="col-md-4">
+                <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
             </div>
-            <div class="col-md-10">
-                <h3>Ordering display by every news upload</h3>
-                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">Add my journey</a>
+            <div class="col-md-6 search-journey">
+                <input type="text" name="search" placeholder="Search..">
+            </div>
+            <div class="col-md-2 add-journey">
+                <a href={% url 'hatama_viajen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 list-users">
-                <p>Mario</p>
-                <p>Mariano</p>
-                <p>Joanico</p>
-                <p>Ony</p>
-            </div>
-            <div class="col-md-10">
-              <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
-                {% for via in viazen %}
-                  <p>Title: {{ via.title }}</p>
-                  <p>Deskrisaun: {{ via.description }}</p>
-                  <p>Data: {{ via.date }}</p>
-                  <p><img src="{{ via.image_trip.url }}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name"></span></p>
-
-                <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mario</span></p>
-                <a href="{% url 'delete_viazen' via.pk %}">Delete</a> <br/>
-                <a href="{% url 'update_viazen' via.pk  %}">Update</a>
-                <p>Title: Trip to Baguia</p>
-                <a href="#">Location: Baguia</a>
+                {% for user in users %}
+                    <span class="person-name">{{ user.first_name|default:user.username }}</span>
                 {% endfor %}
-
-                <div class="gallery">
-                    <figure class="gallery__item gallery__item--1">
-                        <img src="{% static 'img/20191119_182005.jpg' %}" class="gallery__img" width="300" height="240" alt="Image 1">
-                    </figure>
-                    <figure class="gallery__item gallery__item--2">
-                        <img src="{% static 'img/IMG_1822.JPG' %}" class="gallery__img" width="300" height="240" alt="Image 2">
-                    </figure>
-                    <figure class="gallery__item gallery__item--3">
-                        <img src="{% static 'img/new_image.jpg' %}" class="gallery__img" width="300" height="240" alt="Image 3">
-                    </figure>
-                </div>
-                <p>Description/comments: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                <p>My trip from January 29 - February 02 2020</p>
-                <p><img src="{% static 'img/ano.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Mariano</span></p>
-                <p>Title</p>
-                <p>Description/comments</p>
-                <p>Location</p>
-                <p>Images</p>
-                <p><img src="{% static 'img/niko.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Joanico</span></p>
-                <p>Title</p>
-                <p>Description/comments</p>
-                <p>Location</p>
-                <p>Images</p>
-                <p><img src="{% static 'img/ony.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40"><span class="person-name">Ony</span></p>
-                <p>Title</p>
-                <p>Description/comments</p>
-                <p>Location</p>
-                <p>Images</p>
+            </div>
+            <div class="col-md-10 display-all-post">
+                {% for via in viazen %}
+                    {% if via.creator %}
+                    <div class="each-upload">
+                        <div class="dropdown dropdown-edit-and-delete">
+                            <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                            <ul class="dropdown-menu menu-dropdown">
+                                <li class="hover-list"><a href="#">{% trans 'Edit' %}</a>
+                                   <span class="glyphicon glyphicon-pencil"></span>
+                                </li>
+                                <li class="hover-list"><a href="#">{% trans 'Delete' %}</a>
+                                   <span class="glyphicon glyphicon-trash"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                            <strong class="person-name">{{ via.creator }}</strong>
+                        </p>
+                        <strong>{{ via.title }}</strong>
+                        <div class="gallery">
+                            {%for photo in geoimages %}
+                                {% if photo.viazen_id == via.id %}
+                                    <figure class="gallery__item gallery__item--3">
+                                        <img src='{{ photo.photo }}' class="gallery__img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                    </figure>
+                                {% endif %}
+                            {% endfor %}
+                            <figure class="gallery__item gallery__item--3">
+                                <a href="{% url "photo_viazen" via.id %}">
+                                    <img src="{% static 'img/photo_add.png' %}" class="gallery__img icon_upload" align="center" width="200px" height="200px" alt="Image icon">
+                                </a>
+                            </figure>
+                        </div>
+                        <p>{{ via.description }}</p>
+                        <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                <!--
+                <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                {% for user in users %}
+                    <span class="person-name">{{ user.first_name }}</span></p>
+                    <a href="{% url 'delete_viazen' 1 %}">Delete</a>
+                    <p>Title: Trip to Baguia</p>
+                    <a href="#">Location: Baguia</a>
+                    <div class="gallery">
+                        {% for photo in geoimages %}
+                            {% if photo.lon and photo.lat %}
+                                <figure class="gallery__item gallery__item--3">
+                                    <img src='{{photo.photo}}' class="gallery__img" width="300" height="240" alt="Image 3">
+                                </figure>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p>Description/comments: </p>
+                    <p>My trip from January 29 - February 02 2020</p>
+	               {% endfor %}
+                -->
             </div>
         </div>
     </div>
