@@ -36,13 +36,15 @@
 
     <div class="container">
         <div class="row navbar-journey">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
             </div>
+            <!--
             <div class="col-md-6 search-journey">
                 <input type="text" name="search" placeholder="Search..">
             </div>
-            <div class="col-md-2 add-journey">
+            -->
+            <div class="col-md-4 add-journey">
                 <a href={% url 'hatama_viajen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
             </div>
         </div>
@@ -74,14 +76,14 @@
                         <div class="gallery">
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
-                                    <figure class="gallery__item gallery__item--3">
-                                        <img src='{{ photo.photo }}' class="gallery__img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                    <figure>
+                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
                                     </figure>
                                 {% endif %}
                             {% endfor %}
-                            <figure class="gallery__item gallery__item--3">
+                            <figure>
                                 <a href="{% url "photo_viazen" via.id %}">
-                                    <img src="{% static 'img/photo_add.png' %}" class="gallery__img icon_upload" align="center" width="200px" height="200px" alt="Image icon">
+                                    <img src="{% static 'img/photo_add.png' %}" class="gallery-img" align="center" width="200px" height="200px" alt="Image icon">
                                 </a>
                             </figure>
                         </div>
@@ -90,26 +92,6 @@
                     </div>
                     {% endif %}
                 {% endfor %}
-                <!--
-                <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
-                {% for user in users %}
-                    <span class="person-name">{{ user.first_name }}</span></p>
-                    <a href="{% url 'delete_viazen' 1 %}">Delete</a>
-                    <p>Title: Trip to Baguia</p>
-                    <a href="#">Location: Baguia</a>
-                    <div class="gallery">
-                        {% for photo in geoimages %}
-                            {% if photo.lon and photo.lat %}
-                                <figure class="gallery__item gallery__item--3">
-                                    <img src='{{photo.photo}}' class="gallery__img" width="300" height="240" alt="Image 3">
-                                </figure>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <p>Description/comments: </p>
-                    <p>My trip from January 29 - February 02 2020</p>
-	               {% endfor %}
-                -->
             </div>
         </div>
     </div>
