@@ -4,7 +4,7 @@
   <div class="container">
       <a href="{% url 'home' %}" class="logo">Timorgis</a>
       {% if user.is_authenticated %}
-      <b>{% trans 'Welcome' %} {{ user.username }}</b>
+      <b>{% trans 'Welcome' %} {{ user.first_name|default:user.username }}</b>
       {% endif %}
   </div>
 </nav>

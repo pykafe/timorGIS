@@ -1,7 +1,18 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url(../fonts/Montserrat-Regular.woff2);
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa_Thin.woff2);
+}
+
 body {
     margin: 0px;
     color: #000000c7;
     font-family: 'Montserrat';
+    background-color: #f0f2f5;
 }
 
 #mapid { 
@@ -25,12 +36,13 @@ body {
     float: right;
     background-color: white;
     color: #0062cc;
-	margin-top: -39px;
 }
 
 .list-users {
-    border-right: 1px solid #dee2e6;
-    height: auto;
+    position: sticky;
+    height: 100%;
+    top: 75px;
+    margin-top: 25px;
 }
 
 span.person-name {
@@ -43,8 +55,100 @@ span.person-name {
     grid-gap: 1px;
 }
 
-a.logo {
-  font-size: 25px;
-  font-weight: bold;
+img.gallery-img {
+    max-width: 100%;
+    height: auto;
 }
 
+input[type=text] {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.col-md-6.search-journey {
+    line-height: 2;
+}
+
+.row.navbar-journey {
+    border-radius: 4px;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    background: #ffffff;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.display-all-post {
+    padding: 0px;
+    margin-top: 25px;
+}
+
+.each-upload {
+    border-radius: 4px;
+    background-color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.footer {
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #ffffff;
+    margin: 75px;
+    margin-bottom: 0px;
+    line-height: 3;
+}
+
+/* set font-family for every h3 to use comfortaa */
+h3 {
+    font-family: 'Comfortaa';
+}
+
+.trip-text {
+    font-weight: 600;
+}
+
+.text-muted {
+    font-size: 12px;
+}
+a.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.dropdown-edit-and-delete {
+    float: right;
+}
+
+.edit-and-delete-toggle::after {
+    display: inline-block;
+    content: '\2807';
+	font-size: 2em;
+    color: #828282;
+    border-top: unset;
+}
+
+li.hover-list {
+	padding-left: 12px;
+    padding-right: 12px;
+    line-height: 2;
+}
+li.hover-list:hover a {
+    text-decoration: none;
+}
+
+li.hover-list:hover {
+    background-color: rgba(0,0,0,.075);
+}
+
+.icon_upload {
+  margin-left: 55px;
+  margin-top: 25px;
+}

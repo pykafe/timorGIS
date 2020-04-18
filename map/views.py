@@ -24,7 +24,7 @@ class MapView(TemplateView):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
-                images.append({"lat": lat, "lon": lon, "photo": photo.image.url})
+                images.append({"lat": lat, "lon": lon, "photo": photo.image.url, "viazen_id": photo.istoriaviazen_id})
         context['geoimages'] = images
         return context
 
@@ -36,13 +36,20 @@ class AnotherView(TemplateView):
 class HatamaViazenView(CreateView):
     template_name = 'map/viajen_form.html'
     model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'image_trip', 'creator']
+    fields = ['title', 'description', 'date', 'creator']
+    success_url = reverse_lazy('home')
+
+
+class PhotoViazenView(CreateView):
+    template_name = 'map/phototimor_form.html'
+    model = PhotoTimor
+    fields = ['istoriaviazen', 'image']
     success_url = reverse_lazy('home')
 
 
 class ViazenUpdateView(UpdateView):
     model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator', 'image_trip']
+    fields = ['title', 'description', 'date', 'creator']
     success_url = reverse_lazy('home')
 
 
