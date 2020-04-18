@@ -37,28 +37,43 @@
     <div class="container">
         <div class="row navbar-journey">
             <div class="col-md-4">
-                <h3 class="trip-text">Our histories for our trip</h3>
+                <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
             </div>
             <div class="col-md-6 search-journey">
                 <input type="text" name="search" placeholder="Search..">
             </div>
             <div class="col-md-2 add-journey">
-                <a href={% url 'hatama_viajen' %} class="btn btn-primary add-journey">Add my journey</a>
+                <a href={% url 'hatama_viajen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 list-users">
-            {% for user in users %}
-                <span class="person-name">{{ user.first_name }}</span></p>
-            {% endfor %}
+                {% for user in users %}
+                    {% if user.first_name %}
+                    <span class="person-name">{{ user.first_name }}</span></p>
+                    {% else %}
+                    <span class="person-name">{{ user.username }}</span></p>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div class="col-md-10 display-all-post">
                 {% for via in viazen %}
                     {% if via.creator %}
                     <div class="each-upload">
-                        <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                        <div class="dropdown dropdown-edit-and-delete">
+                            <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                            <ul class="dropdown-menu menu-dropdown">
+                                <li class="hover-list"><a href="#">{% trans 'Edit' %}</a>
+                                   <span class="glyphicon glyphicon-pencil"></span>
+                                </li>
+                                <li class="hover-list"><a href="#">{% trans 'Delete' %}</a>
+                                   <span class="glyphicon glyphicon-trash"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
                             <strong class="person-name">{{ via.creator }}</strong>
-																						  </p>
+                        </p>
                         <strong>{{ via.title }}</strong>
                         <div class="gallery">
                             {%for photo in geoimages %}
@@ -75,8 +90,8 @@
                             </figure>
                         </div>
                         <p>{{ via.description }}</p>
-                        <p class="text-muted h6">Durations | April 5, 2020, noon - April 7, 2020 noon</p>
-																								<p class="text-muted h6">Durations | {{ via.date }}</p>
+                        <p class="text-muted h6">April 5, 2020, noon - April 7, 2020 noon</p>
+                        <p class="text-muted h6">{{ via.date }}</p>
                     </div>
                     {% endif %}
                 {% endfor %}

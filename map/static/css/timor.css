@@ -55,6 +55,11 @@ span.person-name {
     grid-gap: 1px;
 }
 
+img.gallery-img {
+    max-width: 100%;
+    height: auto;
+}
+
 input[type=text] {
     width: 100%;
     padding-left: 12px;
@@ -114,8 +119,33 @@ h3 {
     font-size: 12px;
 }
 a.logo {
-  font-size: 25px;
-  font-weight: bold;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.dropdown-edit-and-delete {
+    float: right;
+}
+
+.edit-and-delete-toggle::after {
+    display: inline-block;
+    content: '\2807';
+	font-size: 2em;
+    color: #828282;
+    border-top: unset;
+}
+
+li.hover-list {
+	padding-left: 12px;
+    padding-right: 12px;
+    line-height: 2;
+}
+li.hover-list:hover a {
+    text-decoration: none;
+}
+
+li.hover-list:hover {
+    background-color: rgba(0,0,0,.075);
 }
 
 .icon_upload {
