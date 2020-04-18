@@ -52,7 +52,6 @@ class Istoriaviazen(models.Model):
     date = DateRangeField()
     upload_date = models.DateTimeField(null=False, blank=False, default=timezone.now())
     creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
-    image_trip = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
     def __str__(self):
         return f'{self.title}, {self.pk}'
@@ -70,6 +69,7 @@ class Point(models.Model):
 
 
 class PhotoTimor(models.Model):
+    istoriaviazen = models.ForeignKey(Istoriaviazen, related_name='istoriaviazen', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
 
