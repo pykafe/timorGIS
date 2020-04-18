@@ -60,7 +60,18 @@
                 {% for via in viazen %}
                     {% if via.creator %}
                     <div class="each-upload">
-                        <p><img src="{% static 'img/mario.jpeg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                        <div class="dropdown dropdown-edit-and-delete">
+                            <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                            <ul class="dropdown-menu menu-dropdown">
+                                <li class="hover-list"><a href="#">{% trans 'Edit' %}</a>
+                                   <span class="glyphicon glyphicon-pencil"></span>
+                                </li>
+                                <li class="hover-list"><a href="#">{% trans 'Delete' %}</a>
+                                   <span class="glyphicon glyphicon-trash"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
                             <strong class="person-name">{{ via.creator }}</strong>
                         </p>
                         <strong>{{ via.title }}</strong>
