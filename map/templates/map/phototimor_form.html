@@ -4,7 +4,6 @@
 {% block title %}Hatama photo istoria viazen {% endblock %}
 
 {% block content %}
-        {{ object.istoriaviazen_id }}
     <p>Hatama Photo Istoria Viazen</p>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
@@ -15,7 +14,7 @@
         <a href="{% url 'home' %}">Skip</a> 
     </form>
     <script>
-        $("#id_istoriaviazen").val(window.location.pathname[1]);
-        debugger;
+        const path = window.location.pathname.split('/');
+        $("#id_istoriaviazen").val(path[1]);
     </script>
 {% endblock %}
