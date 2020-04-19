@@ -4,6 +4,7 @@
 {% block title %}Hatama photo istoria viazen {% endblock %}
 
 {% block content %}
+        {{ object.istoriaviazen_id }}
     <p>Hatama Photo Istoria Viazen</p>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
@@ -15,5 +16,6 @@
     </form>
     <script>
         $("#id_istoriaviazen").val(window.location.pathname[1]);
+        debugger;
     </script>
 {% endblock %}
