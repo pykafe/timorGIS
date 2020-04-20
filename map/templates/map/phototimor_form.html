@@ -10,8 +10,8 @@
       <table>
         {{ form.as_table }}
       </table>
-        <input type="submit" value="Save">
-        <a href="{% url 'home' %}">Skip</a> 
+        <button type="submit">{% trans 'Save' %}</button>
+        <a href="{% url 'home' %}">{% trans 'Skip' %}</a> 
     </form>
     <script>
         const path = window.location.pathname.split('/');
