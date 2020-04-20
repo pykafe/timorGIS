@@ -238,8 +238,3 @@ li.hover-list:hover a {
 li.hover-list:hover {
     background-color: rgba(0,0,0,.075);
 }
-
-.icon_upload {
-  margin-left: 55px;
-  margin-top: 25px;
-}
