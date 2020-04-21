@@ -4,7 +4,12 @@ from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
+from django.contrib.gis.geos import Point as P
 from django.urls import reverse_lazy
+
+def convertstr(queryset):
+    return "".join([str(query) for query in queryset])
+
 
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
@@ -23,8 +28,20 @@ class MapView(TemplateView):
         for photo in PhotoTimor.objects.all():
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
+            aldeia = convertstr(Aldeia.objects.filter(geom__contains=P(lon, lat)))
+            suco = convertstr(Suco.objects.filter(geom__contains=P(lon, lat)))
+            subdistrict = convertstr(Subdistrict.objects.filter(geom__contains=P(lon, lat)))
+            district = convertstr(District.objects.filter(geom__contains=P(lon, lat)))
             if lat and lon:
-                images.append({"lat": lat, "lon": lon, "photo": photo.image.url, "viazen_id": photo.istoriaviazen_id})
+                images.append({"lat": lat,
+                               "lon": lon,
+                               "photo": photo.image.url,
+                               "viazen_id": photo.istoriaviazen_id,
+                               "aldeia": aldeia,
+                               "suco": suco,
+                               "subdistrict": subdistrict,
+                               "district": district,
+                })
         context['geoimages'] = images
         return context
 
