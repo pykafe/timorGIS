@@ -7,7 +7,8 @@ from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Isto
 from django.contrib.gis.geos import Point as P
 from django.urls import reverse_lazy
 
-def convertstr(queryset):
+def queryobject(obj, lon, lat):
+    queryset = obj.objects.filter(geom__contains=P(lon, lat))
     return "".join([str(query) for query in queryset])
 
 
@@ -28,10 +29,10 @@ class MapView(TemplateView):
         for photo in PhotoTimor.objects.all():
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
-            aldeia = convertstr(Aldeia.objects.filter(geom__contains=P(lon, lat)))
-            suco = convertstr(Suco.objects.filter(geom__contains=P(lon, lat)))
-            subdistrict = convertstr(Subdistrict.objects.filter(geom__contains=P(lon, lat)))
-            district = convertstr(District.objects.filter(geom__contains=P(lon, lat)))
+            aldeia =queryobject(Aldeia, lon, lat)
+            suco = queryobject(Suco, lon, lat)
+            subdistrict = convertobject(Subdistrict, lon, lat)
+            district = queryobject(District, lon, lat)
             if lat and lon:
                 images.append({"lat": lat,
                                "lon": lon,
