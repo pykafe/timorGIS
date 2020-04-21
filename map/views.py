@@ -6,10 +6,25 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
 from django.contrib.gis.geos import Point as P
 from django.urls import reverse_lazy
+from django.shortcuts import render_to_response
 
 def queryobject(obj, lon, lat):
     queryset = obj.objects.filter(geom__contains=P(lon, lat))
     return "".join([str(query) for query in queryset])
+
+
+class DetailMapView(TemplateView):
+    template_name = 'map/details.html'
+
+    def get_context_data(self, *args, **kwargs):
+
+        context = super(DetailMapView, self).get_context_data(*args, **kwargs)
+        context['viazen'] = Istoriaviazen.objects.all()
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(path=request.user.id)
+        return self.render_to_response(context)
 
 
 class MapView(TemplateView):
@@ -17,7 +32,7 @@ class MapView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         images = []
-        context = super(TemplateView, self).get_context_data(*args, **kwargs)
+        context = super(MapView, self).get_context_data(*args, **kwargs)
 
         context['users'] = User.objects.all()
         # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
@@ -31,7 +46,7 @@ class MapView(TemplateView):
             lat, lon = get_data.get_lat_lng()
             aldeia =queryobject(Aldeia, lon, lat)
             suco = queryobject(Suco, lon, lat)
-            subdistrict = convertobject(Subdistrict, lon, lat)
+            subdistrict = queryobject(Subdistrict, lon, lat)
             district = queryobject(District, lon, lat)
             if lat and lon:
                 images.append({"lat": lat,
