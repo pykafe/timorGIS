@@ -28,7 +28,7 @@
         }).addTo(mymap);
         {%for photo in geoimages %}
             {% if photo.lon and photo.lat %}
-        L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br>{{ photo.district }} | {{ photo.subdistrict }} | {{ photo.suco }} | {{ photo.aldeia}}"+"</br><a target='_blank' href='https://www.google.com/maps?q={{photo.lat}},{{photo.lon}}'>Detail</a>").openPopup().addTo(mymap);
+        L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br>{{ photo.district }} | {{ photo.subdistrict }} | {{ photo.suco }} | {{ photo.aldeia}}"+"</br><a href='{% url 'details' %}'>Detail</a>").openPopup().addTo(mymap);
             {% endif %}
         {%endfor%}
 

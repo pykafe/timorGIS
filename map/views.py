@@ -19,12 +19,8 @@ class DetailMapView(TemplateView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(DetailMapView, self).get_context_data(*args, **kwargs)
-        context['viazen'] = Istoriaviazen.objects.all()
+        context['test'] = "test"
         return context
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(path=request.user.id)
-        return self.render_to_response(context)
 
 
 class MapView(TemplateView):
