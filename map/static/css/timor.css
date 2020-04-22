@@ -254,6 +254,7 @@ ul.dropdown-menu.show {
 }
 
 ul.dropdown-menu.show {
+    font-size: 13px;
     padding: 16px;
     line-height: 2;
 }
