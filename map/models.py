@@ -79,7 +79,11 @@ class PhotoTimor(models.Model):
     def clean(self):
         """check image if it has longitude and latitude before upload to media file"""
         if self.image:
-            get_data = ImageMetaData(self.image)
+            try:
+                get_data = ImageMetaData(self.image)
+            except AttributeError:
+                raise ValidationError("La simu imajen ho tipu gif" )
+
             lat, lon = get_data.get_lat_lng()
             if not lat and not lon:
                 raise ValidationError("Imajen nee laiha detailhu GPS" )
