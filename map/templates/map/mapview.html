@@ -13,27 +13,6 @@
 
     <div id="mapid"></div>
 
-    <script>
-
-        const districts = {{ districts|safe }};
-        var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
-        L.geoJSON(districts, {
-            style: function (feature) {
-                return {color: 'orange'};
-            }
-        }).bindPopup(function (layer) {
-            var name = layer.feature.properties.name;
-                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-        }).addTo(mymap);
-        {%for photo in geoimages %}
-            {% if photo.lon and photo.lat %}
-        L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br>{{ photo.district }} | {{ photo.subdistrict }} | {{ photo.suco }} | {{ photo.aldeia}}"+"</br><a href='{% url 'details' %}'>Detail</a>").openPopup().addTo(mymap);
-            {% endif %}
-        {%endfor%}
-
-    </script>
-
     <div class="container">
         <div class="row navbar-journey">
             <div class="col-md-8">
@@ -91,4 +70,24 @@
             </div>
         </div>
     </div>
+    <script>
+
+        const districts = {{ districts|safe }};
+        var timormap = L.map('mapid').setView([-8.8315139, 125.6199236], 9);
+        L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+        L.geoJSON(districts, {
+            style: function (feature) {
+                return {color: 'orange'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(timormap);
+        {%for photo in geoimages %}
+            {% if photo.lon and photo.lat %}
+        L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br>{{ photo.district }} | {{ photo.subdistrict }} | {{ photo.suco }} | {{ photo.aldeia}}"+"</br><a href='{% url 'details' %}'>Detail</a>").openPopup().addTo(timormap);
+            {% endif %}
+        {%endfor%}
+
+    </script>
 {% endblock %}

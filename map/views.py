@@ -7,6 +7,7 @@ from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Isto
 from django.contrib.gis.geos import Point as P
 from django.urls import reverse_lazy
 from django.shortcuts import render_to_response
+from django.conf import settings
 
 def queryobject(obj, lon, lat):
     queryset = obj.objects.filter(geom__contains=P(lon, lat))
@@ -55,6 +56,7 @@ class MapView(TemplateView):
                                "district": district,
                 })
         context['geoimages'] = images
+        context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
 
 
