@@ -268,3 +268,13 @@ a:hover {
     color: #117a8b;
     text-decoration: none;
 }
+
+.cont-modal {
+    margin-top: 50px;
+}
+
+.button-modal {
+    float: right;
+    background-color: white;
+    color: #0062cc;
+}

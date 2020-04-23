@@ -6,15 +6,11 @@
 {% block title %}{% trans 'Hatama photo istoria viazen' %}{% endblock %}
 
 {% block content %}
-<style>
-    .button-modal{
-        margin-left: 480px;
-        margin-top: 101px;
-    }
-</style>
 
-<!-- Large modal -->
-<button type="button" class="btn btn-primary button-modal" data-toggle="modal" data-target=".bs-example-modal-lg">{% trans 'Upload photos' %}</button>
+<div class="modal-content cont-modal">
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary button-modal" data-toggle="modal" data-target=".bs-example-modal-lg">{% trans 'Upload photos' %}</button>
+</div>
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
