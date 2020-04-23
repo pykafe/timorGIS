@@ -2,20 +2,43 @@
 {% extends 'map/base.html' %}
 {% load i18n %}
 
-{% block title %}Hatama photo istoria viazen {% endblock %}
+{% block title %}{% trans 'Hatama photo istoria viazen' %}{% endblock %}
 
 {% block content %}
-    <p>Hatama Photo Istoria Viazen</p>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <table>
-        {{ form.as_table }}
-      </table>
-        <button type="submit">{% trans 'Save' %}</button>
-        <a href="{% url 'home' %}">{% trans 'Skip' %}</a> 
-    </form>
-    <script>
-        const path = window.location.pathname.split('/');
-        $("#id_istoriaviazen").val(path[1]);
-    </script>
+<style>
+    .button-modal{
+        margin-left: 480px;
+        margin-top: 101px;
+    }
+</style>
+
+<!-- Large modal -->
+<button type="button" class="btn btn-primary button-modal" data-toggle="modal" data-target=".bs-example-modal-lg">{% trans 'Upload photos' %}</button>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{% trans 'Hatama photo istoria viazen' %}</h4>
+        </div>
+        <div class="modal-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+                    <a href="{% url 'home' %}" type="submit" class="btn btn-default">{% trans 'Skip' %}</a> 
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+    const path = window.location.pathname.split('/');
+    $("#id_istoriaviazen").val(path[1]);
+    document.getElementsByClassName("btn")[0].click();
+</script>
 {% endblock %}
