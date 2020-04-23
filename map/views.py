@@ -56,6 +56,10 @@ class MapView(TemplateView):
                                "district": district,
                 })
         context['geoimages'] = images
+        context['points'] = {
+            'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
+            'DEFAULT_ZOOM': 9,
+        }
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
 
