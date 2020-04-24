@@ -238,3 +238,43 @@ li.hover-list:hover a {
 li.hover-list:hover {
     background-color: rgba(0,0,0,.075);
 }
+
+a.btn.btn-primary.timorgis-login {
+    background-color: white;
+    color: #0062cc;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+ul.dropdown-menu.show {
+    min-width: 100%;
+}
+
+ul.dropdown-menu.show {
+    font-size: 13px;
+    padding: 16px;
+    line-height: 2;
+}
+
+ul.dropdown-menu.show > li:hover {
+    background-color: rgba(0,123,255,.25);
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+a:hover {
+    color: #117a8b;
+    text-decoration: none;
+}
+
+.cont-modal {
+    margin-top: 50px;
+}
+
+.button-modal {
+    float: right;
+    background-color: white;
+    color: #0062cc;
+}
