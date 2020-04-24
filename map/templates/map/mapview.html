@@ -85,9 +85,13 @@
         }).addTo(timormap);
         {%for photo in geoimages %}
             {% if photo.lon and photo.lat %}
-        L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br>{{ photo.district }} | {{ photo.subdistrict }} | {{ photo.suco }} | {{ photo.aldeia}}"+"</br><a href='{% url 'details' %}'>Detail</a>").openPopup().addTo(timormap);
+                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(ContentPopup({{ photo|safe }})).openPopup().addTo(timormap);
             {% endif %}
         {%endfor%}
+        function ContentPopup(photo){
+            content = "<div class='content'><div class='row'><div class='col-md-5'><img src="+ photo.photo +" "+"height='90' width='90'></div>"+"<div class='col-md-7'>"+ photo.district +" "+ photo.subdistrict +" "+ photo.suco +" "+ photo.aldeia + "</br><a href='{% url 'details' %}'>Detail</a></div></div></div>"
+            return content
+        }
 
     </script>
 {% endblock %}
