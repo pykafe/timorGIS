@@ -6,7 +6,27 @@
 
 {% block content %}
 
-<p>{{test}}</p>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+    <div id="mapid"></div>
+    <script>
+
+        const districts = {{ districts|safe }};
+        var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
+        L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+        L.geoJSON(districts, {
+            style: function (feature) {
+                return {color: 'orange'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(timormap);
+
+    </script>
 
 {% endblock %}
 

@@ -20,7 +20,12 @@ class DetailMapView(TemplateView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(DetailMapView, self).get_context_data(*args, **kwargs)
-        context['test'] = "test"
+        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        context['points'] = {
+            'DEFAULT_CENTER': [-8.8315139, 125.6199236,10],
+            'DEFAULT_ZOOM': 10,
+        }
+        context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
 
 
