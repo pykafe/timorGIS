@@ -89,7 +89,7 @@
             {% endif %}
         {%endfor%}
         function contentPopup(photo){
-            content = "<div class='content'><div class='row'><div class='col-md-5'><img src="+ photo.photo +" "+"height='90' width='90'></div>"+"<div class='col-md-7'>"+ photo.district +" "+ photo.subdistrict +" "+ photo.suco + "</br><a href='{% url 'details' %}'>Detail</a></div></div></div>"
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src="+ photo.photo +" "+"height='90' width='90'></div>"+"<div class='col-md-7'>"+ photo.district +" "+ photo.subdistrict +" "+ photo.suco + "</br><a href='{% url 'details' %}'>Detail</a></div></div></div>"
             return content
         }
 
