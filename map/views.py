@@ -3,7 +3,7 @@ from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
+from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.urls import reverse_lazy
 
 class MapView(TemplateView):
@@ -19,7 +19,6 @@ class MapView(TemplateView):
 
         context['viazen'] = Istoriaviazen.objects.all()
         # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
-        context['points'] = serialize('geojson', Point.objects.all(), geometry_field='geom')
         for photo in PhotoTimor.objects.all():
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
