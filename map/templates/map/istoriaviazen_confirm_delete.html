@@ -6,7 +6,7 @@
 
 {% block content %}
     <form method="post">{% csrf_token %}
-        <p>{% trans "Are you sure you want to delete {{ object }}?" %}</p>
+        <p>{% blocktrans "Are you sure you want to delete {{ object }}?" endblocktrans %}</p>
         <button type="submit">{% trans "Confirm" %}</button>
         <a href="{% url 'home' %}">{% trans "Cancel" %}</a> 
     </form>
