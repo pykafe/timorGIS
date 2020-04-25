@@ -16,7 +16,7 @@ class Suco(models.Model):
     geom = models.PolygonField()
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.name
 
 
 class Aldeia(models.Model):
@@ -25,7 +25,7 @@ class Aldeia(models.Model):
     geom = models.PointField()
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.name
 
 
 class District(models.Model):
@@ -34,7 +34,7 @@ class District(models.Model):
     geom = models.MultiPolygonField()
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.name
 
 
 class Subdistrict(models.Model):
@@ -43,7 +43,7 @@ class Subdistrict(models.Model):
     geom = models.MultiPolygonField()
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.name
 
 
 class Istoriaviazen(models.Model):

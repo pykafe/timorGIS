@@ -6,12 +6,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, Point, PhotoTimor, Istoriaviazen
 from django.contrib.gis.geos import Point as P
 from django.urls import reverse_lazy
-from django.shortcuts import render_to_response
 from django.conf import settings
 
 def queryobject(obj, lon, lat):
     queryset = obj.objects.filter(geom__contains=P(lon, lat))
-    return "".join([str(query) for query in queryset])
+    return ",".join([str(instance) for instance in queryset])
 
 
 class DetailMapView(TemplateView):
@@ -46,7 +45,6 @@ class MapView(TemplateView):
         for photo in PhotoTimor.objects.all():
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
-            aldeia =queryobject(Aldeia, lon, lat)
             suco = queryobject(Suco, lon, lat)
             subdistrict = queryobject(Subdistrict, lon, lat)
             district = queryobject(District, lon, lat)
@@ -55,7 +53,6 @@ class MapView(TemplateView):
                                "lon": lon,
                                "photo": photo.image.url,
                                "viazen_id": photo.istoriaviazen_id,
-                               "aldeia": aldeia,
                                "suco": suco,
                                "subdistrict": subdistrict,
                                "district": district,
