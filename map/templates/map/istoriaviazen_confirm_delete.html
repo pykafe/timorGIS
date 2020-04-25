@@ -1,5 +1,13 @@
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-    <a href="{% url 'home' %}">Cancel </a> 
-</form>
+
+{% extends 'map/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Confirm Delete Journey" %}{% endblock %}
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+        <p>{% blocktrans "Are you sure you want to delete {{ object }}?" endblocktrans %}</p>
+        <button type="submit">{% trans "Confirm" %}</button>
+        <a href="{% url 'home' %}">{% trans "Cancel" %}</a> 
+    </form>
+{% endblock %}

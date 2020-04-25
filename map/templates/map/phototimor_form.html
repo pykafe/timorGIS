@@ -1,18 +1,81 @@
 
 {% extends 'map/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
 
-{% block title %}Hatama photo istoria viazen {% endblock %}
+{% block title %}{% trans 'Hatama photo istoria viazen' %}{% endblock %}
 
 {% block content %}
-    <p>Hatama Photo Istoria Viazen</p>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <table>
-        {{ form.as_table }}
-      </table>
-        <input type="submit" value="Save">
-    </form>
-    <script>
-        $("#id_istoriaviazen").val(window.location.pathname[1]);
-    </script>
+
+<div class="modal-content cont-modal">
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary button-modal" data-toggle="modal" data-target=".bs-example-modal-lg">{% trans 'Upload photos' %}</button>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{% trans 'Hatama photo istoria viazen' %}</h4>
+            <a href="{% url "home" %}" type="button" class="close"><span aria-hidden="true">&times;</span></a>
+        </div>
+        <div class="modal-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                      {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                      {% endfor %}
+
+                      {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                          {% for error in form.non_field_errors %}
+                            {{ error }}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+
+                      {% for field in form.visible_fields %}
+                        <div class="form-group">
+                          {{ field.label_tag }}
+
+                          {% if form.is_bound %}
+                            {% if field.errors %}
+                              {% render_field field class="form-control is-invalid" %}
+                              {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                  {{ error }}
+                                </div>
+                              {% endfor %}
+                            {% else %}
+                              {% render_field field class="form-control is-valid" %}
+                            {% endif %}
+                          {% else %}
+                            {% render_field field class="form-control" %}
+                          {% endif %}
+
+                          {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                </table>
+                <div class="modal-footer">
+                    {% if form.non_field_errors %}
+                        <button type="submit" class="btn btn-primary">{% trans 'Try Save Again' %}</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+                    {% endif %}
+                    <a href="{% url 'home' %}" type="submit" class="btn btn-default">{% trans 'Skip' %}</a> 
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+    const path = window.location.pathname.split('/');
+    $("#id_istoriaviazen").val(path[1]);
+    document.getElementsByClassName("btn")[0].click();
+</script>
 {% endblock %}

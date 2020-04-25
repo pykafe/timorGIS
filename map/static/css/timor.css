@@ -239,11 +239,6 @@ li.hover-list:hover {
     background-color: rgba(0,0,0,.075);
 }
 
-.icon_upload {
-  margin-left: 55px;
-  margin-top: 25px;
-}
-
 a.btn.btn-primary.timorgis-login {
     background-color: white;
     color: #0062cc;
@@ -272,4 +267,14 @@ a:hover {
 a:hover {
     color: #117a8b;
     text-decoration: none;
+}
+
+.cont-modal {
+    margin-top: 50px;
+}
+
+.button-modal {
+    float: right;
+    background-color: white;
+    color: #0062cc;
 }

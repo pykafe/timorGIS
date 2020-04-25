@@ -37,14 +37,18 @@ class HatamaViazenView(CreateView):
     template_name = 'map/viajen_form.html'
     model = Istoriaviazen
     fields = ['title', 'description', 'date', 'creator']
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        return reverse_lazy('photo_viazen', args = (self.object.id,))
 
 
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
     model = PhotoTimor
     fields = ['istoriaviazen', 'image']
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        return reverse_lazy('photo_viazen', args = (self.object.istoriaviazen_id,))
 
 
 class ViazenUpdateView(UpdateView):
