@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% trans 'Detail map view' %}{% endblock %}
+{% block title %}MAP VIEW{% endblock %}
 
 {% block content %}
 
@@ -12,11 +12,72 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 
     <div id="mapid"></div>
+
+    <div class="container">
+        <div class="row navbar-journey">
+            <div class="col-md-8">
+                <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
+            </div>
+            <!--
+            <div class="col-md-6 search-journey">
+                <input type="text" name="search" placeholder="Search..">
+            </div>
+            -->
+            <div class="col-md-4">
+                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 list-users">
+                {% for user in users %}
+                    <span class="person-name">{{ user.first_name|default:user.username }}</span>
+                {% endfor %}
+            </div>
+            <div class="col-md-10 display-all-post">
+                {% for via in viazen %}
+                    {% if via.creator %}
+                    <div class="each-upload">
+                        <div class="dropdown dropdown-edit-and-delete">
+                            <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                            <ul class="dropdown-menu menu-dropdown">
+                                <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}">{% trans 'Add Photo' %}</a></li>
+                                <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}">{% trans 'Edit' %}</a>
+                                   <span class="glyphicon glyphicon-pencil"></span>
+                                </li>
+                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}">{% trans 'Delete' %}</a>
+                                   <span class="glyphicon glyphicon-trash"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                            <strong class="person-name">{{ via.creator }}</strong>
+                        </p>
+                        <strong>{{ via.title }}</strong>
+                        <div class="gallery">
+                            {%for photo in geoimages %}
+                                {% if photo.viazen_id == via.id %}
+                                    <figure>
+                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                    </figure>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <p>{{ via.description }}</p>
+                        <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     <script>
 
         const districts = {{ districts|safe }};
+        const subdistrict = {{ subdistrict|safe }};
+        const suco = {{ suco|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
         L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+
         L.geoJSON(districts, {
             style: function (feature) {
                 return {color: 'orange'};
@@ -26,7 +87,33 @@
                 return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
         }).addTo(timormap);
 
+        L.geoJSON(subdistrict, {
+            style: function (feature) {
+                return {color: 'yellow'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Subdistritu: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(timormap);
+
+        L.geoJSON(suco, {
+            style: function (feature) {
+                return {color: 'red'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Suco: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(timormap);
+
+        {%for photo in geoimages %}
+            {% if photo.lon and photo.lat %}
+                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup()).openPopup().addTo(timormap);
+            {% endif %}
+            function contentPopup(){
+                content = "<div class='container'><div class='row'><div class='col-md-5'><img src='{{photo.photo}}' height='90' width='90'></div><div class='col-md-7'>{{ photo.district }} {{ photo.subdistrict }} {{ photo.suco }}</br><a href='{% url 'details'  photo.viazen_id  %}'>Detail</a></div></div></div>"
+                return content
+            }
+        {%endfor%}
+
     </script>
-
 {% endblock %}
-

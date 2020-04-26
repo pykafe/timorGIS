@@ -8,9 +8,13 @@ from django.contrib.gis.geos import Point as P
 from django.urls import reverse_lazy
 from django.conf import settings
 
+
 def queryobject(obj, lon, lat):
     queryset = obj.objects.filter(geom__contains=P(lon, lat))
     return ",".join([str(instance) for instance in queryset])
+
+def serializes(obj, name):
+    return serialize('geojson', obj.objects.filter(name=name), geometry_field='geom')
 
 
 class DetailMapView(TemplateView):
@@ -19,9 +23,30 @@ class DetailMapView(TemplateView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(DetailMapView, self).get_context_data(*args, **kwargs)
-        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        images = []
+        target = kwargs['pk']
+        context['viazen'] = Istoriaviazen.objects.filter(id__contains=target)
+        for photo in PhotoTimor.objects.filter(istoriaviazen__exact=target):
+            get_data = ImageMetaData(photo.image.path)
+            lat, lon = get_data.get_lat_lng()
+            suco = queryobject(Suco, lon, lat)
+            subdistrict = queryobject(Subdistrict, lon, lat)
+            district = queryobject(District, lon, lat)
+            if lat and lon:
+                images.append({"lat": lat,
+                               "lon": lon,
+                               "photo": photo.image.url,
+                               "viazen_id": photo.istoriaviazen_id,
+                               "suco": suco,
+                               "subdistrict": subdistrict,
+                               "district": district,
+                })
+        context['geoimages'] = images
+        context['districts'] = serializes(District, district)
+        context['subdistrict'] = serializes(Subdistrict, subdistrict)
+        context['suco'] = serializes(Suco, suco)
         context['points'] = {
-            'DEFAULT_CENTER': [-8.8315139, 125.6199236,10],
+            'DEFAULT_CENTER': [lat, lon,10],
             'DEFAULT_ZOOM': 10,
         }
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
@@ -36,12 +61,8 @@ class MapView(TemplateView):
         context = super(MapView, self).get_context_data(*args, **kwargs)
 
         context['users'] = User.objects.all()
-        # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
-
         context['viazen'] = Istoriaviazen.objects.all()
-        # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
-        context['points'] = serialize('geojson', Point.objects.all(), geometry_field='geom')
         for photo in PhotoTimor.objects.all():
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
