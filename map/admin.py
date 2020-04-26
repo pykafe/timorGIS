@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 from .models import Suco, Aldeia, District, Subdistrict
-from .models import Suco, Aldeia, District, Subdistrict, Point, PhotoTimor, Istoriaviazen
+from .models import Suco, Aldeia, District, Subdistrict, PhotoTimor, Istoriaviazen
 from leaflet.admin import LeafletGeoAdmin
 
 
@@ -29,12 +29,4 @@ admin.site.register(Aldeia, AldeiaAdmin)
 admin.site.register(District, DistrictAdmin)
 admin.site.register(Subdistrict, SubdistrictAdmin)
 admin.site.register(Istoriaviazen)
-admin.site.register(
-    Point,                      #<-- this is a model
-    LeafletGeoAdmin,
-    settings_overrides =  {
-        'DEFAULT_CENTER': ([-8.8315139, 125.6199236,8]),
-        'DEFAULT_ZOOM': 8,
-    }
-)
 admin.site.register(PhotoTimor)

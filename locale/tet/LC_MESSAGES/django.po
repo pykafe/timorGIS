@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-21 03:17+0000\n"
+"PO-Revision-Date: 2020-04-21 03:21+0000\n"
+"Last-Translator: b'Onorio de Jesus <dejesusony@gmail.com>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.9.4\n"
+
+#: map/templates/map/header.html:16
+msgid "Welcome"
+msgstr "Benvindo"
+
+#: map/templates/map/header.html:35
+msgid "Admin"
+msgstr "Administrador"
+
+#: map/templates/map/header.html:36
+msgid "Change password"
+msgstr "Troka password"
+
+#: map/templates/map/header.html:37
+msgid "log out"
+msgstr "Sai"
+
+#: map/templates/map/header.html:39
+msgid "Log In"
+msgstr "Tama"
+
+#: map/templates/map/mapview.html:40
+msgid "Our histories for our trip"
+msgstr "Ita nia istoria sira kona-ba ita nia viajen"
+
+#: map/templates/map/mapview.html:48
+msgid "Add my journey"
+msgstr "Hatama viajen"
+
+#: map/templates/map/mapview.html:64
+msgid "Edit"
+msgstr "Troka"
+
+#: map/templates/map/mapview.html:67
+msgid "Delete"
+msgstr "Hamoos"
+
+#: timor/settings.py:128
+msgid "Tetum"
+msgstr "Tetun"
+
+#: timor/settings.py:129
+msgid "English"
+msgstr "Ingles"
