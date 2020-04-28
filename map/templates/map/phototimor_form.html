@@ -9,6 +9,21 @@
 <style>
     .active{
         color: black!important;
+        font-weight: bold;
+    }
+
+    input {
+        border: 2px solid #0062cc;
+        color: #0062cc;
+        background-color: white;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: bold;
+        cursor:pointer;
+    }
+
+    .group-upload{
+        margin-top: 50px;
     }
 </style>
 
@@ -53,7 +68,7 @@
                       {% endif %}
 
                       {% for field in form.visible_fields %}
-                        <div class="form-group">
+                        <div class="form-group group-upload">
                           {{ field.label_tag }}
 
                           {% if form.is_bound %}
@@ -68,7 +83,7 @@
                               {% render_field field class="form-control is-valid" %}
                             {% endif %}
                           {% else %}
-                            {% render_field field class="form-control" %}
+                            {% render_field field %}
                           {% endif %}
 
                           {% if field.help_text %}

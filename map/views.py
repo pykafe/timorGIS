@@ -45,7 +45,7 @@ class HatamaViazenView(CreateView):
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
     model = PhotoTimor
-    fields = ['istoriaviazen', 'image']
+    fields = ['image', 'istoriaviazen']
 
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.istoriaviazen_id,))
