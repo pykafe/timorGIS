@@ -6,6 +6,11 @@
 {% block title %}{% trans 'Hatama photo istoria viazen' %}{% endblock %}
 
 {% block content %}
+<style>
+    .active{
+        color: black!important;
+    }
+</style>
 
 <div class="modal-content cont-modal">
     <!-- Large modal -->
@@ -16,10 +21,22 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title">{% trans 'Hatama photo istoria viazen' %}</h4>
+            {% if counts %}
+                <h4 class="modal-title">{% trans 'Favor bele hatama tan photo istoria viazen' %}</h4>
+            {% else %}
+                <h4 class="modal-title">{% trans 'Hatama photo istoria viazen' %}</h4>
+            {% endif %}
             <a href="{% url "home" %}" type="button" class="close"><span aria-hidden="true">&times;</span></a>
         </div>
         <div class="modal-body">
+            <ul class="nav nav-tabs">
+                <li><a href="#upload-photos" data-toggle="tab">{% trans 'Upload Photos' %}</a></li>
+                <li><a href="#your-photos" data-toggle="tab" style="margin-left: 20px;">{% trans 'Your Photos' %}</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+            <div class="tab-pane active" id="upload-photos">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <table>
@@ -61,14 +78,31 @@
                       {% endfor %}
                 </table>
                 <div class="modal-footer">
+                {% if counts %}
+                    <div class="text-muted h6">{% trans 'Nota: Se photo laiha ona bele hanehan butaun skip' %}</div>
+                {% endif %}
                     {% if form.non_field_errors %}
                         <button type="submit" class="btn btn-primary">{% trans 'Try Save Again' %}</button>
                     {% else %}
-                        <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+                        {% if counts %}
+                            <button type="submit" class="btn btn-primary">{% trans 'Save another photo' %}</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+                        {% endif %}
                     {% endif %}
                     <a href="{% url 'home' %}" type="submit" class="btn btn-default">{% trans 'Skip' %}</a> 
                 </div>
             </form>
+            </div>
+            <div class="tab-pane" id="your-photos">
+                {% for image in photo %}
+                    <img src='{{ image.image.url }}' class="gallery-img" width="300" height="140" alt="Image {{ image.pk}}">
+                {% endfor %}
+                <div class="modal-footer">
+                    <a href="{% url 'home' %}" type="submit" class="btn btn-default">{% trans 'Skip' %}</a> 
+                </div>
+            </div>
+            </div>
         </div>
     </div>
   </div>
