@@ -83,15 +83,16 @@
             var name = layer.feature.properties.name;
                 return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
         }).addTo(timormap);
-        {%for photo in geoimages %}
+        {% for photo in geoimages %}
             {% if photo.lon and photo.lat %}
-                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup()).openPopup().addTo(timormap);
+                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
             {% endif %}
-            function contentPopup(){
-                content = "<div class='container'><div class='row'><div class='col-md-5'><img src='{{photo.photo}}' height='90' width='90'></div><div class='col-md-7'>{{ photo.district }} {{ photo.subdistrict }} {{ photo.suco }}</br><a href='{% url 'details'  photo.viazen_id  %}'>Detail</a></div></div></div>"
-                return content
-            }
-        {%endfor%}
+        {% endfor %}
+        function contentPopup(photo){
+            var viazen_id = photo.viazen_id.toString();
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' height='60' width='60'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/details/"+viazen_id+"'>Detail</a></div></div></div>"
+            return content
+        }
 
     </script>
 {% endblock %}
