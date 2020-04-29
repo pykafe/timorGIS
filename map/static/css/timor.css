@@ -292,11 +292,16 @@ a:hover {
     border-color: var(--gray);
     background-color: white;
     color: var(--gray);
-
 }
 
 .cancel-delete:hover {
     color: #f8f9fa;
     background-color: #adb5bd;
     border-color: #adb5bd;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #ff0019;
+    border-color: #ff0019;
 }
