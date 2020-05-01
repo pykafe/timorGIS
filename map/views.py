@@ -51,6 +51,7 @@ class PhotoViazenView(CreateView):
 
 
 class ViazenUpdateView(UpdateView):
+    template_name = 'map/update_istoriaviazen.html'
     model = Istoriaviazen
     fields = ['title', 'description', 'date', 'creator']
     success_url = reverse_lazy('home')
