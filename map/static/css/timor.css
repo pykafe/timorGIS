@@ -278,3 +278,30 @@ a:hover {
     background-color: white;
     color: #0062cc;
 }
+
+.delete-journey {
+    border: 1px solid #f8f9fa;
+    box-shadow: 0 16px 48px #adb5bd;
+}
+
+.form-delete {
+    margin-bottom: 0px;
+}
+
+.cancel-delete {
+    border-color: var(--gray);
+    background-color: white;
+    color: var(--gray);
+}
+
+.cancel-delete:hover {
+    color: #f8f9fa;
+    background-color: #adb5bd;
+    border-color: #adb5bd;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #ff0019;
+    border-color: #ff0019;
+}
