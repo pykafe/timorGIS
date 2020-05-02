@@ -53,7 +53,7 @@ class PhotoViazenView(CreateView):
     def get_context_data(self, *args, **kwargs):
         target = self.kwargs['pk']
         context = super(PhotoViazenView, self).get_context_data(*args, **kwargs)
-        context['photo'] = PhotoTimor.objects.filter(istoriaviazen=target)
+        context['journey_photo'] = PhotoTimor.objects.filter(istoriaviazen=target)
         context['counts'] = PhotoTimor.objects.filter(istoriaviazen=target).count()
         return context
 
