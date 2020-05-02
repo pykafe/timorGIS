@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans 'Hatama photo istoria viazen' %}{% endblock %}
+{% block title %}{% trans 'Add journey photos' %}{% endblock %}
 
 {% block content %}
 
@@ -16,7 +16,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            {% if counts %}
+            {% if journey_photos.count %}
                 <h4 class="modal-title">{% trans 'Please add another Photo' %}</h4>
             {% else %}
                 <h4 class="modal-title">{% trans 'Add photo journey' %}</h4>
@@ -73,13 +73,13 @@
                               {% endfor %}
                         </table>
                         <div class="modal-footer">
-                        {% if counts %}
-                            <div class="text-muted h6">{% trans 'Note: If no have another photo, please skip' %}</div>
+                        {% if journey_photos.count %}
+                            <div class="text-muted h6">{% trans 'Note: If don\'t have another photo, please skip' %}</div>
                         {% endif %}
                             {% if form.non_field_errors %}
                                 <button type="submit" class="btn btn-primary">{% trans 'Try Save Again' %}</button>
                             {% else %}
-                                {% if counts %}
+                                {% if journey_photos.count %}
                                     <button type="submit" class="btn btn-primary">{% trans 'Save another photo' %}</button>
                                 {% else %}
                                     <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
