@@ -28,8 +28,24 @@ class MapView(TemplateView):
         return context
 
 
-class AnotherView(TemplateView):
-    template_name = 'map/another.html'
+class CreatorView(TemplateView):
+    template_name = 'map/mapview.html'
+
+    def get_context_data(self, *args, **kwargs):
+        images = []
+        creator = kwargs['pk']
+        context = super(TemplateView, self).get_context_data(*args, **kwargs)
+
+        context['users'] = User.objects.filter(id=creator)
+        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        context['viazen'] = Istoriaviazen.objects.filter(creator=creator)
+        for photo in PhotoTimor.objects.filter(istoriaviazen__creator=creator):
+            get_data = ImageMetaData(photo.image.path)
+            lat, lon = get_data.get_lat_lng()
+            if lat and lon:
+                images.append({"lat": lat, "lon": lon, "photo": photo.image.url, "viazen_id": photo.istoriaviazen_id})
+        context['geoimages'] = images
+        return context
 
 
 class HatamaViazenView(CreateView):

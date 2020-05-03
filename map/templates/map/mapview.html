@@ -51,7 +51,9 @@
         <div class="row">
             <div class="col-md-2 list-users">
                 {% for user in users %}
-                    <span class="person-name">{{ user.first_name|default:user.username }}</span>
+                    <a href="{% url 'user_creator' user.pk %}">
+                        <span class="person-name">{{ user.first_name|default:user.username }}</span>
+                    </a>
                 {% endfor %}
             </div>
             <div class="col-md-10 display-all-post">
