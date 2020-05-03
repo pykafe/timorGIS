@@ -35,8 +35,8 @@ class CreatorView(TemplateView):
         images = []
         creator = kwargs['pk']
         context = super(TemplateView, self).get_context_data(*args, **kwargs)
-
-        context['users'] = User.objects.filter(id=creator)
+        context['userid'] = User.objects.get(id=creator)
+        context['users'] = User.objects.all()
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
         context['viazen'] = Istoriaviazen.objects.filter(creator=creator)
         for photo in PhotoTimor.objects.filter(istoriaviazen__creator=creator):

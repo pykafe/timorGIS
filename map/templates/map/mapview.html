@@ -52,7 +52,7 @@
             <div class="col-md-2 list-users">
                 {% for user in users %}
                     <a href="{% url 'user_creator' user.pk %}">
-                        <span class="person-name">{{ user.first_name|default:user.username }}</span>
+                        <span class="person-name {% if userid.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</span>
                     </a>
                 {% endfor %}
             </div>

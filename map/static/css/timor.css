@@ -305,3 +305,7 @@ a:hover {
     background-color: #ff0019;
     border-color: #ff0019;
 }
+
+.active {
+    color: black;
+}
