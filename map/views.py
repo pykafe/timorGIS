@@ -23,7 +23,7 @@ class MapView(TemplateView):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
-                images.append({"lat": lat, "lon": lon, "photo": photo.image.url, "viazen_id": photo.istoriaviazen_id})
+                images.append({"lat": lat, "lon": lon, "photo": photo.image.url, "viazen_id": photo.istoriaviazen_id, "photo_id": photo.pk })
         context['geoimages'] = images
         return context
 
@@ -56,6 +56,17 @@ class PhotoViazenView(CreateView):
         context['journey_photos'] = PhotoTimor.objects.filter(istoriaviazen=target)
         return context
 
+class UpdatePhotoViazenView(UpdateView):
+    template_name = 'map/updatephototimor_form.html'
+    model = PhotoTimor
+    fields = ['image', 'istoriaviazen']
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        target = self.kwargs['pk']
+        context = super(UpdatePhotoViazenView, self).get_context_data(*args, **kwargs)
+        context['journey_photos'] = PhotoTimor.objects.filter(id=target)
+        return context
 
 class ViazenUpdateView(UpdateView):
     model = Istoriaviazen

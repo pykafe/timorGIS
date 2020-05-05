@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path
-from .views import MapView, AnotherView, HatamaViazenView, PhotoViazenView, ViazenUpdateView, ViazenDeleteView
+from .views import MapView, AnotherView, HatamaViazenView, PhotoViazenView, ViazenUpdateView, ViazenDeleteView, UpdatePhotoViazenView
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -10,6 +10,7 @@ urlpatterns = [
     path('another', AnotherView.as_view()),
     path('hatama_viazen/', HatamaViazenView.as_view(), name='hatama_viazen'),
     path('<int:pk>/update', ViazenUpdateView.as_view(), name='update_viazen'),
+    path('<int:pk>/update_photo', UpdatePhotoViazenView.as_view(), name='update_photo'),
     path('<int:pk>/photo_viazen/', PhotoViazenView.as_view(), name='photo_viazen'),
     path('<int:pk>/delete', ViazenDeleteView.as_view(), name="delete_viazen"),
 

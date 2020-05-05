@@ -78,7 +78,9 @@
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
-                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                        <a href={% url 'update_photo' photo.photo_id %}>
+                                            <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                        </a>
                                     </figure>
                                 {% endif %}
                             {% endfor %}
