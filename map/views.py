@@ -77,3 +77,9 @@ class ViazenUpdateView(UpdateView):
 class ViazenDeleteView(DeleteView):
     model = Istoriaviazen
     success_url = reverse_lazy('home')
+
+
+class DeletePhotoView(DeleteView):
+    model = PhotoTimor
+    template_name = 'map/istoriaviazen_confirm_delete.html'
+    success_url = reverse_lazy('home')

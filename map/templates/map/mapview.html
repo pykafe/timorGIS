@@ -78,9 +78,14 @@
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
-                                        <a href={% url 'update_photo' photo.photo_id %}>
-                                            <img src="{% static 'img/edit_photo.png' %}" width="25" alt="Image {{ photo.pk}}">
-                                        </a>
+                                        {% if user.is_authenticated %}
+                                            <a href="{% url 'update_photo' photo.photo_id %}">
+                                                <img src="{% static 'img/edit_photo.png' %}" width="25" alt="Image {{ photo.pk}}">
+                                            </a>
+                                            <a href="{% url 'delete_photo' photo.photo_id %}">
+                                                <img src="{% static 'img/delete.png' %}" width="25" alt="Image {{ photo.pk}}">
+                                            </a>
+                                        {% endif %}
                                         <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
                                     </figure>
                                 {% endif %}
