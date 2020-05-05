@@ -79,8 +79,9 @@
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
                                         <a href={% url 'update_photo' photo.photo_id %}>
-                                            <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                            <img src="{% static 'img/edit_photo.png' %}" width="25" alt="Image {{ photo.pk}}">
                                         </a>
+                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
                                     </figure>
                                 {% endif %}
                             {% endfor %}
