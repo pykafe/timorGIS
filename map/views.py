@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.urls import reverse_lazy
 
+
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
 
@@ -40,6 +41,11 @@ class HatamaViazenView(CreateView):
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.id,))
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['hatama_viazen'] = ("Hatama Istoria Viazen")
+        return context
+
 
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
@@ -51,10 +57,15 @@ class PhotoViazenView(CreateView):
 
 
 class ViazenUpdateView(UpdateView):
-    template_name = 'map/update_istoriaviazen.html'
+    template_name = 'map/viajen_form.html'
     model = Istoriaviazen
     fields = ['title', 'description', 'date', 'creator']
     success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['update_viazen'] = ("Atualiza Istoria Viazen")
+        return context
 
 
 class ViazenDeleteView(DeleteView):
