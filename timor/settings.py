@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'map',
+    'djrichtextfield',
     'django_extensions',
     'widget_tweaks',
     'rosetta',
@@ -155,6 +156,48 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+# Django Rich Text Field
+TINYMCE_CONFIG = {
+    'js': ['//tinymce.cachefly.net/4.1/tinymce.min.js'],
+    'init_template': 'djrichtextfield/init/tinymce.js',
+    'settings': {
+        'menubar': False,
+        'plugins': 'link image table code',
+        'toolbar': 'formatselect | bold italic | removeformat |'
+                   ' link unlink image table | code',
+        'block_formats': 'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3',
+        'width': 700
+    },
+    'profiles': {
+        'mini': {
+            'toolbar': 'bold italic | removeformat'
+        }
+    }
+}
+
+CKEDITOR_CONFIG = {
+    'js': ['//cdn.ckeditor.com/4.4.4/standard/ckeditor.js'],
+    'init_template': 'djrichtextfield/init/ckeditor.js',
+    'settings': {
+        'toolbar': [
+            {'items': ['Format', '-', 'Bold', 'Italic', '-', 'RemoveFormat']},
+            {'items': ['Link', 'Unlink', 'Image', 'Table', 'Video']},
+            {'items': ['Source']}
+        ],
+        'format_tags': 'p;h1;h2;h3',
+        'width': 700,
+    },
+    'profiles': {
+        'mini': {
+            'toolbar': [
+                {'items': ['Bold', 'Italic', '-', 'RemoveFormat']},
+            ]
+        }
+    },
+}
+
+DJRICHTEXTFIELD_CONFIG = CKEDITOR_CONFIG
 
 try:
     from .local_settings import *  # noqa

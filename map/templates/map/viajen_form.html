@@ -20,6 +20,7 @@
                     <h2>Hatama Istoria Viazen</h2>
                     <form method="post" enctype="multipart/form-data" novalidate>
                       {% csrf_token %}
+                        {{ form.media }}
 
                       {% for hidden_field in form.hidden_fields %}
                         {{ hidden_field }}
@@ -49,7 +50,7 @@
                               {% render_field field class="form-control is-valid" %}
                             {% endif %}
                           {% else %}
-                            {% render_field field class="form-control" %}
+                            {% render_field field class="form-control djrichtextfield" %}
                           {% endif %}
 
                           {% if field.help_text %}
