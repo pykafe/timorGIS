@@ -5,6 +5,7 @@ from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 
 
 class MapView(TemplateView):
@@ -43,7 +44,7 @@ class HatamaViazenView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['hatama_viazen'] = ("Hatama Istoria Viazen")
+        context['hatama_viazen'] = _("Add Journey History")
         return context
 
 
@@ -64,7 +65,7 @@ class ViazenUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['update_viazen'] = ("Atualiza Istoria Viazen")
+        context['update_viazen'] = _("Update Journey History")
         return context
 
 
