@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.urls import reverse_lazy
 from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
@@ -18,7 +19,7 @@ class MapView(TemplateView):
             try:
                 context['creator_filter'] = User.objects.get(id=creator_filter)
                 context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
-            except ValueError :
+            except (ValueError, ObjectDoesNotExist):
                 raise Http404()
         else:
             context['viazen'] = Istoriaviazen.objects.all()
