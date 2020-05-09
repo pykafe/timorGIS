@@ -1,23 +1,20 @@
 {% extends 'map/base.html' %}
-{% load widget_tweaks %}
+{% load widget_tweaks static %}
 
 {% block title %}Hatama istoria viazen {% endblock %}
 
 {% block content %}
 {% load i18n %}
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
     <!-- Fengyuan Chen's Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/datepicker.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/datepicker.min.js' %}"></script>
 
     <div class="container">
         <div class="form-row">
             <div class="row">
                 <div class="form-group col-12">
-                    <h2>Hatama Istoria Viazen</h2>
+                    <h2>{{ hatama_viazen }} {{ update_viazen }}</h2> 
                     <form method="post" enctype="multipart/form-data" novalidate>
                       {% csrf_token %}
 

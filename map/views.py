@@ -7,6 +7,8 @@ from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviaz
 from django.urls import reverse_lazy
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import ugettext_lazy as _
+
 
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
@@ -45,20 +47,38 @@ class HatamaViazenView(CreateView):
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.id,))
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['hatama_viazen'] = _("Add Journey History")
+        return context
+
+
 
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
     model = PhotoTimor
-    fields = ['istoriaviazen', 'image']
+    fields = ['image', 'istoriaviazen']
 
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.istoriaviazen_id,))
 
+    def get_context_data(self, *args, **kwargs):
+        target = self.kwargs['pk']
+        context = super(PhotoViazenView, self).get_context_data(*args, **kwargs)
+        context['journey_photos'] = PhotoTimor.objects.filter(istoriaviazen=target)
+        return context
+
 
 class ViazenUpdateView(UpdateView):
+    template_name = 'map/viajen_form.html'
     model = Istoriaviazen
     fields = ['title', 'description', 'date', 'creator']
     success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['update_viazen'] = _("Update Journey History")
+        return context
 
 
 class ViazenDeleteView(DeleteView):
