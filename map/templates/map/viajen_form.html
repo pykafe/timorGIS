@@ -6,9 +6,8 @@
 {% block content %}
 {% load i18n %}
 
-    <!-- Fengyuan Chen's Datepicker -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="{% static 'js/jquery-1.12.4.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timor.css' %}">
     <script src="{% static 'js/jquery-ui.js' %}"></script>
 
     <div class="container">
@@ -69,8 +68,8 @@
     </div>
     <script>
         $(function () {
-            $("#id_date_0").datepicker({format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D"});
-            $("#id_date_1").datepicker({format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D"});
+            $("#id_date_0").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
+            $("#id_date_1").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
         });
 
     </script>
