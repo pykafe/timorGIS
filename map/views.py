@@ -53,7 +53,6 @@ class HatamaViazenView(CreateView):
         return context
 
 
-
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
     model = PhotoTimor
@@ -68,6 +67,7 @@ class PhotoViazenView(CreateView):
         context['journey_photos'] = PhotoTimor.objects.filter(istoriaviazen=target)
         return context
 
+
 class UpdatePhotoViazenView(UpdateView):
     template_name = 'map/updatephototimor_form.html'
     model = PhotoTimor
@@ -79,6 +79,7 @@ class UpdatePhotoViazenView(UpdateView):
         context = super(UpdatePhotoViazenView, self).get_context_data(*args, **kwargs)
         context['journey_photos'] = PhotoTimor.objects.filter(id=target)
         return context
+
 
 class ViazenUpdateView(UpdateView):
     template_name = 'map/viajen_form.html'
