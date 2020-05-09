@@ -10,7 +10,7 @@ from django.conf import settings
 
 
 def queryobject(obj, lon, lat):
-    queryset = obj.objects.filter(geom__contains=P(lon, lat))
+    queryset = obj.objects.filter(geom__contains=Point(lon, lat))
     return ",".join([str(instance) for instance in queryset])
 
 def serializes(obj, name):
