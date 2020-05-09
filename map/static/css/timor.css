@@ -279,6 +279,24 @@ a:hover {
     color: #0062cc;
 }
 
+.active {
+    color: black!important;
+    font-weight: bold;
+}
+
+input {
+    border: 2px solid #0062cc;
+    color: #0062cc;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.group-upload {
+    margin-top: 50px;
+
 .delete-journey {
     border: 1px solid #f8f9fa;
     box-shadow: 0 16px 48px #adb5bd;

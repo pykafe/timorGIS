@@ -48,13 +48,20 @@ class HatamaViazenView(CreateView):
         return context
 
 
+
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
     model = PhotoTimor
-    fields = ['istoriaviazen', 'image']
+    fields = ['image', 'istoriaviazen']
 
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.istoriaviazen_id,))
+
+    def get_context_data(self, *args, **kwargs):
+        target = self.kwargs['pk']
+        context = super(PhotoViazenView, self).get_context_data(*args, **kwargs)
+        context['journey_photos'] = PhotoTimor.objects.filter(istoriaviazen=target)
+        return context
 
 
 class ViazenUpdateView(UpdateView):
