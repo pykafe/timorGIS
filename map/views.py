@@ -5,6 +5,8 @@ from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.urls import reverse_lazy
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -12,26 +14,29 @@ class MapView(TemplateView):
     template_name = 'map/mapview.html'
 
     def get_context_data(self, *args, **kwargs):
-        images = []
         context = super(TemplateView, self).get_context_data(*args, **kwargs)
 
-        context['users'] = User.objects.all()
-        # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
-        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        creator_filter = self.request.GET.get('creator', False)
+        if creator_filter:
+            try:
+                context['creator_filter'] = User.objects.get(id=creator_filter)
+                context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
+            except (ValueError, ObjectDoesNotExist):
+                raise Http404()
+        else:
+            context['viazen'] = Istoriaviazen.objects.all()
 
-        context['viazen'] = Istoriaviazen.objects.all()
-        # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
-        for photo in PhotoTimor.objects.all():
+
+        context['users'] = User.objects.all()
+        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        images = []
+        for photo in PhotoTimor.objects.filter(istoriaviazen__in=context['viazen']):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
                 images.append({"lat": lat, "lon": lon, "photo": photo.image.url, "viazen_id": photo.istoriaviazen_id, "photo_id": photo.pk })
         context['geoimages'] = images
         return context
-
-
-class AnotherView(TemplateView):
-    template_name = 'map/another.html'
 
 
 class HatamaViazenView(CreateView):
