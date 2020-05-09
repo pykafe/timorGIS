@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
-from django.contrib.gis.geos import Point as P
+from django.contrib.gis.geos import Point
 from django.urls import reverse_lazy
 from django.conf import settings
 
