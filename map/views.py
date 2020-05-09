@@ -5,6 +5,7 @@ from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.urls import reverse_lazy
+from django.http import Http404
 
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
@@ -14,8 +15,11 @@ class MapView(TemplateView):
 
         creator_filter = self.request.GET.get('creator', False)
         if creator_filter:
-            context['creator_filter'] = User.objects.get(id=creator_filter)
-            context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
+            try:
+                context['creator_filter'] = User.objects.get(id=creator_filter)
+                context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
+            except ValueError :
+                raise Http404()
         else:
             context['viazen'] = Istoriaviazen.objects.all()
 
