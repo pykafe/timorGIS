@@ -24,15 +24,15 @@ class DetailMapView(TemplateView):
 
         context = super(DetailMapView, self).get_context_data(*args, **kwargs)
         images = []
-        target = kwargs['pk']
-        context['viazen'] = Istoriaviazen.objects.filter(id__contains=target)
-        for photo in PhotoTimor.objects.filter(istoriaviazen__exact=target):
+        viazen_id = kwargs['pk']
+        context['viazen'] = Istoriaviazen.objects.filter(id__contains=viazen_id)
+        for photo in PhotoTimor.objects.filter(istoriaviazen__exact=viazen_id):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
-            suco = queryobject(Suco, lon, lat)
-            subdistrict = queryobject(Subdistrict, lon, lat)
-            district = queryobject(District, lon, lat)
             if lat and lon:
+                suco = queryobject(Suco, lon, lat)
+                subdistrict = queryobject(Subdistrict, lon, lat)
+                district = queryobject(District, lon, lat)
                 images.append({"lat": lat,
                                "lon": lon,
                                "photo": photo.image.url,
@@ -66,10 +66,10 @@ class MapView(TemplateView):
         for photo in PhotoTimor.objects.all():
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
-            suco = queryobject(Suco, lon, lat)
-            subdistrict = queryobject(Subdistrict, lon, lat)
-            district = queryobject(District, lon, lat)
             if lat and lon:
+                suco = queryobject(Suco, lon, lat)
+                subdistrict = queryobject(Subdistrict, lon, lat)
+                district = queryobject(District, lon, lat)
                 images.append({"lat": lat,
                                "lon": lon,
                                "photo": photo.image.url,
