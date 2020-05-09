@@ -5,9 +5,22 @@
 {% block title %}{% trans "Confirm Delete Journey" %}{% endblock %}
 
 {% block content %}
-    <form method="post">{% csrf_token %}
-        <p>{% blocktrans "Are you sure you want to delete {{ object }}?" endblocktrans %}</p>
-        <button type="submit">{% trans "Confirm" %}</button>
-        <a href="{% url 'home' %}">{% trans "Cancel" %}</a> 
-    </form>
+<div class="modal-dialog">
+    <div class="modal-content delete-journey">
+        <form class="form-delete" action=" " method="POST">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h4 class="modal-title">{% trans 'Confirmation delete' %}</h4>
+                <a href="{% url 'home' %}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+            </div>
+            <div class="modal-body">
+                <p>{% blocktrans %} Are you sure you want to delete "{{ object }}"? {% endblocktrans %}</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'home' %}"><button type="button" class="btn btn-default cancel-delete" data-dismiss="modal">{% trans 'Cancel' %}</button></a>
+                <button class="btn btn-danger">{% trans 'Delete' %}</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
