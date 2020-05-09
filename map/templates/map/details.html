@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}MAP VIEW{% endblock %}
+{% block title %}Detail MAP VIEW{% endblock %}
 
 {% block content %}
 
@@ -34,39 +34,37 @@
                 {% endfor %}
             </div>
             <div class="col-md-10 display-all-post">
-                {% for via in viazen %}
-                    {% if via.creator %}
-                    <div class="each-upload">
-                        <div class="dropdown dropdown-edit-and-delete">
-                            <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
-                            <ul class="dropdown-menu menu-dropdown">
-                                <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}">{% trans 'Add Photo' %}</a></li>
-                                <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}">{% trans 'Edit' %}</a>
-                                   <span class="glyphicon glyphicon-pencil"></span>
-                                </li>
-                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}">{% trans 'Delete' %}</a>
-                                   <span class="glyphicon glyphicon-trash"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
-                            <strong class="person-name">{{ via.creator }}</strong>
-                        </p>
-                        <strong>{{ via.title }}</strong>
-                        <div class="gallery">
-                            {%for photo in geoimages %}
-                                {% if photo.viazen_id == via.id %}
-                                    <figure>
-                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
-                                    </figure>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <p>{{ via.description }}</p>
-                        <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                {% if viazen.creator %}
+                <div class="each-upload">
+                    <div class="dropdown dropdown-edit-and-delete">
+                        <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                        <ul class="dropdown-menu menu-dropdown">
+                            <li class="hover-list"><a href="{% url 'photo_viazen' viazen.pk %}">{% trans 'Add Photo' %}</a></li>
+                            <li class="hover-list"><a href="{% url 'update_viazen' viazen.pk %}">{% trans 'Edit' %}</a>
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </li>
+                            <li class="hover-list"><a href="{% url 'delete_viazen' viazen.pk %}">{% trans 'Delete' %}</a>
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </li>
+                        </ul>
                     </div>
-                    {% endif %}
-                {% endfor %}
+                    <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                        <strong class="person-name">{{ viazen.creator }}</strong>
+                    </p>
+                    <strong>{{ via.title }}</strong>
+                    <div class="gallery">
+                        {%for photo in geoimages %}
+                            {% if photo.viazen_id == viazen.id %}
+                                <figure>
+                                    <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                </figure>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p>{{ via.description }}</p>
+                    <p class="text-muted h6">{{ viazen.date.lower }} - {{ viazen.date.upper }}</p>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -112,7 +110,7 @@
         {%endfor%}
         function contentPopup(photo){
             var viazen_id = photo.viazen_id.toString();
-            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' height='60' width='60'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/details/"+viazen_id+"'>Detail</a></div></div></div>"
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/details/"+viazen_id+"'>Detail</a></div></div></div>"
             return content
         }
 

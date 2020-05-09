@@ -91,7 +91,7 @@
         {% endfor %}
         function contentPopup(photo){
             var viazen_id = photo.viazen_id.toString();
-            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' height='60' width='60'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/details/"+viazen_id+"'>Detail</a></div></div></div>"
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/details/"+viazen_id+"'>Detail</a></div></div></div>"
             return content
         }
 

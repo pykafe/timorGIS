@@ -25,8 +25,8 @@ class DetailMapView(TemplateView):
         context = super(DetailMapView, self).get_context_data(*args, **kwargs)
         images = []
         viazen_id = kwargs['pk']
-        context['viazen'] = Istoriaviazen.objects.filter(id__contains=viazen_id)
-        for photo in PhotoTimor.objects.filter(istoriaviazen__exact=viazen_id):
+        context['viazen'] = Istoriaviazen.objects.get(id=viazen_id)
+        for photo in PhotoTimor.objects.filter(istoriaviazen=viazen_id):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
