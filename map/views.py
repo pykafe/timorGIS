@@ -10,36 +10,20 @@ class MapView(TemplateView):
     template_name = 'map/mapview.html'
 
     def get_context_data(self, *args, **kwargs):
-        images = []
         context = super(TemplateView, self).get_context_data(*args, **kwargs)
 
+        creator_filter = self.request.GET.get('creator', False)
+        if creator_filter:
+            context['creator_filter'] = User.objects.get(id=creator_filter)
+            context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
+        else:
+            context['viazen'] = Istoriaviazen.objects.all()
+
+
         context['users'] = User.objects.all()
-        # context['sucos'] = serialize('geojson', Suco.objects.all(), geometry_field='geom')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
-
-        context['viazen'] = Istoriaviazen.objects.all()
-        # context['aldeias'] = serialize('geojson', Aldeia.objects.all(), geometry_field='geom')
-        for photo in PhotoTimor.objects.all():
-            get_data = ImageMetaData(photo.image.path)
-            lat, lon = get_data.get_lat_lng()
-            if lat and lon:
-                images.append({"lat": lat, "lon": lon, "photo": photo.image.url, "viazen_id": photo.istoriaviazen_id})
-        context['geoimages'] = images
-        return context
-
-
-class CreatorView(TemplateView):
-    template_name = 'map/mapview.html'
-
-    def get_context_data(self, *args, **kwargs):
         images = []
-        creator = kwargs['pk']
-        context = super(TemplateView, self).get_context_data(*args, **kwargs)
-        context['userid'] = User.objects.get(id=creator)
-        context['users'] = User.objects.all()
-        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
-        context['viazen'] = Istoriaviazen.objects.filter(creator=creator)
-        for photo in PhotoTimor.objects.filter(istoriaviazen__creator=creator):
+        for photo in PhotoTimor.objects.filter(istoriaviazen__in=context['viazen']):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
