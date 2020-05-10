@@ -25,9 +25,14 @@ class DetailMapView(TemplateView):
 
         context = super(DetailMapView, self).get_context_data(*args, **kwargs)
         images = []
-        viazen_id = kwargs['pk']
-        context['viazen'] = Istoriaviazen.objects.get(id=viazen_id)
-        for photo in PhotoTimor.objects.filter(istoriaviazen=viazen_id):
+        photo_id = kwargs['pk']
+        try:
+            context['photoviazen'] = PhotoTimor.objects.get(id=photo_id)
+            target = context['photoviazen'].istoriaviazen_id
+        except:
+            target = photo_id
+        context['viazen'] = Istoriaviazen.objects.get(id=target)
+        for photo in PhotoTimor.objects.filter(istoriaviazen=target):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
@@ -35,25 +40,28 @@ class DetailMapView(TemplateView):
                 subdistrict = queryobject(Subdistrict, lon, lat)
                 district = queryobject(District, lon, lat)
                 images.append({"lat": lat,
-                               "lon": lon,
+                                "lon": lon,
                                "photo": photo.image.url,
+                               "photo_id": photo.pk,
                                "viazen_id": photo.istoriaviazen_id,
                                "suco": suco,
                                "subdistrict": subdistrict,
                                "district": district,
                 })
+                if photo_id == photo.pk:
+                    context['districts'] = serializes(District, district)
+                    context['subdistrict'] = serializes(Subdistrict, subdistrict)
+                    context['suco'] = serializes(Suco, suco)
+                    context['points'] = {
+                        'DEFAULT_CENTER': [lat, lon,10],
+                        'DEFAULT_ZOOM': 10,
+                    }
+
         context['geoimages'] = images
-        context['districts'] = serializes(District, district)
-        context['subdistrict'] = serializes(Subdistrict, subdistrict)
-        context['suco'] = serializes(Suco, suco)
-        context['points'] = {
-            'DEFAULT_CENTER': [lat, lon,10],
-            'DEFAULT_ZOOM': 10,
-        }
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
 
-      
+
 class MapView(TemplateView):
     template_name = 'map/mapview.html'
 
@@ -74,6 +82,7 @@ class MapView(TemplateView):
                 images.append({"lat": lat,
                                "lon": lon,
                                "photo": photo.image.url,
+                               "photo_id": photo.pk,
                                "viazen_id": photo.istoriaviazen_id,
                                "suco": suco,
                                "subdistrict": subdistrict,

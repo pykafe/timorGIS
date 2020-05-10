@@ -12,7 +12,7 @@ urlpatterns = [
     path('<int:pk>/update', ViazenUpdateView.as_view(), name='update_viazen'),
     path('<int:pk>/photo_viazen/', PhotoViazenView.as_view(), name='photo_viazen'),
     path('<int:pk>/delete', ViazenDeleteView.as_view(), name="delete_viazen"),
-    path('details/<int:pk>/', DetailMapView.as_view(), name="details"),
+    path('detail/viazen/<int:pk>/', DetailMapView.as_view(), name="details"),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
