@@ -6,6 +6,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.contrib.gis.geos import Point
 from django.urls import reverse_lazy
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
@@ -69,10 +71,19 @@ class MapView(TemplateView):
         images = []
         context = super(MapView, self).get_context_data(*args, **kwargs)
 
+        creator_filter = self.request.GET.get('creator', False)
+        if creator_filter:
+            try:
+                context['creator_filter'] = User.objects.get(id=creator_filter)
+                context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
+            except (ValueError, ObjectDoesNotExist):
+                raise Http404()
+        else:
+            context['viazen'] = Istoriaviazen.objects.all()
+
         context['users'] = User.objects.all()
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
-        context['viazen'] = Istoriaviazen.objects.all()
-        for photo in PhotoTimor.objects.all():
+        for photo in PhotoTimor.objects.filter(istoriaviazen__in=context['viazen']):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
@@ -95,10 +106,6 @@ class MapView(TemplateView):
         }
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
-
-
-class AnotherView(TemplateView):
-    template_name = 'map/another.html'
 
 
 class HatamaViazenView(CreateView):
