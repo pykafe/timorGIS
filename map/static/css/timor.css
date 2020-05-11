@@ -58,11 +58,11 @@ span.person-name {
 /* CREATE FORM */
 
 .form-group {
-    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+    font-family: 'Montserrat';
+    src: url(../fonts/Montserrat-Regular.woff2);
     color: #555;
     font-size: 15px;
     font-weight: 700;
-    margin-left: 30px;
     margin-bottom: 2px;
 }
 
@@ -96,7 +96,6 @@ input#id_date_1 {
 }
 
 input#id_title {
-    inline-size: auto;
     border-radius: 5px;
     padding: 3px 22px;
     font-size: 16px;

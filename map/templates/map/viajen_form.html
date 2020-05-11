@@ -9,39 +9,46 @@
     <!-- Fengyuan Chen's Datepicker -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/datepicker.min.css' %}">
     <script type="text/javascript" src="{% static 'js/datepicker.min.js' %}"></script>
+    <style>
+        .navbar-journey {
+            margin-top: 15px;
+        }
+    </style>
 
     <div class="container">
-        <div class="form-row">
-            <div class="row">
-                <div class="form-group col-12">
-                    <h2>{{ hatama_viazen }} {{ update_viazen }}</h2> 
-                    <form method="post" enctype="multipart/form-data" novalidate>
-                      {% csrf_token %}
+        <div class="row navbar-journey">
+            <div class="col-md-12">
+                <h3 class="trip-text"><a href="{% url 'home' %}"><--{% trans 'Back' %}</a> {{hatama_viazen}} {{ update_viazen }}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="display-all-post each-upload col-md-12">
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
 
-                      {% for hidden_field in form.hidden_fields %}
+                    {% for hidden_field in form.hidden_fields %}
                         {{ hidden_field }}
-                      {% endfor %}
+                    {% endfor %}
 
-                      {% if form.non_field_errors %}
+                    {% if form.non_field_errors %}
                         <div class="alert alert-danger" role="alert">
-                          {% for error in form.non_field_errors %}
-                            {{ error }}
-                          {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
                         </div>
-                      {% endif %}
+                    {% endif %}
+                    <div class="form-group">
+                    {% for field in form.visible_fields %}
+                        {{ field.label_tag }}
 
-                      {% for field in form.visible_fields %}
-                        <div class="form-group">
-                          {{ field.label_tag }}
-
-                          {% if form.is_bound %}
+                        {% if form.is_bound %}
                             {% if field.errors %}
-                              {% render_field field class="form-control is-invalid" %}
-                              {% for error in field.errors %}
+                                {% render_field field class="form-control is-invalid" %}
+                                {% for error in field.errors %}
                                 <div class="invalid-feedback">
-                                  {{ error }}
+                                    {{ error }}
                                 </div>
-                              {% endfor %}
+                                {% endfor %}
                             {% else %}
                               {% render_field field class="form-control is-valid" %}
                             {% endif %}
@@ -52,17 +59,14 @@
                           {% if field.help_text %}
                             <small class="form-text text-muted">{{ field.help_text }}</small>
                           {% endif %}
-                        </div>
-                      {% endfor %}
-
-                      <div class="form-group-button">
-                          <button type="submit" class="btn btn-success btn-lg">
-                              <span class="glyphicon glyphicon-ok"></span>{% trans 'Save' %}
-                          </button>
-                          <a href="{% url 'home' %}" class="btn btn-default btn-lg">{% trans 'Cancel' %}</a>
-                        </div>
-                    </form>
-                </div>
+                    {% endfor %}
+                    </div>
+                    <div class="form-group-button">
+                        <button type="submit" class="btn btn-primary add-journey">
+                            {% trans 'Save Journey' %}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
