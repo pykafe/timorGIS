@@ -5,12 +5,6 @@
 {% block title %}Timor GIS{% endblock %}
 
 {% block content %}
-<style>
-    .icon-edit-delete{
-        float: right;
-        margin-top: 10px;
-    }
-</style>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/leaflet.css' %}">
     <!-- Make sure you put this AFTER Leaflet's CSS -->
@@ -85,17 +79,34 @@
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
-                                        {% if user.is_authenticated %}
-                                            <span class="icon-edit-delete"> 
-                                                <a href="{% url 'update_photo' photo.photo_id %}">
-                                                    <img src="{% static 'img/edit_photo.png' %}" width="25" alt="Image {{ photo.pk}}">
-                                                </a>
-                                                <a href="{% url 'delete_photo' photo.photo_id %}">
-                                                    <img src="{% static 'img/delete.png' %}" width="25" alt="Image {{ photo.pk}}">
-                                                </a>
-                                            </span>
-                                        {% endif %}
-                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.photo_id }}" data-toggle="modal" data-target="#{{ photo.photo_id }}">
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header bg-light">
+                                                <h4 class="modal-title trip-text" id="myModalLabel">Photo</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <img src='{{ photo.photo }}' class="gallery-img" width="100%" alt="Image {{ photo.photo_id }}">
+                                              </div>
+                                              <div class="modal-footer">
+                                              {% if user.is_authenticated %}
+                                                <span class="icon-edit-delete"> 
+                                                    <a href="{% url 'update_photo' photo.photo_id %}">
+                                                        <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                                    </a>
+                                                    <a href="{% url 'delete_photo' photo.photo_id %}">
+                                                        <img src="{% static 'img/delete.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                                    </a>
+                                                </span>
+                                              {% endif %}
+                                              </div>
+                                            </div><!-- /.modal-content -->
+                                          </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
                                     </figure>
                                 {% endif %}
                             {% endfor %}
