@@ -15,11 +15,11 @@
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header bg-light">
             {% if journey_photos.count %}
-                <h4 class="modal-title">{% trans 'Please add another Photo' %}</h4>
+                <h4 class="modal-title trip-text">{% trans 'Please add another Photo' %}</h4>
             {% else %}
-                <h4 class="modal-title">{% trans 'Add photo journey' %}</h4>
+                <h4 class="modal-title trip-text">{% trans 'Add photo journey' %}</h4>
             {% endif %}
             <a href="{% url "home" %}" type="button" class="close"><span aria-hidden="true">&times;</span></a>
         </div>
@@ -74,15 +74,15 @@
                         </table>
                         <div class="modal-footer">
                         {% if journey_photos.count %}
-                            <div class="text-muted h6">{% trans 'Note: If don\'t have another photo, please skip' %}</div>
+                            <div class="text-muted h6">{% trans "Note: If don't have another photo, please skip" %}</div>
                         {% endif %}
                             {% if form.non_field_errors %}
-                                <button type="submit" class="btn btn-primary">{% trans 'Try Save Again' %}</button>
+                                <button type="submit" class="btn btn-primary add-journey">{% trans 'Try Save Again' %}</button>
                             {% else %}
                                 {% if journey_photos.count %}
-                                    <button type="submit" class="btn btn-primary">{% trans 'Save another photo' %}</button>
+                                    <button type="submit" class="btn btn-primary add-journey">{% trans 'Save another photo' %}</button>
                                 {% else %}
-                                    <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+                                    <button type="submit" class="btn btn-primary add-journey">{% trans 'Save' %}</button>
                                 {% endif %}
                             {% endif %}
                             <a href="{% url 'home' %}" type="submit" class="btn btn-default cancel-delete">{% trans 'Skip' %}</a> 
