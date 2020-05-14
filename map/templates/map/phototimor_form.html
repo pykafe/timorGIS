@@ -1,11 +1,21 @@
 
 {% extends 'map/base.html' %}
 {% load i18n %}
-{% load widget_tweaks %}
+{% load widget_tweaks static %}
 
 {% block title %}{% trans 'Add journey history' %}{% endblock %}
 
 {% block content %}
+
+<style>
+    label {
+        text-indent: -9999px;
+    }
+    #id_istoriaviazen {
+        text-indent: -9999px;
+        width: 0px;
+    }
+</style>
 
 <div class="modal-content cont-modal">
     <!-- Large modal -->
