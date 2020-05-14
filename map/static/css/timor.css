@@ -327,3 +327,7 @@ input {
 .active {
     color: black;
 }
+
+a:hover {
+    text-decoration: none;
+}
