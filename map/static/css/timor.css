@@ -95,7 +95,7 @@ input#id_date_1 {
     margin-bottom: 10px;
 }
 
-.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+span.ui-icon.ui-icon-circle-triangle-w, span.ui-icon.ui-icon-circle-triangle-e {
     display: contents;
 }
 
