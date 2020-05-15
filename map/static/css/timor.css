@@ -95,6 +95,10 @@ input#id_date_1 {
     margin-bottom: 10px;
 }
 
+span.ui-icon.ui-icon-circle-triangle-w, span.ui-icon.ui-icon-circle-triangle-e {
+    display: contents;
+}
+
 input#id_title {
     inline-size: auto;
     border-radius: 5px;

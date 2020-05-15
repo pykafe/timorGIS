@@ -6,9 +6,9 @@
 {% block content %}
 {% load i18n %}
 
-    <!-- Fengyuan Chen's Datepicker -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/datepicker.min.css' %}">
-    <script type="text/javascript" src="{% static 'js/datepicker.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timor.css' %}">
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
 
     <div class="container">
         <div class="form-row">
@@ -68,8 +68,9 @@
     </div>
     <script>
         $(function () {
-            $("#id_date_0").datepicker({format: 'yyyy-mm-dd',});
-            $("#id_date_1").datepicker({format: 'yyyy-mm-dd',});
+            $("#id_date_0").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
+            $("#id_date_1").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
         });
+
     </script>
 {% endblock %}
