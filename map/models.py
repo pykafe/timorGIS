@@ -58,7 +58,7 @@ class Istoriaviazen(models.Model):
 
 
 class PhotoTimor(models.Model):
-    istoriaviazen = models.ForeignKey(Istoriaviazen, related_name='istoriaviazen', on_delete=models.CASCADE)
+    istoriaviazen = models.ForeignKey(Istoriaviazen, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
 

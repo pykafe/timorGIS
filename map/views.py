@@ -14,10 +14,7 @@ from django.conf import settings
 
 def queryobject(obj, lon, lat):
     queryset = obj.objects.filter(geom__contains=Point(lon, lat))
-    return ",".join([str(instance) for instance in queryset])
-
-def serializes(obj, name):
-    return serialize('geojson', obj.objects.filter(name=name), geometry_field='geom')
+    return queryset
 
 
 class DetailMapView(TemplateView):
@@ -27,38 +24,40 @@ class DetailMapView(TemplateView):
 
         context = super(DetailMapView, self).get_context_data(*args, **kwargs)
         images = []
-        photo_id = kwargs['pk']
-        try:
-            context['photoviazen'] = PhotoTimor.objects.get(id=photo_id)
-            target = context['photoviazen'].istoriaviazen_id
-        except:
-            target = photo_id
-        context['viazen'] = Istoriaviazen.objects.get(id=target)
-        for photo in PhotoTimor.objects.filter(istoriaviazen=target):
-            get_data = ImageMetaData(photo.image.path)
+        photo_pk = kwargs['photo_pk']
+        viazen_pk = kwargs['viazen_pk']
+        viazen = Istoriaviazen.objects.get(pk=viazen_pk)
+        if photo_pk == 0:
+            selected_photo = viazen.photos.first()
+        else:
+            selected_photo = viazen.photos.get(pk=photo_pk)
+
+        for viazen_photo in viazen.photos.all():
+            get_data = ImageMetaData(viazen_photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
-                suco = queryobject(Suco, lon, lat)
-                subdistrict = queryobject(Subdistrict, lon, lat)
-                district = queryobject(District, lon, lat)
-                images.append({"lat": lat,
-                                "lon": lon,
-                               "photo": photo.image.url,
-                               "photo_id": photo.pk,
-                               "viazen_id": photo.istoriaviazen_id,
-                               "suco": suco,
-                               "subdistrict": subdistrict,
-                               "district": district,
+                sucos = queryobject(Suco, lon, lat)
+                subdistricts = queryobject(Subdistrict, lon, lat)
+                districts = queryobject(District, lon, lat)
+                images.append({
+                    "lat": lat,
+                    "lon": lon,
+                    "photo": viazen_photo.image.url,
+                    "photo_id": viazen_photo.pk,
+                    "viazen_id": viazen_photo.istoriaviazen_id,
+                    "suco": ",".join([suco.name for suco in sucos]),
+                    "subdistrict": ",".join([subdistrict.name for subdistrict in subdistricts]),
+                    "district": ",".join([district.name for district in districts]),
                 })
-                if photo_id == photo.pk:
-                    context['districts'] = serializes(District, district)
-                    context['subdistrict'] = serializes(Subdistrict, subdistrict)
-                    context['suco'] = serializes(Suco, suco)
-                    context['points'] = {
-                        'DEFAULT_CENTER': [lat, lon,10],
-                        'DEFAULT_ZOOM': 10,
-                    }
+            if viazen_photo == selected_photo:
+                context['districts'] = serialize('geojson', districts, geometry_field='geom')
+                context['subdistrict'] = serialize('geojson', subdistricts, geometry_field='geom')
+                context['suco'] = serialize('geojson', sucos, geometry_field='geom')
+                context['DEFAULT_CENTER'] = [lat, lon, 10]
+                context['DEFAULT_ZOOM'] = 10
 
+        context['viazen'] = viazen
+        context['selected_photo'] = selected_photo
         context['geoimages'] = images
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
@@ -87,17 +86,18 @@ class MapView(TemplateView):
             get_data = ImageMetaData(photo.image.path)
             lat, lon = get_data.get_lat_lng()
             if lat and lon:
-                suco = queryobject(Suco, lon, lat)
-                subdistrict = queryobject(Subdistrict, lon, lat)
-                district = queryobject(District, lon, lat)
-                images.append({"lat": lat,
-                               "lon": lon,
-                               "photo": photo.image.url,
-                               "photo_id": photo.pk,
-                               "viazen_id": photo.istoriaviazen_id,
-                               "suco": suco,
-                               "subdistrict": subdistrict,
-                               "district": district,
+                sucos = queryobject(Suco, lon, lat)
+                subdistricts = queryobject(Subdistrict, lon, lat)
+                districts = queryobject(District, lon, lat)
+                images.append({
+                    "lat": lat,
+                    "lon": lon,
+                    "photo": photo.image.url,
+                    "photo_id": photo.pk,
+                    "viazen_id": photo.istoriaviazen_id,
+                    "suco": ",".join([suco.name for suco in sucos]),
+                    "subdistrict": ",".join([subdistrict.name for subdistrict in subdistricts]),
+                    "district": ",".join([district.name for district in districts]),
                 })
         context['geoimages'] = images
         context['points'] = {

@@ -21,7 +21,9 @@
      </head>
     <body>
 
-        {% include 'map/header.html' %}
+        {% block header %}
+            {% include 'map/header.html' %}
+        {% endblock %}
 
         <div class="container">
         {% block content %}
