@@ -13,11 +13,6 @@
                     {% trans 'One history for one trip' %}
                 </h3>
             </div>
-            <!--
-            <div class="col-md-6 search-journey">
-                <input type="text" name="search" placeholder="Search..">
-            </div>
-            -->
             <div class="col-md-4">
                 <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
             </div>
@@ -98,7 +93,7 @@
                     {%endfor%}
                     function contentPopup(photo){
                         var viazen_id = photo.viazen_id.toString();
-                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+photo.photo_id+"'>Detail</a></div></div></div>"
+                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
                         return content
                     }
 
