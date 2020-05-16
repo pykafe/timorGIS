@@ -61,7 +61,7 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <p>{{ via.description|safe|truncatewords:"100"|linebreaks }}</p>
+                        <p>{{ via.description|safe }}</p>
                         <a href="{% url 'details' via.pk 0 %}">{% trans 'Show detail...'%}</a>
                         <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
                     </div>

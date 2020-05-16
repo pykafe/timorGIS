@@ -19,7 +19,7 @@
         <div class="row navbar-journey">
             <div class="col-md-12">
                 <h3 class="trip-text">
-                    <a href="{% url 'home' %}" class="card-link"><--{% trans 'Back' %}</a>
+                    <a href="{% url 'home' %}" class="card-link">&larr; {% trans 'Back' %}</a>
                     {% trans 'One history for one trip' %}
                 </h3>
             </div>
@@ -29,7 +29,7 @@
                 <div class="card">
                     <img class="card-img-top" src="{{ selected_photo.image.url }}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">{{ viazen.title }}</h5>
+                        <h5 class="card-title"><b>{{ viazen.title }}</b></h5>
                         <p class="card-text">{{ viazen.description|truncatewords:"30"}}</p>
                     </div>
                 </div>
