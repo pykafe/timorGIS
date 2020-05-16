@@ -156,6 +156,9 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
+# url ba mapa leaflat
+OPENSTREETMAP_URL = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+
 try:
     from .local_settings import *  # noqa
 except ImportError:

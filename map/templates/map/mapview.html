@@ -12,27 +12,6 @@
 
     <div id="mapid"></div>
 
-    <script>
-
-        const districts = {{ districts|safe }};
-        var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
-        L.geoJSON(districts, {
-            style: function (feature) {
-                return {color: 'orange'};
-            }
-        }).bindPopup(function (layer) {
-            var name = layer.feature.properties.name;
-                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-        }).addTo(mymap);
-        {%for photo in geoimages %}
-            {% if photo.lon and photo.lat %}
-                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br><a target='_blank' href='https://www.google.com/maps?q={{photo.lat}},{{photo.lon}}'>Detail</a>").openPopup().addTo(mymap);
-            {% endif %}
-        {%endfor%}
-
-    </script>
-
     <div class="container">
         <div class="row navbar-journey">
             <div class="col-md-8">
@@ -82,7 +61,8 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <p>{{ via.description }}</p>
+                        <p>{{ via.description|safe|truncatewords:"100"|linebreaks }}</p>
+                        <a href="{% url 'details' via.pk 0 %}">{% trans 'Show detail...'%}</a>
                         <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
                     </div>
                     {% endif %}
@@ -90,4 +70,29 @@
             </div>
         </div>
     </div>
+    <script>
+
+        const districts = {{ districts|safe }};
+        var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
+        L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+        L.geoJSON(districts, {
+            style: function (feature) {
+                return {color: 'orange'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(timormap);
+        {% for photo in geoimages %}
+            {% if photo.lon and photo.lat %}
+                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+            {% endif %}
+        {% endfor %}
+        function contentPopup(photo){
+            var viazen_id = photo.viazen_id.toString();
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+            return content
+        }
+
+    </script>
 {% endblock %}

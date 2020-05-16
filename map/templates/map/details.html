@@ -1,0 +1,142 @@
+{% extends 'map/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Detail MAP VIEW{% endblock %}
+
+{% block header %}
+    <div class="container">
+        <div class="row navbar-journey">
+            <div class="col-md-8">
+                <h3 class="trip-text">
+                    <a href="{% url 'home' %}" class="card-link"><--{% trans 'Back' %}</a>
+                    {% trans 'One history for one trip' %}
+                </h3>
+            </div>
+            <div class="col-md-4">
+                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <style>
+        .leaflet-pane {
+            z-index:0!important; 
+        }
+        .mapstyle {
+            border: 5px solid rgba(0,0,0,.125);
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/components/carousel/">
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+    <div class="container">
+        <div class="row each-upload display-all-post">
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ selected_photo.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ viazen.title }}</h5>
+                        <p class="card-text">{{ viazen.description|truncatewords:"60"}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="mapid" class="mapstyle"></div>
+                <script>
+
+                    var timormap = L.map('mapid').setView({{ DEFAULT_CENTER|default:"[-8.8315139, 125.6199236]" }}, {{ DEFAULT_ZOOM|default:"10" }});
+                    L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+                    {% if districts %}
+                    const districts = {{ districts|safe }};
+                    const subdistrict = {{ subdistrict|safe }};
+                    const suco = {{ suco|safe }};
+
+                    L.geoJSON(districts, {
+                        style: function (feature) {
+                            return {color: 'orange'};
+                        }
+                    }).bindPopup(function (layer) {
+                        var name = layer.feature.properties.name;
+                            return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+                    }).addTo(timormap);
+
+                    L.geoJSON(subdistrict, {
+                        style: function (feature) {
+                            return {color: 'yellow'};
+                        }
+                    }).bindPopup(function (layer) {
+                        var name = layer.feature.properties.name;
+                            return 'Subdistritu: ' + name[0] + name.substr(1).toLowerCase();
+                    }).addTo(timormap);
+
+                    L.geoJSON(suco, {
+                        style: function (feature) {
+                            return {color: 'red'};
+                        }
+                    }).bindPopup(function (layer) {
+                        var name = layer.feature.properties.name;
+                            return 'Suco: ' + name[0] + name.substr(1).toLowerCase();
+                    }).addTo(timormap);
+                    {% endif %}
+
+                    {%for photo in geoimages %}
+                        {% if photo.lon and photo.lat %}
+                            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+                        {% endif %}
+                    {%endfor%}
+                    function contentPopup(photo){
+                        var viazen_id = photo.viazen_id.toString();
+                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+                        return content
+                    }
+
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 display-all-post">
+                {% if viazen.creator %}
+                <div class="each-upload">
+                    <div class="dropdown dropdown-edit-and-delete">
+                        <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                        <ul class="dropdown-menu menu-dropdown">
+                            <li class="hover-list"><a href="{% url 'photo_viazen' viazen.pk %}">{% trans 'Add Photo' %}</a></li>
+                            <li class="hover-list"><a href="{% url 'update_viazen' viazen.pk %}">{% trans 'Edit' %}</a>
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </li>
+                            <li class="hover-list"><a href="{% url 'delete_viazen' viazen.pk %}">{% trans 'Delete' %}</a>
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                        <strong class="person-name">{{ viazen.creator }}</strong>
+                    </p>
+                    <strong>{{ viazen.title }}</strong>
+                    <div class="gallery">
+                        {%for photo in geoimages %}
+                            {% if photo.viazen_id == viazen.id %}
+                                <figure>
+                                    <img src='{{ photo.photo }}' class="gallery-img" width="393" height="393" alt="Image {{ photo.pk}}">
+                                </figure>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p>{{ viazen.description }}</p>
+                    <p class="text-muted h6">{{ viazen.date.lower }} - {{ viazen.date.upper }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

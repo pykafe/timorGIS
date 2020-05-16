@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path
-from .views import MapView, HatamaViazenView, PhotoViazenView, ViazenUpdateView, ViazenDeleteView
+from .views import MapView, HatamaViazenView, PhotoViazenView, ViazenUpdateView, ViazenDeleteView, DetailMapView
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('<int:pk>/update', ViazenUpdateView.as_view(), name='update_viazen'),
     path('<int:pk>/photo_viazen/', PhotoViazenView.as_view(), name='photo_viazen'),
     path('<int:pk>/delete', ViazenDeleteView.as_view(), name="delete_viazen"),
+    path('detail/viazen/<int:viazen_pk>/<int:photo_pk>', DetailMapView.as_view(), name="details"),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
