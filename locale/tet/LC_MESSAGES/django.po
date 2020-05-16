@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-21 03:17+0000\n"
+"POT-Creation-Date: 2020-05-09 03:38+0000\n"
 "PO-Revision-Date: 2020-04-21 03:21+0000\n"
 "Last-Translator: b'Onorio de Jesus <dejesusony@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,6 +38,29 @@ msgstr "Sai"
 msgid "Log In"
 msgstr "Tama"
 
+#: map/templates/map/istoriaviazen_confirm_delete.html:5
+msgid "Confirm Delete Journey"
+msgstr ""
+
+#: map/templates/map/istoriaviazen_confirm_delete.html:13
+msgid "Confirmation delete"
+msgstr ""
+
+#: map/templates/map/istoriaviazen_confirm_delete.html:17
+#, python-format
+msgid " Are you sure you want to delete \"%(object)s\"? "
+msgstr ""
+
+#: map/templates/map/istoriaviazen_confirm_delete.html:20
+#: map/templates/map/viajen_form.html:65
+msgid "Cancel"
+msgstr ""
+
+#: map/templates/map/istoriaviazen_confirm_delete.html:21
+#: map/templates/map/mapview.html:70
+msgid "Delete"
+msgstr "Hamoos"
+
 #: map/templates/map/mapview.html:40
 msgid "Our histories for our trip"
 msgstr "Ita nia istoria sira kona-ba ita nia viajen"
@@ -46,18 +69,40 @@ msgstr "Ita nia istoria sira kona-ba ita nia viajen"
 msgid "Add my journey"
 msgstr "Hatama viajen"
 
-#: map/templates/map/mapview.html:64
+#: map/templates/map/mapview.html:66
+msgid "Add Photo"
+msgstr ""
+
+#: map/templates/map/mapview.html:67
 msgid "Edit"
 msgstr "Troka"
 
-#: map/templates/map/mapview.html:67
-msgid "Delete"
-msgstr "Hamoos"
+#: map/templates/map/phototimor_form.html:6
+#: map/templates/map/phototimor_form.html:19
+msgid "Hatama photo istoria viazen"
+msgstr ""
 
-#: timor/settings.py:128
+#: map/templates/map/phototimor_form.html:12
+msgid "Upload photos"
+msgstr ""
+
+#: map/templates/map/phototimor_form.html:65
+msgid "Try Save Again"
+msgstr ""
+
+#: map/templates/map/phototimor_form.html:67
+#: map/templates/map/viajen_form.html:63
+msgid "Save"
+msgstr ""
+
+#: map/templates/map/phototimor_form.html:69
+msgid "Skip"
+msgstr ""
+
+#: timor/settings.py:125
 msgid "Tetum"
 msgstr "Tetun"
 
-#: timor/settings.py:129
+#: timor/settings.py:126
 msgid "English"
 msgstr "Ingles"

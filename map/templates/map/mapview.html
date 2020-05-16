@@ -64,7 +64,7 @@
                             {% endfor %}
                         </div>
                         <p>{{ via.description|safe|truncatewords:"100"|linebreaks }}</p>
-                        <a href="{% url 'details' via.pk %}">{% trans 'Show detail...'%}</a>
+                        <a href="{% url 'details' via.pk 0 %}">{% trans 'Show detail...'%}</a>
                         <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
                     </div>
                     {% endif %}
@@ -92,7 +92,7 @@
         {% endfor %}
         function contentPopup(photo){
             var viazen_id = photo.viazen_id.toString();
-            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+photo.photo_id+"'>Detail</a></div></div></div>"
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
             return content
         }
 

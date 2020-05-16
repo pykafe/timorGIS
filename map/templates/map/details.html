@@ -1,8 +1,24 @@
-{% extends 'map/basedetail.html' %}
+{% extends 'map/base.html' %}
 {% load static %}
 {% load i18n %}
 
 {% block title %}Detail MAP VIEW{% endblock %}
+
+{% block header %}
+    <div class="container">
+        <div class="row navbar-journey">
+            <div class="col-md-8">
+                <h3 class="trip-text">
+                    <a href="{% url 'home' %}" class="card-link"><--{% trans 'Back' %}</a>
+                    {% trans 'One history for one trip' %}
+                </h3>
+            </div>
+            <div class="col-md-4">
+                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
     <style>
@@ -21,55 +37,21 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 
     <div class="container">
-        <div class="row navbar-journey">
-            <div class="col-md-8">
-                <h3 class="trip-text">
-                    <a href="{% url 'home' %}" class="card-link"><--{% trans 'Back' %}</a>
-                    {% trans 'One history for one trip' %}
-                </h3>
-            </div>
-            <!--
-            <div class="col-md-6 search-journey">
-                <input type="text" name="search" placeholder="Search..">
-            </div>
-            -->
-            <div class="col-md-4">
-                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
-            </div>
-        </div>
         <div class="row each-upload display-all-post">
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    {%for photo in geoimages %}
-                        {% if photo.viazen_id == viazen.id and photoviazen.pk == photo.photo_id %}
-                            <img class="card-img-top" src="{{ photo.photo }}" alt="Card image cap">
-                        {% endif %}
-                    {% endfor %}
+                    <img class="card-img-top" src="{{ selected_photo.image.url }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ viazen.title }}</h5>
-                    {%for photo in geoimages %}
-                        {% if photo.viazen_id == viazen.id and photoviazen.pk == photo.photo_id %}
-                            <p class="card-text">{{ viazen.description|truncatewords:"9"}}</p>
-                        {% else %}
-                            <p class="card-text">{{ viazen.description|truncatewords:"60"}}</p>
-                        {% endif %}
-                    {% endfor %}
+                        <p class="card-text">{{ viazen.description|truncatewords:"60"}}</p>
                     </div>
-                    <ul class="list-group list-group-flush">
-                    {%for photo in geoimages %}
-                        {% if photo.viazen_id == viazen.id and photoviazen.pk == photo.photo_id %}
-                        <li class="list-group-item"><b>{{ photo.district }}</b> | {{ photo.subdistrict }}</li>
-                        <li class="list-group-item">{{ photo.suco }}</li>
-                        {% endif %}
-                    {% endfor %}
-                    </ul>
                 </div>
             </div>
             <div class="col-md-8">
                 <div id="mapid" class="mapstyle"></div>
                 <script>
 
-                    var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER|default:"[-8.8315139, 125.6199236]" }}, {{ points.DEFAULT_ZOOM|default:"8" }});
+                    var timormap = L.map('mapid').setView({{ DEFAULT_CENTER|default:"[-8.8315139, 125.6199236]" }}, {{ DEFAULT_ZOOM|default:"10" }});
                     L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
                     {% if districts %}
                     const districts = {{ districts|safe }};
@@ -111,7 +93,7 @@
                     {%endfor%}
                     function contentPopup(photo){
                         var viazen_id = photo.viazen_id.toString();
-                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+photo.photo_id+"'>Detail</a></div></div></div>"
+                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
                         return content
                     }
 
