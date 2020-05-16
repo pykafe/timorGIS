@@ -1,7 +1,7 @@
 {% extends 'map/base.html' %}
-{% load widget_tweaks static %}
+{% load widget_tweaks static i18n %}
 
-{% block title %}Hatama istoria viazen {% endblock %}
+{% block title %}{% trans ' Add journey history' %}{% endblock %}
 
 {% block content %}
 {% load i18n %}
@@ -9,14 +9,9 @@
     <!-- Fengyuan Chen's Datepicker -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/datepicker.min.css' %}">
     <script type="text/javascript" src="{% static 'js/datepicker.min.js' %}"></script>
-    <style>
-        .navbar-journey {
-            margin-top: 15px;
-        }
-    </style>
 
     <div class="container">
-        <div class="row navbar-journey">
+        <div class="row navbar-journey navbar-top">
             <div class="col-md-12">
                 <h3 class="trip-text"><a href="{% url 'home' %}"><--{% trans 'Back' %}</a> {{hatama_viazen}} {{ update_viazen }}</h3>
             </div>

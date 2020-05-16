@@ -58,8 +58,6 @@ span.person-name {
 /* CREATE FORM */
 
 .form-group {
-    font-family: 'Montserrat';
-    src: url(../fonts/Montserrat-Regular.woff2);
     color: #555;
     font-size: 15px;
     font-weight: 700;
@@ -325,4 +323,8 @@ input {
 
 .active {
     color: black;
+}
+
+.navbar-top {
+    margin-top: 15px;
 }
