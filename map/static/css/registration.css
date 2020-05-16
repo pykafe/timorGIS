@@ -97,6 +97,6 @@ label {
     margin-top: 18px;
 }
 
-.form-row > ul > li {
+.errorlist > li {
     display: inline;
 }
