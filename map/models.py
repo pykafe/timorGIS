@@ -16,7 +16,7 @@ class Suco(models.Model):
     geom = models.PolygonField()
 
     def __str__(self):
-        return '{} pk:{}'.format(self.name, self.pk)
+        return self.name
 
 
 class Aldeia(models.Model):
@@ -25,7 +25,7 @@ class Aldeia(models.Model):
     geom = models.PointField()
 
     def __str__(self):
-        return '{} pk:{}'.format(self.name, self.pk)
+        return self.name
 
 
 class District(models.Model):
@@ -34,7 +34,7 @@ class District(models.Model):
     geom = models.MultiPolygonField()
 
     def __str__(self):
-        return '{} pk:{}'.format(self.name, self.pk)
+        return self.name
 
 
 class Subdistrict(models.Model):
@@ -43,7 +43,7 @@ class Subdistrict(models.Model):
     geom = models.MultiPolygonField()
 
     def __str__(self):
-        return '{} pk:{}'.format(self.name, self.pk)
+        return self.name
 
 
 class Istoriaviazen(models.Model):
@@ -58,7 +58,7 @@ class Istoriaviazen(models.Model):
 
 
 class PhotoTimor(models.Model):
-    istoriaviazen = models.ForeignKey(Istoriaviazen, related_name='istoriaviazen', on_delete=models.CASCADE)
+    istoriaviazen = models.ForeignKey(Istoriaviazen, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
 
 

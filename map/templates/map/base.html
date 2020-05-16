@@ -12,16 +12,20 @@
         <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/leaflet.js' %}"></script>
         {% block extra_js %}{% endblock %}
 
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/timor.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/leaflet.css' %}">
 
         {% block extra_css %}{% endblock %}
      </head>
     <body>
 
-        {% include 'map/header.html' %}
+        {% block header %}
+            {% include 'map/header.html' %}
+        {% endblock %}
 
         <div class="container">
         {% block content %}
