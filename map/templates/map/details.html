@@ -2,23 +2,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Detail MAP VIEW{% endblock %}
+{% block title %}{% trans 'Detail Timor GIS' %}{% endblock %}
 
-{% block header %}
-    <div class="container">
-        <div class="row navbar-journey">
-            <div class="col-md-8">
-                <h3 class="trip-text">
-                    <a href="{% url 'home' %}" class="card-link"><--{% trans 'Back' %}</a>
-                    {% trans 'One history for one trip' %}
-                </h3>
-            </div>
-            <div class="col-md-4">
-                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
-            </div>
-        </div>
-    </div>
-{% endblock %}
 
 {% block content %}
     <style>
@@ -30,20 +15,22 @@
         }
     </style>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/components/carousel/">
-
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-
     <div class="container">
+        <div class="row navbar-journey">
+            <div class="col-md-12">
+                <h3 class="trip-text">
+                    <a href="{% url 'home' %}" class="card-link">&larr; {% trans 'Back' %}</a>
+                    {% trans 'One history for one trip' %}
+                </h3>
+            </div>
+        </div>
         <div class="row each-upload display-all-post">
             <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
+                <div class="card">
                     <img class="card-img-top" src="{{ selected_photo.image.url }}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">{{ viazen.title }}</h5>
-                        <p class="card-text">{{ viazen.description|truncatewords:"60"}}</p>
+                        <h6 class="card-title"><b>{{ viazen.title }}</b></h6>
+                        <p class="card-text">{{ viazen.description|truncatewords:"30"}}</p>
                     </div>
                 </div>
             </div>
@@ -98,44 +85,6 @@
                     }
 
                 </script>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 display-all-post">
-                {% if viazen.creator %}
-                <div class="each-upload">
-                    <div class="dropdown dropdown-edit-and-delete">
-                        <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
-                        <ul class="dropdown-menu menu-dropdown">
-                            <li class="hover-list"><a href="{% url 'photo_viazen' viazen.pk %}">{% trans 'Add Photo' %}</a></li>
-                            <li class="hover-list"><a href="{% url 'update_viazen' viazen.pk %}">{% trans 'Edit' %}</a>
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </li>
-                            <li class="hover-list"><a href="{% url 'delete_viazen' viazen.pk %}">{% trans 'Delete' %}</a>
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
-                        <strong class="person-name">{{ viazen.creator }}</strong>
-                    </p>
-                    <strong>{{ viazen.title }}</strong>
-                    <div class="gallery">
-                        {%for photo in geoimages %}
-                            {% if photo.viazen_id == viazen.id %}
-                                <figure>
-                                    <img src='{{ photo.photo }}' class="gallery-img" width="393" height="393" alt="Image {{ photo.pk}}">
-                                </figure>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <p>{{ viazen.description }}</p>
-                    <p class="text-muted h6">{{ viazen.date.lower }} - {{ viazen.date.upper }}</p>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
