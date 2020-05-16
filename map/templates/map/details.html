@@ -1,0 +1,91 @@
+{% extends 'map/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Detail Timor GIS' %}{% endblock %}
+
+
+{% block content %}
+    <style>
+        .leaflet-pane {
+            z-index:0!important; 
+        }
+        .mapstyle {
+            border: 5px solid rgba(0,0,0,.125);
+        }
+    </style>
+
+    <div class="container">
+        <div class="row navbar-journey">
+            <div class="col-md-12">
+                <h3 class="trip-text">
+                    <a href="{% url 'home' %}" class="card-link">&larr; {% trans 'Back' %}</a>
+                    {% trans 'One history for one trip' %}
+                </h3>
+            </div>
+        </div>
+        <div class="row each-upload display-all-post">
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="{{ selected_photo.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h6 class="card-title"><b>{{ viazen.title }}</b></h6>
+                        <p class="card-text">{{ viazen.description|safe|truncatewords:"30"}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="mapid" class="mapstyle"></div>
+                <script>
+
+                    var timormap = L.map('mapid').setView({{ DEFAULT_CENTER|default:"[-8.8315139, 125.6199236]" }}, {{ DEFAULT_ZOOM|default:"10" }});
+                    L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+                    {% if districts %}
+                    const districts = {{ districts|safe }};
+                    const subdistrict = {{ subdistrict|safe }};
+                    const suco = {{ suco|safe }};
+
+                    L.geoJSON(districts, {
+                        style: function (feature) {
+                            return {color: 'orange'};
+                        }
+                    }).bindPopup(function (layer) {
+                        var name = layer.feature.properties.name;
+                            return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+                    }).addTo(timormap);
+
+                    L.geoJSON(subdistrict, {
+                        style: function (feature) {
+                            return {color: 'yellow'};
+                        }
+                    }).bindPopup(function (layer) {
+                        var name = layer.feature.properties.name;
+                            return 'Subdistritu: ' + name[0] + name.substr(1).toLowerCase();
+                    }).addTo(timormap);
+
+                    L.geoJSON(suco, {
+                        style: function (feature) {
+                            return {color: 'red'};
+                        }
+                    }).bindPopup(function (layer) {
+                        var name = layer.feature.properties.name;
+                            return 'Suco: ' + name[0] + name.substr(1).toLowerCase();
+                    }).addTo(timormap);
+                    {% endif %}
+
+                    {%for photo in geoimages %}
+                        {% if photo.lon and photo.lat %}
+                            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+                        {% endif %}
+                    {%endfor%}
+                    function contentPopup(photo){
+                        var viazen_id = photo.viazen_id.toString();
+                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+                        return content
+                    }
+
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

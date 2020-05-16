@@ -58,11 +58,9 @@ span.person-name {
 /* CREATE FORM */
 
 .form-group {
-    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
     color: #555;
     font-size: 15px;
     font-weight: 700;
-    margin-left: 30px;
     margin-bottom: 2px;
 }
 
@@ -95,8 +93,11 @@ input#id_date_1 {
     margin-bottom: 10px;
 }
 
+span.ui-icon.ui-icon-circle-triangle-w, span.ui-icon.ui-icon-circle-triangle-e {
+    display: contents;
+}
+
 input#id_title {
-    inline-size: auto;
     border-radius: 5px;
     padding: 3px 22px;
     font-size: 16px;
@@ -169,6 +170,7 @@ input[type=text] {
     background: #ffffff;
     padding-top: 1%;
     padding-bottom: 1%;
+    margin-top: 15px;
 }
 
 .display-all-post {
@@ -279,6 +281,24 @@ a:hover {
     color: #0062cc;
 }
 
+.active {
+    color: black!important;
+    font-weight: bold;
+}
+
+input {
+    border: 2px solid #0062cc;
+    color: #0062cc;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.group-upload {
+    margin-top: 50px;
+
 .delete-journey {
     border: 1px solid #f8f9fa;
     box-shadow: 0 16px 48px #adb5bd;
@@ -304,4 +324,8 @@ a:hover {
     color: #fff;
     background-color: #ff0019;
     border-color: #ff0019;
+}
+
+.active {
+    color: black;
 }
