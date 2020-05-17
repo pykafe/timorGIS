@@ -35,14 +35,13 @@
                         <p class="card-text">{{ viazen.description|truncatewords:"20"}}</p>
                         <!-- Large modal -->
                         <button type="button" class="btn btn-primary add-journey" data-toggle="modal" data-target=".{{ viazen.pk }}">{% trans 'Read more' %}</button>
-
-                        <div class="modal fade {{ viazen.pk }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal fade {{ viazen.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header bg-light">
                                     {%for photo in geoimages %}
                                     {% if selected_photo.pk == photo.photo_id %}
-                                        <h4 class="modal-title" id="exampleModalLongTitle">{{ photo.district }}</h4>
+                                        <h4 class="modal-title">{{ photo.district }}</h4>
                                     {% endif %}
                                     {%endfor%}
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
