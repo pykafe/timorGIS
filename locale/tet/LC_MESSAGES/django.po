@@ -8,15 +8,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-09 03:38+0000\n"
-"PO-Revision-Date: 2020-04-21 03:21+0000\n"
-"Last-Translator: b'Onorio de Jesus <dejesusony@gmail.com>'\n"
+"POT-Creation-Date: 2020-05-17 00:58+0000\n"
+"PO-Revision-Date: 2020-05-17 00:57+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.4\n"
+
+#: map/templates/map/details.html:5
+msgid "Detail Timor GIS"
+msgstr "Detallu Timor GIS"
+
+#: map/templates/map/details.html:22 map/templates/map/viajen_form.html:16
+msgid "Back"
+msgstr "FIla"
+
+#: map/templates/map/details.html:23
+msgid "One history for one trip"
+msgstr "Ita nia istoria sira kona-ba ita nia viajen"
 
 #: map/templates/map/header.html:16
 msgid "Welcome"
@@ -28,7 +40,7 @@ msgstr "Administrador"
 
 #: map/templates/map/header.html:36
 msgid "Change password"
-msgstr "Troka password"
+msgstr "Troka sena"
 
 #: map/templates/map/header.html:37
 msgid "log out"
@@ -40,64 +52,97 @@ msgstr "Tama"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:5
 msgid "Confirm Delete Journey"
-msgstr ""
+msgstr "Konfirma Hamoos Viajen"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:13
 msgid "Confirmation delete"
-msgstr ""
+msgstr "Konfirmasaun hamoos"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:17
 #, python-format
 msgid " Are you sure you want to delete \"%(object)s\"? "
-msgstr ""
+msgstr "Ita serteza hakarak atu hamoos \"%(object)s\"?"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:20
-#: map/templates/map/viajen_form.html:65
 msgid "Cancel"
-msgstr ""
+msgstr "Kansela"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:21
-#: map/templates/map/mapview.html:70
 msgid "Delete"
 msgstr "Hamoos"
 
-#: map/templates/map/mapview.html:40
+#: map/templates/map/mapview.html:18
 msgid "Our histories for our trip"
 msgstr "Ita nia istoria sira kona-ba ita nia viajen"
 
-#: map/templates/map/mapview.html:48
+#: map/templates/map/mapview.html:26
 msgid "Add my journey"
-msgstr "Hatama viajen"
+msgstr "Aumenta viajen"
 
-#: map/templates/map/mapview.html:66
-msgid "Add Photo"
-msgstr ""
-
-#: map/templates/map/mapview.html:67
-msgid "Edit"
-msgstr "Troka"
+#: map/templates/map/mapview.html:65
+msgid "Show detail..."
+msgstr "Hatudu detallu"
 
 #: map/templates/map/phototimor_form.html:6
-#: map/templates/map/phototimor_form.html:19
-msgid "Hatama photo istoria viazen"
-msgstr ""
+msgid "Add journey photos"
+msgstr "Aumenta foto viajen"
 
 #: map/templates/map/phototimor_form.html:12
 msgid "Upload photos"
+msgstr "Hatama Foto "
+
+#: map/templates/map/phototimor_form.html:20
+msgid "Please add another Photo"
+msgstr "Favor aumenta foto seluk"
+
+#: map/templates/map/phototimor_form.html:22
+msgid "Add photo journey"
+msgstr "Aumenta viajen"
+
+#: map/templates/map/phototimor_form.html:28
+msgid "Upload Photos"
+msgstr "Hatama Foto "
+
+#: map/templates/map/phototimor_form.html:29
+msgid "Your Photos"
+msgstr "Ita-boot nia Foto"
+
+#: map/templates/map/phototimor_form.html:77
+msgid "Note: If don\\"
 msgstr ""
 
-#: map/templates/map/phototimor_form.html:65
+#: map/templates/map/phototimor_form.html:80
 msgid "Try Save Again"
-msgstr ""
+msgstr "Koko Sai Fila Fali"
 
-#: map/templates/map/phototimor_form.html:67
-#: map/templates/map/viajen_form.html:63
+#: map/templates/map/phototimor_form.html:83
+msgid "Save another photo"
+msgstr "Rai foto seluk"
+
+#: map/templates/map/phototimor_form.html:85
 msgid "Save"
-msgstr ""
+msgstr "Rai"
 
-#: map/templates/map/phototimor_form.html:69
+#: map/templates/map/phototimor_form.html:88
+#: map/templates/map/phototimor_form.html:97
 msgid "Skip"
-msgstr ""
+msgstr "Hakat liu"
+
+#: map/templates/map/viajen_form.html:4
+msgid " Add journey history"
+msgstr "Aumenta istoria viajen"
+
+#: map/templates/map/viajen_form.html:61
+msgid "Save Journey"
+msgstr "Rai Viajen"
+
+#: map/views.py:121
+msgid "Add Journey History"
+msgstr "Aumenta Istoria Viajen"
+
+#: map/views.py:148
+msgid "Update Journey History"
+msgstr "Hatama Historia Viajen"
 
 #: timor/settings.py:125
 msgid "Tetum"
@@ -106,3 +151,9 @@ msgstr "Tetun"
 #: timor/settings.py:126
 msgid "English"
 msgstr "Ingles"
+
+#~ msgid "Edit"
+#~ msgstr "Troka"
+
+#~ msgid "Hatama photo istoria viazen"
+#~ msgstr "Hatama foto istoria viazen"
