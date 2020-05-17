@@ -1,17 +1,8 @@
 {% extends 'map/base.html' %}
-{% load static %}
-{% load i18n %}
-
+{% load static i18n %}
 {% block title %}Timor GIS{% endblock %}
-
 {% block content %}
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/leaflet.css' %}">
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script type="text/javascript" src="{% static 'js/leaflet.js' %}"></script>
-
     <div id="mapid"></div>
-
     <div class="container">
         <div class="row navbar-journey">
             <div class="col-md-8">
@@ -48,7 +39,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" width="40" height="40">
                             <strong class="person-name">{{ via.creator }}</strong>
                         </p>
                         <strong>{{ via.title }}</strong>
@@ -56,14 +47,14 @@
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
-                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.pk}}">
+                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240">
                                     </figure>
                                 {% endif %}
                             {% endfor %}
                         </div>
                         <p>{{ via.description|safe }}</p>
                         <a href="{% url 'details' via.pk 0 %}">{% trans 'Show detail...'%}</a>
-                        <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                        <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
                     </div>
                     {% endif %}
                 {% endfor %}
@@ -71,7 +62,6 @@
         </div>
     </div>
     <script>
-
         const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
         L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
@@ -93,6 +83,5 @@
             content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
             return content
         }
-
     </script>
 {% endblock %}
