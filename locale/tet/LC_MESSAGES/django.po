@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-09 03:38+0000\n"
-"PO-Revision-Date: 2020-04-21 03:21+0000\n"
+"POT-Creation-Date: 2020-05-18 21:57+0900\n"
+"PO-Revision-Date: 2020-05-18 12:55+0000\n"
 "Last-Translator: b'Onorio de Jesus <dejesusony@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,9 +18,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.4\n"
 
+#: map/templates/map/details.html:5
+msgid "Detail Timor GIS"
+msgstr "Detallu Timor GIS"
+
+#: map/templates/map/details.html:22 map/templates/map/viajen_form.html:16
+#: map/templates/registration/password_change_done.html:7
+msgid "Back"
+msgstr "Fila"
+
+#: map/templates/map/details.html:23
+msgid "One history for one trip"
+msgstr "Istoria ida ba vizajen ida"
+
 #: map/templates/map/header.html:16
 msgid "Welcome"
-msgstr "Benvindo"
+msgstr "Benvindu"
 
 #: map/templates/map/header.html:35
 msgid "Admin"
@@ -40,69 +53,273 @@ msgstr "Tama"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:5
 msgid "Confirm Delete Journey"
-msgstr ""
+msgstr "Konfirma hamoos Viajen"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:13
 msgid "Confirmation delete"
-msgstr ""
+msgstr "Konfirmasaun hamoos"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:17
 #, python-format
 msgid " Are you sure you want to delete \"%(object)s\"? "
-msgstr ""
+msgstr " Ita boot konkorda atu hamoos \"%(object)s\"?"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:20
-#: map/templates/map/viajen_form.html:65
 msgid "Cancel"
-msgstr ""
+msgstr "Kansela"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:21
-#: map/templates/map/mapview.html:70
 msgid "Delete"
 msgstr "Hamoos"
 
-#: map/templates/map/mapview.html:40
+#: map/templates/map/mapview.html:18
 msgid "Our histories for our trip"
-msgstr "Ita nia istoria sira kona-ba ita nia viajen"
+msgstr "Ita nia istoria kona-ba ita nia viajen"
 
-#: map/templates/map/mapview.html:48
+#: map/templates/map/mapview.html:26
 msgid "Add my journey"
 msgstr "Hatama viajen"
 
-#: map/templates/map/mapview.html:66
-msgid "Add Photo"
-msgstr ""
-
-#: map/templates/map/mapview.html:67
-msgid "Edit"
-msgstr "Troka"
+#: map/templates/map/mapview.html:65
+msgid "Show detail..."
+msgstr "Hatudu detallu..."
 
 #: map/templates/map/phototimor_form.html:6
-#: map/templates/map/phototimor_form.html:19
-msgid "Hatama photo istoria viazen"
-msgstr ""
+msgid "Add journey photos"
+msgstr "Hatama foto viajen"
 
 #: map/templates/map/phototimor_form.html:12
 msgid "Upload photos"
+msgstr "Hatama foto"
+
+#: map/templates/map/phototimor_form.html:20
+msgid "Please add another Photo"
+msgstr "Favor hatama foto seluk tan"
+
+#: map/templates/map/phototimor_form.html:22
+msgid "Add photo journey"
+msgstr "Hatama foto viajen"
+
+#: map/templates/map/phototimor_form.html:28
+msgid "Upload Photos"
+msgstr "Hatama foto"
+
+#: map/templates/map/phototimor_form.html:29
+msgid "Your Photos"
+msgstr "Ita boot nia foto"
+
+#: map/templates/map/phototimor_form.html:77
+msgid "Note: If don\\"
 msgstr ""
 
-#: map/templates/map/phototimor_form.html:65
+#: map/templates/map/phototimor_form.html:80
 msgid "Try Save Again"
-msgstr ""
+msgstr "Koko Rai Tan"
 
-#: map/templates/map/phototimor_form.html:67
-#: map/templates/map/viajen_form.html:63
+#: map/templates/map/phototimor_form.html:83
+msgid "Save another photo"
+msgstr "Rai foto seluk"
+
+#: map/templates/map/phototimor_form.html:85
 msgid "Save"
-msgstr ""
+msgstr "Rai"
 
-#: map/templates/map/phototimor_form.html:69
+#: map/templates/map/phototimor_form.html:88
+#: map/templates/map/phototimor_form.html:97
 msgid "Skip"
-msgstr ""
+msgstr "Husik"
 
-#: timor/settings.py:125
+#: map/templates/map/viajen_form.html:4
+msgid " Add journey history"
+msgstr "Aumenta istoria viajen"
+
+#: map/templates/map/viajen_form.html:61
+msgid "Save Journey"
+msgstr "Rai viajen"
+
+#: map/templates/registration/base.html:6
+msgid "Registration page"
+msgstr "Pajina registrasaun"
+
+#: map/templates/registration/logged_out.html:5
+msgid "You have logged out!"
+msgstr "Ita boot sai tiha ona!"
+
+#: map/templates/registration/logged_out.html:6
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr "Obrigadu barak ba so'e tempu ho Website ohin loron."
+
+#: map/templates/registration/logged_out.html:8
+msgid "Log in again?"
+msgstr "Tama fali?"
+
+#: map/templates/registration/login.html:8
+msgid "Please Log In"
+msgstr "Favor tama"
+
+#: map/templates/registration/login.html:27
+#, python-format
+msgid ""
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
+msgstr ""
+"Ita boot autentika hanesan %(username)s, maibe la autoriza ita boot atu "
+"asesu pajina ne'e, Oinsa ita boot hakarak tama ho konta seluk?"
+
+#: map/templates/registration/login.html:33
+#: map/templates/registration/password_reset_complete.html:7
+#: map/templates/registration/password_reset_confirm.html:24
+msgid "Log in"
+msgstr "Tama"
+
+#: map/templates/registration/login.html:36
+msgid "Forgotten your password or username?"
+msgstr "Haluha ita nia password ka uzuariu?"
+
+#: map/templates/registration/password_change_done.html:5
+msgid "Change password successful!"
+msgstr "Troka password susesu!"
+
+#: map/templates/registration/password_change_done.html:6
+msgid "Your password was changed."
+msgstr "Ita nia password troka"
+
+#: map/templates/registration/password_change_form.html:8
+#: map/templates/registration/password_change_form.html:42
+msgid "Change your password"
+msgstr "Troka ita nia password"
+
+#: map/templates/registration/password_change_form.html:12
+msgid "Please correct the error below."
+msgstr "Favor ida hadia erru iha okos."
+
+#: map/templates/registration/password_change_form.html:13
+msgid "Please correct the errors below."
+msgstr "Favor ida hadia erru sira iha okos."
+
+#: map/templates/registration/password_change_form.html:17
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+"Favor ida hatama ita nia password tuan, ba questaun seguransa, no depois "
+"hatama ita nia password foun dala rua para ami bele verifika se ita hakerek "
+"ne'e loos."
+
+#: map/templates/registration/password_reset_complete.html:5
+msgid "Reset password successful!"
+msgstr "Defini pasword susesu!"
+
+#: map/templates/registration/password_reset_complete.html:6
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "Ita nia password defini ona. Ita bele kontinua no tama agora."
+
+#: map/templates/registration/password_reset_confirm.html:8
+msgid "Choose a new password"
+msgstr "Hili password foun ida"
+
+#: map/templates/registration/password_reset_confirm.html:9
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+"Favor ida hatama ita nia password foun dala rua para ami bele verifika se "
+"ita hakerek ne'e loos."
+
+#: map/templates/registration/password_reset_confirm.html:28
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+"Link ba defini password nee la vale ona, poisbilidade tamba uza tiha ona. "
+"Favor halo request ba defini password foun."
+
+#: map/templates/registration/password_reset_done.html:5
+msgid "Please check your email!"
+msgstr "Favor check ita nia email!"
+
+#: map/templates/registration/password_reset_done.html:6
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+"Ami haruka ona email ba ita, instrusaun oinsa defini fali ita boot nia "
+"password, karik ita boot nia konta existe ho email nebee ita hatama, ita "
+"boot sei simu sira orasida."
+
+#: map/templates/registration/password_reset_done.html:7
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"Karik ita boot la simu email ruma, favor ida verfika katak email nebee ita "
+"hatama regista, no check iha pasta lixu."
+
+#: map/templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"Ita boot simu email ida ne'e tamba ita boot husu atu defini fali password "
+"foun iha ita nia konta %(site_name)s."
+
+#: map/templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Favor ida ba iha pajina tuir mai no hili password foun."
+
+#: map/templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr "Ita nia uzuariu, iha prosesu haluha:"
+
+#: map/templates/registration/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr "Obrigadu barak ba uza ami nia site!"
+
+#: map/templates/registration/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "Ekipa %(site_name)s"
+
+#: map/templates/registration/password_reset_form.html:5
+#: map/templates/registration/password_reset_form.html:16
+msgid "Reset your password"
+msgstr "Defini fali password"
+
+#: map/templates/registration/password_reset_form.html:6
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+"Haluha ita nia password? Hatama ita boot nia enderesu email iha kraik, no "
+"ami sei haruka instrusaun ba email ne'e hodi defini fali password foun."
+
+#: map/templates/registration/password_reset_subject.txt:2
+#, python-format
+msgid "Password reset on %(site_name)s"
+msgstr "Password defini iha %(site_name)s"
+
+#: map/views.py:121
+msgid "Add Journey History"
+msgstr "Hatama Istoria Viajen "
+
+#: map/views.py:148
+msgid "Update Journey History"
+msgstr "Atualiza Istoria Viajen"
+
+#: timor/settings.py:124
 msgid "Tetum"
 msgstr "Tetun"
 
-#: timor/settings.py:126
+#: timor/settings.py:125
 msgid "English"
 msgstr "Ingles"
+
+#~ msgid "Change my password"
+#~ msgstr "Troka password"
+
+#~ msgid "Reset my password"
+#~ msgstr "Defini fali password"
+
+#~ msgid "Edit"
+#~ msgstr "Troka"

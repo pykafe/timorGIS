@@ -112,12 +112,6 @@ input#id_image_trip {
     color: #555;
 }
 
-.form-row {
-    background: #c2c6c221;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    margin-top: 20px;
-}
 
 textarea.form-control {
     height: 20%;
@@ -328,4 +322,8 @@ input {
 
 .active {
     color: black;
+}
+
+a:hover {
+    text-decoration: none;
 }

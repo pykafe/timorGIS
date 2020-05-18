@@ -1,0 +1,10 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+{% block registration_content %}
+<h5 class="registration-title">{% trans 'You have logged out!' %}</h5>
+<p class="registration-messages">{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+<div class="form-row">
+    <a href="{% url 'login' %}" class="btn btn-primary button-login-again">{% trans 'Log in again?' %}</a>
+</div>
+{% endblock %}
