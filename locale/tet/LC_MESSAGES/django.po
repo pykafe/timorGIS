@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 23:07+0900\n"
-"PO-Revision-Date: 2020-05-16 15:04+0000\n"
+"POT-Creation-Date: 2020-05-18 21:57+0900\n"
+"PO-Revision-Date: 2020-05-18 12:55+0000\n"
 "Last-Translator: b'Onorio de Jesus <dejesusony@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -28,7 +28,6 @@ msgid "Back"
 msgstr "Fila"
 
 #: map/templates/map/details.html:23
-#| msgid "Our histories for our trip"
 msgid "One history for one trip"
 msgstr "Istoria ida ba vizajen ida"
 
@@ -86,7 +85,6 @@ msgid "Show detail..."
 msgstr "Hatudu detallu..."
 
 #: map/templates/map/phototimor_form.html:6
-#| msgid "Add my journey"
 msgid "Add journey photos"
 msgstr "Hatama foto viajen"
 
@@ -99,7 +97,6 @@ msgid "Please add another Photo"
 msgstr "Favor hatama foto seluk tan"
 
 #: map/templates/map/phototimor_form.html:22
-#| msgid "Add my journey"
 msgid "Add photo journey"
 msgstr "Hatama foto viajen"
 
@@ -133,7 +130,6 @@ msgid "Skip"
 msgstr "Husik"
 
 #: map/templates/map/viajen_form.html:4
-#| msgid "Add my journey"
 msgid " Add journey history"
 msgstr "Aumenta istoria viajen"
 
@@ -158,15 +154,14 @@ msgid "Log in again?"
 msgstr "Tama fali?"
 
 #: map/templates/registration/login.html:8
-#| msgid "Log In"
 msgid "Please Log In"
 msgstr "Favor tama"
 
 #: map/templates/registration/login.html:27
 #, python-format
 msgid ""
-"You are authenticated as %(username)s, but are not authorized to access this"
-" page. Would you like to login to a different account?"
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
 msgstr ""
 "Ita boot autentika hanesan %(username)s, maibe la autoriza ita boot atu "
 "asesu pajina ne'e, Oinsa ita boot hakarak tama ho konta seluk?"
@@ -174,7 +169,6 @@ msgstr ""
 #: map/templates/registration/login.html:33
 #: map/templates/registration/password_reset_complete.html:7
 #: map/templates/registration/password_reset_confirm.html:24
-#| msgid "Log In"
 msgid "Log in"
 msgstr "Tama"
 
@@ -183,7 +177,6 @@ msgid "Forgotten your password or username?"
 msgstr "Haluha ita nia password ka uzuariu?"
 
 #: map/templates/registration/password_change_done.html:5
-#| msgid "Change password"
 msgid "Change password successful!"
 msgstr "Troka password susesu!"
 
@@ -192,7 +185,7 @@ msgid "Your password was changed."
 msgstr "Ita nia password troka"
 
 #: map/templates/registration/password_change_form.html:8
-#| msgid "Change password"
+#: map/templates/registration/password_change_form.html:42
 msgid "Change your password"
 msgstr "Troka ita nia password"
 
@@ -206,17 +199,12 @@ msgstr "Favor ida hadia erru sira iha okos."
 
 #: map/templates/registration/password_change_form.html:17
 msgid ""
-"Please enter your old password, for security's sake, and then enter your new"
-" password twice so we can verify you typed it in correctly."
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
 msgstr ""
 "Favor ida hatama ita nia password tuan, ba questaun seguransa, no depois "
 "hatama ita nia password foun dala rua para ami bele verifika se ita hakerek "
 "ne'e loos."
-
-#: map/templates/registration/password_change_form.html:42
-#| msgid "Change password"
-msgid "Change my password"
-msgstr "Troka password"
 
 #: map/templates/registration/password_reset_complete.html:5
 msgid "Reset password successful!"
@@ -227,7 +215,6 @@ msgid "Your password has been set. You may go ahead and log in now."
 msgstr "Ita nia password defini ona. Ita bele kontinua no tama agora."
 
 #: map/templates/registration/password_reset_confirm.html:8
-#| msgid "Change password"
 msgid "Choose a new password"
 msgstr "Hili password foun ida"
 
@@ -295,6 +282,7 @@ msgid "The %(site_name)s team"
 msgstr "Ekipa %(site_name)s"
 
 #: map/templates/registration/password_reset_form.html:5
+#: map/templates/registration/password_reset_form.html:16
 msgid "Reset your password"
 msgstr "Defini fali password"
 
@@ -306,18 +294,12 @@ msgstr ""
 "Haluha ita nia password? Hatama ita boot nia enderesu email iha kraik, no "
 "ami sei haruka instrusaun ba email ne'e hodi defini fali password foun."
 
-#: map/templates/registration/password_reset_form.html:16
-#| msgid "Change password"
-msgid "Reset my password"
-msgstr "Defini fali password"
-
 #: map/templates/registration/password_reset_subject.txt:2
 #, python-format
 msgid "Password reset on %(site_name)s"
 msgstr "Password defini iha %(site_name)s"
 
 #: map/views.py:121
-#| msgid "Add my journey"
 msgid "Add Journey History"
 msgstr "Hatama Istoria Viajen "
 
@@ -332,6 +314,12 @@ msgstr "Tetun"
 #: timor/settings.py:125
 msgid "English"
 msgstr "Ingles"
+
+#~ msgid "Change my password"
+#~ msgstr "Troka password"
+
+#~ msgid "Reset my password"
+#~ msgstr "Defini fali password"
 
 #~ msgid "Edit"
 #~ msgstr "Troka"
