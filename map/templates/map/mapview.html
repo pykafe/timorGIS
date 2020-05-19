@@ -2,6 +2,11 @@
 {% load static i18n %}
 {% block title %}Timor GIS{% endblock %}
 {% block content %}
+<style>
+    .container {
+        max-width: 1320px!important;
+    }
+</style>
     <div id="mapid"></div>
     <div class="container">
         <div class="row navbar-journey">
@@ -47,7 +52,7 @@
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
-                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240">
+                                        <img src='{{ photo.photo }}' class="gallery-img" width="340">
                                     </figure>
                                 {% endif %}
                             {% endfor %}
