@@ -242,18 +242,39 @@ a.btn.btn-primary.timorgis-login {
     padding-bottom: 4px;
 }
 
-ul.dropdown-menu.show {
-    min-width: 100%;
+#language_form > select:hover {
+    cursor: pointer;
+    background-color: #f0f2f5;
+}
+
+
+.dropdown span.vertical-line {
+    border-left: 1px solid #1b1a1838;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+ul.dropdown-menu.show > li {
+    padding: 6px;
 }
 
 ul.dropdown-menu.show {
-    font-size: 13px;
     padding: 16px;
     line-height: 2;
+    width: 100%;
 }
 
-ul.dropdown-menu.show > li:hover {
+ul.dropdown-menu.show > a li:hover {
     background-color: rgba(0,123,255,.25);
+}
+
+ul.dropdown-menu.show > a li {
+    padding: 6px;
+}
+
+ul.dropdown-menu.show > a li img {
+    width: 23px;
+    margin-right: 12px;
 }
 
 a:hover {
