@@ -31,7 +31,7 @@
                 {% for via in viazen %}
                     {% if via.creator %}
                     <div class="each-upload">
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and user.pk == via.creator.pk %}
                         <div class="dropdown dropdown-edit-and-delete">
                             <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
                             <ul class="dropdown-menu menu-dropdown">
