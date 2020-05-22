@@ -58,11 +58,9 @@ span.person-name {
 /* CREATE FORM */
 
 .form-group {
-    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
     color: #555;
     font-size: 15px;
     font-weight: 700;
-    margin-left: 30px;
     margin-bottom: 2px;
 }
 
@@ -95,8 +93,11 @@ input#id_date_1 {
     margin-bottom: 10px;
 }
 
+span.ui-icon.ui-icon-circle-triangle-w, span.ui-icon.ui-icon-circle-triangle-e {
+    display: contents;
+}
+
 input#id_title {
-    inline-size: auto;
     border-radius: 5px;
     padding: 3px 22px;
     font-size: 16px;
@@ -111,12 +112,6 @@ input#id_image_trip {
     color: #555;
 }
 
-.form-row {
-    background: #c2c6c221;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    margin-top: 20px;
-}
 
 textarea.form-control {
     height: 20%;
@@ -170,6 +165,7 @@ input[type=text] {
     background: #ffffff;
     padding-top: 1%;
     padding-bottom: 1%;
+    margin-top: 15px;
 }
 
 .display-all-post {
@@ -327,4 +323,8 @@ input {
 
 .active {
     color: black;
+}
+
+a:hover {
+    text-decoration: none;
 }

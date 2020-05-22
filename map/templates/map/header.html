@@ -1,13 +1,10 @@
-{% load static %}
-{% load i18n %}
-
+{% load static i18n %}
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
         <a href="{% url 'home' %}" class="navbar-brand logo">Timorgis</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ml-auto">
                 <ul class="nav navbar-nav navbar-right">
@@ -36,17 +33,15 @@
                             <li><a href="{% url 'password_change' %}">{% trans 'Change password' %}</a></li>
                             <li><a href="{% url 'logout' %}">{% trans 'log out' %}</a></li>
                         {% else %}
-                            <li><a href="{% url 'admin:index' %}" class="btn btn-primary timorgis-login">{% trans 'Log In' %}</a></li>
+                            <li><a href="{% url 'login' %}" class="btn btn-primary timorgis-login">{% trans 'Log In' %}</a></li>
                         {% endif %}
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-
     </div>
 </nav>
-
 <!-- Changing the languages using js function -->
 <script>
     $('#language_select').change(function(){

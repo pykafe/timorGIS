@@ -1,13 +1,8 @@
-
 {% extends 'map/base.html' %}
-{% load i18n %}
-{% load widget_tweaks static %}
-
-{% block title %}{% trans 'Add journey history' %}{% endblock %}
-
+{% load widget_tweaks i18n static %}
+{% block title %}{% trans 'Add journey photos' %}{% endblock %}
 {% block content %}
-
-<style>
+ <style>
     label {
         text-indent: -9999px;
     }
@@ -16,13 +11,11 @@
         width: 0px;
     }
 </style>
-
 <div class="modal-content cont-modal">
     <!-- Large modal -->
     <button type="button" class="btn btn-primary button-modal" data-toggle="modal" data-target=".bs-example-modal-lg">{% trans 'Upload photos' %}</button>
 </div>
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header bg-light">
@@ -38,7 +31,6 @@
                 <li><a href="#upload-photos" data-toggle="tab">{% trans 'Upload Photos' %}</a></li>
                 <li><a href="#your-photos" data-toggle="tab" style="margin-left: 20px;">{% trans 'Your Photos' %}</a></li>
             </ul>
-
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" id="upload-photos">
@@ -83,9 +75,6 @@
                               {% endfor %}
                         </table>
                         <div class="modal-footer">
-                        {% if journey_photos.count %}
-                            <div class="text-muted h6">{% trans "Note: If don't have another photo, please skip" %}</div>
-                        {% endif %}
                             {% if form.non_field_errors %}
                                 <button type="submit" class="btn btn-primary add-journey">{% trans 'Try Save Again' %}</button>
                             {% else %}

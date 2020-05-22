@@ -1,38 +1,8 @@
 {% extends 'map/base.html' %}
-{% load static %}
-{% load i18n %}
-
+{% load static i18n %}
 {% block title %}Timor GIS{% endblock %}
-
 {% block content %}
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/leaflet.css' %}">
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script type="text/javascript" src="{% static 'js/leaflet.js' %}"></script>
-
     <div id="mapid"></div>
-
-    <script>
-
-        const districts = {{ districts|safe }};
-        var mymap = L.map('mapid').setView([-8.8315139, 125.6199236,8], 8);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(mymap);
-        L.geoJSON(districts, {
-            style: function (feature) {
-                return {color: 'orange'};
-            }
-        }).bindPopup(function (layer) {
-            var name = layer.feature.properties.name;
-                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-        }).addTo(mymap);
-        {%for photo in geoimages %}
-            {% if photo.lon and photo.lat %}
-                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup("<img src='{{photo.photo}}' height='90' width='90'>"+"</br><a target='_blank' href='https://www.google.com/maps?q={{photo.lat}},{{photo.lon}}'>Detail</a>").openPopup().addTo(mymap);
-            {% endif %}
-        {%endfor%}
-
-    </script>
-
     <div class="container">
         <div class="row navbar-journey">
             <div class="col-md-8">
@@ -44,7 +14,9 @@
             </div>
             -->
             <div class="col-md-4">
+                {% if user.is_authenticated %}
                 <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+                {% endif %}
             </div>
         </div>
         <div class="row">
@@ -59,19 +31,19 @@
                 {% for via in viazen %}
                     {% if via.creator %}
                     <div class="each-upload">
+                        {% if user.is_authenticated and user.pk == via.creator.pk %}
                         <div class="dropdown dropdown-edit-and-delete">
                             <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
                             <ul class="dropdown-menu menu-dropdown">
-                                <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}">{% trans 'Add Photo' %}</a></li>
-                                <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}">{% trans 'Edit' %}</a>
-                                   <span class="glyphicon glyphicon-pencil"></span>
+                                <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}"><img src="{% static 'img/photo_add.png' %}" width="40"></a></li>
+                                <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}"><img src="{% static 'img/edit.png' %}" width="40"></a>
                                 </li>
-                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}">{% trans 'Delete' %}</a>
-                                   <span class="glyphicon glyphicon-trash"></span>
+                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}"><img src="{% static 'img/delete.png' %}" width="40"></a>
                                 </li>
                             </ul>
                         </div>
-                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                        {% endif %}
+                        <p><img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" width="40" height="40">
                             <strong class="person-name">{{ via.creator }}</strong>
                         </p>
                         <strong>{{ via.title }}</strong>
@@ -80,7 +52,6 @@
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
                                         <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.photo_id }}" data-toggle="modal" data-target="#{{ photo.photo_id }}">
-
                                         <!-- Modal -->
                                         <div class="modal fade" id="{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                           <div class="modal-dialog">
@@ -111,12 +82,36 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <p>{{ via.description }}</p>
-                        <p class="text-muted h6">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                        <p>{{ via.description|safe }}</p>
+                        <a href="{% url 'details' via.pk 0 %}">{% trans 'Show detail...'%}</a>
+                        <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
                     </div>
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
     </div>
+    <script>
+        const districts = {{ districts|safe }};
+        var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
+        L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+        L.geoJSON(districts, {
+            style: function (feature) {
+                return {color: 'orange'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(timormap);
+        {% for photo in geoimages %}
+            {% if photo.lon and photo.lat %}
+                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+            {% endif %}
+        {% endfor %}
+        function contentPopup(photo){
+            var viazen_id = photo.viazen_id.toString();
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+            return content
+        }
+    </script>
 {% endblock %}
