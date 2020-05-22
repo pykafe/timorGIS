@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 21:57+0900\n"
-"PO-Revision-Date: 2020-05-18 12:55+0000\n"
+"POT-Creation-Date: 2020-05-20 00:18+0900\n"
+"PO-Revision-Date: 2020-05-19 15:18+0000\n"
 "Last-Translator: b'Onorio de Jesus <dejesusony@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,122 +18,127 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.4\n"
 
-#: map/templates/map/details.html:5
+#: map/templates/map/details.html:3
 msgid "Detail Timor GIS"
 msgstr "Detallu Timor GIS"
 
-#: map/templates/map/details.html:22 map/templates/map/viajen_form.html:16
+#: map/templates/map/details.html:17 map/templates/map/viajen_form.html:8
 #: map/templates/registration/password_change_done.html:7
 msgid "Back"
 msgstr "Fila"
 
-#: map/templates/map/details.html:23
+#: map/templates/map/details.html:18
 msgid "One history for one trip"
 msgstr "Istoria ida ba vizajen ida"
 
-#: map/templates/map/header.html:16
+#: map/templates/map/details.html:32
+msgid "Read more"
+msgstr "Haree liu tan"
+
+#: map/templates/map/header.html:13
 msgid "Welcome"
 msgstr "Benvindu"
 
-#: map/templates/map/header.html:35
+#: map/templates/map/header.html:16 map/templates/map/header.html:19
+msgid "Settings"
+msgstr "Konfigurasaun"
+
+#: map/templates/map/header.html:39
 msgid "Admin"
 msgstr "Administrador"
 
-#: map/templates/map/header.html:36
+#: map/templates/map/header.html:44
 msgid "Change password"
 msgstr "Troka password"
 
-#: map/templates/map/header.html:37
+#: map/templates/map/header.html:47
 msgid "log out"
 msgstr "Sai"
 
-#: map/templates/map/header.html:39
+#: map/templates/map/header.html:51
 msgid "Log In"
 msgstr "Tama"
 
-#: map/templates/map/istoriaviazen_confirm_delete.html:5
+#: map/templates/map/istoriaviazen_confirm_delete.html:3
 msgid "Confirm Delete Journey"
 msgstr "Konfirma hamoos Viajen"
 
-#: map/templates/map/istoriaviazen_confirm_delete.html:13
+#: map/templates/map/istoriaviazen_confirm_delete.html:10
 msgid "Confirmation delete"
 msgstr "Konfirmasaun hamoos"
 
-#: map/templates/map/istoriaviazen_confirm_delete.html:17
+#: map/templates/map/istoriaviazen_confirm_delete.html:14
 #, python-format
 msgid " Are you sure you want to delete \"%(object)s\"? "
 msgstr " Ita boot konkorda atu hamoos \"%(object)s\"?"
 
-#: map/templates/map/istoriaviazen_confirm_delete.html:20
+#: map/templates/map/istoriaviazen_confirm_delete.html:17
 msgid "Cancel"
 msgstr "Kansela"
 
-#: map/templates/map/istoriaviazen_confirm_delete.html:21
+#: map/templates/map/istoriaviazen_confirm_delete.html:18
 msgid "Delete"
 msgstr "Hamoos"
 
-#: map/templates/map/mapview.html:18
+#: map/templates/map/mapview.html:9
 msgid "Our histories for our trip"
 msgstr "Ita nia istoria kona-ba ita nia viajen"
 
-#: map/templates/map/mapview.html:26
+#: map/templates/map/mapview.html:17
 msgid "Add my journey"
 msgstr "Hatama viajen"
 
-#: map/templates/map/mapview.html:65
+#: map/templates/map/mapview.html:56
 msgid "Show detail..."
 msgstr "Hatudu detallu..."
 
-#: map/templates/map/phototimor_form.html:6
+#: map/templates/map/phototimor_form.html:3
 msgid "Add journey photos"
 msgstr "Hatama foto viajen"
 
-#: map/templates/map/phototimor_form.html:12
+#: map/templates/map/phototimor_form.html:7
 msgid "Upload photos"
 msgstr "Hatama foto"
 
-#: map/templates/map/phototimor_form.html:20
-msgid "Please add another Photo"
+#: map/templates/map/phototimor_form.html:14
+#| msgid "Please add another Photo"
+msgid "Please add another photo"
 msgstr "Favor hatama foto seluk tan"
 
-#: map/templates/map/phototimor_form.html:22
+#: map/templates/map/phototimor_form.html:16
 msgid "Add photo journey"
 msgstr "Hatama foto viajen"
 
-#: map/templates/map/phototimor_form.html:28
+#: map/templates/map/phototimor_form.html:22
 msgid "Upload Photos"
 msgstr "Hatama foto"
 
-#: map/templates/map/phototimor_form.html:29
+#: map/templates/map/phototimor_form.html:23
 msgid "Your Photos"
 msgstr "Ita boot nia foto"
 
-#: map/templates/map/phototimor_form.html:77
-msgid "Note: If don\\"
-msgstr ""
-
-#: map/templates/map/phototimor_form.html:80
+#: map/templates/map/phototimor_form.html:70
 msgid "Try Save Again"
 msgstr "Koko Rai Tan"
 
-#: map/templates/map/phototimor_form.html:83
+#: map/templates/map/phototimor_form.html:73
 msgid "Save another photo"
 msgstr "Rai foto seluk"
 
-#: map/templates/map/phototimor_form.html:85
+#: map/templates/map/phototimor_form.html:75
 msgid "Save"
 msgstr "Rai"
 
-#: map/templates/map/phototimor_form.html:88
-#: map/templates/map/phototimor_form.html:97
+#: map/templates/map/phototimor_form.html:78
+#: map/templates/map/phototimor_form.html:87
 msgid "Skip"
 msgstr "Husik"
 
-#: map/templates/map/viajen_form.html:4
+#: map/templates/map/viajen_form.html:3
 msgid " Add journey history"
 msgstr "Aumenta istoria viajen"
 
-#: map/templates/map/viajen_form.html:61
+#: map/templates/map/viajen_form.html:53
 msgid "Save Journey"
 msgstr "Rai viajen"
 
@@ -160,8 +165,8 @@ msgstr "Favor tama"
 #: map/templates/registration/login.html:27
 #, python-format
 msgid ""
-"You are authenticated as %(username)s, but are not authorized to access this "
-"page. Would you like to login to a different account?"
+"You are authenticated as %(username)s, but are not authorized to access this"
+" page. Would you like to login to a different account?"
 msgstr ""
 "Ita boot autentika hanesan %(username)s, maibe la autoriza ita boot atu "
 "asesu pajina ne'e, Oinsa ita boot hakarak tama ho konta seluk?"
@@ -199,8 +204,8 @@ msgstr "Favor ida hadia erru sira iha okos."
 
 #: map/templates/registration/password_change_form.html:17
 msgid ""
-"Please enter your old password, for security's sake, and then enter your new "
-"password twice so we can verify you typed it in correctly."
+"Please enter your old password, for security's sake, and then enter your new"
+" password twice so we can verify you typed it in correctly."
 msgstr ""
 "Favor ida hatama ita nia password tuan, ba questaun seguransa, no depois "
 "hatama ita nia password foun dala rua para ami bele verifika se ita hakerek "
