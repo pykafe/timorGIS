@@ -18,7 +18,7 @@
                         {% endif  %}
                         <a href="{% url 'home' %}"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'Settings' %}
                         </a>
-                        {% endif %}
+                      
                         <ul class="dropdown-menu">
                             <form id="language_form" class="navbar-form navbar-left" action="{% url 'set_language' %}" method="post">
                                 {% csrf_token %}
