@@ -57,14 +57,14 @@
                                           <div class="modal-dialog">
                                             <div class="modal-content">
                                               <div class="modal-header bg-light">
-                                                <h4 class="modal-title trip-text" id="myModalLabel">Photo</h4>
+                                                <h6 class="modal-title trip-text">{% trans 'This photo journey took in the Suco' %}: <a href={% url 'details' via.id photo.photo_id %}>{{ photo.suco }}</a></h6>
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                               </div>
                                               <div class="modal-body">
                                                 <img src='{{ photo.photo }}' class="gallery-img" width="100%" alt="Image {{ photo.photo_id }}">
                                               </div>
                                               <div class="modal-footer">
-                                              {% if user.is_authenticated %}
+                                              {% if user.is_authenticated and user.pk == via.creator.pk %}
                                                 <span class="icon-edit-delete"> 
                                                     <a href="{% url 'update_photo' photo.photo_id %}">
                                                         <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
