@@ -141,6 +141,10 @@ button.btn.btn-success.btn-lg {
     font-family: auto;
 }
 
+img.gallery-img.add-pointer {
+    cursor: pointer;
+}
+
 img.gallery-img {
     max-width: 100%;
     height: auto;
@@ -301,9 +305,7 @@ a:hover {
 }
 
 input {
-    border: 2px solid #0062cc;
-    color: white;
-    background-color: #0062cc;
+    border: 2px solid #f0f2f5;
     border-radius: 8px;
     font-size: 13px;
     font-weight: bold;
