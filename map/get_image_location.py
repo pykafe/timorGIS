@@ -65,4 +65,3 @@ def get_lat_lon(exif_data):
                 lon = 0 - lon
 
     return lat, lon
-
