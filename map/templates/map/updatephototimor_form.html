@@ -75,7 +75,7 @@
                         </div>
                         <div class="tab-pane" id="your-photos">
                             {% for photos in journey_photos %}
-                                <img src='{{ photos.image.url }}' class="gallery-img" width="190" height="190" alt="Image {{ photos.pk}}">
+                                <img src='{{ photos.image.url }}' class="gallery-img" width="300px" alt="Image-{{ photos.pk}}">
                             {% endfor %}
                             <div class="modal-footer">
                                 <a href="{% url 'home' %}" type="submit" class="btn btn-default cancel-delete">{% trans 'Skip' %}</a> 

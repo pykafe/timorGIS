@@ -78,7 +78,7 @@
                         <div class="tab-pane" id="your-photos">
                             {% for photos in journey_photos %}
                                 <a href={% url 'update_photo' photos.pk %}>
-                                    <img src='{{ photos.image.url }}' class="gallery-img" width="190" height="190" alt="Image {{ photos.pk}}">
+                                    <img src='{{ photos.image.url }}' class="gallery-img" width="300px" alt="Image-{{ photos.pk}}">
                                 </a>
                             {% endfor %}
                             <div class="modal-footer">

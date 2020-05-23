@@ -159,12 +159,11 @@ input[type=text] {
 .row.navbar-journey {
     border-radius: 4px;
     position: sticky;
-    top: 0px;
     z-index: 1;
     background: #ffffff;
     padding-top: 1%;
     padding-bottom: 1%;
-    margin-top: 15px;
+    margin-top: 15px!important;
 }
 
 .display-all-post {
