@@ -144,7 +144,6 @@ button.btn.btn-success.btn-lg {
 img.gallery-img {
     max-width: 100%;
     height: auto;
-    cursor: pointer;
 }
 
 input[type=text] {
