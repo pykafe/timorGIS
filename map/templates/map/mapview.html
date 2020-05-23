@@ -53,7 +53,7 @@
                                     <figure>
                                         <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240" alt="Image {{ photo.photo_id }}" data-toggle="modal" data-target="#{{ photo.photo_id }}">
                                         <!-- Modal -->
-                                        <div class="modal fade" id="{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="photo-{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                           <div class="modal-dialog">
                                             <div class="modal-content">
                                               <div class="modal-header bg-light">
