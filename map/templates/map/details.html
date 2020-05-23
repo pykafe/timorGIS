@@ -30,8 +30,8 @@
                         <p class="card-text">{{ viazen.description|truncatewords:"20"}}</p>
                         <p class="text-muted">{{ viazen.date.lower }} - {{ viazen.date.upper }}</p>
                         <!-- Large modal -->
-                        <button type="button" class="btn btn-primary add-journey" data-toggle="modal" data-target=".{{ viazen.pk }}">{% trans 'Read more' %}</button>
-                        <div class="modal fade {{ viazen.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <button type="button" class="btn btn-primary add-journey" data-toggle="modal" data-target=".read-more-{{ viazen.pk }}">{% trans 'Read more' %}</button>
+                        <div class="modal fade read-more-{{ viazen.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header bg-light">
