@@ -255,13 +255,14 @@ a.btn.btn-primary.timorgis-login {
 }
 
 ul.dropdown-menu.show > li {
-    padding: 6px;
+    padding: 8px;
 }
 
 ul.dropdown-menu.show {
-    padding: 16px;
+    padding: 12px;
     line-height: 2;
     width: 100%;
+    font-size: 12px;
 }
 
 ul.dropdown-menu.show > a li:hover {
