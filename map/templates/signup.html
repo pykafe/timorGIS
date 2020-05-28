@@ -1,10 +1,12 @@
-{% extends 'map/base.html' %}
-
-{% block content %}
-  <h2>Sign up</h2>
+{% extends "registration/base.html" %}
+{% load i18n  %}
+{% block registration_content %}
+  <h5 class="registration-title">{% trans 'Sign up' %}</h5>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Sign up</button>
+    <div class="form-row">
+        <button type="submit" class="btn btn-primary">{% trans 'Sign up' %}</button>
+    </div>
   </form>
 {% endblock %}
