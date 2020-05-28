@@ -59,7 +59,7 @@
                 <div id="mapid" class="mapstyle"></div>
                 <script>
                     var timormap = L.map('mapid').setView({{ DEFAULT_CENTER|default:"[-8.8315139, 125.6199236]" }}, {{ DEFAULT_ZOOM|default:"10" }});
-                    L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+                    L.tileLayer('{{ url_openstreetmap }}', { minZoom:8, maxZoom: 18 }).addTo(timormap);
                     {% if districts %}
                     const districts = {{ districts|safe }};
                     const subdistrict = {{ subdistrict|safe }};
