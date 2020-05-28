@@ -5,7 +5,7 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <div class="form-row">
+    <div class="form-rows">
         <button type="submit" class="btn btn-primary">{% trans 'Sign up' %}</button>
     </div>
   </form>
