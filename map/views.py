@@ -10,6 +10,7 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from .forms import SignUpForm
 
 
 def queryobject(obj, lon, lat):
@@ -159,3 +160,9 @@ class ViazenUpdateView(UpdateView):
 class ViazenDeleteView(DeleteView):
     model = Istoriaviazen
     success_url = reverse_lazy('home')
+
+
+class SignUp(CreateView):
+    form_class = SignUpForm
+    template_name = 'signup.html'
+    success_url = reverse_lazy('login')

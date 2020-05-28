@@ -35,6 +35,9 @@
     <div class="form-row forgot-password-link">
         <a href="{% url 'password_reset' %}">{% trans 'Forgotten your password or username?' %}</a>
     </div>
+    <div class="form-row forgot-password-link">
+        <a href="{% url 'signup' %}">{% trans 'Create an account' %}</a>
+    </div>
 </form>
 
 {% endblock %}
