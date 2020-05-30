@@ -167,7 +167,7 @@ CKEDITOR_CONFIG = {
             {'items': ['Format', '-', 'Bold', 'Italic', '-', 'RemoveFormat']},
             {'items': ['Link',]},
         ],
-        'format_tags': 'p;h1;h2;h3;h4;h5;h6',
+        'format_tags': 'p;h3;h4;h5;h6',
         'width': 700,
     },
     'profiles': {
