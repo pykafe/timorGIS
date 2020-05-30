@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
-from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.contrib.gis.geos import Point
 from django.urls import reverse_lazy
