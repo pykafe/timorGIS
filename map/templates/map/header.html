@@ -1,27 +1,28 @@
-{% load static %}
-{% load i18n %}
-
+{% load static i18n %}
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
         <a href="{% url 'home' %}" class="navbar-brand logo">Timorgis</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ml-auto">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         {% if user.is_authenticated %}
-                            <b>{% trans 'Welcome' %} {{ user.first_name|default:user.username }}</b>
-                        <img src="{% static 'img/default_profile.jpg' %}" class="rounded-circle" alt="{{  user.username }}" width="25" height="25">
-                        <a href="{% url "home" %}"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <b>{% trans 'Welcome' %} {{ user.first_name|default:user.username }}</b>
+                        <img src="{% static 'icons/people-circle.svg' %}" class="rounded-circle" alt="{{  user.username }}" width="25" height="25"> 
+                        <span class="vertical-line"></span>
+                      
+                        {% endif  %}
+                        <a href="{% url 'home' %}"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'Settings' %}
                         </a>
+                      
                         <ul class="dropdown-menu">
                             <form id="language_form" class="navbar-form navbar-left" action="{% url 'set_language' %}" method="post">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}" />
-                            <select name="language" id="language_select" class="form-control">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                                <select name="language" id="language_select" class="form-control">
                                 {% get_current_language as LANGUAGE_CODE %}
                                 {% get_available_languages as LANGUAGES %}
                                 {% get_language_info_list for LANGUAGES as languages %}
@@ -30,23 +31,32 @@
                                     {{ language.name_local }}
                                 </option>
                                 {% endfor %}
-                            </select>
+                                </select>
                             </form>
-                            <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
-                            <li><a href="{% url 'password_change' %}">{% trans 'Change password' %}</a></li>
-                            <li><a href="{% url 'logout' %}">{% trans 'log out' %}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'admin:index' %}" class="btn btn-primary timorgis-login">{% trans 'Log In' %}</a></li>
-                        {% endif %}
+                            {% if user.is_staff %}
+                            <a href="{% url 'admin:index' %}">
+                                <li><img src="{% static 'icons/gear.svg' %}" alt="icon" width="25" height="25" title="Admin">{% trans 'Admin' %}</li>
+                            </a>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'password_change' %}">
+                                <li><img src="{% static 'icons/lock.svg' %}" alt="icon" width="25" height="25" title="Change password">{% trans 'Change password' %}</li>
+                            </a>
+                            <a href="{% url 'logout' %}">
+                                <li><img src="{% static 'icons/box-arrow-left.svg' %}" alt="icon" width="25" height="25" title="Logout">{% trans 'log out' %}</li>
+                            </a>
+                            {% else %}
+                            <a href="{% url 'login' %}">
+                                <li><img src="{% static 'icons/power.svg' %}" alt="icon" width="25" height="25" title="Login">{% trans 'Log In' %}</li>
+                            </a>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-
     </div>
 </nav>
-
 <!-- Changing the languages using js function -->
 <script>
     $('#language_select').change(function(){

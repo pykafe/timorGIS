@@ -1,0 +1,40 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+
+{% block registration_content %}
+
+<form action="{{ app_path }}" method="post">{% csrf_token %}
+    <h5 class="registration-title">{% trans 'Please Log In' %}</h5>
+    <div class="form-row">
+        {{ form.username.label_tag }} 
+        {{ form.username }}
+    </div>
+    <div class="form-row">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+    </div>
+
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <p class="errornote animated headShake">
+        {{ error }}
+    </p>
+    {% endfor %}
+    {% endif %}
+    {% if user.is_authenticated %}
+    <p class="errornote animated headShake">
+        {% blocktrans with username=request.user.get_username trimmed %}You are authenticated as {{ username }}, but are not authorized to access this page. Would you like to login to a different account?
+        {% endblocktrans %}
+    </p>
+    {% endif %}
+
+    <div class="form-row">
+        <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
+    </div>
+    <div class="form-row forgot-password-link">
+        <a href="{% url 'password_reset' %}">{% trans 'Forgotten your password or username?' %}</a>
+    </div>
+</form>
+
+{% endblock %}
