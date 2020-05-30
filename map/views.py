@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
 from django.contrib.gis.geos import Point
 from django.urls import reverse_lazy
@@ -118,7 +118,7 @@ class MapView(TemplateView):
 class HatamaViazenView(CreateView):
     template_name = 'map/viajen_form.html'
     model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator']
+    fields = ['title', 'description', 'date']
 
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.id,))
@@ -128,6 +128,10 @@ class HatamaViazenView(CreateView):
         context['hatama_viazen'] = _("Add Journey History")
         return context
 
+    def form_valid(self, form):
+        # set the creator of the istoria to the logged in user
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
