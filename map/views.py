@@ -157,7 +157,7 @@ class PhotoViazenView(CreateView):
 class UpdatePhotoViazenView(UpdateView):
     template_name = 'map/updatephototimor_form.html'
     model = PhotoTimor
-    fields = ['image', 'istoriaviazen']
+    fields = ['image']
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *args, **kwargs):
