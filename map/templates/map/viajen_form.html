@@ -30,14 +30,14 @@
 
                         {% if form.is_bound %}
                             {% if field.errors %}
-                                {% render_field field class="form-control is-invalid" %}
+                                {% render_field field class="form-control is-invalid djrichtextfield" %}
                                 {% for error in field.errors %}
                                 <div class="invalid-feedback">
                                     {{ error }}
                                 </div>
                                 {% endfor %}
                             {% else %}
-                              {% render_field field class="form-control is-valid" %}
+                              {% render_field field class="form-control is-valid djrichtextfield" %}
                             {% endif %}
                           {% else %}
                             {% render_field field class="form-control djrichtextfield" %}
