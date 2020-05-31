@@ -46,6 +46,11 @@
                                 <div class="modal-body">
                                     <h5><b>{{ viazen.title }}</b></h5>
                                     <p class="text-muted">{{ viazen.date.lower }} - {{ viazen.date.upper }}</p>
+                                    {% if selected_photo %}
+                                    <figure>
+                                        <img class="card-img-top" src="{{ selected_photo.image.url }}">
+                                    </figure>
+                                    {% endif %}
                                     <p>{{ viazen.description|safe }}</p>
                                 </div>
                             </div>
