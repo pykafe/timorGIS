@@ -68,7 +68,7 @@
     <script>
         const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
-        L.tileLayer('{{ url_openstreetmap }}', {maxZoom: 18 }).addTo(timormap);
+        L.tileLayer('{{ url_openstreetmap }}', { minZoom: 8.49, maxZoom: 18 }).addTo(timormap);
         L.geoJSON(districts, {
             style: function (feature) {
                 return {color: 'orange'};

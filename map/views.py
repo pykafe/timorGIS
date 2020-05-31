@@ -26,11 +26,18 @@ class DetailMapView(TemplateView):
         images = []
         photo_pk = kwargs['photo_pk']
         viazen_pk = kwargs['viazen_pk']
-        viazen = Istoriaviazen.objects.get(pk=viazen_pk)
+        try:
+            viazen = Istoriaviazen.objects.get(pk=viazen_pk)
+        except ObjectDoesNotExist:
+            raise Http404()
         if photo_pk == 0:
             selected_photo = viazen.photos.first()
         else:
-            selected_photo = viazen.photos.get(pk=photo_pk)
+            try:
+                selected_photo = viazen.photos.get(pk=photo_pk)
+            except ObjectDoesNotExist:
+                raise Http404()
+
 
         for viazen_photo in viazen.photos.all():
             get_data = ImageMetaData(viazen_photo.image.path)
