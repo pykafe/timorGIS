@@ -141,6 +141,10 @@ button.btn.btn-success.btn-lg {
     font-family: auto;
 }
 
+img.gallery-img.add-pointer {
+    cursor: pointer;
+}
+
 img.gallery-img {
     max-width: 100%;
     height: auto;
@@ -159,12 +163,11 @@ input[type=text] {
 .row.navbar-journey {
     border-radius: 4px;
     position: sticky;
-    top: 0px;
     z-index: 1;
     background: #ffffff;
     padding-top: 1%;
     padding-bottom: 1%;
-    margin-top: 15px;
+    margin-top: 15px!important;
 }
 
 .display-all-post {
@@ -302,9 +305,7 @@ a:hover {
 }
 
 input {
-    border: 2px solid #0062cc;
-    color: #0062cc;
-    background-color: white;
+    border: 2px solid #f0f2f5;
     border-radius: 8px;
     font-size: 13px;
     font-weight: bold;

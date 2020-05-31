@@ -51,7 +51,33 @@
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
                                     <figure>
-                                        <img src='{{ photo.photo }}' class="gallery-img" width="300" height="240">
+                                        <img src='{{ photo.photo }}' class="gallery-img add-pointer" width="300" height="240" alt="Image {{ photo.photo_id }}" data-toggle="modal" data-target="#photo-{{ photo.photo_id }}">
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="photo-{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header bg-light">
+                                                <h6 class="modal-title trip-text">{% trans 'This photo journey took in the Suco' %}: <a href={% url 'details' via.id photo.photo_id %}>{{ photo.suco }}</a></h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <img src='{{ photo.photo }}' class="gallery-img" width="100%" alt="Image {{ photo.photo_id }}">
+                                              </div>
+                                              <div class="modal-footer">
+                                              {% if user.is_authenticated and user.pk == via.creator.pk %}
+                                                <span class="icon-edit-delete"> 
+                                                    <a href="{% url 'update_photo' photo.photo_id %}">
+                                                        <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                                    </a>
+                                                    <a href="{% url 'delete_photo' photo.photo_id %}">
+                                                        <img src="{% static 'img/delete.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                                    </a>
+                                                </span>
+                                              {% endif %}
+                                              </div>
+                                            </div><!-- /.modal-content -->
+                                          </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
                                     </figure>
                                 {% endif %}
                             {% endfor %}

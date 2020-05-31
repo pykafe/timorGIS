@@ -154,6 +154,19 @@ class PhotoViazenView(CreateView):
         return super().form_valid(form)
 
 
+class UpdatePhotoViazenView(UpdateView):
+    template_name = 'map/updatephototimor_form.html'
+    model = PhotoTimor
+    fields = ['image']
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        target = self.kwargs['pk']
+        context = super(UpdatePhotoViazenView, self).get_context_data(*args, **kwargs)
+        context['journey_photos'] = PhotoTimor.objects.filter(id=target)
+        return context
+
+
 class ViazenUpdateView(UpdateView):
     template_name = 'map/viajen_form.html'
     model = Istoriaviazen
@@ -168,4 +181,10 @@ class ViazenUpdateView(UpdateView):
 
 class ViazenDeleteView(DeleteView):
     model = Istoriaviazen
+    success_url = reverse_lazy('home')
+
+
+class DeletePhotoView(DeleteView):
+    model = PhotoTimor
+    template_name = 'map/istoriaviazen_confirm_delete.html'
     success_url = reverse_lazy('home')
