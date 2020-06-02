@@ -160,6 +160,17 @@ input[type=text] {
     line-height: 2;
 }
 
+span.logo-2 {
+    font-family: 'Comfortaa';
+    color: #32CD32;
+    font-size: 44px;
+} 
+
+span.blue-text {
+    color: #4169E1;
+    font-weight: 600;
+}
+
 .row.navbar-journey {
     border-radius: 4px;
     position: sticky;
