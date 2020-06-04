@@ -95,8 +95,29 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <p>{{ via.description|safe }}</p>
-                        <a href="{% url 'details' via.pk 0 %}">{% trans 'Show detail...'%}</a>
+                        <p>{{ via.description|safe|truncatewords:"100" }}</p>
+                        <!-- Large modal -->
+                        {% if via.description|length > 617 %}
+                            <p class="detail" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more' %}</p>
+                        {% endif %}
+                        <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <a href="{% url 'details' via.pk 0 %}">
+                                        <h5><b>{{ via.title }}</b></h5>
+                                    </a>
+                                    <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                                    <p>{{ via.description|safe }}</p>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
                         <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
                     </div>
                     {% endif %}

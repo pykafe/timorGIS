@@ -20,6 +20,11 @@ body {
     margin-bottom: 30px;
 }
 
+p.detail {
+    color: rgb(0, 123, 255);
+    cursor: pointer;
+}
+
 .view-map {
     margin: 0px;
 }
@@ -361,3 +366,4 @@ input {
 a:hover {
     text-decoration: none;
 }
+
