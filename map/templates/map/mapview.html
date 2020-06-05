@@ -20,13 +20,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 list-users">
+
+            <div class="col-md-2 display-all-users">
+                <div class="each-upload">
                 {% for user in users %}
+                    <div>
                     <a href="?creator={{ user.pk }}">
                         <span class="person-name {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</span>
                     </a>
+                    </div>
                 {% endfor %}
+                </div>
             </div>
+
             <div class="col-md-10 display-all-post">
                 {% for via in viazen %}
                     {% if via.creator %}

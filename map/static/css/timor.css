@@ -186,6 +186,22 @@ input[type=text] {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
+.display-all-users {
+    padding-left: 0px;
+    margin-top: 25px;
+}
+
+.each-users {
+    border-radius: 4px;
+    background-color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
 .footer {
     text-align: center;
     padding-bottom: 30px;
