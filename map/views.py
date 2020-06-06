@@ -81,11 +81,11 @@ class MapView(TemplateView):
         if creator_filter:
             try:
                 context['creator_filter'] = User.objects.get(id=creator_filter)
-                context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
+                context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter']).order_by('-upload_date')
             except (ValueError, ObjectDoesNotExist):
                 raise Http404()
         else:
-            context['viazen'] = Istoriaviazen.objects.all()
+            context['viazen'] = Istoriaviazen.objects.all().order_by('-upload_date')
 
         context['users'] = User.objects.all()
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
