@@ -20,7 +20,6 @@
             </div>
         </div>
         <div class="row">
-
             <div class="col-md-2 display-all-users">
                 <div class="each-upload">
                 {% for user in users %}
@@ -32,7 +31,6 @@
                 {% endfor %}
                 </div>
             </div>
-
             <div class="col-md-10 display-all-post">
                 {% for via in viazen %}
                     {% if via.creator %}
@@ -41,18 +39,20 @@
                         <div class="dropdown dropdown-edit-and-delete">
                             <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
                             <ul class="dropdown-menu menu-dropdown">
-                                <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}"><img src="{% static 'img/photo_add.png' %}" width="40"></a></li>
-                                <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}"><img src="{% static 'img/edit.png' %}" width="40"></a>
+                                <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}"><img src="{% static 'img/add_photo.png' %}" width="25">{% trans 'Add Photo' %}</a></li>
+                                <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}"><img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}</a>
                                 </li>
-                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}"><img src="{% static 'img/delete.png' %}" width="40"></a>
+                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}"><img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}</a>
                                 </li>
                             </ul>
                         </div>
                         <p><img src="{% static 'icons/people-circle.svg' %}" class="rounded-circle" width="40" height="40">
+                        {% else %}
+                            <p class="text-muted">{% trans 'Created by' %}
                         {% endif %}
-                            <strong class="person-name">{{ via.creator }}</strong>
+                            <strong class="person-name">{{ via.creator }}</strong> - <strong class="text-muted">{{ via.upload_date }}</strong>
                         </p>
-                        <strong>{{ via.title }}</strong>
+                        <h4><strong>{{ via.title }}</strong></h4>
                         <div class="gallery">
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
@@ -76,7 +76,7 @@
                                                         <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
                                                     </a>
                                                     <a href="{% url 'delete_photo' photo.photo_id %}">
-                                                        <img src="{% static 'img/delete.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                                        <img src="{% static 'img/delete_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
                                                     </a>
                                                 </span>
                                               {% endif %}
@@ -88,8 +88,29 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <p>{{ via.description|safe }}</p>
-                        <a href="{% url 'details' via.pk 0 %}">{% trans 'Show detail...'%}</a>
+                        <p>{{ via.description|safe|truncatewords:"100" }}</p>
+                        <!-- Large modal -->
+                        {% if via.description|length > 617 %}
+                            <p class="detail" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more' %}</p>
+                        {% endif %}
+                        <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <a href="{% url 'details' via.pk 0 %}">
+                                        <h5><b>{{ via.title }}</b></h5>
+                                    </a>
+                                    <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                                    <p>{{ via.description|safe }}</p>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
                         <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
                     </div>
                     {% endif %}

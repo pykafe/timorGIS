@@ -20,6 +20,11 @@ body {
     margin-bottom: 30px;
 }
 
+p.detail {
+    color: rgb(0, 123, 255);
+    cursor: pointer;
+}
+
 .view-map {
     margin: 0px;
 }
@@ -160,6 +165,17 @@ input[type=text] {
     line-height: 2;
 }
 
+span.logo-2 {
+    font-family: 'Comfortaa';
+    color: #32CD32;
+    font-size: 44px;
+} 
+
+span.blue-text {
+    color: #4169E1;
+    font-weight: 600;
+}
+
 .row.navbar-journey {
     border-radius: 4px;
     position: sticky;
@@ -274,13 +290,14 @@ a.btn.btn-primary.timorgis-login {
 }
 
 ul.dropdown-menu.show > li {
-    padding: 6px;
+    padding: 8px;
 }
 
 ul.dropdown-menu.show {
-    padding: 16px;
+    padding: 12px;
     line-height: 2;
     width: 100%;
+    font-size: 12px;
 }
 
 ul.dropdown-menu.show > a li:hover {
@@ -365,3 +382,4 @@ input {
 a:hover {
     text-decoration: none;
 }
+
