@@ -57,9 +57,9 @@
                         {% else %}
                             <p class="text-muted">{% trans 'Created by' %}
                         {% endif %}
-                            <strong class="person-name">{{ via.creator }}</strong>
+                            <strong class="person-name">{{ via.creator }}</strong> - <strong class="text-muted">{{ via.upload_date }}</strong>
                         </p>
-                        <strong>{{ via.title }}</strong>
+                        <h4><strong>{{ via.title }}</strong></h4>
                         <div class="gallery">
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
