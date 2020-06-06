@@ -20,22 +20,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 list-users">
-                <div class="pos-f-t">
-                    <div class="collapse" id="navbarToggleExternalContent">
-                        <div class="bg-light p-4">
-                            {% for user in users %}
-                                <a href="?creator={{ user.pk }}">
-                                    <p class="text-muted {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</p>
-                                </a>
-                            {% endfor %}
-                        </div>
+            <div class="col-md-2 display-all-users">
+                <div class="each-upload">
+                {% for user in users %}
+                    <div>
+                    <a href="?creator={{ user.pk }}">
+                        <span class="person-name {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</span>
+                    </a>
                     </div>
-                    <nav class="navbar navbar-dark">
-                        <button class="btn add-journey" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="text-muted">{% trans 'Filter by user' %}</span>
-                        </button>
-                    </nav>
+                {% endfor %}
                 </div>
             </div>
             <div class="col-md-10 display-all-post">
