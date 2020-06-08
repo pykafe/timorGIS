@@ -20,6 +20,22 @@ body {
     margin-bottom: 30px;
 }
 
+span.black_text {
+    color: #000000;
+}
+
+span.white_text {
+    color: #FFFFFF;
+}
+
+span.yellow_text {
+    color: #FFFF00;
+}
+
+span.red_text {
+    color: #FF0000;
+}
+
 p.detail {
     color: rgb(0, 123, 255);
     cursor: pointer;
@@ -241,8 +257,13 @@ h3 {
     font-size: 12px;
 }
 a.logo {
-    font-size: 25px;
+    font-family: 'Comfortaa';
+    font-size: 30px;
     font-weight: bold;
+}
+
+.bg-light {
+    background-color: #e9ecef!important;
 }
 
 .dropdown-edit-and-delete {

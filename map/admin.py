@@ -58,4 +58,4 @@ admin.site.register(PhotoTimor)
 admin.site.unregister(User)
 admin.site.register(User, TimorgisUserAdmin)
 
-admin.site.site_header = "Timor Gis %s" % (_("administration"))
+admin.site.site_header = "Timor Journey %s" % (_("administration"))
