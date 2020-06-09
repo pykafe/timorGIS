@@ -258,12 +258,9 @@ h3 {
 }
 a.logo {
     font-family: 'Comfortaa';
+    text-shadow: 0px 1px 2px #444;
     font-size: 30px;
     font-weight: bold;
-}
-
-.bg-light {
-    background-color: #e9ecef!important;
 }
 
 .dropdown-edit-and-delete {
