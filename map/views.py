@@ -3,7 +3,7 @@ from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
+from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, IstoriaViazen
 from django.contrib.gis.geos import Point
 from django.urls import reverse_lazy
 from django.http import Http404
@@ -27,7 +27,7 @@ class DetailMapView(TemplateView):
         photo_pk = kwargs['photo_pk']
         viazen_pk = kwargs['viazen_pk']
         try:
-            viazen = Istoriaviazen.objects.get(pk=viazen_pk)
+            viazen = IstoriaViazen.objects.get(pk=viazen_pk)
         except ObjectDoesNotExist:
             raise Http404()
         if photo_pk == 0:
@@ -81,11 +81,11 @@ class MapView(TemplateView):
         if creator_filter:
             try:
                 context['creator_filter'] = User.objects.get(id=creator_filter)
-                context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter']).order_by('-upload_date')
+                context['viazen'] = IstoriaViazen.objects.filter(creator=context['creator_filter']).order_by('-created_at')
             except (ValueError, ObjectDoesNotExist):
                 raise Http404()
         else:
-            context['viazen'] = Istoriaviazen.objects.all().order_by('-upload_date')
+            context['viazen'] = IstoriaViazen.objects.all().order_by('-created_at')
 
         context['users'] = User.objects.all()
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
@@ -117,8 +117,8 @@ class MapView(TemplateView):
 
 class HatamaViazenView(CreateView):
     template_name = 'map/viajen_form.html'
-    model = Istoriaviazen
-    fields = ['title', 'description', 'date']
+    model = IstoriaViazen
+    fields = ['title', 'description', 'duration_of_trip']
 
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.id,))
@@ -169,8 +169,8 @@ class UpdatePhotoViazenView(UpdateView):
 
 class ViazenUpdateView(UpdateView):
     template_name = 'map/viajen_form.html'
-    model = Istoriaviazen
-    fields = ['title', 'description', 'date']
+    model = IstoriaViazen
+    fields = ['title', 'description', 'duration_of_trip']
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *args, **kwargs):
@@ -180,7 +180,7 @@ class ViazenUpdateView(UpdateView):
 
 
 class ViazenDeleteView(DeleteView):
-    model = Istoriaviazen
+    model = IstoriaViazen
     success_url = reverse_lazy('home')
 
 
