@@ -223,7 +223,7 @@ select#id_creator {
     margin-bottom: 10px;
 }
 
-input#id_date_0 {
+input#id_duration_of_trip_0 {
     inline-size: auto;
     border-radius: 5px;
     padding: 3px 22px;
@@ -231,7 +231,7 @@ input#id_date_0 {
     color: #555;
 }
 
-input#id_date_1 {
+input#id_duration_of_trip_1 {
     inline-size: auto;
     border-radius: 5px;
     padding: 3px 22px;
