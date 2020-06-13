@@ -49,7 +49,7 @@ class Subdistrict(models.Model):
 
 class IstoriaViazen(models.Model):
     title = models.CharField(max_length=80, null=False)
-    description = models.TextField(null=False)
+    description = RichTextField()
     duration_of_trip = DateRangeField()
     created_at = models.DateTimeField(null=False, blank=False, default=timezone.now)
     creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
