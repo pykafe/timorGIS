@@ -33,10 +33,10 @@
                                 {% endfor %}
                                 </select>
                             </form>
-                            <a href="{% url 'style_guide' %}">
-                                <li><img src="{% static 'icons/gear.svg' %}" alt="icon" width="25" height="25" title="Admin">{% trans 'Style Guide' %}</li>
-                            </a>
                             {% if user.is_staff %}
+                            <a href="{% url 'style_guide' %}">
+                                <li><img src="{% static 'icons/brush.svg' %}" alt="icon" width="25" height="25" title="Style guide">{% trans 'Style Guide' %}</li>
+                            </a>
                             <a href="{% url 'admin:index' %}">
                                 <li><img src="{% static 'icons/gear.svg' %}" alt="icon" width="25" height="25" title="Admin">{% trans 'Admin' %}</li>
                             </a>
