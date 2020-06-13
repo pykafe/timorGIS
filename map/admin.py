@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 from .models import Suco, Aldeia, District, Subdistrict
-from .models import Suco, Aldeia, District, Subdistrict, PhotoTimor, Istoriaviazen
+from .models import Suco, Aldeia, District, Subdistrict, PhotoTimor, IstoriaViazen
 from leaflet.admin import LeafletGeoAdmin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
@@ -53,7 +53,7 @@ admin.site.register(Suco, SucoAdmin)
 admin.site.register(Aldeia, AldeiaAdmin)
 admin.site.register(District, DistrictAdmin)
 admin.site.register(Subdistrict, SubdistrictAdmin)
-admin.site.register(Istoriaviazen)
+admin.site.register(IstoriaViazen)
 admin.site.register(PhotoTimor)
 admin.site.unregister(User)
 admin.site.register(User, TimorgisUserAdmin)
