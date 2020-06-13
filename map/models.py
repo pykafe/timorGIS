@@ -47,20 +47,23 @@ class Subdistrict(models.Model):
         return self.name
 
 
-class Istoriaviazen(models.Model):
+class IstoriaViazen(models.Model):
     title = models.CharField(max_length=80, null=False)
-    description = RichTextField()
-    date = DateRangeField()
-    upload_date = models.DateTimeField(null=False, blank=False, default=timezone.now)
+    description = models.TextField(null=False)
+    duration_of_trip = DateRangeField()
+    created_at = models.DateTimeField(null=False, blank=False, default=timezone.now)
     creator = models.ForeignKey(User, related_name='istoria', on_delete=models.CASCADE)
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.title}, {self.pk}'
 
 
 class PhotoTimor(models.Model):
-    istoriaviazen = models.ForeignKey(Istoriaviazen, related_name='photos', on_delete=models.CASCADE)
+    istoriaviazen = models.ForeignKey(IstoriaViazen, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
+    created_at = models.DateTimeField(null=False, blank=False, default=timezone.now)
+    modified_at = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):

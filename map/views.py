@@ -3,7 +3,7 @@ from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from map.gps_images import ImageMetaData
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, Istoriaviazen
+from .models import Aldeia, Suco, Subdistrict, District, PhotoTimor, IstoriaViazen
 from django.contrib.gis.geos import Point
 from django.urls import reverse_lazy
 from django.http import Http404
@@ -27,7 +27,7 @@ class DetailMapView(TemplateView):
         photo_pk = kwargs['photo_pk']
         viazen_pk = kwargs['viazen_pk']
         try:
-            viazen = Istoriaviazen.objects.get(pk=viazen_pk)
+            viazen = IstoriaViazen.objects.get(pk=viazen_pk)
         except ObjectDoesNotExist:
             raise Http404()
         if photo_pk == 0:
@@ -81,11 +81,11 @@ class MapView(TemplateView):
         if creator_filter:
             try:
                 context['creator_filter'] = User.objects.get(id=creator_filter)
-                context['viazen'] = Istoriaviazen.objects.filter(creator=context['creator_filter'])
+                context['viazen'] = IstoriaViazen.objects.filter(creator=context['creator_filter']).order_by('-created_at')
             except (ValueError, ObjectDoesNotExist):
                 raise Http404()
         else:
-            context['viazen'] = Istoriaviazen.objects.all()
+            context['viazen'] = IstoriaViazen.objects.all().order_by('-created_at')
 
         context['users'] = User.objects.all()
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
@@ -117,8 +117,8 @@ class MapView(TemplateView):
 
 class HatamaViazenView(CreateView):
     template_name = 'map/viajen_form.html'
-    model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator']
+    model = IstoriaViazen
+    fields = ['title', 'description', 'duration_of_trip']
 
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.id,))
@@ -128,11 +128,16 @@ class HatamaViazenView(CreateView):
         context['hatama_viazen'] = _("Add Journey History")
         return context
 
+    def form_valid(self, form):
+        # set the creator of the istoria to the logged in user
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
 
 class PhotoViazenView(CreateView):
     template_name = 'map/phototimor_form.html'
     model = PhotoTimor
-    fields = ['image', 'istoriaviazen']
+    fields = ['image']
 
     def get_success_url(self):
         return reverse_lazy('photo_viazen', args = (self.object.istoriaviazen_id,))
@@ -143,11 +148,29 @@ class PhotoViazenView(CreateView):
         context['journey_photos'] = PhotoTimor.objects.filter(istoriaviazen=target)
         return context
 
+    def form_valid(self, form):
+        # set the viazen of the photo to the url viazen
+        form.instance.istoriaviazen_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+
+class UpdatePhotoViazenView(UpdateView):
+    template_name = 'map/updatephototimor_form.html'
+    model = PhotoTimor
+    fields = ['image']
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        target = self.kwargs['pk']
+        context = super(UpdatePhotoViazenView, self).get_context_data(*args, **kwargs)
+        context['journey_photos'] = PhotoTimor.objects.filter(id=target)
+        return context
+
 
 class ViazenUpdateView(UpdateView):
     template_name = 'map/viajen_form.html'
-    model = Istoriaviazen
-    fields = ['title', 'description', 'date', 'creator']
+    model = IstoriaViazen
+    fields = ['title', 'description', 'duration_of_trip']
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *args, **kwargs):
@@ -157,5 +180,11 @@ class ViazenUpdateView(UpdateView):
 
 
 class ViazenDeleteView(DeleteView):
-    model = Istoriaviazen
+    model = IstoriaViazen
+    success_url = reverse_lazy('home')
+
+
+class DeletePhotoView(DeleteView):
+    model = PhotoTimor
+    template_name = 'map/istoriaviazen_confirm_delete.html'
     success_url = reverse_lazy('home')
