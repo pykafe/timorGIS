@@ -22,6 +22,7 @@
         <div class="row">
             <div class="col-md-2 display-all-users">
                 <div class="each-upload">
+                <p><span class="text-muted">{% trans 'Filter by user' %}</span></p>
                 {% for user in users %}
                     <div>
                     <a href="?creator={{ user.pk }}">
