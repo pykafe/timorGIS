@@ -23,15 +23,11 @@
             <div class="col-md-2 display-all-users">
                 <div class="each-upload">
                 {% for user in users %}
-                    {% for via in viazen %}
-                        {% if via.creator.pk == user.pk %}
-                        <div>
-                        <a href="?creator={{ user.pk }}">
-                            <span class="person-name {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</span>
-                        </a>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
+                    <div>
+                    <a href="?creator={{ user.creator.pk }}">
+                        <span class="person-name {% if creator_filter.pk != user.creator.pk %}active{% endif %}">{{ user.creator.first_name|default:user.creator }}</span>
+                    </a>
+                    </div>
                 {% endfor %}
                 </div>
             </div>

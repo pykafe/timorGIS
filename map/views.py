@@ -87,7 +87,7 @@ class MapView(TemplateView):
         else:
             context['viazen'] = IstoriaViazen.objects.all().order_by('-created_at')
 
-        context['users'] = User.objects.all()
+        context['users'] = IstoriaViazen.objects.distinct('creator')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
         for photo in PhotoTimor.objects.filter(istoriaviazen__in=context['viazen']):
             get_data = ImageMetaData(photo.image.path)
