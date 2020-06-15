@@ -22,6 +22,7 @@
         <div class="row">
             <div class="col-md-2 display-all-users">
                 <div class="each-upload">
+                <p><span class="text-muted">{% trans 'Filter by user' %}</span></p>
                 {% for user in users %}
                     <div>
                     <a href="?creator={{ user.pk }}">
@@ -105,13 +106,13 @@
                                     <a href="{% url 'details' via.pk 0 %}">
                                         <h5><b>{{ via.title }}</b></h5>
                                     </a>
-                                    <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                                    <p class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</p>
                                     <p>{{ via.description|safe }}</p>
                                 </div>
                             </div>
                           </div>
                         </div>
-                        <p class="text-muted">{{ via.date.lower }} - {{ via.date.upper }}</p>
+                        <p class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</p>
                     </div>
                     {% endif %}
                 {% endfor %}
