@@ -41,6 +41,10 @@ p.detail {
     cursor: pointer;
 }
 
+#cke_id_description {
+    width: 100%!important
+}
+
 .view-map {
     margin: 0px;
 }
