@@ -1,0 +1,45 @@
+{% load static i18n %}
+<!DOCTYPE>
+<html>
+    <head>
+        <title>{% block title %}Timor Journey{% endblock %}</title>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/leaflet.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/timor.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/leaflet.css' %}">
+    </head>
+    <body>
+        <style>
+            #mapid {
+                height: 100%!important;
+            }
+        </style>
+        {% include 'map/header.html' %}
+        <div id="mapid"></div>
+        {% include 'map/footer.html' %}
+        <script>
+            const districts = {{ districts|safe }};
+            var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
+            L.tileLayer('{{ url_openstreetmap }}', { minZoom: 9, maxZoom: 18 }).addTo(timormap);
+            L.geoJSON(districts, {
+                style: function (feature) {
+                    return {color: 'orange'};
+                }
+            }).bindPopup(function (layer) {
+                var name = layer.feature.properties.name;
+                    return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+            }).addTo(timormap);
+            {% for photo in geoimages %}
+                {% if photo.lon and photo.lat %}
+                    L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+                {% endif %}
+            {% endfor %}
+            function contentPopup(photo){
+                var viazen_id = photo.viazen_id.toString();
+                content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+                return content
+            }
+        </script>
+    </body>
+</html>
