@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: 'Comfortaa';
     src: url(../fonts/Comfortaa_Thin.woff2);
@@ -14,13 +13,15 @@ body {
     background-color: var(--white-2);
     color: var(--black-1);
     font-family: 'Montserrat';
+    font-size: 14px;
 }
 
 :root {
     --white-1: #FFFFFF;
     --white-2: #f0f2f5;
     --black: #000000;
-    --yellow: #FFFF00;
+    --yellow-1: #FFFF00;
+    --yellow-2: #d39e00;
     --blue-1: #23aeea;
     --blue-2: #007bff;
     --red-1: #c0392b;
@@ -86,6 +87,7 @@ input[type=text]:focus, [type=email]:focus, [name=messages]:focus {
 }
 
 /* BUTTONS STYLES */
+/* This button using for "Add" and  "Cancel", This is only on gray theme*/
 .btn-default {
     background-color: var(--white-2);
     border-color: var(--blue-1);
@@ -95,6 +97,7 @@ input[type=text]:focus, [type=email]:focus, [name=messages]:focus {
     background-color: var(--white-1);
 }
 
+/* This button using for "Submit" form*/
 .btn-primary {
     color: var(--white-1);
     background-color: var(--blue-2);
@@ -106,16 +109,28 @@ input[type=text]:focus, [type=email]:focus, [name=messages]:focus {
     border-color: var(--blue-2);
 }
 
-.btn-warning {
+/* This button using for "Delete" some data */
+.btn-danger {
     color: var(--white-1);
     background-color: var(--red-2);
     border-color: var(--red-3);
 }
 
-.btn-warning:hover {
+.btn-danger:hover {
     color: var(--white-1);
     background-color: var(--red-1);
     border-color: var(--red-2);
+}
+
+/* This button not REALLY to use it yet */
+.btn-warning {
+    background-color: var(--yellow-1);
+    border-color: var(--yellow-2);
+}
+
+.btn-warning:hover {
+    background-color: var(--yellow-2);
+    border-color: var(--yellow-1);
 }
 .gray-theme {
     padding: 36px;
@@ -127,6 +142,7 @@ input[type=text]:focus, [type=email]:focus, [name=messages]:focus {
     padding: 36px;
 }
 
+/* This button using for "Add" and  "Cancel", This is only on white theme*/
 .white-theme .btn-default {
     background-color: var(--white-1);
     border-color: var(--blue-1);
