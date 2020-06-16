@@ -30,7 +30,7 @@
                         <p class="text-muted">{{ viazen.duration_of_trip.lower }} - {{ viazen.duration_of_trip.upper }}</p>
                         <!-- Large modal -->
                         {% if viazen.description|length > 132 %}
-                        <button type="button" class="btn btn-primary add-journey" data-toggle="modal" data-target=".read-more-{{ viazen.pk }}">{% trans 'Read more' %}</button>
+                        <button type="button" class="detail read_more" data-toggle="modal" data-target=".read-more-{{ viazen.pk }}">{% trans 'Read more' %}</button>
                         {% endif %}
                         <div class="modal fade read-more-{{ viazen.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
