@@ -26,6 +26,8 @@
         {% block content %}
         {% endblock %}
         </div>
-        {% include 'map/footer.html' %}
+        {% block footer %}
+            {% include 'map/footer.html' %}
+        {% endblock %}
     </body>
 </html>

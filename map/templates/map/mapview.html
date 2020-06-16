@@ -2,37 +2,45 @@
 {% load static i18n %}
 {% block title %}Timor Journey{% endblock %}
 {% block content %}
-    <div id="mapid"></div>
-    <div class="container">
-        <div class="row navbar-journey">
-            <div class="col-md-8">
-                <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
+<style>
+#mapid {
+    height: 585px!important; 
+}                               
+</style>
+<div class="row">
+    <div class="col-md-5 journey_scroll">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pos-f-t display-all-users">
+                    <div class="collapse each-upload" id="navbarToggleExternalContent">
+                        <div class="bg-light p-4">
+                            {% for user in users %}
+                                <a href="?creator={{ user.pk }}">
+                                    <p class="text-muted {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</p>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-dark">
+                        <button class="btn filter_user" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="text-muted">{% trans 'Filter by user' %}</span>
+                        </button>
+                    </nav>
+                </div>
             </div>
             <!--
             <div class="col-md-6 search-journey">
                 <input type="text" name="search" placeholder="Search..">
             </div>
             -->
-            <div class="col-md-4">
+            <div class="col-md-6">
                 {% if user.is_authenticated %}
-                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+                <a href={% url 'hatama_viazen' %} class="btn filter_user text-muted add_trip">{% trans 'Add my journey' %}</a>
                 {% endif %}
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 display-all-users">
-                <div class="each-upload">
-                <p><span class="text-muted">{% trans 'Filter by user' %}</span></p>
-                {% for user in users %}
-                    <div>
-                    <a href="?creator={{ user.pk }}">
-                        <span class="person-name {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</span>
-                    </a>
-                    </div>
-                {% endfor %}
-                </div>
-            </div>
-            <div class="col-md-10 display-all-post">
+            <div class="col-md-12 display-all-posts">
                 {% for via in viazen %}
                     {% if via.creator %}
                     <div class="each-upload">
@@ -53,7 +61,7 @@
                         {% endif %}
                             <strong class="person-name">{{ via.creator }}</strong> - <strong class="text-muted">{{ via.created_at }}</strong>
                         </p>
-                        <h4><strong>{{ via.title }}</strong></h4>
+                        <h5><strong>{{ via.title }}</strong></h5>
                         <div class="gallery">
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
@@ -119,6 +127,10 @@
             </div>
         </div>
     </div>
+    <div class="col-md-7">
+        <div id="mapid"></div>
+    </div>
+</div>
     <script>
         const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});

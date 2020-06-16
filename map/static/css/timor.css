@@ -17,7 +17,20 @@ body {
 
 #mapid { 
     height: 450px; 
-    margin-bottom: 30px;
+}
+
+.filter_user {
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0.2rem 0.4rem;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    width: 140px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    padding: 0.8rem 1rem;
 }
 
 span.black_text {
@@ -57,6 +70,7 @@ p.detail {
     float: right;
     background-color: white;
     color: #0062cc;
+    margin-top: 20px;
 }
 
 .list-users {
@@ -200,6 +214,7 @@ span.blue-text {
     padding-top: 1%;
     padding-bottom: 1%;
     margin-top: 15px!important;
+    margin-bottom: 15px
 }
 
 .display-all-post {
@@ -220,7 +235,7 @@ span.blue-text {
 
 .display-all-users {
     padding-left: 0px;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 .each-users {
@@ -254,8 +269,19 @@ h3 {
 }
 
 .text-muted {
-    font-size: 12px;
+    font-size: 10px;
 }
+
+.add_trip {
+    margin-top: 19px;
+    float: right;
+}
+
+.journey_scroll {
+    overflow-y:scroll;
+    height: 590px;
+}                                
+
 a.logo {
     font-family: 'Comfortaa';
     text-shadow: 0px 1px 2px #444;
