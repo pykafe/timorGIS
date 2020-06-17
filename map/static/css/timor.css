@@ -15,6 +15,10 @@ body {
     background-color: #f0f2f5;
 }
 
+.navbar_header{
+    box-shadow: 0 10px 8px 0 rgba(42,57,66,.3);
+}
+
 #mapid { 
     height: 450px; 
 }
