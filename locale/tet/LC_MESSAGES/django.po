@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-13 16:37+0000\n"
-"PO-Revision-Date: 2020-06-13 16:42+0000\n"
+"PO-Revision-Date: 2020-06-18 12:23+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,19 +20,19 @@ msgstr ""
 
 #: map/admin.py:33
 msgid "Personal info"
-msgstr ""
+msgstr "Informasaun Pesoal"
 
 #: map/admin.py:34
 msgid "Admin access"
-msgstr ""
+msgstr "Asesu Administrador"
 
 #: map/admin.py:35
 msgid "Important dates"
-msgstr ""
+msgstr "Data Importante"
 
 #: map/admin.py:61
 msgid "administration"
-msgstr ""
+msgstr "Administrasaun"
 
 #: map/models.py:77
 msgid "This image type does not support"
@@ -112,30 +112,27 @@ msgid "Add my journey"
 msgstr "Hatama viajen"
 
 #: map/templates/map/mapview.html:42
-#, fuzzy
 #| msgid "Upload Photos"
 msgid "Add Photo"
 msgstr "Hatama foto"
 
 #: map/templates/map/mapview.html:43
-#, fuzzy
 #| msgid "Save Journey"
 msgid "Edit Journey"
-msgstr "Rai viajen"
+msgstr "Hadia viajen"
 
 #: map/templates/map/mapview.html:45
-#, fuzzy
 #| msgid "Confirm Delete Journey"
 msgid "Delete Journey"
 msgstr "Konfirma hamoos Viajen"
 
 #: map/templates/map/mapview.html:51
 msgid "Created by"
-msgstr ""
+msgstr "Kria husi"
 
 #: map/templates/map/mapview.html:66
 msgid "This photo journey took in the Suco"
-msgstr ""
+msgstr "Foto viajen ida nee hasai iha Suco"
 
 #: map/templates/map/phototimor_form.html:3
 msgid "Add journey photos"
@@ -182,7 +179,6 @@ msgstr "Husik"
 
 #: map/templates/map/updatephototimor_form.html:3
 #: map/templates/map/updatephototimor_form.html:8
-#, fuzzy
 #| msgid "Add photo journey"
 msgid "Edit photo journey"
 msgstr "Hatama foto viajen"
