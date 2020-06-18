@@ -88,6 +88,11 @@ span.person-name {
     padding: 8px;
 }
 
+.icon_logo {
+    padding-bottom: 20;
+    margin-right: 8px;
+}
+
 .gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
