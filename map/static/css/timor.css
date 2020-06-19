@@ -23,6 +23,10 @@ body {
     height: 450px; 
 }
 
+.map_top {
+    margin-top: 19px;
+}
+
 .filter_user {
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0.2rem 0.4rem;
