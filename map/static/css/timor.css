@@ -27,6 +27,17 @@ body {
     margin-top: 19px;
 }
 
+.footer {
+    background: #fff;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    padding-top: 15px;
+    box-shadow: -1px 1px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
 .filter_user {
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0.2rem 0.4rem;
@@ -135,13 +146,13 @@ input#id_duration_of_trip_0 {
 .read_more {
     box-shadow: 0 5px 2px 0 rgba(42,57,66,.3);
     background-color: #f8f9fa;
-    min-height: 40px;
+    min-height: 30px;
     border: none;
     border-radius: 25px;
-    min-width: 120px;
-    width: 190px;
-    padding-left: 40px;
-    padding-top: 7px;
+    min-width: 110px;
+    width: 120px;
+    padding-left: 20px;
+    padding-top: 4px;
 }
 
 input#id_duration_of_trip_1 {
@@ -223,7 +234,7 @@ input[type=text] {
 span.logo-2 {
     font-family: 'Comfortaa';
     color: #32CD32;
-    font-size: 44px;
+    font-size: 20px;
 } 
 
 span.blue-text {
@@ -274,20 +285,14 @@ span.blue-text {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
-.footer {
-    text-align: center;
-    padding-bottom: 30px;
-    padding-top: 30px;
-    border-top: 1px solid #ffffff;
-    margin: 75px;
-    margin-bottom: 0px;
-    line-height: 3;
-}
-
 /* set font-family for every h3 to use comfortaa */
 h3 {
     font-family: 'Comfortaa';
 }
+
+div.each-upload>p {
+    font-size: 14px;
+}                            
 
 .trip-text {
     font-weight: 600;
@@ -304,7 +309,7 @@ h3 {
 
 .journey_scroll {
     overflow-y:scroll;
-    height: 590px;
+    height: 500px;
 }                                
 
 a.logo {

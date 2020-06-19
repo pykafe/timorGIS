@@ -4,7 +4,7 @@
 {% block content %}
 <style>
 #mapid {
-    height: 585px!important; 
+    height: 500px!important; 
 }                               
 .leaflet-marker-icon {
     margin-top: -31px!important;
@@ -65,13 +65,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <p><img src="{% static 'icons/people-circle.svg' %}" class="rounded-circle" width="40" height="40">
+                        <p><img src="{% static 'icons/people-circle.svg' %}" class="rounded-circle" width="25" height="25">
                         {% else %}
                             <p class="text-muted">{% trans 'Created by' %}
                         {% endif %}
                             <strong class="person-name">{{ via.creator }}</strong> - <strong class="text-muted">{{ via.created_at }}</strong>
                         </p>
-                        <h5><strong>{{ via.title }}</strong></h5>
+                        <h6><strong>{{ via.title }}</strong></h6>
                         <div class="gallery">
                             {%for photo in geoimages %}
                                 {% if photo.viazen_id == via.id %}
@@ -107,9 +107,10 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <p>{{ via.description|safe|truncatewords:"100" }}</p>
+                        <p>{{ via.description|safe|truncatewords:"20" }}</p>
+                        <strong class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</strong>
                         <!-- Large modal -->
-                        {% if via.description|length > 617 %}
+                        {% if via.description|length > 132 %}
                             <p class="detail read_more" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more' %}</p>
                         {% endif %}
                         <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -130,7 +131,6 @@
                             </div>
                           </div>
                         </div>
-                        <p class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</p>
                     </div>
                     {% endif %}
                 {% endfor %}
