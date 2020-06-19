@@ -326,7 +326,7 @@ a.logo {
 .edit-and-delete-toggle::after {
     display: inline-block;
     content: '\2807';
-	font-size: 2em;
+	font-size: 1.2em;
     color: #828282;
     border-top: unset;
 }
