@@ -43,7 +43,7 @@
                                 <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}"><img src="{% static 'img/add_photo.png' %}" width="25">{% trans 'Add Photo' %}</a></li>
                                 <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}"><img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}</a>
                                 </li>
-                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}"><img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}</a>
+                                <li class="hover-list" onclick="confirmDeleteModal()"><img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}</a>
                                 </li>
                             </ul>
                         </div>
@@ -119,6 +119,28 @@
             </div>
         </div>
     </div>
+
+    <div id="deleteModal" class="modal fade" role='dialog'>
+        <div class="modal-dialog">
+            <div class="modal-content delete-journey">
+                <form class="form-delete" action=" " method="POST">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h4 class="modal-title">{% trans 'Confirmation delete' %}</h4>
+                        <a href="{% url 'home' %}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    </div>
+                    <div class="modal-body">
+                        <p>{% blocktrans %} Are you sure you want to delete "{{ object }}"? {% endblocktrans %}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{% url 'home' %}"><button type="button" class="btn btn-default cancel-delete" data-dismiss="modal">{% trans 'Cancel' %}</button></a>
+                        <button class="btn btn-danger" id= 'deleteButton'>{% trans 'Delete' %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
@@ -140,6 +162,17 @@
             var viazen_id = photo.viazen_id.toString();
             content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
             return content
-        }
+        };
+
+        function confirmDeleteModal(id){
+            $('#deleteModal').modal();
+            $('#deleteButton').html('<a class="btn btn-danger" onclick="deleteData('+id+')">Delete</a>');
+        }     
+        function deleteData(id){
+          // do your stuffs with id
+          $("#successMessage").html("Record With id "+id+" Deleted successfully!");
+          $('#deleteModal').modal('hide'); // now close modal
+        }  
     </script>
+
 {% endblock %}
