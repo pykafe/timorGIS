@@ -25,8 +25,8 @@
                 <p><span class="text-muted">{% trans 'Filter by user' %}</span></p>
                 {% for user in users %}
                     <div>
-                    <a href="?creator={{ user.pk }}">
-                        <span class="person-name {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</span>
+                    <a href="?creator={{ user.creator.pk }}">
+                        <span class="person-name {% if creator_filter.pk != user.creator.pk %}active{% endif %}">{{ user.creator.first_name|default:user.creator }}</span>
                     </a>
                     </div>
                 {% endfor %}
