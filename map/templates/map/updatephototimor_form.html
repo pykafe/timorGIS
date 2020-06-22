@@ -2,10 +2,15 @@
 {% load widget_tweaks i18n %}
 {% block title %}{% trans 'Edit photo journey' %}{% endblock %}
 {% block content %}
+<style>
+    .add_journey {
+        height: 290px;
+    }
+</style>
     <div class="container">
         <div class="row navbar-journey">
             <div class="col-md-12">
-                <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Edit photo journey' %}</h3>
+                <h3 class="trip-text text_title"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Edit photo journey' %}</h3>
             </div>
         </div>
         <div class="row">

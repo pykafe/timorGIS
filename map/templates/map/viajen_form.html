@@ -2,13 +2,18 @@
 {% load widget_tweaks static i18n %}
 {% block title %}{% trans ' Add journey history' %}{% endblock %}
 {% block content %}
+<style>
+    .add_journey {
+        height: 290px;
+    }
+</style>
     <div class="container">
-        <div class="row navbar-journey">
+        <div class="row">
             <div class="col-md-12">
-                <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {{hatama_viazen}} {{ update_viazen }}</h3>
+                <h3 class="trip-text text_title"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {{hatama_viazen}} {{ update_viazen }}</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row add_journey">
             <div class="display-all-post each-upload col-md-12">
                 <form method="post" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}

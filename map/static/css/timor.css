@@ -42,6 +42,10 @@ body {
     box-shadow: -1px 1px 4px 1px rgba(0, 0, 0, 0.25);
 }
 
+.text_title {
+    margin-top: 20px;
+}
+
 .filter_user {
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0.2rem 0.4rem;
@@ -189,7 +193,7 @@ input#id_image_trip {
 
 
 textarea.form-control {
-    height: 20%;
+    height: 40%;
 }
 
 .form-group.col-12 {
@@ -254,7 +258,6 @@ span.blue-text {
     padding-top: 1%;
     padding-bottom: 1%;
     margin-top: 15px!important;
-    margin-bottom: 15px
 }
 
 .display-all-post {
@@ -300,6 +303,7 @@ div.each-upload>p {
 
 .trip-text {
     font-weight: 600;
+    font-size: 23px;
 }
 
 .text-muted {
