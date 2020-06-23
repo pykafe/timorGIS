@@ -1,145 +1,164 @@
 {% extends 'map/base.html' %}
 {% load static i18n %}
+
 {% block title %}Timor Journey{% endblock %}
+
 {% block content %}
-    <div id="mapid"></div>
-    <div class="container">
-        <div class="row navbar-journey">
-            <div class="col-md-8">
-                <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
-            </div>
-            <!--
-            <div class="col-md-6 search-journey">
-                <input type="text" name="search" placeholder="Search..">
-            </div>
-            -->
-            <div class="col-md-4">
-                {% if user.is_authenticated %}
-                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
-                {% endif %}
-            </div>
+<div id="mapid"></div>
+<div class="container">
+    <div class="row navbar-journey">
+        <div class="col-md-8">
+            <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
         </div>
-        <div class="row">
-            <div class="col-md-2 display-all-users">
-                <div class="each-upload">
+        <!--
+        <div class="col-md-6 search-journey">
+            <input type="text" name="search" placeholder="Search..">
+        </div>
+        -->
+        <div class="col-md-4">
+            {% if user.is_authenticated %}
+            <a href="{% url 'hatama_viazen' %}" class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 display-all-users">
+            <div class="each-upload">
                 <p><span class="text-muted">{% trans 'Filter by user' %}</span></p>
                 {% for user in users %}
-                    <div>
+                <div>
                     <a href="?creator={{ user.creator.pk }}">
                         <span class="person-name {% if creator_filter.pk != user.creator.pk %}active{% endif %}">{{ user.creator.first_name|default:user.creator }}</span>
                     </a>
-                    </div>
-                {% endfor %}
                 </div>
-            </div>
-            <div class="col-md-10 display-all-post">
-                {% for via in viazen %}
-                    {% if via.creator %}
-                    <div class="each-upload">
-                        {% if user.is_authenticated and user.pk == via.creator.pk %}
-                        <div class="dropdown dropdown-edit-and-delete">
-                            <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
-                            <ul class="dropdown-menu menu-dropdown">
-                                <li class="hover-list"><a href="{% url 'photo_viazen' via.pk %}"><img src="{% static 'img/add_photo.png' %}" width="25">{% trans 'Add Photo' %}</a></li>
-                                <li class="hover-list"><a href="{% url 'update_viazen' via.pk %}"><img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}</a>
-                                </li>
-                                <li class="hover-list"><a href="{% url 'delete_viazen' via.pk %}"><img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <p><img src="{% static 'icons/people-circle.svg' %}" class="rounded-circle" width="40" height="40">
-                        {% else %}
-                            <p class="text-muted">{% trans 'Created by' %}
-                        {% endif %}
-                            <strong class="person-name">{{ via.creator }}</strong> - <strong class="text-muted">{{ via.created_at }}</strong>
-                        </p>
-                        <h4><strong>{{ via.title }}</strong></h4>
-                        <div class="gallery">
-                            {%for photo in geoimages %}
-                                {% if photo.viazen_id == via.id %}
-                                    <figure>
-                                        <img src='{{ photo.photo }}' class="gallery-img add-pointer" width="300" height="240" alt="Image {{ photo.photo_id }}" data-toggle="modal" data-target="#photo-{{ photo.photo_id }}">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="photo-{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog">
-                                            <div class="modal-content">
-                                              <div class="modal-header bg-light">
-                                                <h6 class="modal-title trip-text">{% trans 'This photo journey took in the Suco' %}: <a href={% url 'details' via.id photo.photo_id %}>{{ photo.suco }}</a></h6>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                              </div>
-                                              <div class="modal-body">
-                                                <img src='{{ photo.photo }}' class="gallery-img" width="100%" alt="Image {{ photo.photo_id }}">
-                                              </div>
-                                              <div class="modal-footer">
-                                              {% if user.is_authenticated and user.pk == via.creator.pk %}
-                                                <span class="icon-edit-delete"> 
-                                                    <a href="{% url 'update_photo' photo.photo_id %}">
-                                                        <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
-                                                    </a>
-                                                    <a href="{% url 'delete_photo' photo.photo_id %}">
-                                                        <img src="{% static 'img/delete_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
-                                                    </a>
-                                                </span>
-                                              {% endif %}
-                                              </div>
-                                            </div><!-- /.modal-content -->
-                                          </div><!-- /.modal-dialog -->
-                                        </div><!-- /.modal -->
-                                    </figure>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <p>{{ via.description|safe|truncatewords:"100" }}</p>
-                        <!-- Large modal -->
-                        {% if via.description|length > 617 %}
-                            <p class="detail" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more' %}</p>
-                        {% endif %}
-                        <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header bg-light">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                    <a href="{% url 'details' via.pk 0 %}">
-                                        <h5><b>{{ via.title }}</b></h5>
-                                    </a>
-                                    <p class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</p>
-                                    <p>{{ via.description|safe }}</p>
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-                        <p class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</p>
-                    </div>
-                    {% endif %}
                 {% endfor %}
             </div>
         </div>
-    </div>
-    <script>
-        const districts = {{ districts|safe }};
-        var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
-        L.tileLayer('{{ url_openstreetmap }}', { minZoom: 8, maxZoom: 18 }).addTo(timormap);
-        L.geoJSON(districts, {
-            style: function (feature) {
-                return {color: 'orange'};
-            }
-        }).bindPopup(function (layer) {
-            var name = layer.feature.properties.name;
-                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-        }).addTo(timormap);
-        {% for photo in geoimages %}
-            {% if photo.lon and photo.lat %}
-                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+        <div class="col-md-10 display-all-post">
+            {% for via in viazen %}
+            {% if via.creator %}
+            <div class="each-upload">
+                {% if user.is_authenticated and user.pk == via.creator.pk %}
+                <div class="dropdown dropdown-edit-and-delete">
+                    <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                    <ul class="dropdown-menu menu-dropdown">
+                        <li class="hover-list">
+                            <a href="{% url 'photo_viazen' via.pk %}">
+                                <img src="{% static 'img/add_photo.png' %}" width="25">{% trans 'Add Photo' %}
+                            </a>
+                        </li>
+                        <li class="hover-list">
+                            <a href="{% url 'update_viazen' via.pk %}">
+                                <img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}
+                            </a>
+                        </li>
+                        <li class="hover-list">
+                            <a href="{% url 'delete_viazen' via.pk %}">
+                                <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+                <h3><strong>{{ via.title }}</strong></h3>
+                <p class="text-muted">
+                    {% trans 'From' %}<span class="vertical-line"></span>{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}
+                </p>
+                <p>{{ via.description|safe|truncatewords_html:50 }}</p>
+                <!-- Large modal -->
+                {% if via.description|length > 50 %}
+                <p class="detail" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more ...' %}</p>
+                {% endif %}
+
+                <div class="gallery">
+                    {% for photo in geoimages %}
+                    {% if photo.viazen_id == via.id %}
+                    <figure>
+                        <img src='{{ photo.photo }}' class="gallery-img add-pointer" width="300" height="240" alt="Image {{ photo.photo_id }}" title="{% trans 'View full, changing or delete this photo' %}" data-toggle="modal" data-target="#photo-{{ photo.photo_id }}">
+                        <!-- Modal -->
+                        <div class="modal fade" id="photo-{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-light">
+                                        <h6 class="modal-title trip-text">
+                                            {% trans 'This photo journey took in the Suco' %}:
+                                            <a href="{% url 'details' via.id photo.photo_id %}">{{ photo.suco }}</a>
+                                        </h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a href="{{ photo.photo }}">
+                                            <img src='{{ photo.photo }}' class="gallery-img" title="{% trans 'View full' %}" width="100%" alt="Image {{ photo.photo_id }}">
+                                        </a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        {% if user.is_authenticated and user.pk == via.creator.pk %}
+                                        <span class="icon-edit-delete">
+                                            <a href="{% url 'update_photo' photo.photo_id %}">
+                                                <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                            </a>
+                                            <a href="{% url 'delete_photo' photo.photo_id %}">
+                                                <img src="{% static 'img/delete_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                            </a>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </figure>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-light">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <a href="{% url 'details' via.pk 0 %}">
+                                    <h5><b>{{ via.title }}</b></h5>
+                                </a>
+                                <p class="text-muted">
+                                    {% trans 'From' %}<span class="vertical-line"></span>{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}
+                                </p>
+                                <p>{{ via.description|safe }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-muted">{% trans 'Created by' %} {{ via.creator|capfirst }}<span class="vertical-line"> {{ via.created_at }}</p>
+            </div>
             {% endif %}
-        {% endfor %}
-        function contentPopup(photo){
-            var viazen_id = photo.viazen_id.toString();
-            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
-            return content
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    const districts = {{ districts|safe }};
+    var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
+    L.tileLayer('{{ url_openstreetmap }}', { minZoom: 8, maxZoom: 18 }).addTo(timormap);
+    L.geoJSON(districts, {
+        style: function (feature) {
+            return {color: 'orange'};
         }
-    </script>
+    }).bindPopup(function (layer) {
+        var name = layer.feature.properties.name;
+            return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+    }).addTo(timormap);
+    {% for photo in geoimages %}
+        {% if photo.lon and photo.lat %}
+            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+        {% endif %}
+    {% endfor %}
+    function contentPopup(photo){
+        var viazen_id = photo.viazen_id.toString();
+        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+        return content
+    }
+</script>
 {% endblock %}
