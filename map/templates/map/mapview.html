@@ -25,8 +25,8 @@
                     <div class="collapse each-upload" id="navbarToggleExternalContent">
                         <div class="bg-light p-4">
                             {% for user in users %}
-                                <a href="?creator={{ user.pk }}">
-                                    <p class="text-muted {% if creator_filter.pk != user.pk %}active{% endif %}">{{ user.first_name|default:user.username }}</p>
+                                <a href="?creator={{ user.creator.pk }}">
+                                    <p class="text-muted {% if creator_filter.pk != user.creator.pk %}active{% endif %}">{{ user.creator.first_name|default:user.creator.username }}</p>
                                 </a>
                             {% endfor %}
                         </div>

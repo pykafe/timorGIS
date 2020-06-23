@@ -77,7 +77,7 @@ span.red_text {
 }
 
 p.detail {
-    color: #adb5bd;
+    color: #313030;
     cursor: pointer;
 }
 
@@ -161,6 +161,7 @@ input#id_duration_of_trip_0 {
     width: 120px;
     padding-left: 20px;
     padding-top: 4px;
+    font-size: 13px;
 }
 
 input#id_duration_of_trip_1 {
