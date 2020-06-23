@@ -74,8 +74,8 @@ class PhotoTimor(models.Model):
             try:
                 get_data = ImageMetaData(self.image)
             except AttributeError:
-                raise ValidationError("La simu imajen ho tipu gif" )
+                raise ValidationError(_("This image type does not support" ))
 
             lat, lon = get_data.get_lat_lng()
             if not lat and not lon:
-                raise ValidationError("Imajen nee laiha detailhu GPS" )
+                raise ValidationError(_("This image has no GPS details" ))
