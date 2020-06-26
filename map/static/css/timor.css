@@ -138,6 +138,19 @@ textarea.form-control {
     height: 20%;
 }
 
+.read_more {
+    box-shadow: 0 5px 2px 0 rgba(42,57,66,.3);
+    background-color: #f8f9fa;
+    min-height: 30px;
+    border: none;
+    border-radius: 4px;
+    min-width: 110px;
+    width: 120px;
+    padding-left: 20px;
+    padding-top: 4px;
+    font-size: 13px;
+}
+
 .form-group.col-12 {
     max-width: 117%;
     margin-top: 19px;

@@ -92,7 +92,7 @@
                         <p>{{ via.description|safe|truncatewords:"100" }}</p>
                         <!-- Large modal -->
                         {% if via.description|length > 617 %}
-                            <p class="detail" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more' %}</p>
+                            <p class="detail btn-primary read_more" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more' %}</p>
                         {% endif %}
                         <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
