@@ -188,3 +188,7 @@ class DeletePhotoView(DeleteView):
     model = PhotoTimor
     template_name = 'map/istoriaviazen_confirm_delete.html'
     success_url = reverse_lazy('home')
+
+
+class StyleGuideView(TemplateView):
+    template_name = 'map/style_guide.html'
