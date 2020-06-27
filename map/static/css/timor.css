@@ -311,6 +311,7 @@ img.gallery-img.add-pointer {
 img.gallery-img {
     max-width: 100%;
     height: auto;
+    border-radius: 4px;
 }
 
 .col-md-6.search-journey {
@@ -437,7 +438,7 @@ a.btn.btn-primary.timorgis-login {
 }
 
 
-.dropdown span.vertical-line {
+span.vertical-line {
     border-left: 1px solid #1b1a1838;
     margin-left: 6px;
     margin-right: 6px;
