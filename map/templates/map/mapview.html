@@ -47,6 +47,29 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <!-- Delete modal -->
+                        <div id="deleteModal" class="modal fade" role='dialog'>
+                            <div class="modal-dialog">
+                                <div class="modal-content delete-journey">
+                                    <form class="form-delete" action="{% url 'delete_viazen' via.pk %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">{% trans 'Confirmation delete' %}</h4>
+                                            <a href="{% url 'home' %}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>{% blocktrans %} Are you sure you want to delete "{{ via }}"? {% endblocktrans %}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{% url 'home' %}"><button type="button" class="btn btn-default cancel-delete" data-dismiss="modal">{% trans 'Cancel' %}</button></a>
+                                            <a href="{% url 'delete_viazen' via.pk %}"><button class="btn btn-danger" id= 'deleteButton'>{% trans 'Delete' %}</button></a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <p><img src="{% static 'icons/people-circle.svg' %}" class="rounded-circle" width="40" height="40">
                         {% else %}
                             <p class="text-muted">{% trans 'Created by' %}
@@ -120,27 +143,6 @@
         </div>
     </div>
 
-    <div id="deleteModal" class="modal fade" role='dialog'>
-        <div class="modal-dialog">
-            <div class="modal-content delete-journey">
-                <form class="form-delete" action=" " method="POST">
-                    {% csrf_token %}
-                    <div class="modal-header">
-                        <h4 class="modal-title">{% trans 'Confirmation delete' %}</h4>
-                        <a href="{% url 'home' %}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
-                    </div>
-                    <div class="modal-body">
-                        <p>{% blocktrans %} Are you sure you want to delete "{{ object }}"? {% endblocktrans %}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="{% url 'home' %}"><button type="button" class="btn btn-default cancel-delete" data-dismiss="modal">{% trans 'Cancel' %}</button></a>
-                        <button class="btn btn-danger" id= 'deleteButton'>{% trans 'Delete' %}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <script>
         const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
@@ -167,12 +169,8 @@
         function confirmDeleteModal(id){
             $('#deleteModal').modal();
             $('#deleteButton').html('<a class="btn btn-danger" onclick="deleteData('+id+')">Delete</a>');
+            $('#deleteModal').modal('hide'); // now close modal
         }     
-        function deleteData(id){
-          // do your stuffs with id
-          $("#successMessage").html("Record With id "+id+" Deleted successfully!");
-          $('#deleteModal').modal('hide'); // now close modal
-        }  
     </script>
 
 {% endblock %}

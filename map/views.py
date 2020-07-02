@@ -179,8 +179,10 @@ class ViazenUpdateView(UpdateView):
         return context
 
 
+# delete view for details 
 class ViazenDeleteView(DeleteView):
     model = IstoriaViazen
+    template_name = 'map/mapview.html'
     success_url = reverse_lazy('home')
 
 
