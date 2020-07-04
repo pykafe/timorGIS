@@ -122,7 +122,7 @@ class MapView(TemplateView):
         else:
             context['viazen'] = IstoriaViazen.objects.all().order_by('-created_at')
 
-        context['users'] = User.objects.all()
+        context['users'] = IstoriaViazen.objects.distinct('creator')
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
         for photo in PhotoTimor.objects.filter(istoriaviazen__in=context['viazen']):
             get_data = ImageMetaData(photo.image.path)
@@ -223,3 +223,7 @@ class DeletePhotoView(DeleteView):
     model = PhotoTimor
     template_name = 'map/istoriaviazen_confirm_delete.html'
     success_url = reverse_lazy('home')
+
+
+class StyleGuideView(TemplateView):
+    template_name = 'map/style_guide.html'

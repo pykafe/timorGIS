@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 00:18+0900\n"
-"PO-Revision-Date: 2020-05-19 15:18+0000\n"
-"Last-Translator: b'Onorio de Jesus <dejesusony@gmail.com>'\n"
+"POT-Creation-Date: 2020-06-13 16:37+0000\n"
+"PO-Revision-Date: 2020-06-18 12:23+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,20 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.4\n"
 
+#: map/admin.py:33
+msgid "Personal info"
+msgstr "Informasaun Pesoal"
+
+#: map/admin.py:34
+msgid "Admin access"
+msgstr "Asesu Administrador"
+
+#: map/admin.py:35
+msgid "Important dates"
+msgstr "Data Importante"
+
+#: map/admin.py:61
+msgid "administration"
+msgstr "Administrasaun"
+
+#: map/models.py:77
+msgid "This image type does not support"
+msgstr "Tipu imajen ida nee la suporta"
+
+#: map/models.py:81
+msgid "This image does not have GPS detail"
+msgstr "Imajen ida nee la iha detallu GPS "
+
 #: map/templates/map/details.html:3
 msgid "Detail Timor GIS"
 msgstr "Detallu Timor GIS"
 
-#: map/templates/map/details.html:17 map/templates/map/viajen_form.html:8
+#: map/templates/map/details.html:17 map/templates/map/phototimor_form.html:9
+#: map/templates/map/phototimor_form.html:11
+#: map/templates/map/updatephototimor_form.html:8
+#: map/templates/map/viajen_form.html:8
 #: map/templates/registration/password_change_done.html:7
 msgid "Back"
 msgstr "Fila"
 
-#: map/templates/map/details.html:18
-msgid "One history for one trip"
-msgstr "Istoria ida ba vizajen ida"
-
-#: map/templates/map/details.html:32
+#: map/templates/map/details.html:33 map/templates/map/mapview.html:94
 msgid "Read more"
 msgstr "Haree liu tan"
 
@@ -39,23 +62,23 @@ msgstr "Haree liu tan"
 msgid "Welcome"
 msgstr "Benvindu"
 
-#: map/templates/map/header.html:16 map/templates/map/header.html:19
+#: map/templates/map/header.html:18
 msgid "Settings"
 msgstr "Konfigurasaun"
 
-#: map/templates/map/header.html:39
+#: map/templates/map/header.html:38
 msgid "Admin"
 msgstr "Administrador"
 
-#: map/templates/map/header.html:44
+#: map/templates/map/header.html:43
 msgid "Change password"
 msgstr "Troka password"
 
-#: map/templates/map/header.html:47
+#: map/templates/map/header.html:46
 msgid "log out"
 msgstr "Sai"
 
-#: map/templates/map/header.html:51
+#: map/templates/map/header.html:50
 msgid "Log In"
 msgstr "Tama"
 
@@ -84,55 +107,81 @@ msgstr "Hamoos"
 msgid "Our histories for our trip"
 msgstr "Ita nia istoria kona-ba ita nia viajen"
 
-#: map/templates/map/mapview.html:17
+#: map/templates/map/mapview.html:18
 msgid "Add my journey"
 msgstr "Hatama viajen"
 
-#: map/templates/map/mapview.html:56
-msgid "Show detail..."
-msgstr "Hatudu detallu..."
+#: map/templates/map/mapview.html:42
+#| msgid "Upload Photos"
+msgid "Add Photo"
+msgstr "Hatama foto"
+
+#: map/templates/map/mapview.html:43
+#| msgid "Save Journey"
+msgid "Edit Journey"
+msgstr "Hadia viajen"
+
+#: map/templates/map/mapview.html:45
+#| msgid "Confirm Delete Journey"
+msgid "Delete Journey"
+msgstr "Konfirma hamoos Viajen"
+
+#: map/templates/map/mapview.html:51
+msgid "Created by"
+msgstr "Kria husi"
+
+#: map/templates/map/mapview.html:66
+msgid "This photo journey took in the Suco"
+msgstr "Foto viajen ida nee hasai iha Suco"
 
 #: map/templates/map/phototimor_form.html:3
 msgid "Add journey photos"
 msgstr "Hatama foto viajen"
 
-#: map/templates/map/phototimor_form.html:7
-msgid "Upload photos"
-msgstr "Hatama foto"
-
-#: map/templates/map/phototimor_form.html:14
-#| msgid "Please add another Photo"
+#: map/templates/map/phototimor_form.html:9
 msgid "Please add another photo"
 msgstr "Favor hatama foto seluk tan"
 
-#: map/templates/map/phototimor_form.html:16
+#: map/templates/map/phototimor_form.html:11
 msgid "Add photo journey"
 msgstr "Hatama foto viajen"
 
-#: map/templates/map/phototimor_form.html:22
+#: map/templates/map/phototimor_form.html:19
+#: map/templates/map/updatephototimor_form.html:15
 msgid "Upload Photos"
 msgstr "Hatama foto"
 
-#: map/templates/map/phototimor_form.html:23
+#: map/templates/map/phototimor_form.html:20
+#: map/templates/map/updatephototimor_form.html:16
 msgid "Your Photos"
 msgstr "Ita boot nia foto"
 
-#: map/templates/map/phototimor_form.html:70
+#: map/templates/map/phototimor_form.html:62
+#: map/templates/map/updatephototimor_form.html:58
 msgid "Try Save Again"
 msgstr "Koko Rai Tan"
 
-#: map/templates/map/phototimor_form.html:73
+#: map/templates/map/phototimor_form.html:65
 msgid "Save another photo"
 msgstr "Rai foto seluk"
 
-#: map/templates/map/phototimor_form.html:75
+#: map/templates/map/phototimor_form.html:67
+#: map/templates/map/updatephototimor_form.html:60
 msgid "Save"
 msgstr "Rai"
 
-#: map/templates/map/phototimor_form.html:78
-#: map/templates/map/phototimor_form.html:87
+#: map/templates/map/phototimor_form.html:70
+#: map/templates/map/phototimor_form.html:81
+#: map/templates/map/updatephototimor_form.html:62
+#: map/templates/map/updatephototimor_form.html:71
 msgid "Skip"
 msgstr "Husik"
+
+#: map/templates/map/updatephototimor_form.html:3
+#: map/templates/map/updatephototimor_form.html:8
+#| msgid "Add photo journey"
+msgid "Edit photo journey"
+msgstr "Hatama foto viajen"
 
 #: map/templates/map/viajen_form.html:3
 msgid " Add journey history"
@@ -304,11 +353,11 @@ msgstr ""
 msgid "Password reset on %(site_name)s"
 msgstr "Password defini iha %(site_name)s"
 
-#: map/views.py:121
+#: map/views.py:128
 msgid "Add Journey History"
 msgstr "Hatama Istoria Viajen "
 
-#: map/views.py:148
+#: map/views.py:178
 msgid "Update Journey History"
 msgstr "Atualiza Istoria Viajen"
 
@@ -319,6 +368,15 @@ msgstr "Tetun"
 #: timor/settings.py:125
 msgid "English"
 msgstr "Ingles"
+
+#~ msgid "One history for one trip"
+#~ msgstr "Istoria ida ba vizajen ida"
+
+#~ msgid "Show detail..."
+#~ msgstr "Hatudu detallu..."
+
+#~ msgid "Upload photos"
+#~ msgstr "Hatama foto"
 
 #~ msgid "Change my password"
 #~ msgstr "Troka password"
