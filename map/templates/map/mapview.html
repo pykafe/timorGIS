@@ -1,24 +1,24 @@
-{% extends 'map/base.html' %}
+{% extends 'map/containered-base.html' %}
 {% load static i18n %}
 
 {% block title %}Timor Journey{% endblock %}
-
-{% block content %}
-<div id="mapid"></div>
-<div class="container">
-    <div class="row navbar-journey">
-        <div class="col-md-8">
-            <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
-        </div>
-        <!--
-        <div class="col-md-6 search-journey">
-            <input type="text" name="search" placeholder="Search..">
-        </div>
-        -->
-        <div class="col-md-4">
-            {% if user.is_authenticated %}
-            <a href="{% url 'hatama_viazen' %}" class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
-            {% endif %}
+{% block container_content %}
+    <div id="mapid"></div>
+    <div class="container">
+        <div class="row navbar-journey">
+            <div class="col-md-8">
+                <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
+            </div>
+            <!--
+            <div class="col-md-6 search-journey">
+                <input type="text" name="search" placeholder="Search..">
+            </div>
+            -->
+            <div class="col-md-4">
+                {% if user.is_authenticated %}
+                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="row">
@@ -136,29 +136,27 @@
             {% endfor %}
         </div>
     </div>
-</div>
-
 <script>
-    const districts = {{ districts|safe }};
-    var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
-    L.tileLayer('{{ url_openstreetmap }}', { minZoom: 8, maxZoom: 18 }).addTo(timormap);
-    L.geoJSON(districts, {
-        style: function (feature) {
-            return {color: 'orange'};
+        const districts = {{ districts|safe }};
+        var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
+        L.tileLayer('{{ url_openstreetmap }}', { minZoom: 8, maxZoom: 18 ,attribution: '<a href="{% url "fullmap" %}">{% trans "Full Map" %}</a> {% trans "Journey" %}'}).addTo(timormap);
+        L.geoJSON(districts, {
+            style: function (feature) {
+                return {color: 'orange'};
+            }
+        }).bindPopup(function (layer) {
+            var name = layer.feature.properties.name;
+                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+        }).addTo(timormap);
+        {% for photo in geoimages %}
+            {% if photo.lon and photo.lat %}
+                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+            {% endif %}
+        {% endfor %}
+        function contentPopup(photo){
+            var viazen_id = photo.viazen_id.toString();
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+            return content
         }
-    }).bindPopup(function (layer) {
-        var name = layer.feature.properties.name;
-            return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-    }).addTo(timormap);
-    {% for photo in geoimages %}
-        {% if photo.lon and photo.lat %}
-            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
-        {% endif %}
-    {% endfor %}
-    function contentPopup(photo){
-        var viazen_id = photo.viazen_id.toString();
-        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
-        return content
-    }
 </script>
 {% endblock %}
