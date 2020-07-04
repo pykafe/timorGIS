@@ -168,9 +168,11 @@
 
         function confirmDeleteModal(id){
             $('#deleteModal').modal();
-            $('#deleteButton').html('<a class="btn btn-danger" onclick="deleteData('+id+')">Delete</a>');
-            $('#deleteModal').modal('hide'); // now close modal
-        }     
+                $('#deleteButton').html('<a class="btn btn-danger" onclick="deleteData('+id+')">Delete</a>');
+        };     
+        function deleteData(id){
+          $('#deleteModal').modal('hide'); // now close modal
+        }
     </script>
 
 {% endblock %}
