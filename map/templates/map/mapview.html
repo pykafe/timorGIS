@@ -4,13 +4,17 @@
 {% block content %}
 <style>
 #mapid {
-    height: 500px!important; 
+    height: 550px; 
 }                               
 .leaflet-marker-icon {
     margin-top: -31px!important;
     width: 22px!important;
     height: 31px!important;
 }
+
+.map_left {
+    padding-left: 0px!important
+} 
 
 .leaflet-popup {
     bottom: -18px!important;
@@ -137,7 +141,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-7 col-xs-6">
+    <div class="col-md-7 col-xs-6 map_left">
         <div id="mapid"></div>
     </div>
 </div>

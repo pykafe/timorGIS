@@ -7,7 +7,7 @@
         height: 290px;
     }
 </style>
-    <div class="container">
+    <div class="container lab">
         <div class="row">
             <div class="col-md-12">
                 <h3 class="trip-text text_title"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {{hatama_viazen}} {{ update_viazen }}</h3>
@@ -55,7 +55,11 @@
                     </div>
                     <div class="form-group-button">
                         <button type="submit" class="btn btn-primary add-journey">
-                            {% trans 'Save Journey' %}
+                            {% if hatama_viazen %}
+                                {% trans 'Next' %}
+                            {% else %}
+                                {% trans 'Save' %}
+                            {% endif %}
                         </button>
                     </div>
                 </form>
