@@ -32,7 +32,7 @@ body {
 }
 
 .map_top {
-    margin-top: 19px;
+    margin-top: 3px;
 }
 
 .footer {
@@ -323,7 +323,7 @@ div.each-upload>p {
 .journey_scroll {
     position: static;
     overflow: scroll;
-    height: 550px;
+    height: 585px;
 }                                
 
 a.logo {
