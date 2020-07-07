@@ -321,9 +321,8 @@ div.each-upload>p {
 }
 
 .journey_scroll {
-    position: static;
-    overflow: scroll;
     height: 585px;
+    overflow-y: auto;
 }                                
 
 a.logo {
