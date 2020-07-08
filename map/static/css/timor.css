@@ -79,6 +79,12 @@ input {
     cursor: unset;
 }
 
+.white-theme textarea {
+	height: 125px;
+	border: 1px solid var(--blue-1);
+    background: var(--white-2);
+}
+
 input[type=text]:focus, [type=email]:focus, [name=messages]:focus {
     z-index: 2;
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px var(--blue-2);
@@ -275,11 +281,6 @@ input#id_image_trip {
     color: #555;
 }
 
-
-textarea.form-control {
-    height: 20%;
-}
-
 .form-group.col-12 {
     max-width: 117%;
     margin-top: 19px;
@@ -386,8 +387,15 @@ h3 {
     font-family: 'Comfortaa';
 }
 
-.trip-text {
-    font-weight: 600;
+.add-or-edit-journey {
+    max-width: 60%;
+    position: relative;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 6px #DEDEDE;
+    padding: 30px;
+    margin-top: 20px;
 }
 
 .text-muted {
