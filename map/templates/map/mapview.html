@@ -115,11 +115,11 @@
                             {% endfor %}
                         </div>
                         <p>{{ via.description|safe|truncatewords:"20" }}</p>
-                        <strong class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</strong>
                         <!-- Large modal -->
                         {% if via.description|length > 132 %}
                             <p class="detail read_more" data-toggle="modal" data-target=".read-more-{{ via.pk }}">{% trans 'Read more' %}</p>
                         {% endif %}
+                        <strong class="text-muted">{{ via.duration_of_trip.lower }} - {{ via.duration_of_trip.upper }}</strong>
                         <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
