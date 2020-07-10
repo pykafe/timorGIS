@@ -19,6 +19,11 @@ body {
     max-width: 50%;
 }
 
+.user_top{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
 .navbar_header{
     box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.25);
 }
@@ -316,8 +321,9 @@ div.each-upload>p {
 }
 
 .add_trip {
-    margin-top: 19px;
+    margin-top: 10px;
     float: right;
+    margin-bottom:10px;
 }
 
 .journey_scroll {

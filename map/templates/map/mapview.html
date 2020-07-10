@@ -28,22 +28,12 @@
     <div class="col-md-5 col-xs-6 journey_scroll">
         <div class="row">
             <div class="col-md-6">
-                <div class="pos-f-t display-all-users">
-                    <div class="collapse each-upload" id="navbarToggleExternalContent">
-                        <div class="bg-light p-4">
-                            {% for user in users %}
-                                <a href="?creator={{ user.creator.pk }}">
-                                    <p class="text-muted {% if creator_filter.pk != user.creator.pk %}active{% endif %}">{{ user.creator.first_name|default:user.creator.username }}</p>
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <nav class="navbar navbar-dark">
-                        <button class="btn filter_user" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="text-muted">{% trans 'Filter by user' %}</span>
-                        </button>
-                    </nav>
-                </div>
+                <select class="filter_user text-muted user_top" onchange="handleSelect(this)">
+                    <option value="">{% trans "All user" %}</option>
+                    {% for user in users %}
+                    <option value="{{ user.creator.pk }}" {% if creator_filter.pk == user.creator.pk %}selected{% endif %} class="{% if creator_filter.pk == user.creator.pk %}active {% endif %}">{{ user.creator.first_name|default:user.creator.username }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <!--
             <div class="col-md-6 search-journey">
@@ -146,6 +136,14 @@
     </div>
 </div>
     <script>
+        function handleSelect(e){
+            if (e.value){
+                window.location = "?creator="+e.value;
+            }else{
+                window.location = "/";
+            }
+        }
+
         const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
         L.tileLayer('{{ url_openstreetmap }}', { minZoom: 8, maxZoom: 18 ,attribution: '<a href="{% url "fullmap" %}">{% trans "Full Map" %}</a> {% trans "Journey" %}'}).addTo(timormap);
