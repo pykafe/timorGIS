@@ -80,8 +80,8 @@ input {
 }
 
 .white-theme textarea {
-	height: 125px;
-	border: 1px solid var(--blue-1);
+    height: 125px;
+    border: 1px solid var(--blue-1);
     background: var(--white-2);
 }
 

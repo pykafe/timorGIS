@@ -61,15 +61,15 @@
                             </table>
                             <div class="modal-footer">
                                 {% if form.non_field_errors %}
-                                <button type="submit" class="btn btn-primary add-journey">{% trans 'Try Save Again' %}</button>
+                                <button type="submit" class="btn btn-primary">{% trans 'Try Save Again' %}</button>
                                 {% else %}
                                 {% if journey_photos.count %}
-                                <button type="submit" class="btn btn-primary add-journey">{% trans 'Save another photo' %}</button>
+                                <button type="submit" class="btn btn-primary">{% trans 'Save another photo' %}</button>
                                 {% else %}
-                                <button type="submit" class="btn btn-primary add-journey">{% trans 'Save' %}</button>
+                                <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
                                 {% endif %}
                                 {% endif %}
-                                <a href="{% url 'home' %}" type="submit" class="btn btn-default cancel-delete">{% trans 'Skip' %}</a> 
+                                <a href="{% url 'home' %}" type="submit" class="btn btn-default">{% trans 'Skip' %}</a> 
                             </div>
                         </form>
                     </div>
