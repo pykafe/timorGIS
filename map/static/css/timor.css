@@ -1,18 +1,160 @@
 @font-face {
-    font-family: 'Montserrat';
-    src: url(../fonts/Montserrat-Regular.woff2);
-}
-
-@font-face {
     font-family: 'Comfortaa';
     src: url(../fonts/Comfortaa_Thin.woff2);
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url(../fonts/Montserrat-Regular.woff2);
+}
+
 body {
     margin: 0px;
-    color: #000000c7;
+    background-color: var(--white-2);
+    color: var(--black-1);
     font-family: 'Montserrat';
-    background-color: #f0f2f5;
+    font-size: 14px;
+}
+
+:root {
+    --white-1: #FFFFFF;
+    --white-2: #f0f2f5;
+    --black: #000000;
+    --yellow-1: #FFFF00;
+    --yellow-2: #d39e00;
+    --blue-1: #23aeea;
+    --blue-2: #007bff;
+    --red-1: #c0392b;
+    --red-2: #FF0000;
+    --red-3: #f2dede;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+a {
+    color: var(--red-2);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--blue-1);
+    text-decoration: none
+}
+
+/* STYLING FOR INPUT ELEMENTS */
+input {
+    border-radius: 2px;
+    border: 1px solid var(--blue-1);
+    background: var(--white-1);
+    padding: .375rem .75rem;
+    cursor: unset;
+}
+.white-theme input {
+    border-radius: 2px;
+    border: 1px solid var(--blue-1);
+    background: var(--white-2);
+    padding: .375rem .75rem;
+    cursor: unset;
+}
+
+input[type=text]:focus, [type=email]:focus, [name=messages]:focus {
+    z-index: 2;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px var(--blue-2);
+    border-radius: 4px;
+    position: sticky;
+}
+
+/* BUTTONS STYLES */
+/* This button using for "Add" and  "Cancel", This is only on gray theme*/
+.btn-default {
+    background-color: var(--white-2);
+    border-color: var(--blue-1);
+}
+
+.btn-default:hover {
+    background-color: var(--white-1);
+}
+
+/* This button using for "Submit" form*/
+.btn-primary {
+    color: var(--white-1);
+    background-color: var(--blue-2);
+    border-color: var(--blue-1);
+}
+
+.btn-primary:hover {
+    background-color: var(--blue-1);
+    border-color: var(--blue-2);
+}
+
+/* This button using for "Delete" some data */
+.btn-danger {
+    color: var(--white-1);
+    background-color: var(--red-2);
+    border-color: var(--red-3);
+}
+
+.btn-danger:hover {
+    color: var(--white-1);
+    background-color: var(--red-1);
+    border-color: var(--red-2);
+}
+
+/* This button not REALLY to use it yet */
+.btn-warning {
+    background-color: var(--yellow-1);
+    border-color: var(--yellow-2);
+}
+
+.btn-warning:hover {
+    background-color: var(--yellow-2);
+    border-color: var(--yellow-1);
+}
+.gray-theme {
+    padding: 36px;
+}
+
+/* SPECIFIC COLORS SCHEME FOR WHITE THEME */
+.white-theme {
+    background-color: var(--white-1);
+    padding: 36px;
+}
+
+/* This button using for "Add" and  "Cancel", This is only on white theme*/
+.white-theme .btn-default {
+    background-color: var(--white-1);
+    border-color: var(--blue-1);
+}
+
+.white-theme .btn-default:hover {
+    background-color: var(--white-2);
+}
+
+body .default-gray-theme {
+    border-bottom: 1px solid var(--white-1);
+    background-color: var(--white-2)!important;
 }
 
 #mapid { 
@@ -169,12 +311,7 @@ img.gallery-img.add-pointer {
 img.gallery-img {
     max-width: 100%;
     height: auto;
-}
-
-input[type=text] {
-    width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
+    border-radius: 4px;
 }
 
 .col-md-6.search-journey {
@@ -301,7 +438,7 @@ a.btn.btn-primary.timorgis-login {
 }
 
 
-.dropdown span.vertical-line {
+span.vertical-line {
     border-left: 1px solid #1b1a1838;
     margin-left: 6px;
     margin-right: 6px;
@@ -353,14 +490,6 @@ a:hover {
 .active {
     color: black!important;
     font-weight: bold;
-}
-
-input {
-    border: 2px solid #f0f2f5;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor:pointer;
 }
 
 .group-upload {

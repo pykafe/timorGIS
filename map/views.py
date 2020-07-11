@@ -17,6 +17,41 @@ def queryobject(obj, lon, lat):
     return queryset
 
 
+class FullMapView(TemplateView):
+    template_name = 'map/fullmapview.html'
+
+    def get_context_data(self, *args, **kwargs):
+        images = []
+        context = super(FullMapView, self).get_context_data(*args, **kwargs)
+        context['viazen'] = IstoriaViazen.objects.all()
+        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        for photo in PhotoTimor.objects.filter(istoriaviazen__in=context['viazen']):
+            get_data = ImageMetaData(photo.image.path)
+            lat, lon = get_data.get_lat_lng()
+            if lat and lon:
+                sucos = queryobject(Suco, lon, lat)
+                subdistricts = queryobject(Subdistrict, lon, lat)
+                districts = queryobject(District, lon, lat)
+                images.append({
+                    "lat": lat,
+                    "lon": lon,
+                    "photo": photo.image.url,
+                    "photo_id": photo.pk,
+                    "viazen_id": photo.istoriaviazen_id,
+                    "suco": ",".join([suco.name for suco in sucos]),
+                    "subdistrict": ",".join([subdistrict.name for subdistrict in subdistricts]),
+                    "district": ",".join([district.name for district in districts]),
+                })
+        context['geoimages'] = images
+        context['points'] = {
+            'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
+            'DEFAULT_ZOOM': 9,
+        }
+        context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
+        return context
+
+
+
 class DetailMapView(TemplateView):
     template_name = 'map/details.html'
 
@@ -190,3 +225,7 @@ class DeletePhotoView(DeleteView):
     model = PhotoTimor
     template_name = 'map/istoriaviazen_confirm_delete.html'
     success_url = reverse_lazy('home')
+
+
+class StyleGuideView(TemplateView):
+    template_name = 'map/style_guide.html'

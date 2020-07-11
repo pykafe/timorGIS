@@ -1,5 +1,5 @@
 {% load static i18n %}
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light default-gray-theme">
     <div class="container">
         <a href="{% url 'home' %}" class="navbar-brand logo">{% include 'map/logo_timorjourney.html' %}</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -34,6 +34,9 @@
                                 </select>
                             </form>
                             {% if user.is_staff %}
+                            <a href="{% url 'style_guide' %}">
+                                <li><img src="{% static 'icons/brush.svg' %}" alt="icon" width="25" height="25" title="Style guide">{% trans 'Style Guide' %}</li>
+                            </a>
                             <a href="{% url 'admin:index' %}">
                                 <li><img src="{% static 'icons/gear.svg' %}" alt="icon" width="25" height="25" title="Admin">{% trans 'Admin' %}</li>
                             </a>
