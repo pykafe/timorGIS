@@ -12,7 +12,7 @@ body {
     margin: 0px;
     color: #000000c7;
     font-family: 'Montserrat';
-    background-color: #f0f2f5;
+    background: #f0f2f5 url('../css/images/textures_bg.png');
 }
 
 .content {
