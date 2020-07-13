@@ -43,6 +43,7 @@ body {
 
 .map_top {
     margin-top: 3px;
+    max-width: 100%;
 }
 
 .footer {
