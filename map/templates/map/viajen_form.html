@@ -50,6 +50,22 @@
                 <small class="form-text text-muted">{{ form.title.help_text }}</small>
             </div>
             <div class="col-md">
+                {{ form.duration_of_trip.label_tag }}
+                {% if not form.is_bound %}
+                    {% render_field form.duration_of_trip class="form-control" %}
+                {% elif form.duration_of_trip.errors %}
+                    {% render_field form.duration_of_trip class="form-control is-invalid" %}
+                    {% for error in form.duration_of_trip.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.duration_of_trip class="form-control is-valid" %}
+                {% endif %}
+                <small class="form-text text-muted">{{ form.duration_of_trip.help_text }}</small>
+            </div>
+            <div class="col-md">
                 {{ form.description.label_tag }}
                 {% if not form.is_bound %}
                     {% render_field form.description class="form-control" %}
@@ -66,6 +82,15 @@
                 <small class="form-text text-muted">{{ form.description.help_text }}</small>
             </div>
         </div>
+
+        {{ photo_formset.management_form }}
+        {% for photo_form in photo_formset %}
+        <div class="row">
+            <div class="col">
+                {{ photo_form }}
+            </div>
+        </div>
+        {% endfor %}
 
         <div class="row">
             <div class="col">
