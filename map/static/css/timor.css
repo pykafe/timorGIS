@@ -387,15 +387,10 @@ h3 {
     font-family: 'Comfortaa';
 }
 
-.add-or-edit-journey {
-    max-width: 60%;
-    position: relative;
-    text-align: left;
+.edit-journey {
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 1px 1px 6px #DEDEDE;
-    padding: 30px;
-    margin-top: 20px;
 }
 
 .text-muted {

@@ -3,54 +3,76 @@
 
 {% block title %}{% trans ' Add journey history' %}{% endblock %}
 
+{% block container_class %}edit-journey{% endblock %}
+
 {% block container_content %}
-<div class="container add-or-edit-journey white-theme">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {{hatama_viazen}} {{ update_viazen }}</h3>
+            <h3 class="trip-text">
+                <a href="{% url 'home' %}">&larr; {% trans 'Back' %}
+                    {{hatama_viazen}} {{ update_viazen }}
+                </a>
+            </h3>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post" enctype="multipart/form-data" novalidate>
-                {% csrf_token %}
-                {% for hidden_field in form.hidden_fields %}
-                {{ hidden_field }}
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+        <div class="row">
+            <div class="col-12 alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                {{ error }}
                 {% endfor %}
-                {% if form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    {% for error in form.non_field_errors %}
-                    {{ error }}
-                    {% endfor %}
-                </div>
-                {% endif %}
-                <div class="form-group">
-                    {% for field in form.visible_fields %}
-                    {{ field.label_tag }}
-                    {% if form.is_bound %}
-                    {% if field.errors %}
-                    {% render_field field class="form-control is-invalid" %}
-                    {% for error in field.errors %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md">
+                {{ form.title.label_tag }}
+                {% if not form.is_bound %}
+                    {% render_field form.title class="form-control" %}
+                {% elif form.title.errors %}
+                    {% render_field form.title class="form-control is-invalid" %}
+                    {% for error in form.title.errors %}
                     <div class="invalid-feedback">
                         {{ error }}
                     </div>
                     {% endfor %}
-                    {% else %}
-                    {% render_field field class="form-control is-valid" %}
-                    {% endif %}
-                    {% else %}
-                    {% render_field field class="form-control" %}
-                    {% endif %}
-                    {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                    {% endif %}
+                {% else %}
+                    {% render_field form.title class="form-control is-valid" %}
+                {% endif %}
+                <small class="form-text text-muted">{{ form.title.help_text }}</small>
+            </div>
+            <div class="col-md">
+                {{ form.description.label_tag }}
+                {% if not form.is_bound %}
+                    {% render_field form.description class="form-control" %}
+                {% elif form.description.errors %}
+                    {% render_field form.description class="form-control is-invalid" %}
+                    {% for error in form.description.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
                     {% endfor %}
-                </div>
-                <button type="submit" class="btn btn-primary">{% trans 'Save Journey' %}</button>
-            </form>
+                {% else %}
+                    {% render_field form.description class="form-control is-valid" %}
+                {% endif %}
+                <small class="form-text text-muted">{{ form.description.help_text }}</small>
+            </div>
         </div>
-    </div>
-</div>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">{% trans 'Save Journey' %}</button>
+            </div>
+        </div>
+    </form>
 
 <script>
     $(function () {
