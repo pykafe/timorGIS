@@ -321,7 +321,6 @@ img.gallery-img {
 span.logo-2 {
     font-family: 'Comfortaa';
     color: #32CD32;
-    font-size: 44px;
 } 
 
 span.blue-text {
@@ -492,6 +491,32 @@ a:hover {
     font-weight: bold;
 }
 
+.header-users {
+    border-bottom: 1px solid #f0f2f5
+}
+
+.active-users {
+    background-color: rgba(0,123,255,.25);
+    font-weight: 600;
+    color: #117a8b;
+    border-radius: 2px;
+    padding: 6px;
+}
+
+.show-users {
+    padding: 6px;
+}
+.show-users:hover {
+    background-color: #f0f2f5;
+    font-weight: 600;
+    color: #117a8b;
+    border-radius: 2px;
+}
+
+.active-users > a {
+    color: #117a8b;
+}
+
 .group-upload {
     margin-top: 50px;
 
@@ -520,10 +545,6 @@ a:hover {
     color: #fff;
     background-color: #ff0019;
     border-color: #ff0019;
-}
-
-.active {
-    color: black;
 }
 
 a:hover {
