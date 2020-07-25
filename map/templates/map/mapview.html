@@ -71,34 +71,33 @@
                 {% endif %}
 
                 <div class="gallery">
-                    {% for photo in geoimages %}
-                    {% if photo.viazen_id == via.id %}
+                    {% for photo in via.photos.all %}
                     <figure>
-                        <img src='{{ photo.photo }}' class="gallery-img add-pointer" width="300" height="240" alt="Image {{ photo.photo_id }}" title="{% trans 'View full, changing or delete this photo' %}" data-toggle="modal" data-target="#photo-{{ photo.photo_id }}">
+                        <img src='{{ photo.image.url }}' class="gallery-img add-pointer" width="300" height="240" title="{% trans 'View full, changing or delete this photo' %}" data-toggle="modal" data-target="#photo-{{ photo.id }}">
                         <!-- Modal -->
-                        <div class="modal fade" id="photo-{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="photo-{{ photo.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header bg-light">
                                         <h6 class="modal-title trip-text">
                                             {% trans 'This photo journey took in the Suco' %}:
-                                            <a href="{% url 'details' via.id photo.photo_id %}">{{ photo.suco }}</a>
+                                            <a href="{% url 'details' via.id photo.id %}">{{ photo.suco }}</a>
                                         </h6>
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                        <a href="{{ photo.photo }}" target="_blank">
-                                            <img src='{{ photo.photo }}' class="gallery-img" title="{% trans 'View full' %}" width="100%" alt="Image {{ photo.photo_id }}">
+                                        <a href="{{ photo.image.url }}" target="_blank">
+                                            <img src='{{ photo.image.url }}' class="gallery-img" title="{% trans 'View full' %}" width="100%">
                                         </a>
                                     </div>
                                     <div class="modal-footer">
                                         {% if user.is_authenticated and user.pk == via.creator.pk %}
                                         <span class="icon-edit-delete">
-                                            <a href="{% url 'update_photo' photo.photo_id %}">
-                                                <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                            <a href="{% url 'update_photo' photo.id %}">
+                                                <img src="{% static 'img/edit_photo.png' %}" width="40">
                                             </a>
-                                            <a href="{% url 'delete_photo' photo.photo_id %}">
-                                                <img src="{% static 'img/delete_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                            <a href="{% url 'delete_photo' photo.id %}">
+                                                <img src="{% static 'img/delete_photo.png' %}" width="40">
                                             </a>
                                         </span>
                                         {% endif %}
@@ -107,7 +106,6 @@
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
                     </figure>
-                    {% endif %}
                     {% endfor %}
                 </div>
                 <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">

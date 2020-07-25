@@ -83,11 +83,17 @@
             </div>
         </div>
 
-        {{ photo_formset.management_form }}
-        {% for photo_form in photo_formset %}
+        <div class="row">
+            <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
+        </div>
+
+        {% for photo in object.photos.all %}
         <div class="row">
             <div class="col">
-                {{ photo_form }}
+                <img width="200" src="{{ photo.image.url }}">
+                <a href="{% url 'delete_photo' pk=photo.pk %}?next={{ request.path }}">
+                    <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete' %}
+                </a>
             </div>
         </div>
         {% endfor %}

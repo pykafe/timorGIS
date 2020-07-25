@@ -10,9 +10,6 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.forms import inlineformset_factory
-
-PhotoFormset = inlineformset_factory(IstoriaViazen, PhotoTimor, fields=('image',))
 
 
 def queryobject(obj, lon, lat):
@@ -165,22 +162,16 @@ class HatamaViazenView(CreateView):
         context = super().get_context_data(*args, **kwargs)
         context['hatama_viazen'] = _("Add Journey History")
 
-        context['photo_formset'] = PhotoFormset(queryset=PhotoTimor.objects.none())
         return context
 
     def form_valid(self, form):
-        import pudb;pudb.set_trace()
 
         # set the creator of the istoria to the logged in user
         form.instance.creator = self.request.user
 
         redirect = super().form_valid(form)
 
-        photo_formset = PhotoFormset(self.request.POST, self.request.FILES)
-        photos = photo_formset.save(commit=False)
-        for photo in photos:
-            photo.istoriaviazen = self.object
-
+        # WRITE SOME CODE HERE!
         return redirect
 
 
@@ -226,20 +217,16 @@ class ViazenUpdateView(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['update_viazen'] = _("Update Journey History")
-        import pudb;pudb.set_trace()
 
-        context['photo_formset'] = PhotoFormset(queryset=self.object.photos.all())
         return context
 
     def form_valid(self, form):
-        import pudb;pudb.set_trace()
+
+        for photo_file in self.request.FILES.getlist('photos'):
+            photo = PhotoTimor.objects.create(istoriaviazen=self.object, image=photo_file)
+            self.object.photos.add(photo)
 
         redirect = super().form_valid(form)
-
-        photo_formset = PhotoFormset(self.request.POST, self.request.FILES)
-        photos = photo_formset.save(commit=False)
-        for photo in photos:
-            photo.istoriaviazen = self.object
 
         return redirect
 
@@ -253,6 +240,11 @@ class DeletePhotoView(DeleteView):
     model = PhotoTimor
     template_name = 'map/istoriaviazen_confirm_delete.html'
     success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        return next_url if next_url else self.success_url
+
 
 
 class StyleGuideView(TemplateView):
