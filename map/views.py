@@ -54,7 +54,7 @@ class DetailMapView(TemplateView):
         context['districts'] = serialize('geojson', selected_photo.districts(), geometry_field='geom')
         context['subdistricts'] = serialize('geojson', selected_photo.subdistricts(), geometry_field='geom')
         context['sucos'] = serialize('geojson', selected_photo.sucos(), geometry_field='geom')
-        context['DEFAULT_CENTER'] = [selected_photo.point().y, selected_photo.point().x, 10]
+        context['DEFAULT_CENTER'] = [selected_photo.point.y, selected_photo.point.x, 10]
         context['DEFAULT_ZOOM'] = 10
 
         context['viazen'] = viazen

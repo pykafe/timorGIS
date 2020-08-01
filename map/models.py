@@ -2,6 +2,7 @@ from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import DateRangeField
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from psycopg2.extras import DateRange
@@ -86,6 +87,7 @@ class PhotoTimor(models.Model):
                 raise ValidationError(_("This image has no GPS details" ))
 
 
+    @cached_property
     def point(self):
         ''' return the point the photo was taken at if known'''
         try:
@@ -98,8 +100,8 @@ class PhotoTimor(models.Model):
         return None
 
     def get_areas(self, model):
-        if self.point():
-            return queryobject(model, self.point())
+        if self.point:
+            return queryobject(model, self.point)
         else:
             return model.objects.none()
 
