@@ -452,6 +452,8 @@ ul.dropdown-menu.show {
     line-height: 2;
     width: 100%;
     font-size: 12px;
+    right: 0;
+    left: auto;
 }
 
 ul.dropdown-menu.show > a li:hover {
