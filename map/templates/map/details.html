@@ -22,9 +22,7 @@
         <div class="row each-upload display-all-post">
             <div class="col-md-4">
                 <div class="card bg-light">
-                    {% if selected_photo %}
                     <img class="card-img-top" src="{{ selected_photo.image.url }}">
-                    {% endif %}
                     <div class="card-body">
                         <p class="card-text">{{ viazen.description|truncatewords:"20"}}</p>
                         <p class="text-muted">{{ viazen.duration_of_trip.lower }} - {{ viazen.duration_of_trip.upper }}</p>
@@ -36,11 +34,7 @@
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header bg-light">
-                                    {%for photo in geoimages %}
-                                    {% if selected_photo.pk == photo.photo_id %}
-                                        <h4 class="modal-title">{{ photo.district }}</h4>
-                                    {% endif %}
-                                    {%endfor%}
+                                    <h4 class="modal-title">{{ selected_photo.district }}</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -48,11 +42,9 @@
                                 <div class="modal-body">
                                     <h5><b>{{ viazen.title }}</b></h5>
                                     <p class="text-muted">{{ viazen.duration_of_trip.lower }} - {{ viazen.duration_of_trip.upper }}</p>
-                                    {% if selected_photo %}
                                     <figure>
                                         <img class="card-img-top" src="{{ selected_photo.image.url }}">
                                     </figure>
-                                    {% endif %}
                                     <p>{{ viazen.description|safe }}</p>
                                 </div>
                             </div>
@@ -68,8 +60,8 @@
                     L.tileLayer('{{ url_openstreetmap }}', { minZoom:8, maxZoom: 18 }).addTo(timormap);
                     {% if districts %}
                     const districts = {{ districts|safe }};
-                    const subdistrict = {{ subdistrict|safe }};
-                    const suco = {{ suco|safe }};
+                    const subdistricts = {{ subdistricts|safe }};
+                    const sucos = {{ sucos|safe }};
                     L.geoJSON(districts, {
                         style: function (feature) {
                             return {color: 'orange'};
@@ -78,7 +70,7 @@
                         var name = layer.feature.properties.name;
                             return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
                     }).addTo(timormap);
-                    L.geoJSON(subdistrict, {
+                    L.geoJSON(subdistricts, {
                         style: function (feature) {
                             return {color: 'yellow'};
                         }
@@ -86,7 +78,7 @@
                         var name = layer.feature.properties.name;
                             return 'Subdistritu: ' + name[0] + name.substr(1).toLowerCase();
                     }).addTo(timormap);
-                    L.geoJSON(suco, {
+                    L.geoJSON(sucos, {
                         style: function (feature) {
                             return {color: 'red'};
                         }
@@ -95,14 +87,23 @@
                             return 'Suco: ' + name[0] + name.substr(1).toLowerCase();
                     }).addTo(timormap);
                     {% endif %}
-                    {%for photo in geoimages %}
-                        {% if photo.lon and photo.lat %}
-                            L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+
+                    {% for photo in viazen.photos.all %}
+                        {% if photo.point %}
+                            L.marker([{{ photo.point.y }}, {{ photo.point.x }}]).bindPopup(
+                                contentPopup(
+                                    {{photo.id}},
+                                    {{photo.istoriaviazen_id}},
+                                    '{{ photo.image.url|safe }}',
+                                    '{{ photo.district }}',
+                                    '{{ photo.subdistrict }}',
+                                    '{{ photo.suco }}',
+                                )
+                            ).openPopup().addTo(timormap);
                         {% endif %}
-                    {%endfor%}
-                    function contentPopup(photo){
-                        var viazen_id = photo.viazen_id.toString();
-                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"'  width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+                    {% endfor %}
+                    function contentPopup(photo_id, viazen_id, photo_url, district, subdistrict, suco){
+                        content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo_url +" "+"' width='70'></div><div class='col-md-7'><b>"+ district+"</b>, "+ subdistrict +", "+ suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo_id+"'>Detail</a></div></div></div>"
                         return content
                     }
                 </script>
