@@ -1,6 +1,8 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import DateRangeField
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from psycopg2.extras import DateRange
@@ -58,6 +60,10 @@ class IstoriaViazen(models.Model):
         return f'{self.title}, {self.pk}'
 
 
+def queryobject(obj, point):
+    queryset = obj.objects.filter(geom__contains=point)
+    return queryset
+
 class PhotoTimor(models.Model):
     istoriaviazen = models.ForeignKey(IstoriaViazen, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
@@ -79,3 +85,46 @@ class PhotoTimor(models.Model):
             lat, lon = get_data.get_lat_lng()
             if not lat and not lon:
                 raise ValidationError(_("This image has no GPS details" ))
+
+
+    @cached_property
+    def point(self):
+        ''' return the point the photo was taken at if known'''
+        try:
+            get_data = ImageMetaData(self.image)
+        except AttributeError:
+            return None
+        lat, lon = get_data.get_lat_lng()
+        if lat and lon:
+            return Point(lon, lat)
+        return None
+
+    def get_areas(self, model):
+        if self.point:
+            return queryobject(model, self.point)
+        else:
+            return model.objects.none()
+
+    def sucos(self):
+        ''' returns a queryset of all Sucos this photo intersects with '''
+        return self.get_areas(Suco)
+
+    def subdistricts(self):
+        ''' returns a queryset of all Subdistricts this photo intersects with '''
+        return self.get_areas(Subdistrict)
+
+    def districts(self):
+        ''' returns a queryset of all Districts this photo intersects with '''
+        return self.get_areas(District)
+
+    def suco(self):
+        ''' return the suco the photo was taken in '''
+        return ', '.join(self.get_areas(Suco).values_list('name', flat=True))
+
+    def subdistrict(self):
+        ''' return the subdistrict the photo was taken in '''
+        return ', '.join(self.get_areas(Subdistrict).values_list('name', flat=True))
+
+    def district(self):
+        ''' return the district the photo was taken in '''
+        return ', '.join(self.get_areas(District).values_list('name', flat=True))

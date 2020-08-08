@@ -24,14 +24,22 @@
             var name = layer.feature.properties.name;
                 return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
         }).addTo(timormap);
-        {% for photo in geoimages %}
-            {% if photo.lon and photo.lat %}
-                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+        {% for photo in images %}
+            {% if photo.point %}
+                L.marker([{{ photo.point.y }}, {{ photo.point.x }}]).bindPopup(
+                    contentPopup(
+                        {{photo.id}},
+                        {{photo.istoriaviazen_id}},
+                        '{{ photo.image.url|safe }}',
+                        '{{ photo.district }}',
+                        '{{ photo.subdistrict }}',
+                        '{{ photo.suco }}',
+                    )
+                ).openPopup().addTo(timormap);
             {% endif %}
         {% endfor %}
-        function contentPopup(photo){
-            var viazen_id = photo.viazen_id.toString();
-            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+        function contentPopup(photo_id, viazen_id, photo_url, district, subdistrict, suco){
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo_url +" "+"' width='70'></div><div class='col-md-7'><b>"+ district+"</b>, "+ subdistrict +", "+ suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo_id+"'>Detail</a></div></div></div>"
             return content
         }
     </script>
