@@ -65,7 +65,7 @@
                 {% endif %}
                 <small class="form-text text-muted">{{ form.duration_of_trip.help_text }}</small>
             </div>
-            <div class="col-10">
+            <div class="col">
                 {{ form.description.label_tag }}
                 {% if not form.is_bound %}
                     {% render_field form.description class="form-control" %}
