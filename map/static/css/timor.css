@@ -231,6 +231,7 @@ span.person-name {
     font-size: 15px;
     font-weight: 700;
     margin-bottom: 2px;
+    padding: 10px;
 }
 
 select#id_creator {
@@ -319,11 +320,20 @@ img.gallery-img {
     line-height: 2;
 }
 
+.col-9 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.col-10 {
+    margin-bottom: 10px;
+}
+
 span.logo-2 {
     font-family: 'Comfortaa';
     color: #32CD32;
     font-size: 44px;
-} 
+}
 
 span.blue-text {
     color: #4169E1;
@@ -390,7 +400,8 @@ h3 {
 .edit-journey {
     background-color: #fff;
     border-radius: 6px;
-    box-shadow: 1px 1px 6px #DEDEDE;
+    margin-top: 20px;
+    width: 900px;
 }
 
 .text-muted {
