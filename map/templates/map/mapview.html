@@ -24,11 +24,11 @@
     <div class="row">
         <div class="col-md-2 display-all-users">
             <div class="each-upload">
-                <p><span class="text-muted">{% trans 'Filter by user' %}</span></p>
+                <p class="header-users"><span class="text-muted">{% trans 'Filter by user' %}</span></p>
                 {% for user in users %}
-                <div>
+                <div class="show-users {% if creator_filter.pk == user.creator.pk %}active-users{% endif %}">
                     <a href="?creator={{ user.creator.pk }}">
-                        <span class="person-name {% if creator_filter.pk != user.creator.pk %}active{% endif %}">{{ user.creator.first_name|default:user.creator }}</span>
+                        <span class="person-name">{{ user.creator.first_name|default:user.creator }}</span>
                     </a>
                 </div>
                 {% endfor %}
