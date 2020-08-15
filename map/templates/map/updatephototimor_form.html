@@ -1,79 +1,81 @@
-{% extends 'map/base.html' %}
+{% extends 'map/containered-base.html' %}
 {% load widget_tweaks i18n %}
+
 {% block title %}{% trans 'Edit photo journey' %}{% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="row navbar-journey">
-            <div class="col-md-12">
-                <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Edit photo journey' %}</h3>
-            </div>
+
+{% block container_content %}
+<div class="container add-or-edit-journey white-theme">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Edit photo journey' %}</h3>
         </div>
-        <div class="row">
-            <div class="display-all-post each-upload col-md-12">
-                <div class="modal-body">
-                    <ul class="nav nav-tabs">
-                        <li><a href="#upload-photos" data-toggle="tab">{% trans 'Upload Photos' %}</a></li>
-                        <li><a href="#your-photos" data-toggle="tab" style="margin-left: 20px;">{% trans 'Your Photos' %}</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="upload-photos">
-                            <form method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <table>
-                                      {% for hidden_field in form.hidden_fields %}
-                                        {{ hidden_field }}
-                                      {% endfor %}
-                                      {% if form.non_field_errors %}
-                                        <div class="alert alert-danger" role="alert">
-                                          {% for error in form.non_field_errors %}
-                                            {{ error }}
-                                          {% endfor %}
-                                        </div>
-                                      {% endif %}
-                                      {% for field in form.visible_fields %}
-                                        <div class="form-group group-upload">
-                                          {{ field.label_tag }}
-                                          {% if form.is_bound %}
-                                            {% if field.errors %}
-                                              {% render_field field class="form-control is-invalid" %}
-                                              {% for error in field.errors %}
-                                                <div class="invalid-feedback">
-                                                  {{ error }}
-                                                </div>
-                                              {% endfor %}
-                                            {% else %}
-                                              {% render_field field class="form-control is-valid" %}
-                                            {% endif %}
-                                          {% else %}
-                                            {% render_field field %}
-                                          {% endif %}
-                                          {% if field.help_text %}
-                                            <small class="form-text text-muted">{{ field.help_text }}</small>
-                                          {% endif %}
-                                        </div>
-                                      {% endfor %}
-                                </table>
-                                <div class="modal-footer">
-                                    {% if form.non_field_errors %}
-                                        <button type="submit" class="btn btn-primary add-journey">{% trans 'Try Save Again' %}</button>
-                                    {% else %}
-                                        <button type="submit" class="btn btn-primary add-journey">{% trans 'Save' %}</button>
-                                    {% endif %}
-                                    <a href="{% url 'home' %}" type="submit" class="btn btn-default cancel-delete">{% trans 'Skip' %}</a> 
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li><a href="#upload-photos" data-toggle="tab">{% trans 'Upload Photos' %}</a></li>
+                    <li><a href="#your-photos" data-toggle="tab" style="margin-left: 20px;">{% trans 'Your Photos' %}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="upload-photos">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <table>
+                                {% for hidden_field in form.hidden_fields %}
+                                {{ hidden_field }}
+                                {% endfor %}
+                                {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                    {% endfor %}
                                 </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane" id="your-photos">
-                            {% for photos in journey_photos %}
-                                <img src='{{ photos.image.url }}' class="gallery-img" width="300px" alt="Image-{{ photos.pk}}">
-                            {% endfor %}
+                                {% endif %}
+                                {% for field in form.visible_fields %}
+                                <div class="form-group group-upload">
+                                    {{ field.label_tag }}
+                                    {% if form.is_bound %}
+                                    {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                    {% endif %}
+                                    {% else %}
+                                    {% render_field field %}
+                                    {% endif %}
+                                    {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </table>
                             <div class="modal-footer">
-                                <a href="{% url 'home' %}" type="submit" class="btn btn-default cancel-delete">{% trans 'Skip' %}</a> 
+                                {% if form.non_field_errors %}
+                                <button type="submit" class="btn btn-primary">{% trans 'Try Save Again' %}</button>
+                                {% else %}
+                                <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+                                {% endif %}
+                                <a href="{% url 'home' %}" type="submit" class="btn btn-default">{% trans 'Skip' %}</a> 
                             </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="your-photos">
+                        {% for photos in journey_photos %}
+                        <img src='{{ photos.image.url }}' class="gallery-img" width="300px" alt="Image-{{ photos.pk}}">
+                        {% endfor %}
+                        <div class="modal-footer">
+                            <a href="{% url 'home' %}" type="submit" class="btn btn-default cancel-delete">{% trans 'Skip' %}</a> 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

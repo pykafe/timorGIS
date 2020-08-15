@@ -1,18 +1,21 @@
 {% extends 'map/containered-base.html' %}
 {% load widget_tweaks i18n static %}
+
 {% block title %}{% trans 'Add journey photos' %}{% endblock %}
+
 {% block container_content %}
-    <div class="row navbar-journey">
+<div class="container add-or-edit-journey white-theme">
+    <div class="row">
         <div class="col-md-12">
             {% if journey_photos.count %}
-                <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Please add another photo' %}</h3>
+            <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Please add another photo' %}</h3>
             {% else %}
-                <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Add photo journey' %}</h3>
+            <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {% trans 'Add photo journey' %}</h3>
             {% endif %}
         </div>
     </div>
     <div class="row">
-        <div class="display-all-post each-upload col-md-12">
+        <div class="col-md-12">
             <div class="modal-body">
                 <ul class="nav nav-tabs">
                     <li><a href="#upload-photos" data-toggle="tab">{% trans 'Upload Photos' %}</a></li>
@@ -23,50 +26,50 @@
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <table>
-                                  {% for hidden_field in form.hidden_fields %}
-                                    {{ hidden_field }}
-                                  {% endfor %}
-                                  {% if form.non_field_errors %}
-                                    <div class="alert alert-danger" role="alert">
-                                      {% for error in form.non_field_errors %}
+                                {% for hidden_field in form.hidden_fields %}
+                                {{ hidden_field }}
+                                {% endfor %}
+                                {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                {% for field in form.visible_fields %}
+                                <div class="form-group group-upload">
+                                    {{ field.label_tag }}
+                                    {% if form.is_bound %}
+                                    {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                    <div class="invalid-feedback">
                                         {{ error }}
-                                      {% endfor %}
                                     </div>
-                                  {% endif %}
-                                  {% for field in form.visible_fields %}
-                                    <div class="form-group group-upload">
-                                      {{ field.label_tag }}
-                                      {% if form.is_bound %}
-                                        {% if field.errors %}
-                                          {% render_field field class="form-control is-invalid" %}
-                                          {% for error in field.errors %}
-                                            <div class="invalid-feedback">
-                                              {{ error }}
-                                            </div>
-                                          {% endfor %}
-                                        {% else %}
-                                          {% render_field field class="form-control is-valid" %}
-                                        {% endif %}
-                                      {% else %}
-                                        {% render_field field %}
-                                      {% endif %}
-                                      {% if field.help_text %}
-                                        <small class="form-text text-muted">{{ field.help_text }}</small>
-                                      {% endif %}
-                                    </div>
-                                  {% endfor %}
+                                    {% endfor %}
+                                    {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                    {% endif %}
+                                    {% else %}
+                                    {% render_field field %}
+                                    {% endif %}
+                                    {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
                             </table>
                             <div class="modal-footer">
                                 {% if form.non_field_errors %}
-                                    <button type="submit" class="btn btn-primary add-journey">{% trans 'Try Save Again' %}</button>
+                                <button type="submit" class="btn btn-primary">{% trans 'Try Save Again' %}</button>
                                 {% else %}
-                                    {% if journey_photos.count %}
-                                        <button type="submit" class="btn btn-primary add-journey">{% trans 'Save another photo' %}</button>
-                                    {% else %}
-                                        <button type="submit" class="btn btn-primary add-journey">{% trans 'Save' %}</button>
-                                    {% endif %}
+                                {% if journey_photos.count %}
+                                <button type="submit" class="btn btn-primary">{% trans 'Save another photo' %}</button>
+                                {% else %}
+                                <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
                                 {% endif %}
-                                <a href="{% url 'home' %}" type="submit" class="btn btn-default cancel-delete">{% trans 'Skip' %}</a> 
+                                {% endif %}
+                                <a href="{% url 'home' %}" type="submit" class="btn btn-default">{% trans 'Skip' %}</a> 
                             </div>
                         </form>
                     </div>
@@ -84,4 +87,5 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

@@ -43,11 +43,6 @@
                     <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
                     <ul class="dropdown-menu menu-dropdown">
                         <li class="hover-list">
-                            <a href="{% url 'photo_viazen' via.pk %}">
-                                <img src="{% static 'img/add_photo.png' %}" width="25">{% trans 'Add Photo' %}
-                            </a>
-                        </li>
-                        <li class="hover-list">
                             <a href="{% url 'update_viazen' via.pk %}">
                                 <img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}
                             </a>
@@ -71,34 +66,36 @@
                 {% endif %}
 
                 <div class="gallery">
-                    {% for photo in geoimages %}
-                    {% if photo.viazen_id == via.id %}
+                    {% for photo in via.photos.all %}
                     <figure>
-                        <img src='{{ photo.photo }}' class="gallery-img add-pointer" width="300" height="240" alt="Image {{ photo.photo_id }}" title="{% trans 'View full, changing or delete this photo' %}" data-toggle="modal" data-target="#photo-{{ photo.photo_id }}">
+                        <img src='{{ photo.image.url }}' class="gallery-img add-pointer" width="300" height="240" title="{% trans 'View full, change or delete this photo' %}" data-toggle="modal" data-target="#photo-{{ photo.id }}">
                         <!-- Modal -->
-                        <div class="modal fade" id="photo-{{ photo.photo_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="photo-{{ photo.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header bg-light">
+                                        {% if photo.suco %}
                                         <h6 class="modal-title trip-text">
-                                            {% trans 'This photo journey took in the Suco' %}:
-                                            <a href="{% url 'details' via.id photo.photo_id %}">{{ photo.suco }}</a>
+                                            {% blocktrans with suco=photo.suco %}This photo was taken in {{suco}}{% endblocktrans %}
                                         </h6>
+                                        {% endif %}
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                        <a href="{{ photo.photo }}">
-                                            <img src='{{ photo.photo }}' class="gallery-img" title="{% trans 'View full' %}" width="100%" alt="Image {{ photo.photo_id }}">
+                                        <a href="{{ photo.image.url }}" target="_blank">
+                                            <img src='{{ photo.image.url }}' class="gallery-img" title="{% trans 'View full' %}" width="100%">
                                         </a>
                                     </div>
                                     <div class="modal-footer">
+                                        <a href="{% url 'details' via.id photo.id %}">{% trans 'info' %}</a>
                                         {% if user.is_authenticated and user.pk == via.creator.pk %}
                                         <span class="icon-edit-delete">
-                                            <a href="{% url 'update_photo' photo.photo_id %}">
-                                                <img src="{% static 'img/edit_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                            <a href="{% url 'update_photo' photo.id %}">
+                                                <img src="{% static 'img/edit_photo.png' %}" width="40">
                                             </a>
-                                            <a href="{% url 'delete_photo' photo.photo_id %}">
-                                                <img src="{% static 'img/delete_photo.png' %}" width="40" alt="Image {{ photo.photo_id }}">
+                                            <a href="{% url 'delete_photo' photo.id %}">
+
+                                                <img src="{% static 'img/delete_photo.png' %}" width="40">
                                             </a>
                                         </span>
                                         {% endif %}
@@ -107,7 +104,6 @@
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
                     </figure>
-                    {% endif %}
                     {% endfor %}
                 </div>
                 <div class="modal fade read-more-{{ via.pk }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -148,14 +144,22 @@
             var name = layer.feature.properties.name;
                 return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
         }).addTo(timormap);
-        {% for photo in geoimages %}
-            {% if photo.lon and photo.lat %}
-                L.marker([{{ photo.lat }}, {{ photo.lon }}]).bindPopup(contentPopup({{ photo|safe }})).openPopup().addTo(timormap);
+        {% for photo in images %}
+            {% if photo.point %}
+                L.marker([{{ photo.point.y }}, {{ photo.point.x }}]).bindPopup(
+                    contentPopup(
+                        {{photo.id}},
+                        {{photo.istoriaviazen_id}},
+                        '{{ photo.image.url|safe }}',
+                        '{{ photo.district }}',
+                        '{{ photo.subdistrict }}',
+                        '{{ photo.suco }}',
+                    )
+                ).openPopup().addTo(timormap);
             {% endif %}
         {% endfor %}
-        function contentPopup(photo){
-            var viazen_id = photo.viazen_id.toString();
-            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo.photo +" "+"' width='70'></div><div class='col-md-7'><b>"+ photo.district+"</b>, "+ photo.subdistrict +", "+ photo.suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo.photo_id+"'>Detail</a></div></div></div>"
+        function contentPopup(photo_id, viazen_id, photo_url, district, subdistrict, suco){
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo_url +" "+"' width='70'></div><div class='col-md-7'><b>"+ district+"</b>, "+ subdistrict +", "+ suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo_id+"'>Detail</a></div></div></div>"
             return content
         }
 </script>

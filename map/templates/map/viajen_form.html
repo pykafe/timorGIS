@@ -1,64 +1,117 @@
 {% extends 'map/containered-base.html' %}
 {% load widget_tweaks static i18n %}
+
 {% block title %}{% trans ' Add journey history' %}{% endblock %}
+
+{% block container_class %}edit-journey{% endblock %}
+
 {% block container_content %}
-    <div class="row navbar-journey">
-        <div class="col-md-12">
-            <h3 class="trip-text"><a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a> {{hatama_viazen}} {{ update_viazen }}</h3>
-        </div>
-    </div>
     <div class="row">
-        <div class="display-all-post each-upload col-md-12">
-            <form method="post" enctype="multipart/form-data" novalidate>
-                {% csrf_token %}
-
-                {% for hidden_field in form.hidden_fields %}
-                    {{ hidden_field }}
-                {% endfor %}
-
-                {% if form.non_field_errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {% for error in form.non_field_errors %}
-                            {{ error }}
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="form-group">
-                {% for field in form.visible_fields %}
-                    {{ field.label_tag }}
-
-                    {% if form.is_bound %}
-                        {% if field.errors %}
-                            {% render_field field class="form-control is-invalid" %}
-                            {% for error in field.errors %}
-                            <div class="invalid-feedback">
-                                {{ error }}
-                            </div>
-                            {% endfor %}
-                        {% else %}
-                          {% render_field field class="form-control is-valid" %}
-                        {% endif %}
-                      {% else %}
-                        {% render_field field class="form-control" %}
-                      {% endif %}
-
-                      {% if field.help_text %}
-                        <small class="form-text text-muted">{{ field.help_text }}</small>
-                      {% endif %}
-                {% endfor %}
-                </div>
-                <div class="form-group-button">
-                    <button type="submit" class="btn btn-primary add-journey">
-                        {% trans 'Save Journey' %}
-                    </button>
-                </div>
-            </form>
+        <div class="col-md-12">
+            <h3 class="trip-text">
+                <a href="{% url 'home' %}">&larr; {% trans 'Back' %}
+                </a>
+                {{hatama_viazen}} {{ update_viazen }}
+            </h3>
         </div>
     </div>
-    <script>
-        $(function () {
-            $("#id_duration_of_trip_0").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
-            $("#id_duration_of_trip_1").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
-        });
-    </script>
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+        <div class="row">
+            <div class="col-12 alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-6">
+                {{ form.title.label_tag }}
+                {% if not form.is_bound %}
+                    {% render_field form.title class="form-control" %}
+                {% elif form.title.errors %}
+                    {% render_field form.title class="form-control is-invalid" %}
+                    {% for error in form.title.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.title class="form-control is-valid" %}
+                {% endif %}
+                <small class="form-text text-muted">{{ form.title.help_text }}</small>
+            </div>
+            <div class="col-6">
+                {{ form.duration_of_trip.label_tag }}
+                {% if not form.is_bound %}
+                    {% render_field form.duration_of_trip class="form-control" %}
+                {% elif form.duration_of_trip.errors %}
+                    {% render_field form.duration_of_trip class="form-control is-invalid" %}
+                    {% for error in form.duration_of_trip.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.duration_of_trip class="form-control is-valid" %}
+                {% endif %}
+                <small class="form-text text-muted">{{ form.duration_of_trip.help_text }}</small>
+            </div>
+            <div class="col">
+                {{ form.description.label_tag }}
+                {% if not form.is_bound %}
+                    {% render_field form.description class="form-control" %}
+                {% elif form.description.errors %}
+                    {% render_field form.description class="form-control is-invalid" %}
+                    {% for error in form.description.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.description class="form-control is-valid" %}
+                {% endif %}
+                <small class="form-text text-muted">{{ form.description.help_text }}</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
+            </div>
+        </div>
+
+        {% for photo in object.photos.all %}
+        <div class="row">
+            <div class="col-3">
+                <img width="200" src="{{ photo.image.url }}">
+                <a href="{% url 'delete_photo' pk=photo.pk %}?next={{ request.path }}">
+                    <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete' %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-9">
+                <button type="submit" class="btn btn-primary">{% trans 'Save Journey' %}</button>
+            </div>
+        </div>
+    </form>
+
+<script>
+    $(function () {
+        $("#id_duration_of_trip_0").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
+        $("#id_duration_of_trip_1").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
+    });
+</script>
+
 {% endblock %}
