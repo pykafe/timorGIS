@@ -52,14 +52,14 @@
                                 <img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}
                             </a>
                         </li>
-                        <li class="hover-list" onclick="confirmDeleteModal()">
+                        <li class="hover-list" onclick="confirmDeleteModal({{ via.pk }})">
                             <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}
                         </li>
                     </ul>
                 </div>
 
                 <!-- Delete modal -->
-                <div id="deleteModal" class="modal fade" role='dialog'>
+                <div id="deleteModal_{{ via.pk }}" class="modal fade" role='dialog'>
                     <div class="modal-dialog">
                         <div class="modal-content delete-journey">
                             <form class="form-delete" action="{% url 'delete_viazen' via.pk %}" method="POST">
@@ -182,11 +182,11 @@
         };
 
         function confirmDeleteModal(id){
-            $('#deleteModal').modal();
+            $('#deleteModal_'+id).modal();
                 $('#deleteButton').html('<a class="btn btn-danger" onclick="deleteData('+id+')">Delete</a>');
         };     
         function deleteData(id){
-          $('#deleteModal').modal('hide'); // now close modal
+          $('#deleteModal_'+id).modal('hide'); // now close modal
         }
     </script>
 {% endblock %}
