@@ -64,20 +64,6 @@ a:hover {
 }
 
 /* STYLING FOR INPUT ELEMENTS */
-input {
-    border-radius: 2px;
-    border: 1px solid var(--blue-1);
-    background: var(--white-1);
-    padding: .375rem .75rem;
-    cursor: unset;
-}
-.white-theme input {
-    border-radius: 2px;
-    border: 1px solid var(--blue-1);
-    background: var(--white-2);
-    padding: .375rem .75rem;
-    cursor: unset;
-}
 
 .white-theme textarea {
     height: 125px;
@@ -404,7 +390,8 @@ h3 {
 .edit-journey {
     background-color: #fff;
     border-radius: 6px;
-    margin-top: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
     width: 900px;
 }
 

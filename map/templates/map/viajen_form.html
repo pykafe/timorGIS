@@ -10,8 +10,8 @@
         <div class="col-md-12">
             <h3 class="trip-text">
                 <a href="{% url 'home' %}">&larr; {% trans 'Back' %}
-                    {{hatama_viazen}} {{ update_viazen }}
                 </a>
+                {{hatama_viazen}} {{ update_viazen }}
             </h3>
         </div>
     </div>
@@ -84,7 +84,9 @@
         </div>
 
         <div class="row">
-            <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
+            <div class="col">
+                <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
+            </div>
         </div>
 
         {% for photo in object.photos.all %}
