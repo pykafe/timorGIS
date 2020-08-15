@@ -83,20 +83,6 @@ a:hover {
 }
 
 /* STYLING FOR INPUT ELEMENTS */
-input {
-    border-radius: 2px;
-    border: 1px solid var(--blue-1);
-    background: var(--white-1);
-    padding: .375rem .75rem;
-    cursor: unset;
-}
-.white-theme input {
-    border-radius: 2px;
-    border: 1px solid var(--blue-1);
-    background: var(--white-2);
-    padding: .375rem .75rem;
-    cursor: unset;
-}
 
 .white-theme textarea {
     height: 125px;
@@ -250,6 +236,7 @@ span.person-name {
     font-size: 15px;
     font-weight: 700;
     margin-bottom: 2px;
+    padding: 10px;
 }
 
 select#id_creator {
@@ -338,10 +325,20 @@ img.gallery-img {
     line-height: 2;
 }
 
+.col-9 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.col {
+    margin-bottom: 10px;
+}
+
 span.logo-2 {
     font-family: 'Comfortaa';
     color: #32CD32;
-} 
+    font-size: 44px;
+}
 
 span.blue-text {
     color: #4169E1;
@@ -400,6 +397,10 @@ span.blue-text {
     line-height: 3;
 }
 
+.navbar_header{
+    box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
 /* set font-family for every h3 to use comfortaa */
 h3 {
     font-family: 'Comfortaa';
@@ -408,7 +409,9 @@ h3 {
 .edit-journey {
     background-color: #fff;
     border-radius: 6px;
-    box-shadow: 1px 1px 6px #DEDEDE;
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 900px;
 }
 
 .text-muted {
@@ -474,6 +477,8 @@ ul.dropdown-menu.show {
     line-height: 2;
     width: 100%;
     font-size: 12px;
+    right: 0;
+    left: auto;
 }
 
 ul.dropdown-menu.show > a li:hover {

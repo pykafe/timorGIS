@@ -10,8 +10,8 @@
         <div class="col-md-12">
             <h3 class="trip-text">
                 <a href="{% url 'home' %}">&larr; {% trans 'Back' %}
-                    {{hatama_viazen}} {{ update_viazen }}
                 </a>
+                {{hatama_viazen}} {{ update_viazen }}
             </h3>
         </div>
     </div>
@@ -33,7 +33,7 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-md">
+            <div class="col-6">
                 {{ form.title.label_tag }}
                 {% if not form.is_bound %}
                     {% render_field form.title class="form-control" %}
@@ -49,7 +49,7 @@
                 {% endif %}
                 <small class="form-text text-muted">{{ form.title.help_text }}</small>
             </div>
-            <div class="col-md">
+            <div class="col-6">
                 {{ form.duration_of_trip.label_tag }}
                 {% if not form.is_bound %}
                     {% render_field form.duration_of_trip class="form-control" %}
@@ -65,7 +65,7 @@
                 {% endif %}
                 <small class="form-text text-muted">{{ form.duration_of_trip.help_text }}</small>
             </div>
-            <div class="col-md">
+            <div class="col">
                 {{ form.description.label_tag }}
                 {% if not form.is_bound %}
                     {% render_field form.description class="form-control" %}
@@ -84,12 +84,14 @@
         </div>
 
         <div class="row">
-            <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
+            <div class="col">
+                <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
+            </div>
         </div>
 
         {% for photo in object.photos.all %}
         <div class="row">
-            <div class="col">
+            <div class="col-3">
                 <img width="200" src="{{ photo.image.url }}">
                 <a href="{% url 'delete_photo' pk=photo.pk %}?next={{ request.path }}">
                     <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete' %}
@@ -99,7 +101,7 @@
         {% endfor %}
 
         <div class="row">
-            <div class="col">
+            <div class="col-9">
                 <button type="submit" class="btn btn-primary">{% trans 'Save Journey' %}</button>
             </div>
         </div>
