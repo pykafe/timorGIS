@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 16:37+0000\n"
-"PO-Revision-Date: 2020-06-18 12:23+0000\n"
+"POT-Creation-Date: 2020-07-02 07:58+0000\n"
+"PO-Revision-Date: 2020-07-02 08:05+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -39,7 +39,8 @@ msgid "This image type does not support"
 msgstr "Tipu imajen ida nee la suporta"
 
 #: map/models.py:81
-msgid "This image does not have GPS detail"
+#| msgid "This image does not have GPS detail"
+msgid "This image has no GPS details"
 msgstr "Imajen ida nee la iha detallu GPS "
 
 #: map/templates/map/details.html:3
@@ -54,7 +55,7 @@ msgstr "Detallu Timor GIS"
 msgid "Back"
 msgstr "Fila"
 
-#: map/templates/map/details.html:33 map/templates/map/mapview.html:94
+#: map/templates/map/details.html:33 map/templates/map/mapview.html:118
 msgid "Read more"
 msgstr "Haree liu tan"
 
@@ -87,6 +88,7 @@ msgid "Confirm Delete Journey"
 msgstr "Konfirma hamoos Viajen"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:10
+#: map/templates/map/mapview.html:58
 msgid "Confirmation delete"
 msgstr "Konfirmasaun hamoos"
 
@@ -96,10 +98,12 @@ msgid " Are you sure you want to delete \"%(object)s\"? "
 msgstr " Ita boot konkorda atu hamoos \"%(object)s\"?"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:17
+#: map/templates/map/mapview.html:65
 msgid "Cancel"
 msgstr "Kansela"
 
 #: map/templates/map/istoriaviazen_confirm_delete.html:18
+#: map/templates/map/mapview.html:66
 msgid "Delete"
 msgstr "Hamoos"
 
@@ -111,26 +115,33 @@ msgstr "Ita nia istoria kona-ba ita nia viajen"
 msgid "Add my journey"
 msgstr "Hatama viajen"
 
-#: map/templates/map/mapview.html:42
-#| msgid "Upload Photos"
+#: map/templates/map/mapview.html:25
+msgid "Filter by user"
+msgstr "Filtru husi utilizador"
+
+#: map/templates/map/mapview.html:43
 msgid "Add Photo"
 msgstr "Hatama foto"
 
-#: map/templates/map/mapview.html:43
-#| msgid "Save Journey"
+#: map/templates/map/mapview.html:44
 msgid "Edit Journey"
 msgstr "Hadia viajen"
 
-#: map/templates/map/mapview.html:45
-#| msgid "Confirm Delete Journey"
+#: map/templates/map/mapview.html:46
 msgid "Delete Journey"
 msgstr "Konfirma hamoos Viajen"
 
-#: map/templates/map/mapview.html:51
+#: map/templates/map/mapview.html:62
+#, python-format
+#| msgid " Are you sure you want to delete \"%(object)s\"? "
+msgid " Are you sure you want to delete \"%(via)s\"? "
+msgstr " Ita boot konkorda atu hamoos \"%(via)s\"?"
+
+#: map/templates/map/mapview.html:75
 msgid "Created by"
 msgstr "Kria husi"
 
-#: map/templates/map/mapview.html:66
+#: map/templates/map/mapview.html:90
 msgid "This photo journey took in the Suco"
 msgstr "Foto viajen ida nee hasai iha Suco"
 
@@ -179,7 +190,6 @@ msgstr "Husik"
 
 #: map/templates/map/updatephototimor_form.html:3
 #: map/templates/map/updatephototimor_form.html:8
-#| msgid "Add photo journey"
 msgid "Edit photo journey"
 msgstr "Hatama foto viajen"
 

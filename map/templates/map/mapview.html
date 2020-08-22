@@ -47,13 +47,35 @@
                                 <img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}
                             </a>
                         </li>
-                        <li class="hover-list">
-                            <a href="{% url 'delete_viazen' via.pk %}">
-                                <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}
-                            </a>
+                        <li class="hover-list" onclick="confirmDeleteModal({{ via.pk }})">
+                            <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}
                         </li>
                     </ul>
                 </div>
+
+                <!-- Delete modal -->
+                <div id="deleteModal_{{ via.pk }}" class="modal fade" role='dialog'>
+                    <div class="modal-dialog">
+                        <div class="modal-content delete-journey">
+                            <form class="form-delete" action="{% url 'delete_viazen' via.pk %}" method="POST">
+                                {% csrf_token %}
+                                <div class="modal-header">
+                                    <h4 class="modal-title">{% trans 'Confirmation delete' %}</h4>
+                                    <a href="{% url 'home' %}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{% blocktrans %} Are you sure you want to delete "{{ via }}"? {% endblocktrans %}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{% url 'home' %}"><button type="button" class="btn btn-default cancel-delete" data-dismiss="modal">{% trans 'Cancel' %}</button></a>
+                                    <a href="{% url 'delete_viazen' via.pk %}"><button class="btn btn-danger" id= 'deleteButton'>{% trans 'Delete' %}</button></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+              
+              
                 {% endif %}
                 <h3><strong>{{ via.title }}</strong></h3>
                 <p class="text-muted">
@@ -132,7 +154,7 @@
             {% endfor %}
         </div>
     </div>
-<script>
+    <script>
         const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
         L.tileLayer('{{ url_openstreetmap }}', { minZoom: 8, maxZoom: 18 ,attribution: '<a href="{% url "fullmap" %}">{% trans "Full Map" %}</a> {% trans "Journey" %}'}).addTo(timormap);
@@ -161,6 +183,14 @@
         function contentPopup(photo_id, viazen_id, photo_url, district, subdistrict, suco){
             content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo_url +" "+"' width='70'></div><div class='col-md-7'><b>"+ district+"</b>, "+ subdistrict +", "+ suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo_id+"'>Detail</a></div></div></div>"
             return content
+        };
+
+        function confirmDeleteModal(id){
+            $('#deleteModal_'+id).modal();
+                $('#deleteButton').html('<a class="btn btn-danger" onclick="deleteData('+id+')">Delete</a>');
+        };     
+        function deleteData(id){
+          $('#deleteModal_'+id).modal('hide'); // now close modal
         }
-</script>
+    </script>
 {% endblock %}
