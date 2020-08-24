@@ -430,6 +430,10 @@ li.hover-list:hover {
     background-color: rgba(0,0,0,.075);
 }
 
+ul.dropdown-menu.show > li.hover-list.visble-pointer {
+    cursor: pointer;
+}
+
 a.btn.btn-primary.timorgis-login {
     background-color: white;
     color: #0062cc;
