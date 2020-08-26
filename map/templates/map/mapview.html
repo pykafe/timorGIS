@@ -47,7 +47,7 @@
                                 <img src="{% static 'img/photo_edit.png' %}" width="25">{% trans 'Edit Journey' %}
                             </a>
                         </li>
-                        <li class="hover-list" onclick="confirmDeleteModal({{ via.pk }})">
+                        <li class="hover-list visble-pointer" onclick="confirmDeleteModal({{ via.pk }})">
                             <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete Journey' %}
                         </li>
                     </ul>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <a href="{% url 'home' %}"><button type="button" class="btn btn-default cancel-delete" data-dismiss="modal">{% trans 'Cancel' %}</button></a>
-                                    <a href="{% url 'delete_viazen' via.pk %}"><button class="btn btn-danger" id= 'deleteButton'>{% trans 'Delete' %}</button></a>
+                                    <a href="{% url 'delete_viazen' via.pk %}"><button class="btn btn-danger" id="deleteButton">{% trans 'Delete' %}</button></a>
                                 </div>
                             </form>
                         </div>
@@ -187,7 +187,7 @@
 
         function confirmDeleteModal(id){
             $('#deleteModal_'+id).modal();
-                $('#deleteButton').html('<a class="btn btn-danger" onclick="deleteData('+id+')">Delete</a>');
+                $('#deleteButton').html('<a onclick="deleteData('+id+')">Delete</a>');
         };     
         function deleteData(id){
           $('#deleteModal_'+id).modal('hide'); // now close modal
