@@ -29,6 +29,10 @@ body {
     --red-3: #f2dede;
 }
 
+.bg-light {
+    background: linear-gradient(#f8f9fa, #dae0e5);
+}
+
 h1 {
     font-size: 36px;
     font-weight: 600;
