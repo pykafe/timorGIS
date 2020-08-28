@@ -8,9 +8,8 @@
 {% block container_content %}
     <div class="row">
         <div class="col-md-12">
-            <h3 class="trip-text">
-                <a href="{% url 'home' %}">&larr; {% trans 'Back' %}
-                </a>
+            <h3 class="form-title">
+                <a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a>
                 {{hatama_viazen}} {{ update_viazen }}
             </h3>
         </div>
@@ -33,7 +32,7 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 {{ form.title.label_tag }}
                 {% if not form.is_bound %}
                     {% render_field form.title class="form-control" %}
@@ -49,7 +48,9 @@
                 {% endif %}
                 <small class="form-text text-muted">{{ form.title.help_text }}</small>
             </div>
-            <div class="col-6">
+        </div>
+        <div class="row">
+            <div class="col-12 select-date-trip">
                 {{ form.duration_of_trip.label_tag }}
                 {% if not form.is_bound %}
                     {% render_field form.duration_of_trip class="form-control" %}
@@ -65,44 +66,46 @@
                 {% endif %}
                 <small class="form-text text-muted">{{ form.duration_of_trip.help_text }}</small>
             </div>
-            <div class="col">
+        </div>
+        <div class="row">
+            <div class="col-12">
                 {{ form.description.label_tag }}
                 {% if not form.is_bound %}
-                    {% render_field form.description class="form-control" %}
+                    {% render_field form.description class="form-control" cols="4" rows="4" %}
                 {% elif form.description.errors %}
-                    {% render_field form.description class="form-control is-invalid" %}
+                    {% render_field form.description class="form-control is-invalid" cols="4" rows="4" %}
                     {% for error in form.description.errors %}
                     <div class="invalid-feedback">
                         {{ error }}
                     </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.description class="form-control is-valid" %}
+                    {% render_field form.description class="form-control is-valid" cols="4" rows="4" %}
                 {% endif %}
                 <small class="form-text text-muted">{{ form.description.help_text }}</small>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row choose-files">
             <div class="col">
                 <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
             </div>
         </div>
 
+        <div class="row grid-gallery">
         {% for photo in object.photos.all %}
-        <div class="row">
-            <div class="col-3">
-                <img width="200" src="{{ photo.image.url }}">
-                <a href="{% url 'delete_photo' pk=photo.pk %}?next={{ request.path }}">
-                    <img src="{% static 'img/delete_photo.png' %}" width="25">{% trans 'Delete' %}
-                </a>
+            <div class="col-12">
+                <figure>
+                    <img class="edit-img-display" width="200" src="{{ photo.image.url }}">
+                    <a class="top-right" title="{% trans 'Delete this image' %}" href="{% url 'delete_photo' pk=photo.pk %}?next={{ request.path }}">X</a>
+                </figure>
             </div>
-        </div>
         {% endfor %}
+        </div>
 
         <div class="row">
-            <div class="col-9">
-                <button type="submit" class="btn btn-primary">{% trans 'Save Journey' %}</button>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-pull-right">{% trans 'Save Journey' %}</button>
             </div>
         </div>
     </form>
