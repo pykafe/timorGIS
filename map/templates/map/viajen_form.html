@@ -7,11 +7,8 @@
 
 {% block container_content %}
     <div class="row">
-        <div class="col-md-12">
-            <h3 class="form-title">
-                <a href="{% url 'home' %}">&larr; {% trans 'Back' %}</a>
-                {{hatama_viazen}} {{ update_viazen }}
-            </h3>
+        <div class="col form-title">
+            <h3><span>{{ hatama_viazen }}{{ update_viazen }}</span></h3>
         </div>
     </div>
 
@@ -88,7 +85,7 @@
 
         <div class="row choose-files">
             <div class="col">
-                <input type="file" name="photos" accept="image/.jpg,.jpeg" multiple>
+                <input type="file" name="photos" accept="image/.jpeg, .jpg" multiple>
             </div>
         </div>
 
@@ -106,6 +103,7 @@
         <div class="row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-pull-right">{% trans 'Save Journey' %}</button>
+                <a href='{% url "home" %}' class="btn btn-default btn-pull-right">{% trans 'Cancel' %}</a>
             </div>
         </div>
     </form>
