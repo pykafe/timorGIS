@@ -194,7 +194,7 @@ span.red_text {
     color: #FF0000;
 }
 
-figure > a.top-right {
+figure > a.top-right, button.top-right {
     position: absolute;
     top: 2px;
     right: 18px;
@@ -208,8 +208,21 @@ figure > a.top-right {
 
 }
 
-figure > a.top-right:hover {
-    color: var(--black);
+a.close.top-right {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 4px 12px;
+    margin: 2px;
+    background: white;
+    opacity: .6;
+    border-radius: 2px;
+}
+
+figure > a.top-right:hover, a.close.top-right:hover {
+    color: var(--white-1);
+    background-color: var(--black);
+    cursor: pointer;
 }
 
 p.detail {
@@ -537,6 +550,15 @@ ul.dropdown-menu.show > a li img {
     float: right;
     background-color: white;
     color: #0062cc;
+}
+
+.modal-dialog.modal-img {
+    max-width: max-content;
+    height: max-content;
+}
+
+.modal-body.modal-img-body {
+    padding: 1px;
 }
 
 .active {
