@@ -367,7 +367,9 @@ img.edit-img-display {
     max-width: 100%;
     height: 109px;
     border-radius: 4px;
+    cursor: pointer;
 }
+
 .col-md-6.search-journey {
     line-height: 2;
 }
