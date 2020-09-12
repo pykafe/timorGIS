@@ -1,7 +1,7 @@
 {% extends 'map/containered-base.html' %}
 {% load widget_tweaks static i18n %}
 
-{% block title %}{% trans ' Add journey history' %}{% endblock %}
+{% block title %}{{ hatama_viazen }} {{ update_viazen }}{% endblock %}
 
 {% block container_class %}edit-journey{% endblock %}
 
@@ -93,10 +93,21 @@
         {% for photo in object.photos.all %}
             <div class="col-12">
                 <figure>
-                    <img class="edit-img-display" width="200" src="{{ photo.image.url }}">
+                    <img class="edit-img-display" width="200" title="{% trans 'View this image' %}" data-toggle="modal" data-target="#photo-{{ photo.id }}" src="{{ photo.image.url }}">
                     <a class="top-right" title="{% trans 'Delete this image' %}" href="{% url 'delete_photo' pk=photo.pk %}?next={{ request.path }}">X</a>
                 </figure>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="photo-{{ photo.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-img">
+                    <div class="modal-content modal-img-content">
+                        <div class="modal-body modal-img-body">
+                            <img src='{{ photo.image.url }}' class="gallery-img" width="100%">
+                            <a class="close top-right" data-dismiss="modal" aria-hidden="true">X</a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         {% endfor %}
         </div>
 
