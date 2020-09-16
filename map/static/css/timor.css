@@ -619,6 +619,7 @@ ul.dropdown-menu.show > a li img {
 
 .group-upload {
     margin-top: 50px;
+}
 
 .delete-journey {
     border: 1px solid #f8f9fa;
@@ -645,5 +646,15 @@ ul.dropdown-menu.show > a li img {
     color: #fff;
     background-color: #ff0019;
     border-color: #ff0019;
+}
+
+.invalid-feedback {
+    color: #c0392b;
+    background-color: #f2dede;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 2px;
 }
 
