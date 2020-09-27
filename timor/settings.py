@@ -27,7 +27,7 @@ SECRET_KEY = '(g_ipc8-#q9-4a*vwbz)3!47j-8r4_y2tm4$2k8yyo5z$l$30c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['timorgis.pykafe.dns-cloud.net',]
 
 # Application definition
 
