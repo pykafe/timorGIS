@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'timor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'timor_db',
+        'NAME': 'timorgis_db',
     }
 }
 
@@ -148,9 +148,8 @@ django.conf.locale.LANG_INFO.update(EXTRA_LANG_INFO)
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "map/static"),
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles"),]
 
 LOGIN_REDIRECT_URL = '/'
 
