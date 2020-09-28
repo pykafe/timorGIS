@@ -110,17 +110,6 @@
                                     </div>
                                     <div class="modal-footer">
                                         <a href="{% url 'details' via.id photo.id %}">{% trans 'info' %}</a>
-                                        {% if user.is_authenticated and user.pk == via.creator.pk %}
-                                        <span class="icon-edit-delete">
-                                            <a href="{% url 'update_photo' photo.id %}">
-                                                <img src="{% static 'img/edit_photo.png' %}" width="40">
-                                            </a>
-                                            <a href="{% url 'delete_photo' photo.id %}">
-
-                                                <img src="{% static 'img/delete_photo.png' %}" width="40">
-                                            </a>
-                                        </span>
-                                        {% endif %}
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
