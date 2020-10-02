@@ -49,7 +49,7 @@
                                 <li><img src="{% static 'icons/box-arrow-left.svg' %}" alt="icon" width="25" height="25" title="Logout">{% trans 'log out' %}</li>
                             </a>
                             {% else %}
-                            <a href="{% url 'login' %}">
+                            <a href="{% url 'login' %}?next={{ request.path }}">
                                 <li><img src="{% static 'icons/power.svg' %}" alt="icon" width="25" height="25" title="Login">{% trans 'Log In' %}</li>
                             </a>
                             {% endif %}
