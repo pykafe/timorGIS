@@ -120,39 +120,6 @@ class HatamaViazenView(CreateView):
         return redirect
 
 
-class PhotoViazenView(CreateView):
-    template_name = 'map/phototimor_form.html'
-    model = PhotoTimor
-    fields = ['image']
-
-    def get_success_url(self):
-        return reverse_lazy('photo_viazen', args = (self.object.istoriaviazen_id,))
-
-    def get_context_data(self, *args, **kwargs):
-        target = self.kwargs['pk']
-        context = super(PhotoViazenView, self).get_context_data(*args, **kwargs)
-        context['journey_photos'] = PhotoTimor.objects.filter(istoriaviazen=target)
-        return context
-
-    def form_valid(self, form):
-        # set the viazen of the photo to the url viazen
-        form.instance.istoriaviazen_id = self.kwargs['pk']
-        return super().form_valid(form)
-
-
-class UpdatePhotoViazenView(UpdateView):
-    template_name = 'map/updatephototimor_form.html'
-    model = PhotoTimor
-    fields = ['image']
-    success_url = reverse_lazy('home')
-
-    def get_context_data(self, *args, **kwargs):
-        target = self.kwargs['pk']
-        context = super(UpdatePhotoViazenView, self).get_context_data(*args, **kwargs)
-        context['journey_photos'] = PhotoTimor.objects.filter(id=target)
-        return context
-
-
 class ViazenUpdateView(UpdateView):
     template_name = 'map/viajen_form.html'
     model = IstoriaViazen
@@ -176,7 +143,6 @@ class ViazenUpdateView(UpdateView):
         return redirect
 
 
-# delete view for details 
 class ViazenDeleteView(DeleteView):
     model = IstoriaViazen
     template_name = 'map/mapview.html'
@@ -191,7 +157,6 @@ class DeletePhotoView(DeleteView):
     def get_success_url(self):
         next_url = self.request.GET.get('next')
         return next_url if next_url else self.success_url
-
 
 
 class StyleGuideView(TemplateView):
