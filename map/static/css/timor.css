@@ -196,6 +196,10 @@ body .default-gray-theme {
     margin-bottom: 30px;
 }
 
+.ui-datepicker .ui-widget-header .ui-icon {
+    background-image: url(../icons/ui-icons_555555_256x240.png);
+}
+
 span.black_text {
     color: #000000;
 }
