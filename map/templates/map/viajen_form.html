@@ -32,36 +32,34 @@
             <div class="col-12">
                 {{ form.title.label_tag }}
                 {% if not form.is_bound %}
-                    {% render_field form.title class="form-control" %}
+                    {% render_field form.title class="form-control" autocomplete="off" %}
                 {% elif form.title.errors %}
-                    {% render_field form.title class="form-control is-invalid" %}
+                    {% render_field form.title class="form-control is-invalid" autocomplete="off" %}
                     {% for error in form.title.errors %}
                     <div class="invalid-feedback">
                         {{ error }}
                     </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.title class="form-control is-valid" %}
+                    {% render_field form.title class="form-control is-valid" autocomplete="off" %}
                 {% endif %}
-                <small class="form-text text-muted">{{ form.title.help_text }}</small>
             </div>
         </div>
         <div class="row">
             <div class="col-12 select-date-trip">
                 {{ form.duration_of_trip.label_tag }}
                 {% if not form.is_bound %}
-                    {% render_field form.duration_of_trip class="form-control" %}
+                    {% render_field form.duration_of_trip class="form-control" readonly="readonly" autocomplete="off" %}
                 {% elif form.duration_of_trip.errors %}
-                    {% render_field form.duration_of_trip class="form-control is-invalid" %}
+                    {% render_field form.duration_of_trip class="form-control is-invalid" readonly="readonly" autocomplete="off" %}
                     {% for error in form.duration_of_trip.errors %}
                     <div class="invalid-feedback">
                         {{ error }}
                     </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.duration_of_trip class="form-control is-valid" %}
+                    {% render_field form.duration_of_trip class="form-control is-valid" readonly="readonly" autocomplete="off"%}
                 {% endif %}
-                <small class="form-text text-muted">{{ form.duration_of_trip.help_text }}</small>
             </div>
         </div>
         <div class="row">
@@ -79,7 +77,6 @@
                 {% else %}
                     {% render_field form.description class="form-control is-valid" cols="4" rows="4" %}
                 {% endif %}
-                <small class="form-text text-muted">{{ form.description.help_text }}</small>
             </div>
         </div>
 
@@ -121,8 +118,18 @@
 
 <script>
     $(function () {
-        $("#id_duration_of_trip_0").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
-        $("#id_duration_of_trip_1").datepicker({Format: 'mm-dd-yyyy', minDate: "-1M", maxDate: "+0D", showButtonPanel: true});
+        $("#id_duration_of_trip_0").datepicker({
+            Format: 'mm-dd-yyyy',
+            minDate: "-1M",
+            maxDate: "+0D",
+            showButtonPanel: true
+        });
+        $("#id_duration_of_trip_1").datepicker({
+            Format: 'mm-dd-yyyy',
+            minDate: "-1M",
+            maxDate: "+0D",
+            showButtonPanel: true
+        });
     });
 </script>
 
