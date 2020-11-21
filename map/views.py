@@ -11,6 +11,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
 
+class TestView(TemplateView):
+    template_name = 'my_design_work.html'
+
+
 class FullMapView(TemplateView):
     template_name = 'map/fullmapview.html'
 

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path
-from .views import MapView, HatamaViazenView, ViazenUpdateView, ViazenDeleteView, DeletePhotoView, DetailMapView, FullMapView, StyleGuideView
+from .views import MapView, HatamaViazenView, ViazenUpdateView, ViazenDeleteView, DeletePhotoView, DetailMapView, FullMapView, StyleGuideView, TestView
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
     path('detail/viazen/<int:viazen_pk>/<int:photo_pk>', DetailMapView.as_view(), name="details"),
     path('fullmap/', FullMapView.as_view(), name="fullmap"),
     path('style_guide', StyleGuideView.as_view(), name='style_guide'),
+    path('test', TestView.as_view(), name='test'),
 ]

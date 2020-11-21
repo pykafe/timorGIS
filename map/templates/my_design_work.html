@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Timor Journey</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/js/popper.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/static/js/leaflet.js"></script>
+        <script type="text/javascript" src="/static/js/jquery-ui.js"></script>
+
+        
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/timor.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/leaflet.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/jquery-ui.css">
+        
+     </head>
+    <body>
+        
+            
+<nav class="navbar navbar_header navbar-expand-md navbar-light bg-light">
+    <div class="container">
+        <a href="/" class="navbar-brand logo"><span class="black_text">Tim</span><span class="white_text">or</span>&nbsp;<span class="yellow_text">Jo</span><span class="red_text">urney</span>
+</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        
+                        <a href="/"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings
+                        </a>
+                      
+                        <ul class="dropdown-menu">
+                            <form id="language_form" class="navbar-form navbar-left" action="/i18n/setlang/" method="post">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="xHJo91oJykOv4AwEeNv4xY61kONtwGCYaGp1QOSKVAabtxxnIz46ytMAdDArkiMK">
+                                <input name="next" type="hidden" value="" />
+                                <select name="language" id="language_select" class="form-control">
+                                
+                                
+                                
+                                
+                                <option value="tet">
+                                    Tetum
+                                </option>
+                                
+                                <option value="en" selected="selected">
+                                    English
+                                </option>
+                                
+                                </select>
+                            </form>
+                            
+                            
+                            <a href="/accounts/login/">
+                                <li><img src="/static/icons/power.svg" alt="icon" width="25" height="25" title="Login">Log In</li>
+                            </a>
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Changing the languages using js function -->
+<script>
+    $('#language_select').change(function(){
+        // submit the form
+        $('#language_form').submit();
+    })
+</script>
+
+        
+
+        
+
+<div class="container ">
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div id="mapid"></div>
+        </div>
+        <div class="col-md-6">
+            <h3 class="trip-text">Our histories for our trip</h3>
+
+            {% include "journey_block.html" %} 
+            {% include "journey_block.html" %} 
+            {% include "journey_block.html" %} 
+        </div>
+
+    </div>
+
+
+    <script>
+        var timormap = L.map('mapid').setView([-8.8315139, 125.6199236, 8], 8);
+        L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { minZoom: 8, maxZoom: 18 ,attribution: '<a href="/fullmap/">Full Map</a> Journey'}).addTo(timormap);
+        
+            
+                L.marker([-8.838219444444444, 125.59423888888888]).bindPopup(
+                    contentPopup(
+                        6,
+                        3,
+                        '/media/photos/340CBF2D-3587-44FD-850A-50546D5BCE72_P3ElYJS.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+                L.marker([-8.837927777777779, 125.59448888888889]).bindPopup(
+                    contentPopup(
+                        8,
+                        5,
+                        '/media/photos/7F1AE01C-66BA-4014-93DF-EC37E37E5E8B_kr40BB4.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+                L.marker([-9.011811111111111, 125.28472777777777]).bindPopup(
+                    contentPopup(
+                        11,
+                        1,
+                        '/media/photos/8B38DAB2-933F-4BD5-B082-97F746606B0D_KcoRmNx.jpeg',
+                        'BOBONARO',
+                        'MALIANA',
+                        'Ritabou',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+                L.marker([-8.545194444444444, 125.60359166666666]).bindPopup(
+                    contentPopup(
+                        12,
+                        1,
+                        '/media/photos/86345B7F-46B7-48BF-9648-7AFC137B3648_by6crzX.jpeg',
+                        'DILI',
+                        'CRISTO REI',
+                        'Meti Aut',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+        
+            
+                L.marker([-8.838202777777779, 125.5941611111111]).bindPopup(
+                    contentPopup(
+                        14,
+                        1,
+                        '/media/photos/8E0D34A2-EB62-40D6-84DD-FBD0D71A4542_H81OoYU.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+                L.marker([-8.83778888888889, 125.59426111111111]).bindPopup(
+                    contentPopup(
+                        17,
+                        6,
+                        '/media/photos/6A9D06A0-A71A-4E51-B68B-40225B78D5A1_eXFZ61k.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+        
+            
+                L.marker([-8.837575000000001, 125.59484166666667]).bindPopup(
+                    contentPopup(
+                        19,
+                        7,
+                        '/media/photos/B9C8A665-02E4-4069-ADB3-A20395DCD9B9.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+                L.marker([-8.837844444444444, 125.59451944444444]).bindPopup(
+                    contentPopup(
+                        20,
+                        7,
+                        '/media/photos/B02672A0-0C93-482E-B1EB-284EB49F4135_EHpeN3g.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+                L.marker([-8.83786388888889, 125.59455833333332]).bindPopup(
+                    contentPopup(
+                        21,
+                        7,
+                        '/media/photos/F329BEEA-A35B-4792-B21B-3D097BCB908D_0Sgh9cR.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+            
+                L.marker([-8.838519444444445, 125.59403888888889]).bindPopup(
+                    contentPopup(
+                        23,
+                        8,
+                        '/media/photos/9C005AF9-714E-49BE-8B17-9C1EFBF307C4.jpeg',
+                        'AINARO',
+                        'MAUBISSE',
+                        'Maubisse',
+                    )
+                ).openPopup().addTo(timormap);
+            
+        
+        function contentPopup(photo_id, viazen_id, photo_url, district, subdistrict, suco){
+            content = "<div class='container'><div class='row'><div class='col-md-5'><img src='"+ photo_url +" "+"' width='70'></div><div class='col-md-7'><b>"+ district+"</b>, "+ subdistrict +", "+ suco +"</br><a href='/detail/viazen/"+viazen_id+"/"+photo_id+"'>Detail</a></div></div></div>"
+            return content
+        };
+
+        function confirmDeleteModal(id){
+            $('#deleteModal_'+id).modal();
+                $('#deleteButton').html('<a onclick="deleteData('+id+')">Delete</a>');
+        };     
+        function deleteData(id){
+          $('#deleteModal_'+id).modal('hide'); // now close modal
+        }
+    </script>
+
+</div>
+
+
+        
+<div class="footer">
+    <p align="center">Copyright <a href="http://pykafe.org" target="_blank"><span class="logo-2">Py<span class="blue-text">Kafe</span></span>
+</a> 2020</p>
+</div>
+
+    </body>
+</html>
+
