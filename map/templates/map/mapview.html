@@ -3,39 +3,67 @@
 
 {% block title %}Timor Journey{% endblock %}
 {% block container_content %}
-        <div class="row">
-            <div class="col-md-6 display-all-post"> 
+        <div class="row navbar-journey">
+            <div class="col-md-12"> 
                 <div class="our-history">
-                    <h3 class="trip-text">{% trans 'Our histories for our trip' %}</h3>
-                </div>
+                    <p class="trip-text">{% trans 'Our histories for our trip' %}</p>
             <!--
-            <div class="col-md-6 search-journey">
-                <input type="text" name="search" placeholder="Search..">
-            </div>
-            -->
-                <div class="authen-user">
-                    {% if user.is_authenticated %}
-                    <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
-                    {% endif %}
+                    <div class="col-md-6 search-journey">
+                        <input type="text" name="search" placeholder="Search..">
+                    </div>
+                    -->
+                    <div class="authen-user">
+                        {% if user.is_authenticated %}
+                        <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+                        {% endif %}
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="row map-content">
+        <!-- Card -->
+        <div class="col-md-6">
+            <div id="mapid"></div>
+                <div class="display-all-users">
+                    <div class="card testimonial-card">
+                      <!-- Content -->
+                      <div class="card-body">
+                        <!-- Name -->
+                        <p class="header-users"><span class="text-muted">{% trans 'Filter by user' %}</span></p>
+                        <hr>
+                        <!-- Quotation -->
+                        {% for user in users %}
+                        <div class="show-users {% if creator_filter.pk == user.creator.pk %}active-users{% endif %}">
+                            <a href="?creator={{ user.creator.pk }}">
+                                <span class="person-name">{{ user.creator.first_name|default:user.creator }}</span>
+                            </a>
+                        </div>
+                        {% endfor %}
+                        </p>
+                      </div>
+
+                    </div>
+                </div>
+        </div>
+        <!-- Card -->
+            <div class="col-md-6 display-all-post">
                 {% for via in viazen %}
                 {% if via.creator %}
                 <div class="each-upload">
                     {% if user.is_authenticated and user.pk == via.creator.pk %}
-                    <div class="dropdown dropdown-edit-and-delete">
-                        <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
-                        <ul class="dropdown-menu menu-dropdown">
-                            <li class="hover-list">
-                                <a href="{% url 'update_viazen' via.pk %}">
-                                    <img src="{% static 'img/photo_edit.png' %}" width="15">{% trans 'Edit Journey' %}
-                                </a>
-                            </li>
-                            <li class="hover-list visble-pointer" onclick="confirmDeleteModal({{ via.pk }})">
-                                <img src="{% static 'img/delete_photo.png' %}" width="15">{% trans 'Delete Journey' %}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                        <div class="dropdown dropdown-edit-and-delete">
+                            <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
+                            <ul class="dropdown-menu menu-dropdown">
+                                <li class="hover-list">
+                                    <a href="{% url 'update_viazen' via.pk %}">
+                                        <img src="{% static 'img/photo_edit.png' %}" width="15">{% trans 'Edit Journey' %}
+                                    </a>
+                                </li>
+                                <li class="hover-list visble-pointer" onclick="confirmDeleteModal({{ via.pk }})">
+                                    <img src="{% static 'img/delete_photo.png' %}" width="15">{% trans 'Delete Journey' %}
+                                </li>
+                            </ul>
+                        </div>
                     <!-- Delete modal -->
                     <div id="deleteModal_{{ via.pk }}" class="modal fade" role='dialog'>
                         <div class="modal-dialog">
@@ -57,7 +85,6 @@
                             </div>
                         </div>
                     </div>
-                  
                     {% endif %}
                     <h3><strong>{{ via.title }}</strong></h3>
                     <p class="text-muted">
@@ -120,24 +147,9 @@
                         </div>
                     </div>
                     <p class="text-muted">{% trans 'Created by' %} {{ via.creator|capfirst }}<span class="vertical-line"> {{ via.created_at }}</p>
+            </div>
                 {% endif %}
                 {% endfor %}
-            </div>
-            <div class="col-md-6">
-                <h1>Test my Div</h1>
-                <div id="mapid"></div>
-                <div class="display-all-users">
-                <div class="each-upload">
-                    <p class="header-users"><span class="text-muted">{% trans 'Filter by user' %}</span></p>
-                    {% for user in users %}
-                    <div class="show-users {% if creator_filter.pk == user.creator.pk %}active-users{% endif %}">
-                        <a href="?creator={{ user.creator.pk }}">
-                            <span class="person-name">{{ user.creator.first_name|default:user.creator }}</span>
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
-                </div>
             </div>
         </div>
 
