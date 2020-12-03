@@ -14,6 +14,7 @@ body {
     color: var(--black-1);
     font-family: 'Montserrat';
     font-size: 14px;
+    overflow-y:hidden;
 }
 
 :root {
@@ -198,7 +199,8 @@ body .default-gray-theme {
 
 
 #mapid { 
-    height: 400px; 
+    height: 450px; 
+    width: 560px; 
 }
 
 .ui-datepicker .ui-widget-header .ui-icon {
@@ -273,7 +275,8 @@ p.detail {
     float: right;
     background-color: white;
     color: #0062cc;
-    margin-top: -35px;
+    margin-top: -45px;
+    margin-right: 40px;
 }
 
 .list-users {
@@ -445,12 +448,14 @@ span.blue-text {
     position: sticky;
     z-index: 1;
     background: #ffffff;
-    padding: 20px;
+    padding: 10px;
 }
 
 .display-all-post {
     border-radius: 4px;
     position: sticky;
+    overflow-y: scroll;
+    height:450px;
 }
 
 .user-upload {

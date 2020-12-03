@@ -22,11 +22,10 @@ class FullMapView(TemplateView):
         context['images'] = PhotoTimor.objects.filter(istoriaviazen__in=context['viazen'])
         context['points'] = {
             'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
-            'DEFAULT_ZOOM': 9,
+            'DEFAULT_ZOOM': 8,
         }
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
-
 
 
 class DetailMapView(TemplateView):
@@ -85,7 +84,7 @@ class MapView(TemplateView):
         context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
         context['images'] = PhotoTimor.objects.filter(istoriaviazen__in=context['viazen'])
         context['points'] = {
-            'DEFAULT_CENTER': [-8.8315139, 125.6199236,8],
+            'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
             'DEFAULT_ZOOM': 8,
         }
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
