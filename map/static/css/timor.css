@@ -14,7 +14,6 @@ body {
     color: var(--black-1);
     font-family: 'Montserrat';
     font-size: 14px;
-    height:950px;
 }
 
 :root {
@@ -455,7 +454,7 @@ span.blue-text {
     border-radius: 4px;
     position: sticky;
     overflow-y: scroll;
-    height:450px;
+    height:640px;
 }
 
 .user-upload {
