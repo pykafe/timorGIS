@@ -14,7 +14,7 @@ body {
     color: var(--black-1);
     font-family: 'Montserrat';
     font-size: 14px;
-    overflow-y:hidden;
+    height:950px;
 }
 
 :root {
