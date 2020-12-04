@@ -617,6 +617,19 @@ ul.dropdown-menu.show > a li img {
     margin-right: 12px;
 }
 
+.modal-backdrop.fade.show {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    margin-left: 770px;
+    animation-duration: 0.4s
+}
+
+.modal-content.delete-journey {
+    margin-left: 290px;
+    width: 85%;
+}
+
 .cont-modal {
     margin-top: 50px;
 }
@@ -634,6 +647,12 @@ ul.dropdown-menu.show > a li img {
 
 .modal-body.modal-img-body {
     padding: 1px;
+}
+
+.modal-content {
+    position: relative;
+    width: 60%;
+    margin-left: 300px;
 }
 
 .active {
