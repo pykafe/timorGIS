@@ -58,12 +58,6 @@ a {
     text-decoration: none;
 }
 
-p.trip-text {
-    margin: 10px;
-    font-family: initial;
-    font-size: 24px;
-}
-
 a:hover {
     color: var(--blue-1);
     text-decoration: none
@@ -189,7 +183,7 @@ body .default-gray-theme {
     border-top: 1px solid #31d9ff;
 }
 
-.container {
+.container.form-viazen {
     margin-right: 10%;
     margin-left: 10%;
     background-color: white;
@@ -205,7 +199,6 @@ body .default-gray-theme {
 
 #mapid { 
     height: 600px; 
-    width: 700px; 
 }
 
 .ui-datepicker .ui-widget-header .ui-icon {
@@ -511,17 +504,6 @@ h4.card-title {
 .display-all-users {
     padding-left: 0px;
     margin-top: 25px;
-}
-
-.each-users {
-    border-radius: 4px;
-    background-color: white;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    margin-bottom: 14px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 .footer {
