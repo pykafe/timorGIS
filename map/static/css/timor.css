@@ -447,12 +447,13 @@ span.blue-text {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
     padding: 20px;
     padding-left: 140px;
-    margin-left: 15px;
-    margin-right: 15px;
 }
 
 .row.map-content {
-    margin: 10px;
+    margin: 0px;
+    background: #ffffff;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .our-history{
