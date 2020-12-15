@@ -86,7 +86,7 @@
                     <div class="gallery">
                         {% for photo in via.photos.all %}
                         <figure>
-                            <img src='{{ photo.image.url }}' class="gallery-img add-pointer" width="200" height="110" title="{% trans 'View full, change or delete this photo' %}" data-toggle="modal" data-target="#photo-{{ photo.id }}">
+                            <img src='{{ photo.image.url }}' class="img-responsive add-pointer" width="220" height="170" title="{% trans 'View full, change or delete this photo' %}" data-toggle="modal" data-target="#photo-{{ photo.id }}">
                             <!-- Modal -->
                             <div class="modal fade" id="photo-{{ photo.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <a href="{{ photo.image.url }}" target="_blank">
-                                                <img src='{{ photo.image.url }}' class="gallery-img" title="{% trans 'View full' %}" width="100%">
+                                                <img src='{{ photo.image.url }}' class="img-reponsive" title="{% trans 'View full' %}" width="100%">
                                             </a>
                                         </div>
                                         <div class="modal-footer">

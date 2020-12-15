@@ -401,14 +401,14 @@ button.btn.btn-success.btn-lg {
     margin-bottom: 16px;
 }
 
-img.gallery-img.add-pointer {
+img.img-responsive.add-pointer {
     cursor: pointer;
 }
 
-img.gallery-img {
+img.img-responsive {
     max-width: 100%;
-    height: auto;
     border-radius: 4px;
+    padding: 3px
 }
 
 img.edit-img-display {
@@ -497,7 +497,7 @@ h4.card-title {
     padding-bottom: 16px;
     margin-bottom: 14px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    padding-left: 16px;
+    padding: 15px;
 }
 
 
