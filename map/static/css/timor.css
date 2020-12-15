@@ -444,16 +444,15 @@ span.blue-text {
 
 .row.navbar-journey {
     background: #ffffff;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
     padding: 20px;
     padding-left: 140px;
 }
 
 .row.map-content {
     margin: 0px;
-    background: #ffffff;
     margin-left: 5px;
     margin-right: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .our-history{
