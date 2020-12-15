@@ -273,12 +273,7 @@ p.detail {
     float: right;
     background-color: white;
     color: #0062cc;
-    margin-top: -20px;
-    margin-right: 50px;
-}
-
-.authen-user {
-    padding-top: 15px;
+    margin-right: 60px;
 }
 
 button.btn.dropdown-toggle {
@@ -444,7 +439,7 @@ span.blue-text {
 
 .row.navbar-journey {
     background: #ffffff;
-    padding: 20px;
+    padding: 25px;
     padding-left: 140px;
 }
 

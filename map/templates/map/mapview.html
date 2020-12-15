@@ -4,12 +4,7 @@
 {% block title %}Timor Journey{% endblock %}
 {% block container_content %}
         <div class="row navbar-journey">
-            <div class="col-md-12"> 
-                <div class="authen-user">
-                    {% if user.is_authenticated %}
-                    <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
-                    {% endif %}
-                </div>
+            <div class="col-md-8">
                 <div class="dropdown-users">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                         <span class="text-muted">{% trans 'Filter by user' %}</span>
@@ -25,6 +20,11 @@
                         </p>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4"> 
+                {% if user.is_authenticated %}
+                <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+                {% endif %}
             </div>
         </div>
         <div class="row map-content">
