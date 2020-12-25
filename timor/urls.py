@@ -19,9 +19,30 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework import routers, serializers, viewsets
+from map.models import District
+from geojson_serializer.serializers import geojson_serializer
+
+# Serializers define the API representation.
+@geojson_serializer('geom')
+class DistrictSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = District
+        fields = ['id', 'name', 'geom']
+
+# ViewSets define the view behavior.
+class DistrictViewSet(viewsets.ModelViewSet):
+    queryset = District.objects.all()
+    serializer_class = DistrictSerializer
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'districts', DistrictViewSet)
 
 urlpatterns = i18n_patterns(
     path('', include('map.urls')),
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),

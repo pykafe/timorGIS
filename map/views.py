@@ -18,7 +18,7 @@ class FullMapView(TemplateView):
         images = []
         context = super(FullMapView, self).get_context_data(*args, **kwargs)
         context['viazen'] = IstoriaViazen.objects.all()
-        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        #context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
         context['images'] = PhotoTimor.objects.filter(istoriaviazen__in=context['viazen'])
         context['points'] = {
             'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
@@ -51,7 +51,7 @@ class DetailMapView(TemplateView):
                 raise Http404()
 
 
-        context['districts'] = serialize('geojson', selected_photo.districts(), geometry_field='geom')
+        #context['districts'] = serialize('geojson', selected_photo.districts(), geometry_field='geom')
         context['subdistricts'] = serialize('geojson', selected_photo.subdistricts(), geometry_field='geom')
         context['sucos'] = serialize('geojson', selected_photo.sucos(), geometry_field='geom')
         context['DEFAULT_CENTER'] = [selected_photo.point.y, selected_photo.point.x, 10]
@@ -82,7 +82,7 @@ class MapView(TemplateView):
             context['viazen'] = IstoriaViazen.objects.all().order_by('-created_at')
 
         context['users'] = IstoriaViazen.objects.distinct('creator')
-        context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
+        #context['districts'] = serialize('geojson', District.objects.all(), geometry_field='geom')
         context['images'] = PhotoTimor.objects.filter(istoriaviazen__in=context['viazen'])
         context['points'] = {
             'DEFAULT_CENTER': [-8.8315139, 125.6199236,8],

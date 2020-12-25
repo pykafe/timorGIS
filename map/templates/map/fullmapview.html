@@ -13,17 +13,20 @@
     <div id="mapid"></div>
 
     <script>
-        const districts = {{ districts|safe }};
+        const url = "/en/api/districts/?format=json";
+        //const districts = {{ districts|safe }};
         var timormap = L.map('mapid').setView({{ points.DEFAULT_CENTER }}, {{ points.DEFAULT_ZOOM }});
         L.tileLayer('{{ url_openstreetmap }}', { minZoom: 9, maxZoom: 18 }).addTo(timormap);
-        L.geoJSON(districts, {
-            style: function (feature) {
-                return {color: 'orange'};
-            }
-        }).bindPopup(function (layer) {
-            var name = layer.feature.properties.name;
-                return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-        }).addTo(timormap);
+        $.getJSON(url,function(data){
+            L.geoJSON(data, {
+                style: function (feature) {
+                    return {color: 'orange'};
+                }
+            }).bindPopup(function (layer) {
+                var name = layer.feature.properties.name;
+                    return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+            }).addTo(timormap);
+        })
         {% for photo in images %}
             {% if photo.point %}
                 L.marker([{{ photo.point.y }}, {{ photo.point.x }}]).bindPopup(

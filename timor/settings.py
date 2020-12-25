@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'widget_tweaks',
     'rosetta',
+    'rest_framework',
+    'geojson_serializer',
 ]
 
 MIDDLEWARE = [
@@ -156,6 +158,14 @@ LOGIN_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 # url ba mapa leaflat
 OPENSTREETMAP_URL = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
