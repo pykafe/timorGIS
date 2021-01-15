@@ -5,6 +5,14 @@
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{% url 'fullmap' %}" class="nav-link map">Map</a></li>
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link photo">Photo</a></li>
+        </ul>
+
+        {% if user.is_authenticated %}
+            <a href={% url 'hatama_viazen' %} class="btn btn-primary add-journey">{% trans 'Add my journey' %}</a>
+        {% endif %}
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ml-auto">
                 <ul class="nav navbar-nav navbar-right">

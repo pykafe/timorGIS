@@ -264,10 +264,24 @@ p.detail {
     font-size: 18px;
 }
 
+.nav-pills .nav-link {
+    font-size: 20px;
+    margin-left: 9px;
+}
+
+a.nav-link.map {
+    margin-left: 90px;
+}
+
+a:hover {
+    color: #0062cc;
+}
+
 .add-journey {
     float: right;
     background-color: white;
     color: #0062cc;
+    margin-left: 100px;
 }
 
 .list-users {
@@ -429,7 +443,7 @@ span.blue-text {
 
 .display-all-post {
     padding: 0px;
-    margin-top: 25px;
+    margin-top: 5px;
 }
 
 .each-upload {
@@ -438,8 +452,8 @@ span.blue-text {
     padding-left: 16px;
     padding-right: 16px;
     padding-top: 16px;
-    padding-bottom: 16px;
-    margin-bottom: 14px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
