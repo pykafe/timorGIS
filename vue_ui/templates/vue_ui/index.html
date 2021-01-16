@@ -4,4 +4,19 @@
 {% block content %}
 <script type="text/javascript" src="{% static 'vue.global.js' %}"></script>
 HELLO WORLD
+<div id="counter">
+    Counter: [[ counter ]]
+</div>
+<script>
+    const Counter = {
+        data() {
+            return {
+                counter: 0
+            }
+        },
+        delimiters: ['[[', ']]'],
+    }
+
+    Vue.createApp(Counter).mount('#counter')
+</script>
 {% endblock %}
