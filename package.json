@@ -1,0 +1,26 @@
+{
+  "name": "timorgis",
+  "version": "1.0.0",
+  "description": "## Setup instructions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pykafe/timorGIS.git"
+  },
+  "keywords": [
+    "pykafe",
+    "timor"
+  ],
+  "author": "Pykafe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pykafe/timorGIS/issues"
+  },
+  "homepage": "https://github.com/pykafe/timorGIS#readme",
+  "dependencies": {
+    "vue": "^3.0.5"
+  }
+}
