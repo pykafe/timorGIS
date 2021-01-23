@@ -3,20 +3,35 @@
 
 {% block content %}
 <script type="text/javascript" src="{% static 'vue.global.js' %}"></script>
-HELLO WORLD
-<div id="counter">
-    Counter: [[ counter ]]
+
+<div id="timorgis">
+    <div class="images_container">
+
+        <div v-for="item in items" class="image_card">
+            <img src="/media/photos/3AA92B55-4CE5-4D1B-A967-0A1D98FA45AB_FlsuDPE.jpeg" width="200">
+        </div>
+    </div>
+
 </div>
+<style>
+    .images_container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .image_card {
+        margin: 5px;
+    }
+</style>
 <script>
-    const Counter = {
+    const TimorGis = {
         data() {
             return {
-                counter: 0
+                items: new Array(40)
             }
         },
         delimiters: ['[[', ']]'],
     }
 
-    Vue.createApp(Counter).mount('#counter')
+    Vue.createApp(TimorGis).mount('#timorgis')
 </script>
 {% endblock %}
