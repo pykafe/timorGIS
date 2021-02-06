@@ -11,6 +11,15 @@
     </div>
 </template>
 
+<style  scoped>
+    div {
+        color:REd;
+    }
+    .image_card {
+        margin: 5px;
+    }
+</style>
+
 <script>
     export default {
         data() {
