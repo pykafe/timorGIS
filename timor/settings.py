@@ -150,7 +150,7 @@ django.conf.locale.LANG_INFO.update(EXTRA_LANG_INFO)
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "node_modules/vue/dist"),
+    os.path.join(BASE_DIR, "dist"),
 ]
 
 LOGIN_REDIRECT_URL = '/'
