@@ -5,4 +5,14 @@
 
 <div id="app"></div>
 <script type="text/javascript" src="{% static 'main.js' %}"></script>
+<script>
+    timorgis.mountApp(
+        '#app',
+        {
+            districts: {{ districts|safe }},
+            url_openstreetmap: '{{ url_openstreetmap }}' ,
+            api_url: '{% url "api" %}'
+        }
+    );
+</script>
 {% endblock %}

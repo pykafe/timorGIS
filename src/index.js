@@ -4,4 +4,7 @@ console.log('YAAY');
 import { createApp } from 'vue';
 import App from './App.vue';
 
-createApp(App).mount('#app');
+export function mountApp(element, properties) {
+    console.log('mounting app')
+    createApp(App, properties).mount(element);
+}
