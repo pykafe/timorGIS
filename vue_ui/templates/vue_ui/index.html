@@ -9,9 +9,8 @@
     timorgis.mountApp(
         '#app',
         {
-            districts: {{ districts|safe }},
             url_openstreetmap: '{{ url_openstreetmap }}' ,
-            api_url: '{% url "api" %}'
+            api_url: '{% url "api_geojson" %}'
         }
     );
 </script>

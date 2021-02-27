@@ -24,7 +24,6 @@
     export default {
         props: [
             'url_openstreetmap',
-            'districts',
             'api_url'
         ],
         data() {
@@ -48,19 +47,22 @@
                     'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
                     'DEFAULT_ZOOM': 9,
                 }
-                var timormap = L.map('mapid').setView(points.DEFAULT_CENTER, points.DEFAULT_ZOOM);
-                L.tileLayer(this.url_openstreetmap, {minZoom: 8, maxZoom: 18}).addTo(timormap);
-                L.geoJSON(this.districts, {
-                    style: function (feature) {
-                        return {color: 'orange'};
-                    }
-                }).bindPopup(function (layer) {
-                    var name = layer.feature.properties.name;
-                        return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
-                }).addTo(timormap);
+                this.timormap = L.map('mapid').setView(points.DEFAULT_CENTER, points.DEFAULT_ZOOM);
+                L.tileLayer(this.url_openstreetmap, {minZoom: 8, maxZoom: 18}).addTo(this.timormap);
             },
             getApiData: function() {
-                fetch(this.api_url).then(response => console.log(response))
+                fetch(this.api_url).then(response => {
+                    return response.json()
+                }).then(geojson => {
+                    L.geoJSON(geojson, {
+                        style: function (feature) {
+                            return {color: 'orange'};
+                        }
+                    }).bindPopup(function (layer) {
+                        var name = layer.feature.properties.name;
+                            return 'Distritu: ' + name[0] + name.substr(1).toLowerCase();
+                    }).addTo(this.timormap);
+                })
             }
         },
         mounted() {

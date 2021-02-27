@@ -7,3 +7,7 @@
 3. Create a postgresql database `createdb timor_db`
 4. Migrate to create tables in your database `./manage.py migrate`
 5. Import the shapefiles `./manage.py import_shapefiles`
+
+6. using node 12
+7. npm install
+8. npm run build|dev
