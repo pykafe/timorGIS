@@ -5,10 +5,14 @@
         <div v-for="image in images" v-bind:key="image.pk" class="image_card">
             {{ image.pk }}
             <!--<img src="/media/photos/3AA92B55-4CE5-4D1B-A967-0A1D98FA45AB_FlsuDPE.jpeg" width="200"> -->
+            <img v-bind:src="'/media/' + image.images" /> 
         </div>
     </div>
     <div id="mapInset">
         <div id="mapid"></div>
+    </div>
+    <div v-for="viazen in istoriaviazen" v-bind:key="viazen.pk" class="viazen_card">
+        {{ viazen.pk }}
     </div>
 </template>
 
@@ -28,7 +32,8 @@
         ],
         data() {
             return {
-                images: []
+                images: [],
+                istoriaviazen: []
             }
         },
         methods: {
@@ -54,6 +59,13 @@
                     return response.json()
                 });
             },
+            getIstoriaviazen: function() {
+                // fetch is returning a Promise which will succeed with some geojson
+                // OR fail with an error
+                return fetch(this.urls.istoriaviazen).then(response => {
+                    return response.json()
+                });
+            },
             renderGeoJSON: function(geojson) {
                 L.geoJSON(geojson, {
                     style: function (feature) {
@@ -67,12 +79,17 @@
             renderImages: function(images) {
                 console.log(images);
                 this.images = images;
+            },
+            renderIstoriaviazen: function(istoriaviazen) {
+                console.log(istoriaviazen);
+                this.istoriaviazen = istoriaviazen;
             }
         },
         mounted() {
             this.renderMap();
             this.getGeoJSON().then(this.renderGeoJSON);
             this.getImages().then(this.renderImages);
+            this.getIstoriaviazen().then(this.renderIstoriaviazen);
         },
     }
 </script>
