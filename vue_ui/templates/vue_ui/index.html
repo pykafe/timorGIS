@@ -6,11 +6,11 @@
 <div id="app"></div>
 <script type="text/javascript" src="{% static 'main.js' %}"></script>
 <script>
+    const urls = {{ urls|safe }};
     timorgis.mountApp(
         '#app',
         {
-            url_openstreetmap: '{{ url_openstreetmap }}' ,
-            api_url: '{% url "api_geojson" %}'
+            urls: urls
         }
     );
 </script>
