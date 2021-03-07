@@ -1,18 +1,24 @@
 
 <template>
+    <div class="container-fluid">
     <div class="images_container">
-
         <div v-for="image in images" v-bind:key="image.pk" class="image_card">
             {{ image.pk }}
             <!--<img src="/media/photos/3AA92B55-4CE5-4D1B-A967-0A1D98FA45AB_FlsuDPE.jpeg" width="200"> -->
-            <img v-bind:src="'/media/' + image.images" /> 
         </div>
     </div>
     <div id="mapInset">
         <div id="mapid"></div>
     </div>
-    <div v-for="viazen in istoriaviazen" v-bind:key="viazen.pk" class="viazen_card">
-        {{ viazen.pk }}
+    <div v-for="viazen in istoriaviazen" class="viazen_card">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ viazen.fields.title}}</h5>
+                <p class="card-text">{{ viazen.fields.description }}</p>
+                <p class="card-text"><small class="text-muted">{{ created_at }} {{ viazen.fields.created_at }}</small></p>
+            </div>
+        </div>
+    </div>
     </div>
 </template>
 
@@ -33,7 +39,8 @@
         data() {
             return {
                 images: [],
-                istoriaviazen: []
+                istoriaviazen: [],
+                created_at: "Created at :"
             }
         },
         methods: {
