@@ -160,6 +160,13 @@ MEDIA_URL = "/media/"
 # url ba mapa leaflat
 OPENSTREETMAP_URL = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'unix:/tmp/memcached.sock',
+    }
+}
+
 try:
     from .local_settings import *  # noqa
 except ImportError:
