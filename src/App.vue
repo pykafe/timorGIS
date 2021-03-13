@@ -3,7 +3,7 @@
     <div class="images_container">
 
         <div v-for="image in images" v-bind:key="image.pk" class="image_card">
-            <img v-bind:src="`/media/${ image.fields.image}`" height="200" width="240"/>
+            <img v-bind:src="`${urls.media_url}${ image.fields.image}`" width="200"/>
         </div>
     </div>
     <div id="mapInset">
@@ -23,7 +23,7 @@
 <script>
     export default {
         props: [
-            'urls'
+            'urls',
         ],
         data() {
             return {

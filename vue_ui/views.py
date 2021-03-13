@@ -15,6 +15,7 @@ class VueView(TemplateView):
                 openstreetmap=settings.OPENSTREETMAP_URL,
                 geojson=reverse("api_geojson"),
                 images=reverse("api_images"),
+                media_url=settings.MEDIA_URL,
             )
         }
         return context
