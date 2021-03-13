@@ -16,6 +16,7 @@ class VueView(TemplateView):
                 geojson=reverse("api_geojson"),
                 images=reverse("api_images"),
                 istoriaviazen=reverse("api_istoriaviazen"),
+                media_url=settings.MEDIA_URL,
             )
         }
         return context
