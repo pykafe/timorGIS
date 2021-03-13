@@ -12,10 +12,6 @@
             'url_openstreetmap',
             'url_geojson',
         ],
-        data() {
-            return {
-            }
-        },
         methods: {
             renderMap: function() {
                 const points = {
