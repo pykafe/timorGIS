@@ -15,6 +15,8 @@ class VueView(TemplateView):
                 openstreetmap=settings.OPENSTREETMAP_URL,
                 geojson=reverse("api_geojson"),
                 images=reverse("api_images"),
+                istoriaviazen=reverse("api_istoriaviazen"),
+                media_url=settings.MEDIA_URL,
             )
         }
         return context
@@ -26,5 +28,10 @@ def geojson_api(request):
 
 def images_api(request):
     json = serialize('json', PhotoTimor.objects.all())
+    response = HttpResponse(json, content_type="application/json")
+    return response
+
+def istoriaviazen_api(request):
+    json = serialize('json', IstoriaViazen.objects.all())
     response = HttpResponse(json, content_type="application/json")
     return response
