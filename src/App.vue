@@ -9,15 +9,6 @@
         <div id="mapInset">
             <div id="mapid"></div>
         </div>
-        <div v-for="viazen in istoriaviazen" v-bind:key="viazen.pk" class="viazen_card">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ viazen.fields.title}}</h5>
-                    <p class="card-text">{{ viazen.fields.description }}</p>
-                    <p class="card-text"><small class="text-muted">Created at: {{ viazen.fields.created_at }}</small></p>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -31,14 +22,17 @@
 </style>
 
 <script>
+    import Istoria_viazen from "./Istoria_viazen.vue";
     export default {
         props: [
             'urls',
         ],
+        components: {
+            Istoria_viazen,
+        },
         data() {
             return {
                 images: [],
-                istoriaviazen: [],
             }
         },
         methods: {
@@ -64,13 +58,6 @@
                     return response.json()
                 });
             },
-            getIstoriaviazen: function() {
-                // fetch is returning a Promise which will succeed with some geojson
-                // OR fail with an error
-                return fetch(this.urls.istoriaviazen).then(response => {
-                    return response.json()
-                });
-            },
             renderGeoJSON: function(geojson) {
                 L.geoJSON(geojson, {
                     style: function (feature) {
@@ -85,16 +72,11 @@
                 console.log(images);
                 this.images = images;
             },
-            renderIstoriaviazen: function(istoriaviazen) {
-                console.log(istoriaviazen);
-                this.istoriaviazen = istoriaviazen;
-            }
         },
         mounted() {
             this.renderMap();
             this.getGeoJSON().then(this.renderGeoJSON);
             this.getImages().then(this.renderImages);
-            this.getIstoriaviazen().then(this.renderIstoriaviazen);
         },
     }
 </script>
