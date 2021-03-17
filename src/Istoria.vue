@@ -10,10 +10,13 @@
     </div>
 </template>
 
+<style  scoped>
+</style>
+
 <script>
     export default {
         props: [
-            'urls',
+            'url_istoriaviazen',
         ],
         data() {
             return {
@@ -24,7 +27,7 @@
             getIstoriaviazen: function() {
                 // fetch is returning a Promise which will succeed with some geojson
                 // OR fail with an error
-                return fetch(this.urls.istoriaviazen).then(response => {
+                return fetch(this.url_istoriaviazen).then(response => {
                     return response.json()
                 });
             },
