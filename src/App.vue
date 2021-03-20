@@ -57,12 +57,29 @@
                     return response.json()
                 });
             },
-            getImages: function() {
-                // fetch is returning a Promise which will succeed with some geojson
-                // OR fail with an error
-                return fetch(this.urls.images).then(response => {
-                    return response.json()
+            getImages: async function() {
+                // Do we have this response in our cache???
+                const cache = await caches.open("timorgis");
+                let apiMatch = await cache.match(this.urls.images);
+                if (apiMatch === undefined) {
+                    // we don't have a match
+                    await cache.add(this.urls.images);
+                    apiMatch = await cache.match(this.urls.images);
+                }
+
+                // Do the conditional request
+                const response = await fetch(this.urls.images, {
+                    headers: {'If-Modified-Since': apiMatch.headers.get('Last-Modified')}
                 });
+
+                // is the response a 200 or a 304?
+                if( response.ok ) {
+                    cache.put(this.urls.images, response);
+                    return response.json();
+                } else {
+                    return apiMatch.json();
+                }
+
             },
             getIstoriaviazen: function() {
                 // fetch is returning a Promise which will succeed with some geojson
