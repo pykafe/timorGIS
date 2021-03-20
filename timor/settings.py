@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'map',
+    'vue_ui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -149,7 +150,7 @@ django.conf.locale.LANG_INFO.update(EXTRA_LANG_INFO)
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "map/static"),
+    os.path.join(BASE_DIR, "dist"),
 ]
 
 LOGIN_REDIRECT_URL = '/'
