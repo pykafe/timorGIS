@@ -1,6 +1,8 @@
+from django.db.models import Max
 from django.conf import settings
 from django.core.serializers import serialize
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.http import last_modified
 from django.views.generic.base import TemplateView
 from django.urls import reverse
 
@@ -26,6 +28,11 @@ def geojson_api(request):
     response = HttpResponse(geojson, content_type="application/json")
     return response
 
+def images_modified_at(request):
+    ''' returns the last time the photo objects were modified '''
+    return PhotoTimor.objects.aggregate(Max('modified_at'))['modified_at__max']
+
+@last_modified(images_modified_at)
 def images_api(request):
     json = serialize('json', PhotoTimor.objects.all())
     response = HttpResponse(json, content_type="application/json")
