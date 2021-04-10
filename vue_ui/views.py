@@ -23,28 +23,19 @@ class VueView(TemplateView):
         return context
 
 def geojson_api(request):
-    cacheapi = cache.get('api_geojson')
-    if cacheapi == None:
-        geojson = cache.get_or_set('api_geojson', serialize('geojson', District.objects.all(), geometry_field='geom'))
-    else:
-        geojson = cache.get('api_geojson')
+    geojson = cache.get('api_geojson')
+    if geojson == None:
+        geojson = serialize('geojson', District.objects.all(), geometry_field='geom')
+        cache.set('api_geojson', geojson)
     response = HttpResponse(geojson, content_type="application/json")
     return response
 
 def images_api(request):
-    cacheapi = cache.get('api_images')
-    if cacheapi == None:
-        json = cache.get_or_set('api_images', serialize('json', PhotoTimor.objects.all()))
-    else:
-        json = cache.get('api_images')
+    json = serialize('json', PhotoTimor.objects.all()))
     response = HttpResponse(json, content_type="application/json")
     return response
 
 def istoriaviazen_api(request):
-    cacheapi = cache.get('api_istoriaviazen')
-    if cacheapi == None:
-        json = cache.get_or_set('api_istoriaviazen', serialize('json', IstoriaViazen.objects.all()))
-    else:
-        json = cache.get('api_istoriaviazen')
+    json = serialize('json', IstoriaViazen.objects.all()))
     response = HttpResponse(json, content_type="application/json")
     return response

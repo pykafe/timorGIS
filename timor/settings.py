@@ -157,14 +157,19 @@ LOGIN_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
 
 # url ba mapa leaflat
 OPENSTREETMAP_URL = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'unix:/tmp/memcached.sock',
+        'BACKEND': "django.core.cache.backends.filebased.FileBasedCache",
+        'LOCATION': os.path.join(BASE_DIR, "FileCache"),
     }
 }
 
