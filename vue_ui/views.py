@@ -31,11 +31,11 @@ def geojson_api(request):
     return response
 
 def images_api(request):
-    json = serialize('json', PhotoTimor.objects.all()))
+    json = serialize('json', PhotoTimor.objects.all())
     response = HttpResponse(json, content_type="application/json")
     return response
 
 def istoriaviazen_api(request):
-    json = serialize('json', IstoriaViazen.objects.all()))
+    json = serialize('json', IstoriaViazen.objects.all())
     response = HttpResponse(json, content_type="application/json")
     return response
