@@ -5,6 +5,13 @@
 </template>
 
 <style  scoped>
+#mapid {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    height: 250px;
+    width: 600px;
+}
 .loader {
     position: absolute;
     display: flex;

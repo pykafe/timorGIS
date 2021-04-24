@@ -1,18 +1,17 @@
 
 <template>
     <div class="container-fluid">
-        <div class="images_container">
-            <div v-for="image in images" v-bind:key="image.pk" class="image_card">
-                <img v-bind:src="`${urls.media_url}${ image.fields.image}`" width="200"/>
-            </div>
-        </div>
+
+        <PhotoTimor
+            v-bind:url_media="urls.media_url"
+            v-bind:url_images="urls.images" />
+
+        <Istoria 
+            v-bind:url_istoriaviazen="urls.istoriaviazen" />
 
         <Map
             v-bind:url_openstreetmap="urls.openstreetmap"
             v-bind:url_geojson="urls.geojson" />
-
-        <Istoria 
-            v-bind:url_istoriaviazen="urls.istoriaviazen" />
     </div>
 </template>
 
@@ -26,37 +25,18 @@
 </style>
 
 <script>
-    import Map from "./Map.vue";
-    import Istoria from "./Istoria.vue";
+    import PhotoTimor from "./components/PhotoTimor.vue";
+    import Map from "./components/Map.vue";
+    import Istoria from "./components/Istoria.vue";
 
     export default {
         props: [
             'urls',
         ],
         components: {
+            PhotoTimor,
             Map,
             Istoria,
-        },
-        data() {
-            return {
-                images: [],
-            }
-        },
-        methods: {
-            getImages: function() {
-                // fetch is returning a Promise which will succeed with some geojson
-                // OR fail with an error
-                return fetch(this.urls.images).then(response => {
-                    return response.json()
-                });
-            },
-            renderImages: function(images) {
-                console.log(images);
-                this.images = images;
-            },
-        },
-        mounted() {
-            this.getImages().then(this.renderImages);
         },
     }
 </script>
