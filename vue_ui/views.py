@@ -3,6 +3,7 @@ from django.core.serializers import serialize
 from django.http import JsonResponse, HttpResponse
 from django.views.generic.base import TemplateView
 from django.urls import reverse
+from django.core.cache import cache
 
 from map.models import District, PhotoTimor, IstoriaViazen
 
@@ -22,7 +23,10 @@ class VueView(TemplateView):
         return context
 
 def geojson_api(request):
-    geojson = serialize('geojson', District.objects.all(), geometry_field='geom')
+    geojson = cache.get('api_geojson')
+    if geojson == None:
+        geojson = serialize('geojson', District.objects.all(), geometry_field='geom')
+        cache.set('api_geojson', geojson)
     response = HttpResponse(geojson, content_type="application/json")
     return response
 
