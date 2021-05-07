@@ -1,8 +1,8 @@
 <template>
     <div class="images_container">
-        <div v-for="image in images" v-bind:key="image.id" class="image_card"
+        <div @mouseover="selectedTitle(image.id)" @mouseleave="image_id = 0" v-for="image in images" v-bind:key="image.id" class="image_card"
             v-bind:style="imageCardStyle(image)">
-            <div class="istoria_title">{{ image.istoria.title }}</div>
+            <div  v-if="image.id == image_id" class="istoria_title">{{ image.istoria.title }}</div>
         </div>
     </div>
 </template>
@@ -17,6 +17,7 @@
 .image_card {
     height: 200px;
     background-size: cover;
+    cursor: pointer;
 }
 .image_card .istoria_title {
     margin: 5px;
@@ -35,9 +36,13 @@
         data() {
             return {
                 images: [],
+                image_id:0,
             }
         },
         methods: {
+            selectedTitle(id){
+                this.image_id = id;
+            },
             imageCardStyle(image) {
                 return `background-image: url(${ this.url_media }${ image.image})`;
             },
