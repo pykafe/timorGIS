@@ -2,7 +2,11 @@
     <div class="images_container">
         <div @mouseover="selectedTitle(image.id)" @mouseleave="image_id = 0" v-for="image in images" v-bind:key="image.id" class="image_card"
             v-bind:style="imageCardStyle(image)">
-            <div  v-if="image.id == image_id" class="istoria_title">{{ image.istoria.title }}</div>
+            <div  v-if="image.id == image_id" class="istoria_title">
+                {{ image.istoria.title }}
+                <br>
+                <a href="###">View detail</a>
+            </div>
         </div>
     </div>
 </template>
@@ -14,16 +18,19 @@
     column-gap: 15px;
     row-gap: 15px;
 }
+
 .image_card {
     height: 200px;
     background-size: cover;
     cursor: pointer;
 }
+
 .image_card .istoria_title {
     margin: 5px;
     padding: 3px;
     background-color: White;
     border-radius: 3px;
+    cursor: auto;
 }
 </style>
 
