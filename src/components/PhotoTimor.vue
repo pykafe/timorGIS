@@ -36,7 +36,7 @@
         data() {
             return {
                 images: [],
-                image_id:0,
+                image_id: 0,
             }
         },
         methods: {
