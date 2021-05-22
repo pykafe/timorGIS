@@ -190,12 +190,6 @@ body .default-gray-theme {
     padding: 10px;
 }
 
-
-#mapid { 
-    height: 450px; 
-    margin-bottom: 30px;
-}
-
 .ui-datepicker .ui-widget-header .ui-icon {
     background-image: url(../icons/ui-icons_555555_256x240.png);
 }

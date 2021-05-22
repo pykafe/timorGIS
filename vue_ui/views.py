@@ -31,8 +31,23 @@ def geojson_api(request):
     return response
 
 def images_api(request):
-    json = serialize('json', PhotoTimor.objects.all())
-    response = HttpResponse(json, content_type="application/json")
+    images = [
+        {
+            "id": photo["id"],
+            "image": photo["image"],
+            "istoria": {
+                "id": photo["istoriaviazen_id"],
+                "title": photo["istoriaviazen__title"],
+            }
+        }
+        for photo in PhotoTimor.objects.values(
+            'id',
+            'image',
+            'istoriaviazen_id',
+            'istoriaviazen__title',
+        )
+    ]
+    response = JsonResponse(images, safe=False)
     return response
 
 def istoriaviazen_api(request):

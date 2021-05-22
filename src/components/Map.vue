@@ -1,10 +1,34 @@
 <template>
-    <div id="mapid">
-        <span class="loader" v-if="loading">Loading Districts...</span>
+    <div id="map_container">
+        <div id="mapid">
+            <span class="loader" v-if="loading">Loading Districts...</span>
+        </div>
+        <button @click="toggleExpand">
+            {{ expanded ? 'SHRINK' : 'EXPAND' }}
+        </button>
     </div>
 </template>
 
 <style  scoped>
+#map_container {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}
+#map_container button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 500;
+}
+#mapid {
+    border-radius: 15px;
+    border-width: 5px;
+    border-color: black;
+    padding: 5px;
+    height: 250px;
+    width: 600px;
+}
 .loader {
     position: absolute;
     display: flex;
@@ -28,9 +52,13 @@
         data() {
             return {
                 loading: false,
+                expanded: false,
             }
         },
         methods: {
+            toggleExpand() {
+                this.expanded = !this.expanded;
+            },
             renderMap: function() {
                 const points = {
                     'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
