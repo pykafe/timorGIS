@@ -24,7 +24,6 @@
 <script>
     import PhotoTimor from "./components/PhotoTimor.vue";
     import Map from "./components/Map.vue";
-    import Istoria from "./components/Istoria.vue";
 
     export default {
         props: [
@@ -33,7 +32,6 @@
         components: {
             PhotoTimor,
             Map,
-            Istoria,
         },
     }
 </script>
