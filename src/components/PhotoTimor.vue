@@ -20,9 +20,10 @@
     cursor: pointer;
 }
 .image_card .istoria_title {
+    color:  rgb(255, 255, 255);
     margin: 5px;
     padding: 3px;
-    background-color: White;
+    background-color: rgba(44, 44, 43, 0.336);
     border-radius: 3px;
 }
 </style>
