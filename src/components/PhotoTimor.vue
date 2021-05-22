@@ -1,7 +1,8 @@
 <template>
     <div class="images_container">
-        <div v-for="image in images" v-bind:key="image.pk" class="image_card"
+        <div @mouseover="selectedTitle(image.id)" @mouseleave="image_id = 0" v-for="image in images" v-bind:key="image.id" class="image_card"
             v-bind:style="imageCardStyle(image)">
+            <div  v-if="image.id == image_id" class="istoria_title">{{ image.istoria.title }}</div>
         </div>
     </div>
 </template>
@@ -16,6 +17,13 @@
 .image_card {
     height: 200px;
     background-size: cover;
+    cursor: pointer;
+}
+.image_card .istoria_title {
+    margin: 5px;
+    padding: 3px;
+    background-color: White;
+    border-radius: 3px;
 }
 </style>
 
@@ -28,11 +36,15 @@
         data() {
             return {
                 images: [],
+                image_id: 0,
             }
         },
         methods: {
+            selectedTitle(id){
+                this.image_id = id;
+            },
             imageCardStyle(image) {
-                return `background-image: url(${ this.url_media }${ image.fields.image})`;
+                return `background-image: url(${ this.url_media }${ image.image})`;
             },
             getImages: function() {
                 // fetch is returning a Promise which will succeed with some geojson
