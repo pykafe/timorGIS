@@ -6,9 +6,6 @@
             v-bind:url_media="urls.media_url"
             v-bind:url_images="urls.images" />
 
-        <Istoria 
-            v-bind:url_istoriaviazen="urls.istoriaviazen" />
-
         <Map
             v-bind:url_openstreetmap="urls.openstreetmap"
             v-bind:url_geojson="urls.geojson" />
