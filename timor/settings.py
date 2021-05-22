@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'map',
+    'vue_ui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -149,16 +150,28 @@ django.conf.locale.LANG_INFO.update(EXTRA_LANG_INFO)
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "map/static"),
+    os.path.join(BASE_DIR, "dist"),
 ]
 
 LOGIN_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
 
 # url ba mapa leaflat
 OPENSTREETMAP_URL = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+CACHES = {
+    'default': {
+        'BACKEND': "django.core.cache.backends.filebased.FileBasedCache",
+        'LOCATION': os.path.join(BASE_DIR, "FileCache"),
+    }
+}
 
 try:
     from .local_settings import *  # noqa

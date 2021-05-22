@@ -1,0 +1,17 @@
+{% extends 'map/containered-base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="app"></div>
+<script type="text/javascript" src="{% static 'main.js' %}"></script>
+<script>
+    const urls = {{ urls|safe }};
+    timorgis.mountApp(
+        '#app',
+        {
+            urls: urls
+        }
+    );
+</script>
+{% endblock %}
