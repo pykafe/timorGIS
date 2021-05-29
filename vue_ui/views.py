@@ -37,7 +37,9 @@ def images_api(request):
             "image": photo["image"],
             "istoria": {
                 "id": photo["istoriaviazen_id"],
+                "creator": photo["istoriaviazen__creator__username"],
                 "title": photo["istoriaviazen__title"],
+                "description": photo["istoriaviazen__description"],
             }
         }
         for photo in PhotoTimor.objects.values(
@@ -45,6 +47,8 @@ def images_api(request):
             'image',
             'istoriaviazen_id',
             'istoriaviazen__title',
+            'istoriaviazen__description',
+            'istoriaviazen__creator__username',
         )
     ]
     response = JsonResponse(images, safe=False)

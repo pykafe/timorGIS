@@ -2,7 +2,16 @@
     <div class="images_container">
         <div @mouseover="selectedTitle(image.id)" @mouseleave="image_id = 0" v-for="image in images" v-bind:key="image.id" class="image_card"
             v-bind:style="imageCardStyle(image)">
-            <div  v-if="image.id == image_id" class="istoria_title">{{ image.istoria.title }}</div>
+            <div class="istoria_title">
+                {{ image.istoria.title }}
+                <div v-if="image.id == image_id">
+                    <a href="#">See more..</a>
+                    <p>
+                        {{ $filters.shorten(image.istoria.description, 75) }}
+                    </p>
+                    <span>Uploaded by {{ image.istoria.creator }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
