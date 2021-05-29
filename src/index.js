@@ -8,8 +8,7 @@ export function mountApp(element, properties) {
     console.log('mounting app')
     const app = createApp(App, properties)
     app.config.globalProperties.$filters = {
-         description(text){
-            let length = 50;
+        shorten(text, length){
             let suffix = '...';
             if (text.length > length) {
                 return text.substring(0, length) + suffix;
