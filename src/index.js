@@ -6,5 +6,17 @@ import App from './App.vue';
 
 export function mountApp(element, properties) {
     console.log('mounting app')
-    createApp(App, properties).mount(element);
+    const app = createApp(App, properties)
+    app.config.globalProperties.$filters = {
+         description(text){
+            let length = 50;
+            let suffix = '...';
+            if (text.length > length) {
+                return text.substring(0, length) + suffix;
+            } else {
+                return text;
+            }
+        },
+    }
+    app.mount(element);
 }
