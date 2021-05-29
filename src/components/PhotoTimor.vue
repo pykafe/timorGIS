@@ -1,10 +1,15 @@
 <template>
     <div class="images_container">
-        <div @mouseover="selectedTitle(image.id)" @mouseleave="image_id = 0" v-for="image in images" v-bind:key="image.id" class="image_card"
+        <div
+            @click="selectImage(image.id)"
+            @mouseover="rolloverImage(image.id)"
+            @mouseleave="rollover_image_id = 0"
+            v-for="image in images" v-bind:key="image.id"
+            class="image_card"
             v-bind:style="imageCardStyle(image)">
             <div class="istoria_title">
                 {{ image.istoria.title }}
-                <div v-if="image.id == image_id">
+                <div v-if="image.id == rollover_image_id">
                     <a href="#">See more..</a>
                     <p>
                         {{ $filters.description(image.istoria.description) }}
@@ -13,6 +18,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="image_selected" v-show="selected_image_id !== 0" @click="selected_image_id = 0">
+        <img v-bind:src="selectedImageSrc" width="600" />
     </div>
 </template>
 <style scoped>
@@ -35,6 +43,13 @@
     background-color: rgba(44, 44, 43, 0.336);
     border-radius: 3px;
 }
+.image_selected {
+    width: 95%;
+    height: 95%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
 </style>
 
 <script>
@@ -46,12 +61,26 @@
         data() {
             return {
                 images: [],
-                image_id: 0,
+                rollover_image_id: 0,
+                selected_image_id: 0,
+            }
+        },
+        computed: {
+            selectedImage() {
+                return this.images.find(image => image.id === this.selected_image_id);
+            },
+            selectedImageSrc() {
+                return this.selectedImage !== undefined
+                    ? `${ this.url_media }${ this.selectedImage.image}`
+                    : ""
             }
         },
         methods: {
-            selectedTitle(id){
-                this.image_id = id;
+            rolloverImage(id){
+                this.rollover_image_id = id;
+            },
+            selectImage(id){
+                this.selected_image_id = id;
             },
             imageCardStyle(image) {
                 return `background-image: url(${ this.url_media }${ image.image})`;
