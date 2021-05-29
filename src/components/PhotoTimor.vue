@@ -7,7 +7,7 @@
                 <div v-if="image.id == image_id">
                     <a href="#">See more..</a>
                     <p>
-                        {{ $filters.description(image.istoria.description) }}
+                        {{ $filters.shorten(image.istoria.description, 75) }}
                     </p>
                     <span>Uploaded by {{ image.istoria.creator }}</span>
                 </div>
