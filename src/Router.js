@@ -6,7 +6,8 @@ export default function getRouter(properties) {
 
     const routes = [
         { 
-            path: '/',
+            path: '/photos/:selected_id(\\d+)?',
+            name: 'photos',
             component: PhotoTimor,
             props: { 
                 'url_images': properties.urls.images,

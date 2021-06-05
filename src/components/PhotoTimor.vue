@@ -1,27 +1,31 @@
 <template>
     <div class="images_container">
-        <div
-            @click="selectImage(image.id)"
-            @mouseover="rolloverImage(image.id)"
-            @mouseleave="rollover_image_id = 0"
+        <router-link 
             v-for="image in images" v-bind:key="image.id"
-            class="image_card"
-            v-bind:style="imageCardStyle(image)">
-            <div class="istoria_title">
-                {{ image.istoria.title }}
-                <div v-if="image.id == rollover_image_id">
-                    <a href="#">See more..</a>
-                    <p>
-                        {{ $filters.description(image.istoria.description) }}
-                    </p>
-                    <span>Uploaded by {{ image.istoria.creator }}</span>
+            :to="{name: 'photos', params: {selected_id: image.id}}">
+            <div
+                @mouseover="rolloverImage(image.id)"
+                @mouseleave="rollover_image_id = 0"
+                class="image_card"
+                v-bind:style="imageCardStyle(image)">
+                <div class="istoria_title">
+                    {{ image.istoria.title }}
+                    <div v-if="image.id == rollover_image_id">
+                        <a href="#">See more..</a>
+                        <p>
+                            {{ $filters.description(image.istoria.description) }}
+                        </p>
+                        <span>Uploaded by {{ image.istoria.creator }}</span>
+                    </div>
                 </div>
             </div>
+        </router-link>
+    </div>
+    <router-link :to="{name: 'photos'}">
+        <div class="image_selected" v-show="!!$route.params.selected_id">
+            <img v-bind:src="selectedImageSrc" width="600" />
         </div>
-    </div>
-    <div class="image_selected" v-show="selected_image_id !== 0" @click="selected_image_id = 0">
-        <img v-bind:src="selectedImageSrc" width="600" />
-    </div>
+    </router-link>
 </template>
 <style scoped>
 .images_container {
@@ -67,7 +71,7 @@
         },
         computed: {
             selectedImage() {
-                return this.images.find(image => image.id === this.selected_image_id);
+                return this.images.find(image => image.id == this.$route.params.selected_id);
             },
             selectedImageSrc() {
                 return this.selectedImage !== undefined
@@ -78,9 +82,6 @@
         methods: {
             rolloverImage(id){
                 this.rollover_image_id = id;
-            },
-            selectImage(id){
-                this.selected_image_id = id;
             },
             imageCardStyle(image) {
                 return `background-image: url(${ this.url_media }${ image.image})`;
