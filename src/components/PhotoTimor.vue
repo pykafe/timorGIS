@@ -1,5 +1,6 @@
 <template>
     {{ count }}
+    <button @click="increment">INcrement</button>
     <div class="images_container">
         <router-link 
             v-for="image in images" v-bind:key="image.id"
@@ -59,6 +60,7 @@
 
 <script>
     import { mapState } from 'vuex'
+    import { mapMutations } from 'vuex'
 
     export default {
         props: [
@@ -84,6 +86,7 @@
             ...mapState(['count']),
         },
         methods: {
+            ...mapMutations(['increment']),
             rolloverImage(id){
                 this.rollover_image_id = id;
             },
