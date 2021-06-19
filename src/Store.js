@@ -18,6 +18,7 @@ export default function getStore(properties) {
               return state.count + 5;
             }
         },
+        strict: true
     })
     return store;
 }
