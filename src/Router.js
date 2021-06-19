@@ -7,21 +7,23 @@ export default function getRouter(properties) {
     const routes = [
         { 
             path: '/photos/:selected_id(\\d+)?',
+            alias: '/',
             name: 'photos',
-            component: PhotoTimor,
-            props: { 
-                'url_images': properties.urls.images,
-                'url_media': properties.urls.media_url,
+            components: {
+                default: PhotoTimor,
+                map: Map,
+            },
+            props: {
+                default: {
+                    'url_images': properties.urls.images,
+                    'url_media': properties.urls.media_url,
+                },
+                map: {
+                    'url_openstreetmap': properties.urls.openstreetmap,
+                    'url_geojson': properties.urls.geojson,
+                }
             },
         },
-        { 
-            path: '/map',
-            component: Map,
-            props: { 
-                'url_openstreetmap': properties.urls.openstreetmap,
-                'url_geojson': properties.urls.geojson,
-            },
-        }
     ];
 
     const router = createRouter({
