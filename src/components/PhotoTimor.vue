@@ -1,4 +1,5 @@
 <template>
+    {{ count }}
     <div class="images_container">
         <router-link 
             v-for="image in images" v-bind:key="image.id"
@@ -57,6 +58,8 @@
 </style>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         props: [
             'url_images',
@@ -77,7 +80,8 @@
                 return this.selectedImage !== undefined
                     ? `${ this.url_media }${ this.selectedImage.image}`
                     : ""
-            }
+            },
+            ...mapState(['count']),
         },
         methods: {
             rolloverImage(id){

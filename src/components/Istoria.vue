@@ -1,4 +1,6 @@
 <template>
+    {{ count }}
+    <br/>{{ countPlus5 }}
     <div v-for="viazen in istoriaviazen" v-bind:key="viazen.pk" class="viazen_card">
         <div class="card mb-3">
             <div class="card-body">
@@ -14,6 +16,9 @@
 </style>
 
 <script>
+    import { mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
+
     export default {
         props: [
             'url_istoriaviazen',
@@ -22,6 +27,10 @@
             return {
                 istoriaviazen: [],
             }
+        },
+        computed: {
+            ...mapState(['count']),
+            ...mapGetters(['countPlus5']),
         },
         methods: {
             getIstoriaviazen: function() {
