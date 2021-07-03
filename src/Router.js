@@ -16,7 +16,6 @@ export default function getRouter(properties) {
             },
             props: {
                 default: {
-                    'url_images': properties.urls.images,
                     'url_media': properties.urls.media_url,
                 },
                 map: {
