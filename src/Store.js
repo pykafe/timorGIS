@@ -15,7 +15,7 @@ export default function getStore(properties) {
                     requesting: false,
                     error: null,
                 },
-                map: {
+                statedistrict: {
                     list: null,
                     requesting: false,
                     error: null,
@@ -42,13 +42,13 @@ export default function getStore(properties) {
                 state.istoria.error = payload;
             },
             requestingMapDistrict(state, requesting) {
-                state.images.requesting = requesting;
+                state.statedistrict.requesting = requesting;
             },
             setMapDistrictList(state, payload) {
-                state.mapdistrict.list = payload.images;
+                state.statedistrict.list = payload.requestingdistrict;
             },
             setMapError(state, payload) {
-                state.mapdistrict.error = payload;
+                state.statedistrict.error = payload;
             },
         },
         getters: {
