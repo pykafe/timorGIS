@@ -15,6 +15,11 @@ export default function getStore(properties) {
                     requesting: false,
                     error: null,
                 },
+                map: {
+                    list: null,
+                    requesting: false,
+                    error: null,
+                },
             }
         },
         mutations: {
@@ -35,6 +40,15 @@ export default function getStore(properties) {
             },
             setIstoriaError(state, payload) {
                 state.istoria.error = payload;
+            },
+            requestingMapDistrict(state, requesting) {
+                state.images.requesting = requesting;
+            },
+            setMapDistrictList(state, payload) {
+                state.mapdistrict.list = payload.images;
+            },
+            setMapError(state, payload) {
+                state.mapdistrict.error = payload;
             },
         },
         getters: {
