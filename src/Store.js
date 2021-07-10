@@ -15,6 +15,11 @@ export default function getStore(properties) {
                     requesting: false,
                     error: null,
                 },
+                map: {
+                    list: null,
+                    requesting: false,
+                    error: null,
+                },
             }
         },
         mutations: {
@@ -35,6 +40,15 @@ export default function getStore(properties) {
             },
             setIstoriaError(state, payload) {
                 state.istoria.error = payload;
+            },
+            requestingMap(state, requesting) {
+                state.map.requesting = requesting;
+            },
+            setMapList(state, payload) {
+                state.map.list = payload.map;
+            },
+            setMapError(state, payload) {
+                state.map.error = payload;
             },
         },
         getters: {
@@ -77,6 +91,26 @@ export default function getStore(properties) {
                     }).finally(() => {
                         // we have definitely finished requesting
                         context.commit('requestingIstoria', false);
+                    });
+                }
+            },
+            requestMap(context) {
+                // request the images are retrieved
+                if (context.state.map.list === null) {
+                    context.commit('requestingMap', true);
+
+                    // go get the images
+                    fetch(properties.urls.url_geojson).then(response => {
+                        return response.json();
+                    }).then(map => {
+                        // everything is good, we have the istoria
+                        context.commit('setMapList', {map});
+                    }).catch((err) => {
+                        // something bad has happened, show an error
+                        context.commit('setMapError', {err});
+                    }).finally(() => {
+                        // we have definitely finished requesting
+                        context.commit('requestingMap', false);
                     });
                 }
             }
