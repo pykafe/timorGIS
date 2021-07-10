@@ -45,7 +45,7 @@ export default function getStore(properties) {
                 state.statedistrict.requesting = requesting;
             },
             setMapDistrictList(state, payload) {
-                state.statedistrict.list = payload.requestingdistrict;
+                state.statedistrict.list = payload.district;
             },
             setMapError(state, payload) {
                 state.statedistrict.error = payload;
