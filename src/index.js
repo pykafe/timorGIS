@@ -1,12 +1,11 @@
-// hello this is a comment
-console.log('YAAY');
-
 import { createApp } from 'vue';
 import App from './App.vue';
+import getRouter from './Router.js';
 
 export function mountApp(element, properties) {
-    console.log('mounting app')
-    const app = createApp(App, properties)
+
+    const app = createApp(App)
+
     app.config.globalProperties.$filters = {
          description(text){
             let length = 50;
@@ -18,5 +17,9 @@ export function mountApp(element, properties) {
             }
         },
     }
+
+    const router = getRouter(properties);
+    app.use(router);
+
     app.mount(element);
 }
