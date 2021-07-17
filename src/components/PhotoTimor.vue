@@ -1,9 +1,9 @@
 <template>
-    {{ count }}
-    <button @click="increment">INcrement</button>
-    <div class="images_container">
+    requesting or not? {{ images.requesting }}
+    error? {{ images.error }}
+    <div class="images_container" v-if="images.list">
         <router-link 
-            v-for="image in images" v-bind:key="image.id"
+            v-for="image in images.list" v-bind:key="image.id"
             :to="{name: 'photos', params: {selected_id: image.id}}">
             <div
                 @mouseover="rolloverImage(image.id)"
@@ -22,12 +22,12 @@
                 </div>
             </div>
         </router-link>
+        <router-link :to="{name: 'photos'}">
+            <div class="image_selected" v-show="!!$route.params.selected_id">
+                <img v-bind:src="selectedImageSrc" width="600" />
+            </div>
+        </router-link>
     </div>
-    <router-link :to="{name: 'photos'}">
-        <div class="image_selected" v-show="!!$route.params.selected_id">
-            <img v-bind:src="selectedImageSrc" width="600" />
-        </div>
-    </router-link>
 </template>
 <style scoped>
 .images_container {
@@ -60,52 +60,40 @@
 
 <script>
     import { mapState } from 'vuex'
-    import { mapMutations } from 'vuex'
+    import { mapActions } from 'vuex'
 
     export default {
         props: [
-            'url_images',
             'url_media',
         ],
         data() {
             return {
-                images: [],
                 rollover_image_id: 0,
                 selected_image_id: 0,
             }
         },
         computed: {
             selectedImage() {
-                return this.images.find(image => image.id == this.$route.params.selected_id);
+                return this.images.list.find(image => image.id == this.$route.params.selected_id);
             },
             selectedImageSrc() {
                 return this.selectedImage !== undefined
                     ? `${ this.url_media }${ this.selectedImage.image}`
                     : ""
             },
-            ...mapState(['count']),
+            ...mapState(['images']),
         },
         methods: {
-            ...mapMutations(['increment']),
+            ...mapActions(['requestImages']),
             rolloverImage(id){
                 this.rollover_image_id = id;
             },
             imageCardStyle(image) {
                 return `background-image: url(${ this.url_media }${ image.image})`;
             },
-            getImages: function() {
-                // fetch is returning a Promise which will succeed with some geojson
-                // OR fail with an error
-                return fetch(this.url_images).then(response => {
-                    return response.json()
-                });
-            },
-            renderImages: function(images) {
-                this.images = images;
-            },
         },
         mounted() {
-            this.getImages().then(this.renderImages);
+            this.requestImages();
         },
     }
 </script>

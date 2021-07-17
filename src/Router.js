@@ -16,12 +16,10 @@ export default function getRouter(properties) {
             },
             props: {
                 default: {
-                    'url_images': properties.urls.images,
                     'url_media': properties.urls.media_url,
                 },
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,
-                    'url_geojson': properties.urls.geojson,
                 }
             },
         },
@@ -34,11 +32,9 @@ export default function getRouter(properties) {
             },
             props: {
                 default: {
-                    'url_istoriaviazen': properties.urls.istoriaviazen,
                 },
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,
-                    'url_geojson': properties.urls.geojson,
                 }
             },
         },
