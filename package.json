@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/pykafe/timorGIS#readme",
   "dependencies": {
-    "vue": "^3.0.5"
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.8",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.5",

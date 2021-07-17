@@ -1,18 +1,32 @@
 <template>
-    <div class="images_container">
-        <div @mouseover="selectedTitle(image.id)" @mouseleave="image_id = 0" v-for="image in images" v-bind:key="image.id" class="image_card"
-            v-bind:style="imageCardStyle(image)">
-            <div class="istoria_title">
-                {{ image.istoria.title }}
-                <div v-if="image.id == image_id">
-                    <a href="#">See more..</a>
-                    <p>
-                        {{ $filters.shorten(image.istoria.description, 75) }}
-                    </p>
-                    <span>Uploaded by {{ image.istoria.creator }}</span>
+    requesting or not? {{ images.requesting }}
+    error? {{ images.error }}
+    <div class="images_container" v-if="images.list">
+        <router-link 
+            v-for="image in images.list" v-bind:key="image.id"
+            :to="{name: 'photos', params: {selected_id: image.id}}">
+            <div
+                @mouseover="rolloverImage(image.id)"
+                @mouseleave="rollover_image_id = 0"
+                class="image_card"
+                v-bind:style="imageCardStyle(image)">
+                <div class="istoria_title">
+                    {{ image.istoria.title }}
+                    <div v-if="image.id == rollover_image_id">
+                        <a href="#">See more..</a>
+                        <p>
+                            {{ $filters.shorten(image.istoria.description, 75) }}
+                        </p>
+                        <span>Uploaded by {{ image.istoria.creator }}</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </router-link>
+        <router-link :to="{name: 'photos'}">
+            <div class="image_selected" v-show="!!$route.params.selected_id">
+                <img v-bind:src="selectedImageSrc" width="600" />
+            </div>
+        </router-link>
     </div>
 </template>
 <style scoped>
@@ -35,40 +49,51 @@
     background-color: rgba(44, 44, 43, 0.336);
     border-radius: 3px;
 }
+.image_selected {
+    width: 95%;
+    height: 95%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
 </style>
 
 <script>
+    import { mapState } from 'vuex'
+    import { mapActions } from 'vuex'
+
     export default {
         props: [
-            'url_images',
             'url_media',
         ],
         data() {
             return {
-                images: [],
-                image_id: 0,
+                rollover_image_id: 0,
+                selected_image_id: 0,
             }
         },
+        computed: {
+            selectedImage() {
+                return this.images.list.find(image => image.id == this.$route.params.selected_id);
+            },
+            selectedImageSrc() {
+                return this.selectedImage !== undefined
+                    ? `${ this.url_media }${ this.selectedImage.image}`
+                    : ""
+            },
+            ...mapState(['images']),
+        },
         methods: {
-            selectedTitle(id){
-                this.image_id = id;
+            ...mapActions(['requestImages']),
+            rolloverImage(id){
+                this.rollover_image_id = id;
             },
             imageCardStyle(image) {
                 return `background-image: url(${ this.url_media }${ image.image})`;
             },
-            getImages: function() {
-                // fetch is returning a Promise which will succeed with some geojson
-                // OR fail with an error
-                return fetch(this.url_images).then(response => {
-                    return response.json()
-                });
-            },
-            renderImages: function(images) {
-                this.images = images;
-            },
         },
         mounted() {
-            this.getImages().then(this.renderImages);
+            this.requestImages();
         },
     }
 </script>
