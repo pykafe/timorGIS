@@ -1,4 +1,7 @@
 <template>
+    <button @click="increment">INcrement</button>
+    {{ count }}
+    <br/>{{ countPlus5 }}
     <div v-for="viazen in istoriaviazen" v-bind:key="viazen.pk" class="viazen_card">
         <div class="card mb-3">
             <div class="card-body">
@@ -14,6 +17,11 @@
 </style>
 
 <script>
+    import { mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
+    import { mapMutations } from 'vuex'
+
+
     export default {
         props: [
             'url_istoriaviazen',
@@ -23,7 +31,12 @@
                 istoriaviazen: [],
             }
         },
+        computed: {
+            ...mapState(['count']),
+            ...mapGetters(['countPlus5']),
+        },
         methods: {
+            ...mapMutations(['increment']),
             getIstoriaviazen: function() {
                 // fetch is returning a Promise which will succeed with some geojson
                 // OR fail with an error

@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import getRouter from './Router.js';
+import getStore from './Store.js';
 
 export function mountApp(element, properties) {
 
@@ -20,6 +21,9 @@ export function mountApp(element, properties) {
 
     const router = getRouter(properties);
     app.use(router);
+
+    const store = getStore(properties);
+    app.use(store);
 
     app.mount(element);
 }
