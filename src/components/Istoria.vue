@@ -29,7 +29,7 @@
             ...mapActions(['requestIstoria']),
         },
         mounted() {
-            this.$store.dispatch('requestIstoria');
+            this.requestIstoria();
         },
     }
 </script>
