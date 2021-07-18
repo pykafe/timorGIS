@@ -1,6 +1,10 @@
 <template>
     requesting or not? {{ images.requesting }}
     error? {{ images.error }}
+    <div class="add_jourhey">
+        <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
+    </div>
+    
     <div class="images_container" v-if="images.list">
         <router-link 
             v-for="image in images.list" v-bind:key="image.id"
