@@ -1,9 +1,9 @@
 <template>
     requesting or not? {{ images.requesting }}
     error? {{ images.error }}
-    <div class="add_jourhey">
+    <router-link :to="{name: 'new_istoria'}">
         <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
-    </div>
+    </router-link>
     
     <div class="images_container" v-if="images.list">
         <router-link 

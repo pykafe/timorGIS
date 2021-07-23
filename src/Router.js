@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import PhotoTimor from './components/PhotoTimor.vue';
 import Istoria from './components/Istoria.vue';
 import Map from './components/Map.vue';
+import Addistoria from './components/Addistoria.vue';
 
 export default function getRouter(properties) {
 
@@ -36,6 +37,13 @@ export default function getRouter(properties) {
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,
                 }
+            },
+        },
+        { 
+            path: '/new_istoria',
+            name: 'new_istoria',
+            components: {
+                default: Addistoria,
             },
         },
     ];
