@@ -62,6 +62,12 @@ export default function getStore(properties) {
         actions: {
             detectLogin(context) {
                 fetch(properties.urls.login).then(response => {
+                    if ( response.status === 401) {
+                        context.commit('setLoggedIn', {amILoggedIn: false});
+                    }
+                    if ( response.status === 200) {
+                        context.commit('setLoggedIn', {amILoggedIn: true});
+                    }
                 });
             },
             requestImages(context) {

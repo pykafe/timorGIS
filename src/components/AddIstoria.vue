@@ -2,7 +2,8 @@
     <div class="card mb-3">
         <div class="card-body">
             <!-- Default form -->
-            <form method="post" enctype="multipart/form-data" novalidate>
+            <form v-if="amILoggedIn === true"
+                method="post" enctype="multipart/form-data" novalidate>
                 <p class="h4 text-center mb-4">Add Journey History</p>
                 <br/>
                 <div class="form-group"> <!-- Title -->
@@ -31,6 +32,32 @@
                 </div>
             </form>
             <!-- Default form -->
+            <div v-if="amILoggedIn === null">Detecting login...</div>
+            <div v-if="amILoggedIn === false">
+                You must
+                <a v-bind:href="loginUrl" >Login</a>
+                to add a journey
+            </div>
         </div>
     </div>
 </template>
+
+<script>
+    import { mapState } from 'vuex'
+    import { mapActions } from 'vuex'
+
+    export default {
+        computed: {
+            ...mapState(['amILoggedIn']),
+            loginUrl() {
+                return `/en/accounts/login?next=${location.href}`;
+            }
+        },
+        methods: {
+            ...mapActions(['detectLogin']),
+        },
+        mounted() {
+            this.detectLogin();
+        },
+    }
+</script>
