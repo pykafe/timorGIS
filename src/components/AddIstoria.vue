@@ -2,13 +2,14 @@
     <div class="card mb-3">
         <div class="card-body">
             <!-- Default form -->
-            <form v-if="amILoggedIn === true"
-                method="post" enctype="multipart/form-data" novalidate>
+            <form v-if="amILoggedIn === true" action="my_bew_endpoint"
+                method="post" enctype="multipart/form-data">
+                <span v-html="csrfTokenInput" />
                 <p class="h4 text-center mb-4">Add Journey History</p>
                 <br/>
                 <div class="form-group"> <!-- Title -->
                     <label class="control-label" for="title">Title</label>
-                    <input class="form-control" id="title" name="title" placeholder="" type="text"/>
+                    <input class="form-control" id="title" name="title" placeholder="" type="text" minlength="5" maxlength="80"/>
                 </div>
                 <div class="form-group"> <!-- Date input -->
                     <label class="control-label" for="date">Date</label>
@@ -44,17 +45,19 @@
 
 <script>
     import { mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
 
     export default {
         computed: {
             ...mapState(['amILoggedIn']),
+            ...mapGetters(['csrfTokenInput']),
             loginUrl() {
                 return `/en/accounts/login?next=${location.href}`;
             }
         },
         methods: {
-            ...mapActions(['detectLogin']),
+            ...mapActions(['detectLogin', 'submitNewJourney']),
         },
         mounted() {
             this.detectLogin();

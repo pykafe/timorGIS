@@ -23,6 +23,11 @@ export default function getStore(properties) {
                 },
             }
         },
+        getters: {
+            csrfTokenInput: state => {
+                return properties.csrfTokenInput;
+            }
+        },
         mutations: {
             setLoggedIn(state, payload) {
                 state.amILoggedIn = payload.amILoggedIn;
@@ -57,9 +62,14 @@ export default function getStore(properties) {
                 state.map.error = payload;
             },
         },
-        getters: {
-        },
         actions: {
+            submitNewJourney(context, payload) {
+                // build the body required
+                fetch(properties.urls.new_journey, { method:POST }).then(response=> {
+
+                });
+
+            },
             detectLogin(context) {
                 fetch(properties.urls.login).then(response => {
                     if ( response.status === 401) {
