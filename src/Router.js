@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import PhotoTimor from './components/PhotoTimor.vue';
 import Istoria from './components/Istoria.vue';
 import Map from './components/Map.vue';
-import Addistoria from './components/Addistoria.vue';
+import AddIstoria from './components/AddIstoria.vue';
 
 export default function getRouter(properties) {
 
@@ -43,7 +43,7 @@ export default function getRouter(properties) {
             path: '/new_istoria',
             name: 'new_istoria',
             components: {
-                default: Addistoria,
+                default: AddIstoria,
             },
         },
     ];
