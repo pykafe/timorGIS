@@ -5,6 +5,7 @@ export default function getStore(properties) {
     const store = createStore({
         state () {
             return {
+                amILoggedIn: null,
                 images: {
                     list: null,
                     requesting: false,
@@ -23,6 +24,9 @@ export default function getStore(properties) {
             }
         },
         mutations: {
+            setLoggedIn(state, payload) {
+                state.amILoggedIn = payload.amILoggedIn;
+            },
             requestingImages(state, payload) {
                 state.images.requesting = payload.requesting;
             },
@@ -56,6 +60,10 @@ export default function getStore(properties) {
         getters: {
         },
         actions: {
+            detectLogin(context) {
+                fetch(properties.urls.login).then(response => {
+                });
+            },
             requestImages(context) {
                 // request the images are retrieved
                 if (context.state.images.list === null) {

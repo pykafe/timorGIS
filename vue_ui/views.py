@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.serializers import serialize
 from django.http import JsonResponse, HttpResponse
+from django.http.response import HttpResponseForbidden
 from django.views.generic.base import TemplateView
 from django.urls import reverse
 from django.core.cache import cache
@@ -17,10 +18,20 @@ class VueView(TemplateView):
                 geojson=reverse("api_geojson"),
                 images=reverse("api_images"),
                 istoriaviazen=reverse("api_istoriaviazen"),
+                login=reverse("api_login"),
                 media_url=settings.MEDIA_URL,
             )
         }
         return context
+
+def login_api(request):
+    if request.user.is_authenticated:
+        response = JsonResponse(
+            {'name': request.user.get_full_name()
+        })
+    else:
+        response = HttpResponse(status=401, reason="You need to login")
+    return response
 
 def geojson_api(request):
     geojson = cache.get('api_geojson')
