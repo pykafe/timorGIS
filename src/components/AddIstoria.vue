@@ -2,8 +2,7 @@
     <div class="card mb-3">
         <div class="card-body">
             <!-- Default form -->
-            <form v-if="amILoggedIn === true" action="my_bew_endpoint"
-                method="post" enctype="multipart/form-data">
+            <form v-if="amILoggedIn === true" @submit.prevent="submitNewJourney" >
                 <span v-html="csrfTokenInput" />
                 <p class="h4 text-center mb-4">Add Journey History</p>
                 <br/>
@@ -27,7 +26,7 @@
                 </div>
                 <br/>
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-pull-right">Save Journey</button>
+                    <button class="btn btn-primary btn-pull-right">Save Journey</button>
                     <a href="#" class="btn btn-default btn-pull-right">Cancel</a>
                 </div>
             </form>
