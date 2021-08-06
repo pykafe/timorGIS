@@ -9,22 +9,21 @@
                 <br/>
                 <div class="form-group"> <!-- Title -->
                     <label class="control-label" for="title">Title</label>
-                    <input class="form-control" id="title" name="title" placeholder="" type="text" minlength="5" maxlength="80"/>
+                    <input class="form-control" id="title" name="title" placeholder="" type="text"  required minlength="5" maxlength="80" />
                 </div>
                 <div class="form-group"> <!-- Date input -->
-                    <label class="control-label" for="date">Date</label>
-                    <input class="from_date" placeholder="Select start date" type="text" name="from_date">
-                    <input class="to_date" placeholder="Select end date" type="text" name="to_date">
+                    <label for="fromDate">From Date</label>
+                    <input type="date" class="fromDate" select=":first" required="" style="width: 400px;" />
+                    <label for="toDate">to</label>
+                    <input type="date" class="toDate" select=":last" required="" style="width: 400px;" />
                 </div>
                 <div class="form-group"> <!-- Description input -->
                     <label class="control-label" for="description">Description</label>
                     <textarea type="text" id="description" class="form-control" rows="3"></textarea>
                 </div>
                 <br/>
-                <div class="row choose-files">
-                    <div class="col">
-                        <input type="file" name="photos" accept="image/.jpeg, .jpg" multiple>
-                    </div>
+                <div class="form-group">
+                    <input type="file" name="photos" style="width: 300px;" accept="image/.jpeg, .jpg" multiple>
                 </div>
                 <br/>
                 <div class="text-center mt-4">
