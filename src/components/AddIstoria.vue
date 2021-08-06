@@ -12,10 +12,10 @@
                     <input class="form-control" id="title" name="title" placeholder="" type="text"  required minlength="5" maxlength="80" />
                 </div>
                 <div class="form-group"> <!-- Date input -->
-                    <label for="fromDate">From Date</label>
-                    <input type="date" class="fromDate" select=":first" required="" style="width: 400px;" />
+                    <label for="fromDate">From </label>
+                    <input type="date" class="fromDate" select=":first" required="" style="width: 400px; margin: 8px;" />
                     <label for="toDate">to</label>
-                    <input type="date" class="toDate" select=":last" required="" style="width: 400px;" />
+                    <input type="date" class="toDate" select=":last" required="" style="width: 400px; margin: 8px;" />
                 </div>
                 <div class="form-group"> <!-- Description input -->
                     <label class="control-label" for="description">Description</label>
