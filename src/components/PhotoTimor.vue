@@ -92,7 +92,7 @@
                         inline: true, 
                         button: true, 
                         navbar: true, 
-                        title: true, 
+                        title: false, 
                         toolbar: true, 
                         tooltip: true, 
                         movable: true, 
