@@ -3,7 +3,7 @@
     error? {{ images.error }}
     <div class="images_container" v-if="images.list">
         <div 
-            v-for="image in images.list" v-bind:key="image.id">
+            v-for="image in images.list" v-bind:key="image.id" @click="selectImgObject(image.image)">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
@@ -17,7 +17,6 @@
                             {{ $filters.shorten(image.istoria.description, 75) }}
                         </p>
                         <div><span>Uploaded by {{ image.istoria.creator }}</span></div>
-                        <button type="button" class="btn-outline-success" @click="selectImgObject(image.image)">Zoom</button>
                     </div>
                 </div>
             </div>
