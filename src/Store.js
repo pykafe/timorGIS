@@ -65,7 +65,10 @@ export default function getStore(properties) {
         actions: {
             submitNewJourney(context, payload) {
                 // build the body required
-                fetch(properties.urls.new_journey, { method:POST }).then(response=> {
+                const formData = new FormData(payload.srcElement);
+
+                fetch(properties.urls.add_journey, { method: 'POST', body: formData }).then(response=> {
+                    // react to success or failure of request
 
                 });
 

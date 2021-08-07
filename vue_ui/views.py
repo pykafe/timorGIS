@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.serializers import serialize
 from django.http import JsonResponse, HttpResponse
 from django.http.response import HttpResponseForbidden
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
 
@@ -19,10 +19,20 @@ class VueView(TemplateView):
                 images=reverse("api_images"),
                 istoriaviazen=reverse("api_istoriaviazen"),
                 login=reverse("api_login"),
+                add_journey=reverse("api_add_istoria"),
                 media_url=settings.MEDIA_URL,
             )
         }
         return context
+
+class AddIstoriaView(View):
+    def post(self, request, *args, **kwargs):
+        import pdb;pdb.set_trace()
+        istoria = IstoriaViazen.objects.create(
+            title=request.POST["title"],
+        )
+        return HttpResponse()
+
 
 def login_api(request):
     if request.user.is_authenticated:

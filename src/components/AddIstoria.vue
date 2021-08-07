@@ -8,17 +8,17 @@
                 <br/>
                 <div class="form-group"> <!-- Title -->
                     <label class="control-label" for="title">Title</label>
-                    <input class="form-control" id="title" name="title" placeholder="" type="text"  required minlength="5" maxlength="80" />
+                    <input class="form-control" id="title" name="title" placeholder="" type="text" required minlength="5" maxlength="80" />
                 </div>
                 <div class="form-group"> <!-- Date input -->
                     <label for="fromDate">From </label>
-                    <input type="date" class="fromDate" select=":first" required="" style="width: 400px; margin: 8px;" />
+                    <input type="date" class="fromDate" name="fromDate" select=":first" required="" style="width: 400px; margin: 8px;" />
                     <label for="toDate">to</label>
-                    <input type="date" class="toDate" select=":last" required="" style="width: 400px; margin: 8px;" />
+                    <input type="date" class="toDate" name="toDate" select=":last" required="" style="width: 400px; margin: 8px;" />
                 </div>
                 <div class="form-group"> <!-- Description input -->
                     <label class="control-label" for="description">Description</label>
-                    <textarea type="text" id="description" class="form-control" rows="3"></textarea>
+                    <textarea type="text" id="description" name="description" class="form-control" rows="3"></textarea>
                 </div>
                 <br/>
                 <div class="form-group">
