@@ -64,14 +64,23 @@ export default function getStore(properties) {
         },
         actions: {
             submitNewJourney(context, payload) {
+                // TODO: commit a mutation to tell the app we are submitting a new istoria
+
                 // build the body required
                 const formData = new FormData(payload.srcElement);
 
                 fetch(properties.urls.add_journey, { method: 'POST', body: formData }).then(response=> {
                     // react to success or failure of request
-
+                    return response.json()
+                }).then(response_data => {
+                    // TODO add the data to the state here using a mutation
+                    console.log(response_data.photos)
+                }).catch((err) => {
+                    // TODO We have an error, tel the user about it
+                }).finally(() => {
+                    // TODO: commit a mutation to tell the app we are done submitting a new istoria
+                    // TODO: route the app to the istoria list, or the istoria page
                 });
-
             },
             detectLogin(context) {
                 fetch(properties.urls.login).then(response => {

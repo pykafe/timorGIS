@@ -27,17 +27,21 @@ class VueView(TemplateView):
 
 class AddIstoriaView(View):
     def post(self, request, *args, **kwargs):
-        import pdb;pdb.set_trace()
         istoria = IstoriaViazen.objects.create(
             title=request.POST["title"],
             description=request.POST["description"],
             duration_of_trip=(request.POST["fromDate"], request.POST["toDate"]),
             creator=request.user,
         )
+        response_data = {
+            "istoria": istoria.to_json(),
+            "photos": [],
+        }
         for photo_file in self.request.FILES.getlist('photos'):
             photo = PhotoTimor.objects.create(istoriaviazen=istoria, image=photo_file)
-        return HttpResponse()
+            response_data["photos"].append(photo.to_json())
 
+        return JsonResponse(response_data)
 
 def login_api(request):
     if request.user.is_authenticated:
@@ -58,29 +62,16 @@ def geojson_api(request):
 
 def images_api(request):
     images = [
-        {
-            "id": photo["id"],
-            "image": photo["image"],
-            "istoria": {
-                "id": photo["istoriaviazen_id"],
-                "creator": photo["istoriaviazen__creator__username"],
-                "title": photo["istoriaviazen__title"],
-                "description": photo["istoriaviazen__description"],
-            }
-        }
-        for photo in PhotoTimor.objects.values(
-            'id',
-            'image',
-            'istoriaviazen_id',
-            'istoriaviazen__title',
-            'istoriaviazen__description',
-            'istoriaviazen__creator__username',
-        )
+        p.to_json()
+        for p in PhotoTimor.objects.all().select_related("istoriaviazen", "istoriaviazen__creator")
     ]
     response = JsonResponse(images, safe=False)
     return response
 
 def istoriaviazen_api(request):
-    json = serialize('json', IstoriaViazen.objects.all())
-    response = HttpResponse(json, content_type="application/json")
+    viazen = [
+        v.to_json()
+        for v in IstoriaViazen.objects.all().select_related('creator')
+    ]
+    response = JsonResponse(viazen, safe=False)
     return response

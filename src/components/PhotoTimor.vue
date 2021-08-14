@@ -21,7 +21,7 @@
                         <p>
                             {{ $filters.shorten(image.istoria.description, 75) }}
                         </p>
-                        <span>Uploaded by {{ image.istoria.creator }}</span>
+                        <span>Uploaded by {{ image.istoria.creator.fullname }}</span>
                     </div>
                 </div>
             </div>
