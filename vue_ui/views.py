@@ -30,7 +30,12 @@ class AddIstoriaView(View):
         import pdb;pdb.set_trace()
         istoria = IstoriaViazen.objects.create(
             title=request.POST["title"],
+            description=request.POST["description"],
+            duration_of_trip=(request.POST["fromDate"], request.POST["toDate"]),
+            creator=request.user,
         )
+        for photo_file in self.request.FILES.getlist('photos'):
+            photo = PhotoTimor.objects.create(istoriaviazen=istoria, image=photo_file)
         return HttpResponse()
 
 
