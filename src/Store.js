@@ -75,11 +75,11 @@ export default function getStore(properties) {
                 }).then(response_data => {
                     // TODO add the data to the state here using a mutation
                     console.log(response_data.photos)
+                    // TODO: route the app to the istoria list, or the istoria page
                 }).catch((err) => {
                     // TODO We have an error, tel the user about it
                 }).finally(() => {
                     // TODO: commit a mutation to tell the app we are done submitting a new istoria
-                    // TODO: route the app to the istoria list, or the istoria page
                 });
             },
             detectLogin(context) {
