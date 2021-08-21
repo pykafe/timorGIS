@@ -11,6 +11,11 @@ export default function getStore(properties) {
                     requesting: false,
                     error: null,
                 },
+                add_istoria: {
+                    list: null,
+                    requesting: false,
+                    error: null,
+                },
                 istoria: {
                     list: null,
                     requesting: false,
@@ -32,6 +37,16 @@ export default function getStore(properties) {
             setLoggedIn(state, payload) {
                 state.amILoggedIn = payload.amILoggedIn;
             },
+            requestingAddIstoria(state, payload) {
+                state.add_istoria.requesting = payload.requesting;
+            },
+            setAddIstoriaList(state, payload) {
+                state.add_istoria.list = payload.add_istoria;
+            },
+            setAddIstoriaError(state, payload) {
+                state.add_istoria.error = payload;
+            },
+
             requestingImages(state, payload) {
                 state.images.requesting = payload.requesting;
             },
@@ -65,7 +80,7 @@ export default function getStore(properties) {
         actions: {
             submitNewJourney(context, payload) {
                 // TODO: commit a mutation to tell the app we are submitting a new istoria
-
+                context.commit('requestingAddIstoria', {requesting: true});
                 // build the body required
                 const formData = new FormData(payload.srcElement);
 
@@ -75,11 +90,14 @@ export default function getStore(properties) {
                 }).then(response_data => {
                     // TODO add the data to the state here using a mutation
                     console.log(response_data.photos)
+                    context.commit('setAddIstoriaList', {response_data});
                     // TODO: route the app to the istoria list, or the istoria page
                 }).catch((err) => {
                     // TODO We have an error, tel the user about it
+                    context.commit('setAddIstoriaError', {err});
                 }).finally(() => {
                     // TODO: commit a mutation to tell the app we are done submitting a new istoria
+                    context.commit('requestingAddIstoria', {requesting: false});
                 });
             },
             detectLogin(context) {

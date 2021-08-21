@@ -1,5 +1,6 @@
 <template>
     <div class="card mb-3">
+        {{ add_istoria }}
         <div class="card-body">
             <!-- Default form -->
             <form v-if="amILoggedIn === true" @submit.prevent="submitNewJourney" >
@@ -26,12 +27,13 @@
                 </div>
                 <br/>
                 <div class="text-center mt-4">
-                    <button class="btn btn-primary btn-pull-right">Save Journey</button>
+                    <button class="btn btn-primary btn-pull-right" v-bind:disabled="add_istoria.requesting">Save Journey</button>
                     <a href="#" class="btn btn-default btn-pull-right">Cancel</a>
                 </div>
             </form>
             <!-- Default form -->
             <div v-if="amILoggedIn === null">Detecting login...</div>
+            <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
             <div v-if="amILoggedIn === false">
                 You must
                 <a v-bind:href="loginUrl" >Login</a>
@@ -48,7 +50,7 @@
 
     export default {
         computed: {
-            ...mapState(['amILoggedIn']),
+            ...mapState(['amILoggedIn', 'add_istoria']),
             ...mapGetters(['csrfTokenInput']),
             loginUrl() {
                 return `/en/accounts/login?next=${location.href}`;
