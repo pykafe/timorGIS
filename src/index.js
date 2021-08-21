@@ -21,7 +21,7 @@ export function mountApp(element, properties) {
     const router = getRouter(properties);
     app.use(router);
 
-    const store = getStore(properties);
+    const store = getStore(properties, router);
     app.use(store);
 
     app.mount(element);

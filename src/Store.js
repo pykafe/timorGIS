@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 
-export default function getStore(properties) {
+export default function getStore(properties, router) {
     // Create a new store instance.
     const store = createStore({
         state () {
@@ -41,7 +41,12 @@ export default function getStore(properties) {
                 state.add_istoria.requesting = payload.requesting;
             },
             setAddIstoriaList(state, payload) {
-                state.add_istoria.list = payload.add_istoria;
+                if (state.images.list !== null) {
+                    state.images.list.unshift(payload.photos);
+                }
+                if (state.istoria.list !== null) {
+                    state.istoria.list.unshift(payload.istoria);
+                }
             },
             setAddIstoriaError(state, payload) {
                 state.add_istoria.error = payload;
@@ -79,7 +84,6 @@ export default function getStore(properties) {
         },
         actions: {
             submitNewJourney(context, payload) {
-                // TODO: commit a mutation to tell the app we are submitting a new istoria
                 context.commit('requestingAddIstoria', {requesting: true});
                 // build the body required
                 const formData = new FormData(payload.srcElement);
@@ -88,15 +92,12 @@ export default function getStore(properties) {
                     // react to success or failure of request
                     return response.json()
                 }).then(response_data => {
-                    // TODO add the data to the state here using a mutation
-                    console.log(response_data.photos)
-                    context.commit('setAddIstoriaList', {response_data});
-                    // TODO: route the app to the istoria list, or the istoria page
+                    context.commit('setAddIstoriaList', response_data);
+                    router.push('istoria');
                 }).catch((err) => {
                     // TODO We have an error, tel the user about it
                     context.commit('setAddIstoriaError', {err});
                 }).finally(() => {
-                    // TODO: commit a mutation to tell the app we are done submitting a new istoria
                     context.commit('requestingAddIstoria', {requesting: false});
                 });
             },
