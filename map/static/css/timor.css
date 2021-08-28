@@ -655,4 +655,10 @@ ul.dropdown-menu.show > a li img {
     padding: 8px;
     border-radius: 2px;
 }
+.viewer-toolbar > ul > li.viewer-reset {
+    display: none;
+}
+.viewer-toolbar > ul > li.viewer-play {
+    display: none;
+}
 

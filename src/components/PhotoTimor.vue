@@ -2,9 +2,8 @@
     requesting or not? {{ images.requesting }}
     error? {{ images.error }}
     <div class="images_container" v-if="images.list">
-        <router-link 
-            v-for="image in images.list" v-bind:key="image.id"
-            :to="{name: 'photos', params: {selected_id: image.id}}">
+        <div 
+            v-for="image in images.list" v-bind:key="image.id" @click="selectImgObject(image.image)">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
@@ -17,16 +16,11 @@
                         <p>
                             {{ $filters.shorten(image.istoria.description, 75) }}
                         </p>
-                        <span>Uploaded by {{ image.istoria.creator }}</span>
+                        <div><span>Uploaded by {{ image.istoria.creator }}</span></div>
                     </div>
                 </div>
             </div>
-        </router-link>
-        <router-link :to="{name: 'photos'}">
-            <div class="image_selected" v-show="!!$route.params.selected_id">
-                <img v-bind:src="selectedImageSrc" width="600" />
-            </div>
-        </router-link>
+        </div>
     </div>
 </template>
 <style scoped>
@@ -61,6 +55,8 @@
 <script>
     import { mapState } from 'vuex'
     import { mapActions } from 'vuex'
+    import 'viewerjs/dist/viewer.css'
+    import { api as viewerApi } from "v-viewer"
 
     export default {
         props: [
@@ -69,18 +65,9 @@
         data() {
             return {
                 rollover_image_id: 0,
-                selected_image_id: 0,
             }
         },
         computed: {
-            selectedImage() {
-                return this.images.list.find(image => image.id == this.$route.params.selected_id);
-            },
-            selectedImageSrc() {
-                return this.selectedImage !== undefined
-                    ? `${ this.url_media }${ this.selectedImage.image}`
-                    : ""
-            },
             ...mapState(['images']),
         },
         methods: {
@@ -90,6 +77,34 @@
             },
             imageCardStyle(image) {
                 return `background-image: url(${ this.url_media }${ image.image})`;
+            },
+            selectImgObject (image) {
+                let img = [];
+                const urlMedia = this.url_media;
+                this.images.list.forEach( function(image){
+                    img.push(urlMedia + image.image)
+                });
+                const indexId = img.indexOf(urlMedia + image);
+                const $viewer = viewerApi({
+                    options: {
+                        toolbar: true,
+                        initialViewIndex: indexId,
+                        inline: true, 
+                        button: true, 
+                        navbar: true, 
+                        title: false, 
+                        toolbar: true, 
+                        tooltip: true, 
+                        movable: true, 
+                        zoomable: false, 
+                        rotatable: false, 
+                        scalable: false, 
+                        transition: true, 
+                        fullscreen: true, 
+                        keyboard: true, 
+                    },
+                    images: img 
+                });
             },
         },
         mounted() {
