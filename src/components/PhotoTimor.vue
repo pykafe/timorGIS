@@ -8,7 +8,7 @@
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
-                class="image_card"
+                class="image_card rounded"
                 v-bind:style="imageCardStyle(image)">
                 <div class="istoria_title">
                     {{ image.istoria.title }}
@@ -24,7 +24,19 @@
         </router-link>
         <router-link :to="{name: 'photos'}">
             <div class="image_selected" v-show="!!$route.params.selected_id">
-                <img v-bind:src="selectedImageSrc" width="600" />
+                <div tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg modals-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modals-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+                            </div>
+                             <div class="modal-body">
+                                <img v-bind:src="selectedImageSrc" width="600"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </router-link>
     </div>
@@ -50,12 +62,30 @@
     border-radius: 3px;
 }
 .image_selected {
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    left: 10px;
-    top: 10px;
+    left: 1px;
+    right: 10px;
+    top: 1px;
 }
+.modals-lg {
+    max-width: 100%!important;
+    margin: 0px!important;
+}
+.modals-header {
+    display: -ms-flexbox;
+    /* display: flex; */
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    /* border-bottom: 1px solid #dee2e6; */
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+}
+
 </style>
 
 <script>
