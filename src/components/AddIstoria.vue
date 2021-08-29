@@ -1,4 +1,5 @@
 <template>
+    <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
     <div class="card mb-3">
         {{ add_istoria }}
         <div class="card-body">
@@ -28,7 +29,7 @@
                     </div>
                     <br/>
                     <div class="text-center mt-4">
-                        <button class="btn btn-primary btn-pull-right" >Save Journey</button>
+                        <button class="btn btn-primary btn-pull-right" >Submit</button>
                         <a href="#" class="btn btn-default btn-pull-right">Cancel</a>
                     </div>
                 </fieldset>
@@ -44,6 +45,23 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    .loader {
+        background-color: rgb(8 8 8 / 87%);
+        position: absolute;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 401;
+        color: var(--white);
+        font-size: 32px;
+    }
+</style>
 
 <script>
     import { mapState } from 'vuex'
