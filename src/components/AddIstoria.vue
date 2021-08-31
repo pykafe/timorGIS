@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        {{ add_istoria }}
+        <span class="loader" v-if="add_istoria.error">Sorry!</span>
         <div class="row">
             <div class="col-md-12 back-button">
                 <a href="#" class="btn btn-default">Back</a>
