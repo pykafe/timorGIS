@@ -83,8 +83,8 @@ input[type=text]:focus, [type=email]:focus, [name=messages]:focus, textarea:not(
 
 input:not([type="submit"]), textarea:not([type="submit"]) {
     border-radius: 2px;
-    border: 1px solid #31d9ff;
-    background: #f0f2f5;
+    border: 1px solid var(--gray);
+    background: var(--white-1);
     color: #151313;
     width: 100%;
     padding: 11px;
@@ -285,16 +285,6 @@ span.person-name {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1px;
-}
-
-/* CREATE FORM */
-
-.form-group {
-    color: #555;
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 2px;
-    padding: 10px;
 }
 
 select#id_creator {
