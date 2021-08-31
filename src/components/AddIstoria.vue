@@ -2,7 +2,7 @@
     <div class="container">
         {{ add_istoria }}
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 back-button">
                 <a href="#" class="btn btn-default">Back</a>
             </div>
         </div>

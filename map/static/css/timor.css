@@ -95,6 +95,10 @@ input[type="file"] {
     cursor: pointer;
 }
 
+input#title {
+    padding: 24px;
+}
+
 /* BUTTONS STYLES */
 /* This button using for "Add" and  "Cancel", This is only on gray theme*/
 .btn-default {
@@ -308,6 +312,10 @@ input#id_duration_of_trip_0, input#id_duration_of_trip_1 {
     max-width: 37%;
 }
 
+input.fromDate, input.toDate {
+    margin: 2px;
+}
+
 .select-date-trip {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -460,6 +468,11 @@ span.blue-text {
 /* set font-family for every h3 to use comfortaa */
 h3 {
     font-family: 'Comfortaa';
+}
+
+.back-button {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .edit-journey {
