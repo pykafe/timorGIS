@@ -29,7 +29,7 @@
 </template>
 <style scoped>
 .images_container {
-    padding-top: 15px;
+    padding-top: 80px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     column-gap: 15px;
