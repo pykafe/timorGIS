@@ -1,6 +1,6 @@
 <template>
     <span class="loader" v-if="images.requesting">Loading...</span>
-    <span class="loader" v-if="images.error">Sorry...</span>
+    <span class="loader" v-if="images.error">Sorry!</span>
     <router-link :to="{name: 'new_istoria'}">
         <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
     </router-link>
