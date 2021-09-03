@@ -1,19 +1,24 @@
 <template>
+    <div id="expand">
+            <span>Click the map icon for expand</span>
+    </div>
     <div id="map_container">
         <div id="mapid">
             <span class="loader" v-if="map.requesting">Loading Districts...</span>
         </div>
-        <button @click="toggleExpand">
-            {{ expanded ? 'SHRINK' : 'EXPAND' }}
-        </button>
     </div>
 </template>
 
 <style  scoped>
+#expand {
+    position: fixed;
+    top: 140px;
+    right: 170px;
+}
 #map_container {
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    top: 90px;
+    right: 12px;
 }
 #map_container button {
     position: absolute;
@@ -26,8 +31,8 @@
     border-width: 5px;
     border-color: black;
     padding: 5px;
-    height: 250px;
-    width: 600px;
+    height: 70px;
+    width: 140px;
 }
 .loader {
     position: absolute;
