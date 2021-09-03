@@ -71,6 +71,8 @@
     height: 100%;
     z-index: 401;
     font-size: 32px;
+    background-color: rgb(8 8 8 / 87%);
+    color: var(--white);
 }
 </style>
 
