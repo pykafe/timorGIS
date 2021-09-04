@@ -3,6 +3,8 @@ import PhotoTimor from './components/PhotoTimor.vue';
 import Istoria from './components/Istoria.vue';
 import Map from './components/Map.vue';
 import AddIstoria from './components/AddIstoria.vue';
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 export default function getRouter(properties) {
 
@@ -13,6 +15,8 @@ export default function getRouter(properties) {
             name: 'photos',
             components: {
                 default: PhotoTimor,
+                header: Header,
+                footer: Footer,
                 map: Map,
             },
             props: {
@@ -29,6 +33,8 @@ export default function getRouter(properties) {
             name: 'istoria',
             components: {
                 default: Istoria,
+                header: Header,
+                footer: Footer,
                 map: Map,
             },
             props: {
@@ -44,6 +50,8 @@ export default function getRouter(properties) {
             name: 'new_istoria',
             components: {
                 default: AddIstoria,
+                header: Header,
+                footer: Footer,
             },
         },
     ];
