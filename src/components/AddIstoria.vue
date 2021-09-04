@@ -50,9 +50,18 @@
     </div>
 </template>
 <style scoped>
-input.fromDate, input.toDate {
-    margin: 2px;
-}
+    input.fromDate, input.toDate {
+        margin: 2px;
+    }
+
+    input#title {
+        padding: 24px;
+    }
+
+    .back-button {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
 </style>
 
 

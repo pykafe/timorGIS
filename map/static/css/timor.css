@@ -95,9 +95,6 @@ input[type="file"] {
     cursor: pointer;
 }
 
-input#title {
-    padding: 24px;
-}
 
 /* BUTTONS STYLES */
 /* This button using for "Add" and  "Cancel", This is only on gray theme*/
@@ -468,11 +465,6 @@ span.blue-text {
 /* set font-family for every h3 to use comfortaa */
 h3 {
     font-family: 'Comfortaa';
-}
-
-.back-button {
-    padding-top: 15px;
-    padding-bottom: 15px;
 }
 
 .edit-journey {
