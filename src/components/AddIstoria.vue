@@ -1,7 +1,6 @@
 <template>
     <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
     <div class="card mb-3">
-        {{ add_istoria }}
         <div class="card-body">
             <!-- Default form -->
             <form v-if="amILoggedIn === true" @submit.prevent="submitNewJourney" >
