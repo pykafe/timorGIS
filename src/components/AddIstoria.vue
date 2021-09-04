@@ -1,6 +1,5 @@
 <template>
     <div class="card mb-3">
-        {{ add_istoria }}
         <div class="card-body">
             <!-- Default form -->
             <form v-if="amILoggedIn === true" @submit.prevent="submitNewJourney" >
@@ -14,9 +13,17 @@
                     </div>
                     <div class="form-group"> <!-- Date input -->
                         <label for="fromDate">From </label>
-                        <input type="date" class="fromDate" name="fromDate" select=":first" required="" style="width: 400px; margin: 8px;" />
+                        <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" style="width: 400px; margin: 8px;" />
                         <label for="toDate">to</label>
-                        <input type="date" class="toDate" name="toDate" select=":last" required="" style="width: 400px; margin: 8px;" />
+                        <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" style="width: 400px; margin: 8px;" />
+                        <p v-if="error.length">
+                            <b>Please correct this Date</b>
+                            <ul>
+                                <li v-for="e in error" v-bind:key="e.id">
+                                    {{e}}
+                                </li>
+                            </ul>
+                        </p>
                     </div>
                     <div class="form-group"> <!-- Description input -->
                         <label class="control-label" for="description">Description</label>
@@ -51,6 +58,14 @@
     import { mapActions } from 'vuex'
 
     export default {
+        name: "Submited",
+        data(){
+            return {
+                error:[],
+                fromDate: null,
+                toDate: null
+            }
+        },
         computed: {
             ...mapState(['amILoggedIn', 'add_istoria']),
             ...mapGetters(['csrfTokenInput']),
@@ -60,6 +75,17 @@
         },
         methods: {
             ...mapActions(['detectLogin', 'submitNewJourney']),
+            submitNewJourney(e){
+                if(this.fromDate && this.toDate){
+                    console.log("submit function called")
+                }
+                this.error=[];
+                if(this.fromDate > this.toDate){
+                    this.error.push("End date must be greater than start date")
+                }
+                console.warn("error", this.error)
+                e.preventDefault()
+            }
         },
         mounted() {
             this.detectLogin();
