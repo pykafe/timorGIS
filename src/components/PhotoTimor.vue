@@ -1,6 +1,6 @@
 <template>
-    requesting or not? {{ images.requesting }}
-    error? {{ images.error }}
+    <span class="loader" v-if="images.requesting">Loading...</span>
+    <span class="loader" v-if="images.error">Sorry!</span>
     <router-link :to="{name: 'new_istoria'}">
         <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
     </router-link>
@@ -59,6 +59,21 @@
     position: absolute;
     left: 10px;
     top: 10px;
+}
+.loader {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 401;
+    font-size: 32px;
+    background-color: rgb(8 8 8 / 87%);
+    color: var(--white);
 }
 </style>
 
