@@ -2,7 +2,7 @@
     <div class="card mb-3">
         <div class="card-body">
             <!-- Default form -->
-            <form v-if="amILoggedIn === true" @submit.prevent="submitNewJourney" >
+            <form v-if="amILoggedIn === true" @submit.prevent="validateAndSubmitNewJourney" >
                 <fieldset v-bind:disabled="add_istoria.requesting">
                     <span v-html="csrfTokenInput" />
                     <p class="h4 text-center mb-4">Add Journey History</p>
@@ -16,8 +16,8 @@
                         <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" style="width: 400px; margin: 8px;" />
                         <label for="toDate">to</label>
                         <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" style="width: 400px; margin: 8px;" />
-                        <p v-if="error.length">
-                            <b>Please correct this Date</b>
+                        <p v-if="error.length" style="color: red;">
+                            <b>Please correct following this error:</b>
                             <ul>
                                 <li v-for="e in error" v-bind:key="e.id">
                                     {{e}}
@@ -58,7 +58,6 @@
     import { mapActions } from 'vuex'
 
     export default {
-        name: "Submited",
         data(){
             return {
                 error:[],
@@ -75,7 +74,7 @@
         },
         methods: {
             ...mapActions(['detectLogin', 'submitNewJourney']),
-            submitNewJourney(e){
+            validateAndSubmitNewJourney(e){
                 if(this.fromDate && this.toDate){
                     console.log("submit function called")
                 }
@@ -83,8 +82,9 @@
                 if(this.fromDate > this.toDate){
                     this.error.push("End date must be greater than start date")
                 }
-                console.warn("error", this.error)
-                e.preventDefault()
+                if( this.error.length === 0 ) {
+                    this.submitNewJourney(e);
+	            }
             }
         },
         mounted() {
