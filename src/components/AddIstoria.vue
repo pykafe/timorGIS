@@ -49,6 +49,12 @@
         </div>
     </div>
 </template>
+<style scoped>
+input.fromDate, input.toDate {
+    margin: 2px;
+}
+</style>
+
 
 <script>
     import { mapState } from 'vuex'
