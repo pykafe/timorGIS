@@ -67,6 +67,7 @@
     align-items: center;
     text-align: center;
     top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
     z-index: 401;
