@@ -309,10 +309,6 @@ input#id_duration_of_trip_0, input#id_duration_of_trip_1 {
     max-width: 37%;
 }
 
-input.fromDate, input.toDate {
-    margin: 2px;
-}
-
 .select-date-trip {
     margin-top: 10px;
     margin-bottom: 10px;
