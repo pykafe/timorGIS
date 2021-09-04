@@ -8,6 +8,9 @@ from django.utils import timezone
 from psycopg2.extras import DateRange
 from django.core.exceptions import ValidationError
 from map.gps_images import ImageMetaData
+from django.conf import settings
+
+COMMENT_MAX_LENGTH = getattr(settings, 'COMMENT_MAX_LENGTH', 3000)
 
 
 class Suco(models.Model):
@@ -128,3 +131,33 @@ class PhotoTimor(models.Model):
     def district(self):
         ''' return the district the photo was taken in '''
         return ', '.join(self.get_areas(District).values_list('name', flat=True))
+
+
+class CommentViazen(models.Model):
+    phototimor = models.ForeignKey(PhotoTimor, verbose_name=_('comment'), related_name="comment", on_delete=models.CASCADE)
+    usercomment = models.ForeignKey(User, verbose_name=_('user'), blank=True, null=True, related_name='%(class)s_comments', on_delete=models.SET_NULL)
+    comment = models.TextField(_('comment'), max_length=COMMENT_MAX_LENGTH)
+    submit_at = models.DateTimeField(null=False, blank=False, default=None, db_index=True)
+    modified_at= models.DateTimeField(auto_now=True)
+    ip_address = models.GenericIPAddressField(_('IP address'), unpack_ipv4=True, blank=True, null=True)
+    is_public = models.BooleanField(_('is public'), default=True,
+                                    help_text=_('Uncheck this box to make the comment effectively '
+                                                'disappear from the site.'))
+    is_removed = models.BooleanField(_('is removed'), default=False, db_index=True,
+                                     help_text=_('Check this box if the comment is inappropriate. '
+                                                 'A "This comment has been removed" message will '
+                                                 'be displayed instead.'))
+    class Meta:
+        #abstract = True
+        ordering = ('submit_at',)
+        permissions = [("can_moderate", "Can moderate comments")]
+        verbose_name = _('comment')
+        verbose_name_plural = _('comments')
+
+    def __str__(self):
+        return "%s: %s..." % (self.name, self.comment[:50])
+
+    def save(self, *args, **kwargs):
+        if self.submit_at is None:
+            self.submit_at = timezone.now()
+        super().save(*args, **kwargs)
