@@ -22,33 +22,72 @@
                 </div>
             </div>
         </router-link>
-        <router-link :to="{name: 'photos'}">
-            <div class="image_selected" v-show="!!$route.params.selected_id">
-                <div tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-lg modals-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modals-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
-                            </div>
-                             <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <img v-bind:src="selectedImageSrc" class="size_images"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <b>Joanico Barros  12:33 AM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                            </div>
+        <div class="image_selected" v-show="!!$route.params.selected_id">
+            <div tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg modals-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modals-header">
+                            <router-link :to="{name: 'photos'}" class="close close_comment">
+                                <span class="closes">&times;</span>
+                            </router-link>
+                            <h4 class="modal-title" id="gridSystemModalLabel">Ilha Jaco</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>Hosi | April 22, 2021 - April 23, 2021</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <img v-bind:src="selectedImageSrc" class="size_images"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>Kria hosi Mario April 29, 2021, 12:34 p.m.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 comment_scroll">
+                                            <b>Joanico Barros  12:33 AM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                            <b>Mariano de Deus  2:33 PM</b>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="comment_input">
                                                 <input type="text" name="comments" placeholder="Comments..."/>
-                                            </div>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +96,7 @@
                     </div>
                 </div>
             </div>
-        </router-link>
+        </div>
     </div>
 </template>
 <style scoped>
@@ -106,8 +145,60 @@
 }
 .size_images {
     height: calc(100vh - 64px - 14px);
-    width: 600px;
+    width: 610px;
 }
+.comment_input {
+    display: inline-block;
+    width: 40em;
+    position: relative;
+    bottom: -2rem;
+    white-space: nowrap;
+}
+.comment_scroll {
+    overflow-y: auto;
+    min-height: 0;
+    max-height: 480px;
+    right: 30px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-2);
+}
+.close_comment {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 80px;
+    overflow: hidden;
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    -webkit-transition: background-color 0.15s;
+    transition: background-color 0.15s;
+    width: 80px;
+}
+.closes {
+    color: white;
+}
+
 
 </style>
 
