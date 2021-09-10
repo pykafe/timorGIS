@@ -220,17 +220,17 @@
         data() {
             return {
                 rollover_image_id: 0,
-                selected_image_id: 0,
+                sselected_image_id: 0,
             }
         },
         computed: {
-            selectedImage() {
-                return this.images.list.find(image => image.id == this.$route.params.selected_id);
+            sselectedImage() {
+            return this.images.list.find(image => image.id == this.$route.params.selected_id);
             },
-            selectedImageSrc() {
-                return this.selectedImage !== undefined
-                    ? `${ this.url_media }${ this.selectedImage.image}`
-                    : ""
+            sselectedImageSrc() {
+            return this.selectedImage !== undefined
+                ? `${ this.url_media }${ this.selectedImage.image}`
+                : ""
             },
             ...mapState(['images']),
         },
@@ -240,7 +240,7 @@
                 this.rollover_image_id = id;
             },
             imageCardStyle(image) {
-                return `background-image: url(${ this.url_media }${ image.image})`;
+            return `background-image: url(${ this.url_media }${ image.image})`;
             },
         },
         mounted() {
