@@ -190,19 +190,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--blue-2);
 }
-.close_comment {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    height: 80px;
-    overflow: hidden;
-    position: absolute;
-    right: -40px;
-    top: -40px;
-    -webkit-transition: background-color 0.15s;
-    transition: background-color 0.15s;
-    width: 80px;
-}
 .closes {
     color: white;
 }
