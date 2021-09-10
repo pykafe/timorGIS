@@ -2,11 +2,12 @@
     requesting or not? {{ images.requesting }}
     error? {{ images.error }}
     <div class="images_container" v-if="images.list">
-        <div v-for="image in images.list" v-bind:key="image.id">
+        <div 
+            v-for="image in images.list" v-bind:key="image.id">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
-                class="image_card rounded"
+                class="image_card rounded" @click="selectImgObject(image.image)"
                 v-bind:style="imageCardStyle(image)">
                 <div class="istoria_title">
                     {{ image.istoria.title }}
@@ -15,20 +16,20 @@
                         <p>
                             {{ $filters.shorten(image.istoria.description, 75) }}
                         </p>
-                        <span>Uploaded by {{ image.istoria.creator }}</span>
-                        <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
-                            <p>Add comment</p>
-                        </router-link>
+                        <div><span>Uploaded by {{ image.istoria.creator }}</span></div>
                     </div>
                 </div>
             </div>
+            <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
+                <p>Add comment</p>
+            </router-link>
         </div>
         <div class="image_selected" v-show="!!$route.params.selected_id">
             <div tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg modals-lg" role="document">
                     <div class="modal-content">
                         <div class="modals-header">
-                            <router-link :to="{name: 'photos'}" class="close close_comment">
+                            <router-link :to="{name: 'photos'}" class="viewer-button viewer-close">
                                 <span class="closes">&times;</span>
                             </router-link>
                             <h4 class="modal-title" id="gridSystemModalLabel">Ilha Jaco</h4>
@@ -212,6 +213,8 @@
 <script>
     import { mapState } from 'vuex'
     import { mapActions } from 'vuex'
+    import 'viewerjs/dist/viewer.css'
+    import { api as viewerApi } from "v-viewer"
 
     export default {
         props: [
@@ -220,17 +223,17 @@
         data() {
             return {
                 rollover_image_id: 0,
-                sselected_image_id: 0,
+                selected_image_id: 0,
             }
         },
         computed: {
-            sselectedImage() {
-            return this.images.list.find(image => image.id == this.$route.params.selected_id);
+            selectedImage() {
+                return this.images.list.find(image => image.id == this.$route.params.selected_id);
             },
-            sselectedImageSrc() {
-            return this.selectedImage !== undefined
-                ? `${ this.url_media }${ this.selectedImage.image}`
-                : ""
+            selectedImageSrc() {
+                return this.selectedImage !== undefined
+                    ? `${ this.url_media }${ this.selectedImage.image}`
+                    : ""
             },
             ...mapState(['images']),
         },
@@ -240,7 +243,35 @@
                 this.rollover_image_id = id;
             },
             imageCardStyle(image) {
-            return `background-image: url(${ this.url_media }${ image.image})`;
+                return `background-image: url(${ this.url_media }${ image.image})`;
+            },
+            selectImgObject (image) {
+                let img = [];
+                const urlMedia = this.url_media;
+                this.images.list.forEach( function(image){
+                    img.push(urlMedia + image.image)
+                });
+                const indexId = img.indexOf(urlMedia + image);
+                const $viewer = viewerApi({
+                    options: {
+                        toolbar: true,
+                        initialViewIndex: indexId,
+                        inline: true, 
+                        button: true, 
+                        navbar: true, 
+                        title: false, 
+                        toolbar: true, 
+                        tooltip: true, 
+                        movable: true, 
+                        zoomable: false, 
+                        rotatable: false, 
+                        scalable: false, 
+                        transition: true, 
+                        fullscreen: true, 
+                        keyboard: true, 
+                    },
+                    images: img 
+                });
             },
         },
         mounted() {
