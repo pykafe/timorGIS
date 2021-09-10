@@ -2,9 +2,7 @@
     requesting or not? {{ images.requesting }}
     error? {{ images.error }}
     <div class="images_container" v-if="images.list">
-        <router-link 
-            v-for="image in images.list" v-bind:key="image.id"
-            :to="{name: 'photos', params: {selected_id: image.id}}">
+        <div v-for="image in images.list" v-bind:key="image.id">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
@@ -18,10 +16,13 @@
                             {{ $filters.shorten(image.istoria.description, 75) }}
                         </p>
                         <span>Uploaded by {{ image.istoria.creator }}</span>
+                        <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
+                            <p>Add comment</p>
+                        </router-link>
                     </div>
                 </div>
             </div>
-        </router-link>
+        </div>
         <div class="image_selected" v-show="!!$route.params.selected_id">
             <div tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg modals-lg" role="document">
