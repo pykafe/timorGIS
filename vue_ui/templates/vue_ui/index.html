@@ -7,10 +7,12 @@
 <script type="text/javascript" src="{% static 'main.js' %}"></script>
 <script>
     const urls = {{ urls|safe }};
+    const csrfTokenInput = '{% csrf_token %}';
     timorgis.mountApp(
         '#app',
         {
-            urls: urls
+            urls: urls,
+            csrfTokenInput: csrfTokenInput,
         }
     );
 </script>
