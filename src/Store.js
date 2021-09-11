@@ -1,11 +1,17 @@
 import { createStore } from 'vuex'
 
-export default function getStore(properties) {
+export default function getStore(properties, router) {
     // Create a new store instance.
     const store = createStore({
         state () {
             return {
+                amILoggedIn: null,
                 images: {
+                    list: null,
+                    requesting: false,
+                    error: null,
+                },
+                add_istoria: {
                     list: null,
                     requesting: false,
                     error: null,
@@ -22,7 +28,30 @@ export default function getStore(properties) {
                 },
             }
         },
+        getters: {
+            csrfTokenInput: state => {
+                return properties.csrfTokenInput;
+            }
+        },
         mutations: {
+            setLoggedIn(state, payload) {
+                state.amILoggedIn = payload.amILoggedIn;
+            },
+            requestingAddIstoria(state, payload) {
+                state.add_istoria.requesting = payload.requesting;
+            },
+            setAddIstoriaList(state, payload) {
+                if (state.images.list !== null) {
+                    state.images.list.unshift(payload.photos);
+                }
+                if (state.istoria.list !== null) {
+                    state.istoria.list.unshift(payload.istoria);
+                }
+            },
+            setAddIstoriaError(state, payload) {
+                state.add_istoria.error = payload;
+            },
+
             requestingImages(state, payload) {
                 state.images.requesting = payload.requesting;
             },
@@ -53,9 +82,35 @@ export default function getStore(properties) {
                 state.map.error = payload;
             },
         },
-        getters: {
-        },
         actions: {
+            submitNewJourney(context, payload) {
+                context.commit('requestingAddIstoria', {requesting: true});
+                // build the body required
+                const formData = new FormData(payload.srcElement);
+
+                fetch(properties.urls.add_journey, { method: 'POST', body: formData }).then(response=> {
+                    // react to success or failure of request
+                    return response.json()
+                }).then(response_data => {
+                    context.commit('setAddIstoriaList', response_data);
+                    router.push('istoria');
+                }).catch((err) => {
+                    // TODO We have an error, tel the user about it
+                    context.commit('setAddIstoriaError', {err});
+                }).finally(() => {
+                    context.commit('requestingAddIstoria', {requesting: false});
+                });
+            },
+            detectLogin(context) {
+                fetch(properties.urls.login).then(response => {
+                    if ( response.status === 401) {
+                        context.commit('setLoggedIn', {amILoggedIn: false});
+                    }
+                    if ( response.status === 200) {
+                        context.commit('setLoggedIn', {amILoggedIn: true});
+                    }
+                });
+            },
             requestImages(context) {
                 // request the images are retrieved
                 if (context.state.images.list === null) {
