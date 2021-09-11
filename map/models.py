@@ -133,11 +133,11 @@ class PhotoTimor(models.Model):
         return ', '.join(self.get_areas(District).values_list('name', flat=True))
 
 
-class CommentViazen(models.Model):
-    phototimor = models.ForeignKey(PhotoTimor, verbose_name=_('comment'), related_name="comment", on_delete=models.CASCADE)
-    usercomment = models.ForeignKey(User, verbose_name=_('user'), blank=True, null=True, related_name='%(class)s_comments', on_delete=models.SET_NULL)
-    comment = models.TextField(_('comment'), max_length=COMMENT_MAX_LENGTH)
-    submit_at = models.DateTimeField(null=False, blank=False, default=None, db_index=True)
+class CommentPhoto(models.Model):
+    phototimor = models.ForeignKey(PhotoTimor, verbose_name=_('PhotoTimor'), related_name="comment", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=_('User'), blank=True, null=True, related_name='%(class)s_comments', on_delete=models.SET_NULL)
+    comment = models.TextField(_('Comment'), max_length=COMMENT_MAX_LENGTH)
+    submit_at = models.DateTimeField(auto_now_add=True, db_index=True)
     modified_at= models.DateTimeField(auto_now=True)
     ip_address = models.GenericIPAddressField(_('IP address'), unpack_ipv4=True, blank=True, null=True)
     is_public = models.BooleanField(_('is public'), default=True,
@@ -148,16 +148,10 @@ class CommentViazen(models.Model):
                                                  'A "This comment has been removed" message will '
                                                  'be displayed instead.'))
     class Meta:
-        #abstract = True
         ordering = ('submit_at',)
         permissions = [("can_moderate", "Can moderate comments")]
-        verbose_name = _('comment')
-        verbose_name_plural = _('comments')
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
 
     def __str__(self):
-        return "%s: %s..." % (self.name, self.comment[:50])
-
-    def save(self, *args, **kwargs):
-        if self.submit_at is None:
-            self.submit_at = timezone.now()
-        super().save(*args, **kwargs)
+        return "%s: %s..." % (self.user, self.comment[:50])
