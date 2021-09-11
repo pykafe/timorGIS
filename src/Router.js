@@ -17,7 +17,6 @@ export default function getRouter(properties) {
                 default: PhotoTimor,
                 header: Header,
                 footer: Footer,
-                map: Map,
             },
             props: {
                 default: {

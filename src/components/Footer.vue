@@ -9,9 +9,22 @@
     </div>
 </template>
 <style scoped>
-p {
-    margin-top:20px;
-}
+
+    p {
+        margin-top:20px;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    .footer {
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #ffffff;
+        margin: 75px;
+        margin-bottom: 0px;
+        line-height: 3;
+    }
 </style>
 <script>
     import LogoPyKafe from './LogoPyKafe.vue';
