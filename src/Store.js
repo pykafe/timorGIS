@@ -26,6 +26,11 @@ export default function getStore(properties, router) {
                     requesting: false,
                     error: null,
                 },
+                comments: {
+                    list: null,
+                    requesting: false,
+                    error: null,
+                },
             }
         },
         getters: {
@@ -80,6 +85,15 @@ export default function getStore(properties, router) {
             },
             setMapError(state, payload) {
                 state.map.error = payload;
+            },
+            requestingComment(state, payload) {
+                state.comments.requesting = payload.requesting;
+            },
+            setCommentList(state, payload) {
+                state.comments.list = payload.comments;
+            },
+            setCommentError(state, payload) {
+                state.comments.error = payload;
             },
         },
         actions: {
@@ -148,6 +162,26 @@ export default function getStore(properties, router) {
                     }).finally(() => {
                         // we have definitely finished requesting
                         context.commit('requestingIstoria', false);
+                    });
+                }
+            },
+            requestComment(context) {
+                // request the images are retrieved
+                if (context.state.comments.list === null) {
+                    context.commit('requestingComment', {requesting: true});
+
+                    // go get the images
+                    fetch(properties.urls.commentphoto).then(response => {
+                        return response.json();
+                    }).then(comments => {
+                        // everything is good, we have comment
+                        context.commit('setCommentList', {comments});
+                    }).catch((err) => {
+                        // something bad has happened, show an error
+                        context.commit('setCommentError', {err});
+                    }).finally(() => {
+                        // we have definitely finished requesting
+                        context.commit('requestingComment', false);
                     });
                 }
             },

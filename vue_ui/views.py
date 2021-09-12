@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
 
-from map.models import District, PhotoTimor, IstoriaViazen
+from map.models import District, PhotoTimor, IstoriaViazen, CommentPhoto
 
 class VueView(TemplateView):
     template_name = 'vue_ui/index.html'
@@ -17,6 +17,7 @@ class VueView(TemplateView):
                 openstreetmap=settings.OPENSTREETMAP_URL,
                 geojson=reverse("api_geojson"),
                 images=reverse("api_images"),
+                commentphoto=reverse("api_commentphoto"),
                 istoriaviazen=reverse("api_istoriaviazen"),
                 login=reverse("api_login"),
                 add_journey=reverse("api_add_istoria"),
@@ -75,3 +76,12 @@ def istoriaviazen_api(request):
     ]
     response = JsonResponse(viazen, safe=False)
     return response
+
+def commentphoto_api(request):
+    comment = [
+        c.to_json()
+        for c in CommentPhoto.objects.filter(is_public=True).select_related('user')
+    ]
+    response = JsonResponse(comment, safe=False)
+    return response
+
