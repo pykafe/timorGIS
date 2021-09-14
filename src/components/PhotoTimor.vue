@@ -30,7 +30,9 @@
         </div>
         <div class="image_selected" v-show="!!$route.params.selected_id">
             <div tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg modals-lg" role="document">
+                <div class="modal-dialog modals-lg" role="document">
+                    <span class="loader" v-if="comments.requesting">Loading...</span>
+                    <span class="loader" v-if="comments.error">Sorry!</span>
                     <div class="modal-content">
                         <div class="modals-header">
                             <router-link :to="{name: 'photos'}" class="viewer-button viewer-close">
@@ -60,7 +62,7 @@
                                     <div class="row">
                                         <div class="col-md-12" v-for="image in images.list" v-bind:key="image.id">
                                             <span v-if="image.id == $route.params.selected_id">
-                                                <p>Kria hosi {{ image.istoria.creator.fullname !== "" ? image.istoria.creator.fullname: image.istoria.creator.username }} {{ $filters.formatDate(image.istoria.created_at) }}</p>
+                                                <p>Foto hosi {{ image.istoria.creator.fullname !== "" ? image.istoria.creator.fullname: image.istoria.creator.username }} {{ $filters.formatDate(image.istoria.created_at) }}</p>
                                             </span>
                                         </div>
                                     </div>
@@ -83,10 +85,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <span class="comment_input">
-                                                <input type="text" name="comments" placeholder="Comments..."/>
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                            </span>
+                                            <form @submit.prevent="submitNewComment" >
+                                                <span v-html="csrfTokenInput" />
+                                                <span class="comment_input">
+                                                    <input type="hidden" name="phototimor" :value="$route.params.selected_id">
+                                                    <input type="text" name="comments" placeholder="Comments..."/>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </span>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -181,9 +187,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--blue-2);
 }
-.closes {
-    color: white;
-}
 
 .loader {
     position: absolute;
@@ -205,6 +208,7 @@
 <script>
     import { mapState } from 'vuex'
     import { mapActions } from 'vuex'
+    import { mapGetters } from 'vuex'
     import 'viewerjs/dist/viewer.css'
     import { api as viewerApi } from "v-viewer"
 
@@ -228,9 +232,10 @@
                     : ""
             },
             ...mapState(['images', 'comments']),
+            ...mapGetters(['csrfTokenInput']),
         },
         methods: {
-            ...mapActions(['requestImages', 'requestComment']),
+            ...mapActions(['requestImages', 'requestComment', 'submitNewComment']),
             rolloverImage(id){
                 this.rollover_image_id = id;
             },

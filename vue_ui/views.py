@@ -21,6 +21,7 @@ class VueView(TemplateView):
                 istoriaviazen=reverse("api_istoriaviazen"),
                 login=reverse("api_login"),
                 add_journey=reverse("api_add_istoria"),
+                add_comment=reverse("api_add_comment"),
                 media_url=settings.MEDIA_URL,
             )
         }
@@ -84,4 +85,24 @@ def commentphoto_api(request):
     ]
     response = JsonResponse(comment, safe=False)
     return response
+
+
+class AddCommentView(View):
+    def post(self, request, *args, **kwargs):
+        http_x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if http_x_forwarded_for:
+            ip_address = http_x_forwarded_for.split(',')[0]
+        else:
+            ip_address = request.META.get('REMOTE_ADDR')
+        comment = CommentPhoto.objects.create(
+            phototimor=PhotoTimor.objects.get(id=request.POST["phototimor"]),
+            comment=request.POST["comments"],
+            ip_address=ip_address,
+            user=request.user,
+        )
+        response_data = {
+            "comment": comment.to_json(),
+        }
+        return JsonResponse(response_data)
+
 
