@@ -85,7 +85,15 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form @submit.prevent="submitNewComment" >
+                                            <!-- Default form -->
+                                            <div v-if="amILoggedIn === null">Detecting login...</div>
+                                            <div v-if="add_comment.requesting === true">Detecting add Comment...</div>
+                                            <div v-if="amILoggedIn === false">
+                                                You must
+                                                <a v-bind:href="loginUrl" >Login</a>
+                                                to add a comment
+                                            </div>
+                                            <form @submit.prevent="submitNewComment" v-if="amILoggedIn === true">
                                                 <span v-html="csrfTokenInput" />
                                                 <span class="comment_input">
                                                     <input type="hidden" name="phototimor" :value="$route.params.selected_id">
@@ -231,11 +239,14 @@
                     ? `${ this.url_media }${ this.selectedImage.image}`
                     : ""
             },
-            ...mapState(['images', 'comments']),
+            ...mapState(['images', 'comments', 'add_comment', 'amILoggedIn']),
             ...mapGetters(['csrfTokenInput']),
+            loginUrl() {
+                return `/en/accounts/login?next=${location.origin}/en/vue/#/photos/${this.$route.params.selected_id}`;
+            }
         },
         methods: {
-            ...mapActions(['requestImages', 'requestComment', 'submitNewComment']),
+            ...mapActions(['requestImages', 'requestComment', 'submitNewComment', 'detectLogin']),
             rolloverImage(id){
                 this.rollover_image_id = id;
             },
@@ -274,6 +285,7 @@
         mounted() {
             this.requestImages();
             this.requestComment();
+            this.detectLogin();
         },
     }
 </script>
