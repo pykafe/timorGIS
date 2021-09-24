@@ -5,7 +5,6 @@ from django.http.response import HttpResponseForbidden
 from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
-
 from map.models import District, PhotoTimor, IstoriaViazen
 
 class VueView(TemplateView):
@@ -42,6 +41,23 @@ class AddIstoriaView(View):
             response_data["photos"].append(photo.to_json())
 
         return JsonResponse(response_data)
+
+def update_view(request, id):
+    postobj= get_object_or_404(IstoriaViazen, id=id)
+    if request.method == 'POST':
+        if request.POST.get('title') and request.POST.get('description') and request.POST.get('fromDate') and request.POST.get('toDate'):
+            IstoriaViazen.objects.filter(id = id).update(title= request.POST.get('title'), description= request.POST.get('description'), fromDate= request.POST.get('fromDate'), toDate= request.POST.get('toDate'))
+
+            messages.success(request, "The post was successfully updated")
+
+    def form_valid(self, form):
+        for photo_file in self.request.FILES.getlist('photos'):
+            photo = PhotoTimor.objects.create(istoriaviazen=self.object, image=photo_file)
+            self.object.photos.add(photo)
+
+        redirect = super().form_valid(form)
+
+        return redirect
 
 def login_api(request):
     if request.user.is_authenticated:

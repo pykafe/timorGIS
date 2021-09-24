@@ -16,6 +16,11 @@ export default function getStore(properties, router) {
                     requesting: false,
                     error: null,
                 },
+                edit_istoria: {
+                    list: null,
+                    requesting: false,
+                    error: null,
+                },
                 istoria: {
                     list: null,
                     requesting: false,
