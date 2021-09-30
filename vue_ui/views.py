@@ -6,6 +6,7 @@ from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
 from map.models import District, PhotoTimor, IstoriaViazen
+import pudb; pudb.set_trace()
 
 class VueView(TemplateView):
     template_name = 'vue_ui/index.html'
@@ -44,11 +45,14 @@ class AddIstoriaView(View):
 
 def update_view(request, id):
     postobj= get_object_or_404(IstoriaViazen, id=id)
+    pudb.set_trace()
     if request.method == 'POST':
         if request.POST.get('title') and request.POST.get('description') and request.POST.get('fromDate') and request.POST.get('toDate'):
             IstoriaViazen.objects.filter(id = id).update(title= request.POST.get('title'), description= request.POST.get('description'), fromDate= request.POST.get('fromDate'), toDate= request.POST.get('toDate'))
 
             messages.success(request, "The post was successfully updated")
+
+        return HttpResponse("success")
 
     def form_valid(self, form):
         for photo_file in self.request.FILES.getlist('photos'):
