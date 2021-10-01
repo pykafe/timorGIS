@@ -98,8 +98,7 @@ input[type="file"] {
 /* BUTTONS STYLES */
 /* This button using for "Add" and  "Cancel", This is only on gray theme*/
 .btn-default {
-    background-color: var(--white-2);
-    border-color: var(--blue-1);
+    color: #fbf5f5;
 }
 
 .btn-default:hover {
@@ -110,12 +109,17 @@ input[type="file"] {
 .btn-primary {
     color: var(--white-1);
     background-color: var(--blue-2);
-    border-color: var(--blue-1);
+    border-radius: 15px;
 }
 
 .btn-primary:hover {
     background-color: var(--blue-1);
     border-color: var(--blue-2);
+}
+
+a.btn.btn-default.btn-pull-right {
+    background-color: #f4a20dfa;
+    border-radius: 10px;
 }
 
 /* This button using for "Delete" some data */
@@ -362,7 +366,7 @@ button.btn.btn-success.btn-lg {
 
 .btn-pull-right {
     float: right;
-    margin: 4px;
+    margin: 8px;
 }
 
 .row.choose-files {
@@ -656,3 +660,15 @@ ul.dropdown-menu.show > a li img {
     border-radius: 2px;
 }
 
+
+/* set form page styling */
+label {
+    margin: 5px;
+}
+
+a.btn.btn-outline-info {
+    border-radius: 16px;
+    color: black;
+    margin-bottom: 15px;
+    font-size: small;
+}

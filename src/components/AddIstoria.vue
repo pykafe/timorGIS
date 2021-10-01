@@ -5,33 +5,39 @@
             <form v-if="amILoggedIn === true" @submit.prevent="validateAndSubmitNewJourney" >
                 <fieldset v-bind:disabled="add_istoria.requesting">
                     <span v-html="csrfTokenInput" />
-                    <p class="h4 text-center mb-4">Add Journey History</p>
+                    <a href="#" type="button" class="btn btn-outline-info">Back</a>
                     <br/>
-                    <div class="form-group"> <!-- Title -->
-                        <label class="control-label" for="title">Title</label>
-                        <input class="form-control" id="title" name="title" placeholder="" type="text" required minlength="5" maxlength="80" />
-                    </div>
-                    <div class="form-group"> <!-- Date input -->
-                        <label for="fromDate">From </label>
-                        <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" style="width: 400px; margin: 8px;" />
-                        <label for="toDate">to</label>
-                        <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" style="width: 400px; margin: 8px;" />
-                        <p v-if="error.length" style="color: red;">
-                            <b>Please correct following this error:</b>
-                            <ul>
-                                <li v-for="e in error" v-bind:key="e.id">
-                                    {{e}}
-                                </li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div class="form-group"> <!-- Description input -->
-                        <label class="control-label" for="description">Description</label>
-                        <textarea type="text" id="description" name="description" class="form-control" rows="3"></textarea>
+                    <div class="row">
+                        <div class="col">
+                            <label class="control-label" for="title">Title</label>
+                            <input class="form-control" id="title" name="title" placeholder="" type="text" required minlength="5" maxlength="80" />
+                        </div>
+                        <div class="col">
+                            <label class="control-label" for="image">Image</label>
+                            <input type="file" name="photos" accept="image/.jpeg, .jpg" multiple>
+                        </div>
                     </div>
                     <br/>
-                    <div class="form-group">
-                        <input type="file" name="photos" style="width: 300px;" accept="image/.jpeg, .jpg" multiple>
+                    <div class="row">
+                        <div class="col"> <!-- Description input -->
+                            <label class="control-label" for="description">Description</label>
+                            <textarea type="text" id="description" name="description" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="col"> <!-- Date input -->
+                            <label for="fromDate">From </label>
+                            <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" />
+                            <br/>
+                            <label for="toDate">To</label>
+                            <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" />
+                            <p v-if="error.length" style="color: red;">
+                                <b>Please correct following this error:</b>
+                                <ul>
+                                    <li v-for="e in error" v-bind:key="e.id">
+                                        {{e}}
+                                    </li>
+                                </ul>
+                            </p>
+                        </div>
                     </div>
                     <br/>
                     <div class="text-center mt-4">
@@ -60,7 +66,7 @@
     export default {
         data(){
             return {
-                error:[],
+                error:"",
                 fromDate: null,
                 toDate: null
             }
