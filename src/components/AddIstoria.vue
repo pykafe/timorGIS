@@ -66,7 +66,7 @@
     export default {
         data(){
             return {
-                error:"",
+                error:[],
                 fromDate: null,
                 toDate: null
             }
