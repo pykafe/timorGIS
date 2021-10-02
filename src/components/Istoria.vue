@@ -5,9 +5,9 @@
         <div v-for="viazen in istoria.list" v-bind:key="viazen.pk" class="viazen_card">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">{{ viazen.fields.title}}</h5>
-                    <p class="card-text">{{ viazen.fields.description }}</p>
-                    <p class="card-text"><small class="text-muted">Created at: {{ viazen.fields.created_at }}</small></p>
+                    <h5 class="card-title">{{ viazen.title}}</h5>
+                    <p class="card-text">{{ viazen.description }}</p>
+                    <p class="card-text"><small class="text-muted">Created at: {{ viazen.created_at }}</small></p>
                 </div>
             </div>
         </div>

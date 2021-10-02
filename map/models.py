@@ -59,6 +59,19 @@ class IstoriaViazen(models.Model):
     def __str__(self):
         return f'{self.title}, {self.pk}'
 
+    def to_json(self):
+        return {
+            "pk": self.pk,
+            "title": self.title,
+            "description": self.description,
+            "created_at": self.created_at,
+            "creator" : {
+                "pk": self.creator.pk,
+                "username": self.creator.username,
+                "fullname": self.creator.get_full_name(),
+            }
+        }
+
 
 def queryobject(obj, point):
     queryset = obj.objects.filter(geom__contains=point)
@@ -70,6 +83,12 @@ class PhotoTimor(models.Model):
     created_at = models.DateTimeField(null=False, blank=False, default=timezone.now)
     modified_at = models.DateTimeField(auto_now=True)
 
+    def to_json(self):
+        return {
+            "id": self.pk,
+            "image": self.image.name,
+            "istoria": self.istoriaviazen.to_json(),
+        }
 
     def __str__(self):
         return "{photo}".format(photo=self.image)

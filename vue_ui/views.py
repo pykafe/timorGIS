@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.core.serializers import serialize
 from django.http import JsonResponse, HttpResponse
-from django.views.generic.base import TemplateView
+from django.http.response import HttpResponseForbidden
+from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
 
@@ -17,10 +18,39 @@ class VueView(TemplateView):
                 geojson=reverse("api_geojson"),
                 images=reverse("api_images"),
                 istoriaviazen=reverse("api_istoriaviazen"),
+                login=reverse("api_login"),
+                add_journey=reverse("api_add_istoria"),
                 media_url=settings.MEDIA_URL,
             )
         }
         return context
+
+class AddIstoriaView(View):
+    def post(self, request, *args, **kwargs):
+        istoria = IstoriaViazen.objects.create(
+            title=request.POST["title"],
+            description=request.POST["description"],
+            duration_of_trip=(request.POST["fromDate"], request.POST["toDate"]),
+            creator=request.user,
+        )
+        response_data = {
+            "istoria": istoria.to_json(),
+            "photos": [],
+        }
+        for photo_file in self.request.FILES.getlist('photos'):
+            photo = PhotoTimor.objects.create(istoriaviazen=istoria, image=photo_file)
+            response_data["photos"].append(photo.to_json())
+
+        return JsonResponse(response_data)
+
+def login_api(request):
+    if request.user.is_authenticated:
+        response = JsonResponse(
+            {'name': request.user.get_full_name()
+        })
+    else:
+        response = HttpResponse(status=401, reason="You need to login")
+    return response
 
 def geojson_api(request):
     geojson = cache.get('api_geojson')
@@ -32,29 +62,16 @@ def geojson_api(request):
 
 def images_api(request):
     images = [
-        {
-            "id": photo["id"],
-            "image": photo["image"],
-            "istoria": {
-                "id": photo["istoriaviazen_id"],
-                "creator": photo["istoriaviazen__creator__username"],
-                "title": photo["istoriaviazen__title"],
-                "description": photo["istoriaviazen__description"],
-            }
-        }
-        for photo in PhotoTimor.objects.values(
-            'id',
-            'image',
-            'istoriaviazen_id',
-            'istoriaviazen__title',
-            'istoriaviazen__description',
-            'istoriaviazen__creator__username',
-        )
+        p.to_json()
+        for p in PhotoTimor.objects.all().select_related("istoriaviazen", "istoriaviazen__creator")
     ]
     response = JsonResponse(images, safe=False)
     return response
 
 def istoriaviazen_api(request):
-    json = serialize('json', IstoriaViazen.objects.all())
-    response = HttpResponse(json, content_type="application/json")
+    viazen = [
+        v.to_json()
+        for v in IstoriaViazen.objects.all().select_related('creator')
+    ]
+    response = JsonResponse(viazen, safe=False)
     return response
