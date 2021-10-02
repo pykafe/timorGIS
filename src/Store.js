@@ -105,7 +105,7 @@ export default function getStore(properties, router) {
             },
             setAddCommentList(state, payload) {
                 if (state.comments.list !== null) {
-                    state.comments.list.unshift(payload.comments);
+                    state.comments.list.unshift(payload.comment);
                 }
             },
             setAddIstoriaError(state, payload) {
@@ -141,13 +141,11 @@ export default function getStore(properties, router) {
                     return response.json()
                 }).then(response_data => {
                     context.commit('setAddCommentList', response_data);
-                    router.push({name:'photos', params:{selected_id: response_data.comment.phototimor.id}});
                 }).catch((err) => {
                     // TODO We have an error, tel the user about it
                     context.commit('setAddCommentError', {err});
                 }).finally(() => {
                     context.commit('requestingAddComment', {requesting: false});
-                    location.reload(true)
                 });
             },
             detectLogin(context) {
