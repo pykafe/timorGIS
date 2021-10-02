@@ -16,10 +16,10 @@
                         <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" style="width: 400px; margin: 8px;" />
                         <label for="toDate">to</label>
                         <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" style="width: 400px; margin: 8px;" />
-                        <p v-if="error.length" style="color: red;">
+                        <p v-if="errors.length" style="color: red;">
                             <b>Please correct following this error:</b>
                             <ul>
-                                <li v-for="e in error" v-bind:key="e.id">
+                                <li v-for="e in errors" v-bind:key="e.id">
                                     {{e}}
                                 </li>
                             </ul>
@@ -60,7 +60,7 @@
     export default {
         data(){
             return {
-                error:[],
+                errors:[],
                 fromDate: null,
                 toDate: null
             }
@@ -75,14 +75,11 @@
         methods: {
             ...mapActions(['detectLogin', 'submitNewJourney']),
             validateAndSubmitNewJourney(e){
-                if(this.fromDate && this.toDate){
-                    console.log("submit function called")
-                }
-                this.error=[];
+                this.errors=[];
                 if(this.fromDate > this.toDate){
-                    this.error.push("End date must be greater than start date")
+                    this.errors.push("End date must be greater than start date")
                 }
-                if( this.error.length === 0 ) {
+                if( this.errors.length === 0 ) {
                     this.submitNewJourney(e);
 	            }
             }
