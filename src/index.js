@@ -3,6 +3,7 @@ import App from './App.vue';
 import getRouter from './Router.js';
 import getStore from './Store.js';
 import VueViewer from 'v-viewer'
+import moment from 'moment';
 
 
 export function mountApp(element, properties) {
@@ -16,6 +17,11 @@ export function mountApp(element, properties) {
                 return text.substring(0, length) + suffix;
             } else {
                 return text;
+            }
+        },
+        formatDate(value){
+            if (value) {
+               return moment(String(value)).format('MMMM MM, YYYY hh:mm a')
             }
         },
     }

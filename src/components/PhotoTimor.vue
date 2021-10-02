@@ -30,13 +30,19 @@
         </div>
         <div class="image_selected" v-show="!!$route.params.selected_id">
             <div tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg modals-lg" role="document">
+                <div class="modal-dialog modals-lg" role="document">
+                    <span class="loader" v-if="comments.requesting">Loading...</span>
+                    <span class="loader" v-if="comments.error">Sorry!</span>
                     <div class="modal-content">
                         <div class="modals-header">
                             <router-link :to="{name: 'photos'}" class="viewer-button viewer-close">
                                 <span class="closes">&times;</span>
                             </router-link>
-                            <h4 class="modal-title" id="gridSystemModalLabel">Ilha Jaco</h4>
+                            <span v-for="image in images.list" v-bind:key="image.id">
+                                <span v-if="image.id == $route.params.selected_id">
+                                    <h4 class="modal-title" id="gridSystemModalLabel">{{ image.istoria.title }}</h4>
+                                </span>
+                            </span>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -54,52 +60,47 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <p>Kria hosi Mario April 29, 2021, 12:34 p.m.</p>
+                                        <div class="col-md-12" v-for="image in images.list" v-bind:key="image.id">
+                                            <span v-if="image.id == $route.params.selected_id">
+                                                <p>Foto hosi {{ image.istoria.creator.fullname !== "" ? image.istoria.creator.fullname: image.istoria.creator.username }} {{ $filters.formatDate(image.istoria.created_at) }}</p>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="row">
+                                        <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
                                         <div class="col-md-12 comment_scroll">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                <b>Joanico Barros  12:33 AM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
-                                                <b>Mariano de Deus  2:33 PM</b>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and</p>
+                                                    <span v-for="comment in comments.list" v-bind:key="comment.id">
+                                                        <span v-if="comment.phototimor.id == $route.params.selected_id">
+                                                            <b>{{ comment.user.fullname != "" ? comment.user.fullname : comment.user.username }} - <small>{{ $filters.formatDate(comment.sutmit_at) }}</small></b>
+                                                            <p>{{ comment.comment }}</p>
+                                                        </span>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <span class="comment_input">
-                                                <input type="text" name="comments" placeholder="Comments..."/>
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                            </span>
+                                            <!-- Default form -->
+                                            <div v-if="amILoggedIn === null">Detecting login...</div>
+                                            <div v-if="add_comment.requesting === true">Detecting add Comment...</div>
+                                            <div v-if="amILoggedIn === false">
+                                                You must
+                                                <a v-bind:href="loginUrl" >Login</a>
+                                                to add a comment
+                                            </div>
+                                            <form @submit.prevent="submitNewComment" v-if="amILoggedIn === true">
+                                                <span v-html="csrfTokenInput" />
+                                                <span class="comment_input">
+                                                    <input type="hidden" name="phototimor" :value="$route.params.selected_id">
+                                                    <input type="text" name="comments" placeholder="Comments..."/>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </span>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -169,8 +170,8 @@
 .comment_scroll {
     overflow-y: auto;
     min-height: 0;
-    max-height: 480px;
     right: 20px;
+    height: calc(77vh - 64px - 14px);
 }
 
 /* width */
@@ -194,9 +195,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--blue-2);
 }
-.closes {
-    color: white;
-}
 
 .loader {
     position: absolute;
@@ -218,6 +216,7 @@
 <script>
     import { mapState } from 'vuex'
     import { mapActions } from 'vuex'
+    import { mapGetters } from 'vuex'
     import 'viewerjs/dist/viewer.css'
     import { api as viewerApi } from "v-viewer"
 
@@ -240,10 +239,14 @@
                     ? `${ this.url_media }${ this.selectedImage.image}`
                     : ""
             },
-            ...mapState(['images']),
+            ...mapState(['images', 'comments', 'add_comment', 'amILoggedIn']),
+            ...mapGetters(['csrfTokenInput']),
+            loginUrl() {
+                return `/en/accounts/login?next=${location.origin}/en/vue/#/photos/${this.$route.params.selected_id}`;
+            }
         },
         methods: {
-            ...mapActions(['requestImages']),
+            ...mapActions(['requestImages', 'requestComment', 'submitNewComment', 'detectLogin']),
             rolloverImage(id){
                 this.rollover_image_id = id;
             },
@@ -281,6 +284,8 @@
         },
         mounted() {
             this.requestImages();
+            this.requestComment();
+            this.detectLogin();
         },
     }
 </script>

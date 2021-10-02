@@ -174,3 +174,17 @@ class CommentPhoto(models.Model):
 
     def __str__(self):
         return "%s: %s..." % (self.user, self.comment[:50])
+
+    def to_json(self):
+        return {
+            "id": self.pk,
+            "phototimor": self.phototimor.to_json(),
+            "user" : {
+                "pk": self.user.pk,
+                "username": self.user.username,
+                "fullname": self.user.get_full_name(),
+            },
+            "comment": self.comment,
+            "sutmit_at": self.submit_at,
+            "modified_at": self.modified_at,
+        }
