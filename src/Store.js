@@ -26,6 +26,11 @@ export default function getStore(properties, router) {
                     requesting: false,
                     error: null,
                 },
+                add_comment: {
+                    list: null,
+                    requesting: false,
+                    error: null,
+                },
                 comments: {
                     list: null,
                     requesting: false,
@@ -95,6 +100,17 @@ export default function getStore(properties, router) {
             setCommentError(state, payload) {
                 state.comments.error = payload;
             },
+            requestingAddComment(state, payload) {
+                state.add_comment.requesting = payload.requesting;
+            },
+            setAddCommentList(state, payload) {
+                if (state.comments.list !== null) {
+                    state.comments.list.unshift(payload.comments);
+                }
+            },
+            setAddIstoriaError(state, payload) {
+                state.add_comment.error = payload;
+            },
         },
         actions: {
             submitNewJourney(context, payload) {
@@ -113,6 +129,25 @@ export default function getStore(properties, router) {
                     context.commit('setAddIstoriaError', {err});
                 }).finally(() => {
                     context.commit('requestingAddIstoria', {requesting: false});
+                });
+            },
+            submitNewComment(context, payload) {
+                context.commit('requestingAddComment', {requesting: true});
+                // build the body required
+                const formData = new FormData(payload.srcElement);
+
+                fetch(properties.urls.add_comment, { method: 'POST', body: formData }).then(response=> {
+                    // react to success or failure of request
+                    return response.json()
+                }).then(response_data => {
+                    context.commit('setAddCommentList', response_data);
+                    router.push({name:'photos', params:{selected_id: response_data.comment.phototimor.id}});
+                }).catch((err) => {
+                    // TODO We have an error, tel the user about it
+                    context.commit('setAddCommentError', {err});
+                }).finally(() => {
+                    context.commit('requestingAddComment', {requesting: false});
+                    location.reload(true)
                 });
             },
             detectLogin(context) {
