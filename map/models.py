@@ -153,13 +153,13 @@ class PhotoTimor(models.Model):
 
 
 class CommentPhoto(models.Model):
-    phototimor = models.ForeignKey(PhotoTimor, verbose_name=_('PhotoTimor'), related_name="comment", on_delete=models.CASCADE)
+    phototimor = models.ForeignKey(PhotoTimor, verbose_name=_('PhotoTimor'), related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name=_('User'), blank=True, null=True, related_name='%(class)s_comments', on_delete=models.SET_NULL)
     comment = models.TextField(_('Comment'), max_length=COMMENT_MAX_LENGTH)
-    submit_at = models.DateTimeField(auto_now_add=True, db_index=True)
-    modified_at= models.DateTimeField(auto_now=True)
+    submit_at = models.DateTimeField(_("Submit at"), auto_now_add=True, db_index=True)
+    modified_at= models.DateTimeField(_("Modified at"), auto_now=True)
     ip_address = models.GenericIPAddressField(_('IP address'), unpack_ipv4=True, blank=True, null=True)
-    is_public = models.BooleanField(_('is public'), default=True,
+    is_public = models.BooleanField(_('Is public'), default=True,
                                     help_text=_('Uncheck this box to make the comment effectively '
                                                 'disappear from the site.'))
     is_removed = models.BooleanField(_('is removed'), default=False, db_index=True,
@@ -168,7 +168,6 @@ class CommentPhoto(models.Model):
                                                  'be displayed instead.'))
     class Meta:
         ordering = ('submit_at',)
-        permissions = [("can_moderate", "Can moderate comments")]
         verbose_name = _('Comment')
         verbose_name_plural = _('Comments')
 
@@ -178,7 +177,7 @@ class CommentPhoto(models.Model):
     def to_json(self):
         return {
             "id": self.pk,
-            "phototimor": self.phototimor.to_json(),
+            "phototimor": self.phototimor.pk,
             "user" : {
                 "pk": self.user.pk,
                 "username": self.user.username,
