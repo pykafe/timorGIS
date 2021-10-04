@@ -464,7 +464,7 @@ span.blue-text {
 }
 
 .navbar_header {
-    background-color: #f0f2f5!important;
+    background-color: var(--white-2);
     border-bottom: 1px solid #ffffff;
 }
 
