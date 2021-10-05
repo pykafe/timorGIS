@@ -2,6 +2,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import getRouter from './Router.js';
 import getStore from './Store.js';
+import VueViewer from 'v-viewer'
+
 
 export function mountApp(element, properties) {
 
@@ -17,6 +19,7 @@ export function mountApp(element, properties) {
             }
         },
     }
+    app.use(VueViewer)
 
     const router = getRouter(properties);
     app.use(router);
