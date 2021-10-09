@@ -1,45 +1,57 @@
 <template>
     <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
-    <div class="container">
-        <span class="loader" v-if="add_istoria.error">Sorry!</span>
-        <div class="row">
-            <div class="col-md-12 back-button">
-                <a href="#" class="btn btn-default">Back</a>
-            </div>
+    <span class="loader" v-if="add_istoria.error">Sorry!</span>
+    <div class="row">
+        <div class="col-md-12 back-button">
+            <a href="#" class="btn btn-default">Back</a>
         </div>
-        <!-- Default form -->
-        <form v-if="amILoggedIn === true" @submit.prevent="submitNewJourney" >
-            <fieldset v-bind:disabled="add_istoria.requesting">
-                <span v-html="csrfTokenInput" />
-                <div class="form-row">
-                    <div class="form-group col-md-6"> <!-- Title -->
+    </div>
+    <div class="card mb-3">
+        <div class="card-body">
+            <!-- Default form -->
+            <form v-if="amILoggedIn === true" @submit.prevent="validateAndSubmitNewJourney" >
+                <fieldset v-bind:disabled="add_istoria.requesting">
+                    <span v-html="csrfTokenInput" />
+                    <p class="h4 text-center mb-4">Add Journey History</p>
+                    <br/>
+                    <div class="form-group"> <!-- Title -->
                         <label class="control-label" for="title">Title</label>
                         <input class="form-control" id="title" name="title" placeholder="" type="text" required minlength="5" maxlength="80" />
+                    </div>
+                    <div class="form-group"> <!-- Date input -->
+                        <label for="fromDate">From </label>
+                        <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" style="width: 400px; margin: 8px;" />
+                        <label for="toDate">to</label>
+                        <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" style="width: 400px; margin: 8px;" />
+                        <p v-if="errors.length" style="color: red;">
+                            <b>Please correct following this error:</b>
+                            <ul>
+                                <li v-for="e in errors" v-bind:key="e.id">
+                                    {{e}}
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> <!-- Description -->
+                            <label class="control-label" for="description">Description</label>
+                            <textarea type="text" id="description" name="description" class="form-control" rows="3"></textarea>
+                        </div>
                     </div>
                     <div class="form-group col-md-6"> <!-- Image -->
                         <label class="control-label" for="file">Image</label>
                         <input type="file" name="photos" accept="image/.jpeg, .jpg" multiple>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6"> <!-- Description -->
-                        <label class="control-label" for="description">Description</label>
-                        <textarea type="text" id="description" name="description" class="form-control" rows="3"></textarea>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button class="btn btn-primary btn-pull-right" >Submit</button>
+                            <a href="#" class="btn btn-default btn-pull-right">Clear</a>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6"> <!-- Date input -->
-                        <label class="control-label" for="duration">Duration of trip</label>
-                        <input type="date" class="fromDate" name="fromDate" select=":first" required="" />
-                        <input type="date" class="toDate" name="toDate" select=":last" required=""/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12"> <!-- Description input -->
-                        <button class="btn btn-primary btn-pull-right" >Submit</button>
-                        <a href="#" class="btn btn-default btn-pull-right">Clear</a>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
+        </div>
+    </div>
         <!-- Default form -->
         <div v-if="amILoggedIn === null">Detecting login...</div>
         <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
@@ -48,7 +60,6 @@
             <a v-bind:href="loginUrl" >Login</a>
             to add a journey
         </div>
-    </div>
 </template>
 <style scoped>
     input.fromDate, input.toDate {
@@ -85,6 +96,13 @@
     import { mapActions } from 'vuex'
 
     export default {
+        data(){
+            return {
+                errors:[],
+                fromDate: null,
+                toDate: null
+            }
+        },
         computed: {
             ...mapState(['amILoggedIn', 'add_istoria']),
             ...mapGetters(['csrfTokenInput']),
@@ -94,6 +112,15 @@
         },
         methods: {
             ...mapActions(['detectLogin', 'submitNewJourney']),
+            validateAndSubmitNewJourney(e){
+                this.errors=[];
+                if(this.fromDate > this.toDate){
+                    this.errors.push("End date must be greater than start date")
+                }
+                if( this.errors.length === 0 ) {
+                    this.submitNewJourney(e);
+	            }
+            }
         },
         mounted() {
             this.detectLogin();
