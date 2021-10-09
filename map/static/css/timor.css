@@ -454,8 +454,9 @@ span.blue-text {
     line-height: 3;
 }
 
-.navbar_header{
-    box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.25);
+.navbar_header {
+    background-color: var(--white-2);
+    border-bottom: 1px solid #ffffff;
 }
 
 /* set font-family for every h3 to use comfortaa */
