@@ -1,4 +1,6 @@
 <template>
+    <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
+    <span class="loader" v-if="add_istoria.error">Sorry!</span>
     <div class="card mb-3">
         <div class="card-body">
             <!-- Default form -->
@@ -8,31 +10,31 @@
                     <a href="#" type="button" class="btn btn-outline-info">Back</a>
                     <br/>
                     <div class="row">
-                        <div class="col">
+                        <div class="col"> <!-- Title -->
                             <label class="control-label" for="title">Title</label>
                             <input class="form-control" id="title" name="title" placeholder="" type="text" required minlength="5" maxlength="80" />
                         </div>
-                        <div class="col">
-                            <label class="control-label" for="image">Image</label>
+                        <div class="col"> <!-- Image -->
+                            <label class="control-label" for="file">Image</label>
                             <input type="file" name="photos" accept="image/.jpeg, .jpg" multiple>
                         </div>
                     </div>
                     <br/>
                     <div class="row">
-                        <div class="col"> <!-- Description input -->
+                        <div class="col"> <!-- Description -->
                             <label class="control-label" for="description">Description</label>
                             <textarea type="text" id="description" name="description" class="form-control" rows="4"></textarea>
                         </div>
                         <div class="col"> <!-- Date input -->
-                            <label class="date-range" for="fromDate">From </label>
+                            <label class="control-label" for="fromDate">From </label>
                             <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" />
                             <br/>
-                            <label class="date-range" for="toDate">To</label>
+                            <label class="control-label" for="toDate">To</label>
                             <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" />
-                            <p v-if="error.length" style="color: red;">
+                            <p v-if="errors.length" style="color: red;">
                                 <b>Please correct following this error:</b>
                                 <ul>
-                                    <li v-for="e in error" v-bind:key="e.id">
+                                    <li v-for="e in errors" v-bind:key="e.id">
                                         {{e}}
                                     </li>
                                 </ul>
@@ -40,23 +42,53 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-primary btn-pull-right" >Save Journey</button>
-                        <a href="#" class="btn btn-default btn-pull-right">Cancel</a>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button class="btn btn-primary btn-pull-right" >Save journey</button>
+                            <a href="#" class="btn btn-default btn-pull-right">Cancel</a>
+                        </div>
                     </div>
                 </fieldset>
             </form>
-            <!-- Default form -->
-            <div v-if="amILoggedIn === null">Detecting login...</div>
-            <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
-            <div v-if="amILoggedIn === false">
-                You must
-                <a v-bind:href="loginUrl" >Login</a>
-                to add a journey
-            </div>
         </div>
     </div>
+        <!-- Default form -->
+        <div v-if="amILoggedIn === null">Detecting login...</div>
+        <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
+        <div v-if="amILoggedIn === false"> 
+            You must
+            <a v-bind:href="loginUrl" >Login</a> 
+            to add a journey
+        </div>
 </template>
+<style scoped>
+    input.fromDate, input.toDate {
+        margin: 2px;
+    }
+
+    input#title {
+        padding: 24px;
+    }
+
+    .back-button {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .loader {
+        background-color: rgb(8 8 8 / 87%);
+        position: absolute;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 401;
+        color: var(--white);
+        font-size: 32px;
+    }
+</style>
 
 <style scoped>
 /* STYLING FOR INPUT ELEMENTS */
@@ -115,14 +147,14 @@ a.btn.btn-default.btn-pull-right {
     border-radius: 10px;
 }
 
-label.date-range {
+label.control-label {
     margin: 5px;
 }
 
 a.btn.btn-outline-info {
     border-radius: 16px;
     color: black;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     font-size: small;
 }
 </style>
@@ -135,7 +167,7 @@ a.btn.btn-outline-info {
     export default {
         data(){
             return {
-                error:[],
+                errors:[],
                 fromDate: null,
                 toDate: null
             }
@@ -150,14 +182,11 @@ a.btn.btn-outline-info {
         methods: {
             ...mapActions(['detectLogin', 'submitNewJourney']),
             validateAndSubmitNewJourney(e){
-                if(this.fromDate && this.toDate){
-                    console.log("submit function called")
-                }
-                this.error=[];
+                this.errors=[];
                 if(this.fromDate > this.toDate){
-                    this.error.push("End date must be greater than start date")
+                    this.errors.push("End date must be greater than start date")
                 }
-                if( this.error.length === 0 ) {
+                if( this.errors.length === 0 ) {
                     this.submitNewJourney(e);
 	            }
             }
