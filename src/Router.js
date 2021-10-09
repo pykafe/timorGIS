@@ -9,7 +9,7 @@ import Footer from './components/Footer.vue';
 export default function getRouter(properties) {
 
     const routes = [
-        { 
+        {
             path: '/photos/:selected_id(\\d+)?',
             alias: '/',
             name: 'photos',
@@ -22,12 +22,17 @@ export default function getRouter(properties) {
                 default: {
                     'url_media': properties.urls.media_url,
                 },
+                header: {
+                    'url_changepassord': properties.urls.changepassword,
+                    'url_login': properties.urls.login,
+                    'url_logout': properties.urls.logout,
+                },
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,
                 }
             },
         },
-        { 
+        {
             path: '/istoria',
             name: 'istoria',
             components: {
@@ -39,18 +44,30 @@ export default function getRouter(properties) {
             props: {
                 default: {
                 },
+                header: {
+                    'url_changepassord': properties.urls.changepassword,
+                    'url_login': properties.urls.login,
+                    'url_logout': properties.urls.logout,
+                },
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,
                 }
             },
         },
-        { 
+        {
             path: '/new_istoria',
             name: 'new_istoria',
             components: {
                 default: AddIstoria,
                 header: Header,
                 footer: Footer,
+            },
+            props: {
+                header: {
+                    'url_changepassord': properties.urls.changepassword,
+                    'url_login': properties.urls.login,
+                    'url_logout': properties.urls.logout,
+                },
             },
         },
     ];

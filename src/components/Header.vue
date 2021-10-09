@@ -1,7 +1,6 @@
 <template>
     <nav class="navbar navbar_header navbar-expand-md navbar-light bg-light">
         <div class="container">
-            <!-- <a href="{% url 'home' %}" class="navbar-brand logo">{% include 'map/logo_timorjourney.html' %}</a> -->
             <a href="" class="navbar-brand logo">Timor Journey</a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -10,25 +9,18 @@
                 <div class="navbar-nav ml-auto">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
+                            <template v-if="amILoggedIn">
+                                <b>
+                                    Welcome 
+                                    {{ userName }}
+                                </b>
+                                <span class="vertical-line"></span>
+                            </template>
                             <!--
-                            {% if user.is_authenticated %}
-                            <b>{% trans 'Welcome' %} {{ user.first_name|default:user.username }}</b>
-                            <img src="{% static 'icons/people-circle.svg' %}" class="rounded-circle" alt="{{  user.username }}" width="25" height="25"> 
-                            <span class="vertical-line"></span>
-                        
-                            {% endif  %}
                             <a href="{% url 'home' %}"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'Settings' %}
                             </a>
                         
                             <ul class="dropdown-menu">
-                                {% if user.is_staff %}
-                                <a href="{% url 'style_guide' %}">
-                                    <li><img src="{% static 'icons/brush.svg' %}" alt="icon" width="25" height="25" title="Style guide">{% trans 'Style Guide' %}</li>
-                                </a>
-                                <a href="{% url 'admin:index' %}">
-                                    <li><img src="{% static 'icons/gear.svg' %}" alt="icon" width="25" height="25" title="Admin">{% trans 'Admin' %}</li>
-                                </a>
-                                {% endif %}
                                 {% if user.is_authenticated %}
                                 <a href="{% url 'password_change' %}">
                                     <li><img src="{% static 'icons/lock.svg' %}" alt="icon" width="25" height="25" title="Change password">{% trans 'Change password' %}</li>
@@ -49,5 +41,21 @@
             </div>
         </div>
     </nav>
-
 </template>
+
+<script>
+    import { mapState } from 'vuex'
+    import { mapActions } from 'vuex'
+
+    export default {
+        computed: {
+            ...mapState(['amILoggedIn', 'userName']),
+        },
+        methods: {
+            ...mapActions(['detectLogin']),
+        },
+        mounted() {
+            this.detectLogin();
+        },
+    }
+</script>
