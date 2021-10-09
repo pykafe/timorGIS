@@ -46,7 +46,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <!--
                                     <div class="row">
                                         <div class="col-md-12">
@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     <div class="row">
                                         <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
                                         <div class="col-md-12 comment_scroll">
