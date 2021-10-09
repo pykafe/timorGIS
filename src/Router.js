@@ -23,9 +23,9 @@ export default function getRouter(properties) {
                     'url_media': properties.urls.media_url,
                 },
                 header: {
-                    'url_changepassord': properties.urls.changepassword,
-                    'url_login': properties.urls.login,
-                    'url_logout': properties.urls.logout,
+                    'url_changepassord': properties.urls.changepassword_django,
+                    'url_login': properties.urls.login_django,
+                    'url_logout': properties.urls.logout_django,
                 },
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,
@@ -45,9 +45,9 @@ export default function getRouter(properties) {
                 default: {
                 },
                 header: {
-                    'url_changepassord': properties.urls.changepassword,
-                    'url_login': properties.urls.login,
-                    'url_logout': properties.urls.logout,
+                    'url_changepassord': properties.urls.changepassword_django,
+                    'url_login': properties.urls.login_django,
+                    'url_logout': properties.urls.logout_django,
                 },
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,
@@ -64,9 +64,9 @@ export default function getRouter(properties) {
             },
             props: {
                 header: {
-                    'url_changepassord': properties.urls.changepassword,
-                    'url_login': properties.urls.login,
-                    'url_logout': properties.urls.logout,
+                    'url_changepassord': properties.urls.changepassword_django,
+                    'url_login': properties.urls.login_django,
+                    'url_logout': properties.urls.logout_django,
                 },
             },
         },

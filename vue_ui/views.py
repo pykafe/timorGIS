@@ -21,9 +21,9 @@ class VueView(TemplateView):
                 login=reverse("api_login"),
                 add_journey=reverse("api_add_istoria"),
                 media_url=settings.MEDIA_URL,
-                change_password=reverse("change_password"),
-                login=reverse("login"),
-                logout=reverse("logout"),
+                change_password_django=reverse("password_change"),
+                login_django=reverse("login"),
+                logout_django=reverse("logout"),
             )
         }
         return context

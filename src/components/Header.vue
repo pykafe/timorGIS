@@ -16,25 +16,25 @@
                                 </b>
                                 <span class="vertical-line"></span>
                             </template>
-                            <!--
-                            <a href="{% url 'home' %}"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'Settings' %}
+
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Settings
                             </a>
-                        
                             <ul class="dropdown-menu">
-                                {% if user.is_authenticated %}
-                                <a href="{% url 'password_change' %}">
-                                    <li><img src="{% static 'icons/lock.svg' %}" alt="icon" width="25" height="25" title="Change password">{% trans 'Change password' %}</li>
-                                </a>
-                                <a href="{% url 'logout' %}">
-                                    <li><img src="{% static 'icons/box-arrow-left.svg' %}" alt="icon" width="25" height="25" title="Logout">{% trans 'log out' %}</li>
-                                </a>
-                                {% else %}
-                                <a href="{% url 'login' %}?next={{ request.path }}">
-                                    <li><img src="{% static 'icons/power.svg' %}" alt="icon" width="25" height="25" title="Login">{% trans 'Log In' %}</li>
-                                </a>
-                                {% endif %}
+                                <template v-if="amILoggedIn">
+                                    <a v-bind:href="url_changepassord">
+                                        Change password {{ url_changepassord }}
+                                    </a>
+                                    <a href="{ url_logout_django }}">
+                                        Log out
+                                    </a>
+                                </template>
+                                <template v-if="!amILoggedIn">
+                                    <a href="{{ url_login_django }}">
+                                        Login
+                                    </a>
+                                </template>
                             </ul>
-                            -->
                         </li>
                     </ul>
                 </div>
