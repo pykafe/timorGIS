@@ -56,7 +56,7 @@
                                     -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <img v-bind:src="selectedImageSrc" class="size_images"/>
+                                            <img v-bind:src="selectedImageSrc" class="size_images rounded"/>
                                         </div>
                                     </div>
                                     <div class="row">
