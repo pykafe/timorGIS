@@ -24,10 +24,10 @@
                             <textarea type="text" id="description" name="description" class="form-control" rows="4"></textarea>
                         </div>
                         <div class="col"> <!-- Date input -->
-                            <label for="fromDate">From </label>
+                            <label class="date-range" for="fromDate">From </label>
                             <input type="date" class="fromDate" name="fromDate" select=":first" required="" v-model="fromDate" />
                             <br/>
-                            <label for="toDate">To</label>
+                            <label class="date-range" for="toDate">To</label>
                             <input type="date" class="toDate" name="toDate" select=":last" required="" v-model="toDate" />
                             <p v-if="error.length" style="color: red;">
                                 <b>Please correct following this error:</b>
@@ -57,6 +57,75 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+/* STYLING FOR INPUT ELEMENTS */
+
+.white-theme textarea {
+    height: 125px;
+    border: 1px solid var(--blue-1);
+    background: var(--white-2);
+}
+
+input[type=text]:focus, [type=email]:focus, [name=messages]:focus, textarea:not([type="submit"]):focus {
+    z-index: 2;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px var(--blue-2);
+    border-radius: 2px;
+    position: sticky;
+}
+
+input:not([type="submit"]), textarea:not([type="submit"]) {
+    border-radius: 2px;
+    border: 1px solid #31d9ff;
+    background: #f0f2f5;
+    color: #151313;
+    width: 100%;
+    padding: 11px;
+    cursor: unset;
+}
+
+input[type="file"] {
+    cursor: pointer;
+}
+
+/* BUTTONS STYLES */
+/* This button using for "Add" and  "Cancel", This is only on gray theme*/
+.btn-default {
+    color: #fbf5f5;
+}
+
+.btn-default:hover {
+    background-color: var(--white-1);
+}
+
+/* This button using for "Submit" form*/
+.btn-primary {
+    color: var(--white-1);
+    background-color: var(--blue-2);
+    border-radius: 15px;
+}
+
+.btn-primary:hover {
+    background-color: var(--blue-1);
+    border-color: var(--blue-2);
+}
+
+a.btn.btn-default.btn-pull-right {
+    background-color: #f4a20dfa;
+    border-radius: 10px;
+}
+
+label.date-range {
+    margin: 5px;
+}
+
+a.btn.btn-outline-info {
+    border-radius: 16px;
+    color: black;
+    margin-bottom: 15px;
+    font-size: small;
+}
+</style>
 
 <script>
     import { mapState } from 'vuex'
