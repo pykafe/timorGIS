@@ -594,15 +594,11 @@ ul.dropdown-menu.show > a li img {
     margin-bottom: 8px;
     padding: 8px;
     border-radius: 2px;
-<<<<<<< HEAD
 }
-=======
-}
+
 .viewer-toolbar > ul > li.viewer-reset {
     display: none;
 }
 .viewer-toolbar > ul > li.viewer-play {
     display: none;
 }
-
->>>>>>> master

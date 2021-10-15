@@ -157,6 +157,11 @@ a.btn.btn-outline-info {
     margin-bottom: 30px;
     font-size: small;
 }
+
+.card.mb-3 {
+    margin-left: 40px;
+    margin-right: 40px;
+}
 </style>
 
 <script>
