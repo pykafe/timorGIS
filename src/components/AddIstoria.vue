@@ -1,6 +1,4 @@
 <template>
-    <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
-    <span class="loader" v-if="add_istoria.error">Sorry!</span>
     <div class="card mb-3">
         <div class="card-body">
             <!-- Default form -->
@@ -52,14 +50,15 @@
             </form>
         </div>
     </div>
-        <!-- Default form -->
-        <div v-if="amILoggedIn === null">Detecting login...</div>
-        <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
-        <div v-if="amILoggedIn === false"> 
-            You must
-            <a v-bind:href="loginUrl" >Login</a> 
-            to add a journey
-        </div>
+    <div v-if="amILoggedIn === null">Detecting login...</div>
+    <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
+    <div v-if="amILoggedIn === false">
+        You must
+        <a v-bind:href="loginUrl" >Login</a>
+        to add a journey
+    </div>
+    <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
+    <span class="loader" v-if="add_istoria.error">Sorry!</span>
 </template>
 <style scoped>
     input.fromDate, input.toDate {
@@ -70,98 +69,77 @@
         padding: 24px;
     }
 
-    .back-button {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
     .loader {
         background-color: rgb(8 8 8 / 87%);
-        position: absolute;
+        position: fixed;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        text-align: center;
         top: 0px;
-        width: 100%;
+        left: -10%;
+        width: 110%;
         height: 100%;
-        z-index: 401;
         color: var(--white);
         font-size: 32px;
     }
-</style>
 
-<style scoped>
-/* STYLING FOR INPUT ELEMENTS */
+    input:not([type="submit"]), textarea {
+        border-radius: 2px;
+        border: 1px solid #31d9ff;
+        background: #f0f2f5;
+        color: #151313;
+        width: 100%;
+        padding: 11px;
+        cursor: unset;
+    }
 
-.white-theme textarea {
-    height: 125px;
-    border: 1px solid var(--blue-1);
-    background: var(--white-2);
-}
+    input[type=text]:focus , textarea:focus, input[type=date]:focus {
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px var(--blue-2);
+    }
 
-input[type=text]:focus, [type=email]:focus, [name=messages]:focus, textarea:not([type="submit"]):focus {
-    z-index: 2;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px var(--blue-2);
-    border-radius: 2px;
-    position: sticky;
-}
+    input[type="file"] {
+        cursor: pointer;
+    }
 
-input:not([type="submit"]), textarea:not([type="submit"]) {
-    border-radius: 2px;
-    border: 1px solid #31d9ff;
-    background: #f0f2f5;
-    color: #151313;
-    width: 100%;
-    padding: 11px;
-    cursor: unset;
-}
+    /* This button using for  "Cancel" */
+    .btn-default {
+        color: #fbf5f5;
+    }
 
-input[type="file"] {
-    cursor: pointer;
-}
+    /* CHECKED DOWN TO HERE, WE NEED TO CHECK THE ONES BELOW ARE OK TOO */
 
-/* BUTTONS STYLES */
-/* This button using for "Add" and  "Cancel", This is only on gray theme*/
-.btn-default {
-    color: #fbf5f5;
-}
+    /* This button using for "Submit" form*/
+    .btn-primary {
+        color: var(--white-1);
+        background-color: var(--blue-2);
+        border-radius: 15px;
+    }
 
-.btn-default:hover {
-    background-color: var(--white-1);
-}
+    .btn-primary:hover {
+        background-color: var(--blue-1);
+        border-color: var(--blue-2);
+    }
 
-/* This button using for "Submit" form*/
-.btn-primary {
-    color: var(--white-1);
-    background-color: var(--blue-2);
-    border-radius: 15px;
-}
+    a.btn.btn-default.btn-pull-right {
+        background-color: #f4a20dfa;
+        border-radius: 10px;
+    }
 
-.btn-primary:hover {
-    background-color: var(--blue-1);
-    border-color: var(--blue-2);
-}
+    label.control-label {
+        margin: 5px;
+    }
 
-a.btn.btn-default.btn-pull-right {
-    background-color: #f4a20dfa;
-    border-radius: 10px;
-}
+    a.btn.btn-outline-info {
+        border-radius: 16px;
+        color: black;
+        margin-bottom: 30px;
+        font-size: small;
+    }
 
-label.control-label {
-    margin: 5px;
-}
-
-a.btn.btn-outline-info {
-    border-radius: 16px;
-    color: black;
-    margin-bottom: 30px;
-    font-size: small;
-}
-
-.card.mb-3 {
-    margin-left: 40px;
-    margin-right: 40px;
-}
+    .card.mb-3 {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
 </style>
 
 <script>
