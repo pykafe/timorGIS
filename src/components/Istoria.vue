@@ -9,7 +9,7 @@
                         <span class="dropdown-toggle edit-and-delete-toggle" type="button" data-toggle="dropdown"></span>
                         <ul class="dropdown-menu menu-dropdown">
                             <li class="hover-list">
-                                <router-link :to="{name: 'new_istoria'}">
+                                <router-link :to="{name: 'update_istoria'}">
                                     <a href="#" class="btn btn-primary add-new-journey">Edit journey</a>
                                 </router-link>
                             </li>

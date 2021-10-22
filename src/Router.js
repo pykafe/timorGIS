@@ -3,6 +3,7 @@ import PhotoTimor from './components/PhotoTimor.vue';
 import Istoria from './components/Istoria.vue';
 import Map from './components/Map.vue';
 import AddIstoria from './components/AddIstoria.vue';
+import UpdateIstoria from './components/UpdateIstoria.vue';
 
 export default function getRouter(properties) {
 
@@ -44,6 +45,13 @@ export default function getRouter(properties) {
             name: 'new_istoria',
             components: {
                 default: AddIstoria,
+            },
+        },
+        { 
+            path: '/update_istoria',
+            name: 'update_istoria',
+            components: {
+                default: UpdateIstoria,
             },
         },
     ];
