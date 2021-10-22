@@ -6,7 +6,6 @@ from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
 from map.models import District, PhotoTimor, IstoriaViazen
-import pudb
 
 class VueView(TemplateView):
     template_name = 'vue_ui/index.html'
@@ -26,7 +25,6 @@ class VueView(TemplateView):
         return context
 
 class AddIstoriaView(View):
-    pudb.set_trace()
     def post(self, request, *args, **kwargs):
         istoria = IstoriaViazen.objects.create(
             title=request.POST["title"],
@@ -46,13 +44,12 @@ class AddIstoriaView(View):
 
 def update_view(request, id):
     def post(self, request, *args, **kwargs):
-        pudb.set_trace()
         if request.method == 'POST':
             if request.POST.get('title') and request.POST.get('description') and request.POST.get('fromDate') and request.POST.get('toDate'):
-                IstoriaViazen.objects.filter(id = id).update(title= request.POST.get('title'), description= request.POST.get('description'), fromDate= request.POST.get('fromDate'), toDate= request.POST.get('toDate'))
+                update_istoria = IstoriaViazen.objects.filter(id = id).update(title= request.POST.get('title'), description= request.POST.get('description'), fromDate= request.POST.get('fromDate'), toDate= request.POST.get('toDate'))
 
             response_data = {
-                "istoria": istoria.to_json(),
+                "update_istoria": update_istoria.to_json(),
                 "photos": [],
             }
             return HttpResponse(response_data)
@@ -60,11 +57,10 @@ def update_view(request, id):
     def form_valid(self, form):
         for photo_file in self.request.FILES.getlist('photos'):
             photo = PhotoTimor.objects.create(istoriaviazen=self.object, image=photo_file)
-            self.object.photos.add(photo)
+            response_data["photos"].append(photo.to_json())
 
-        redirect = super().form_valid(form)
+        return JsonResponse(response_data)
 
-        return redirect
 
 def login_api(request):
     if request.user.is_authenticated:
