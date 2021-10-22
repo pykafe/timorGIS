@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                     -->
-                                    <div class="row">
+                                    <div class="row modal-img">
                                         <div class="col-md-12">
                                             <img v-bind:src="selectedImageSrc" class="size_images rounded"/>
                                         </div>
@@ -157,8 +157,11 @@
     border-top-right-radius: calc(.3rem - 1px);
 }
 .size_images {
-    height: calc(88vh - 64px - 14px);
+    height: 100%;
     width: 100%;
+}
+.modal-img {
+   height: calc(88vh - 64px - 14px); 
 }
 .comment_input {
     display: inline-block;
