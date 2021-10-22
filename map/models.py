@@ -177,7 +177,7 @@ class CommentPhoto(models.Model):
     def to_json(self):
         return {
             "id": self.pk,
-            "phototimor": self.phototimor.to_json(),
+            "phototimor": str(self.phototimor.pk),
             "user" : {
                 "pk": self.user.pk,
                 "username": self.user.username,

@@ -74,7 +74,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <span v-for="comment in comments.list" v-bind:key="comment.id">
-                                                        <span v-if="comment.phototimor.id == $route.params.selected_id">
+                                                        <span v-if="comment.phototimor == $route.params.selected_id">
                                                             <b>{{ comment.user.fullname != "" ? comment.user.fullname : comment.user.username }} - <small>{{ $filters.formatDate(comment.sutmit_at) }}</small></b>
                                                             <p>{{ comment.comment }}</p>
                                                         </span>
