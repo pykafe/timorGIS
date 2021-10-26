@@ -123,7 +123,7 @@ export default function getStore(properties, router) {
                     return response.json()
                 }).then(response_data => {
                     context.commit('setAddIstoriaList', response_data);
-                    router.push('istoria');
+                    router.push(`/istoria/${ response_data.istoria.pk }`);
                 }).catch((err) => {
                     // TODO We have an error, tel the user about it
                     context.commit('setAddIstoriaError', {err});

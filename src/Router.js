@@ -25,7 +25,8 @@ export default function getRouter(properties) {
             },
         },
         { 
-            path: '/istoria',
+            path: '/istoria/:journey_selected(\\d+)?',
+            //path: '/istoria',
             name: 'istoria',
             components: {
                 default: Istoria,
@@ -33,6 +34,7 @@ export default function getRouter(properties) {
             },
             props: {
                 default: {
+                    'url_media': properties.urls.media_url,
                 },
                 map: {
                     'url_openstreetmap': properties.urls.openstreetmap,

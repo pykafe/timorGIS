@@ -62,7 +62,7 @@
                                     <div class="row">
                                         <div class="col-md-12" v-for="image in images.list" v-bind:key="image.id">
                                             <span v-if="image.id == $route.params.selected_id">
-                                                <p>Foto hosi {{ image.istoria.creator.fullname !== "" ? image.istoria.creator.fullname: image.istoria.creator.username }} {{ $filters.formatDate(image.istoria.created_at) }}</p>
+                                                <p class="card-text"><small class="text-muted">Foto hosi {{ image.istoria.creator.fullname !== "" ? image.istoria.creator.fullname: image.istoria.creator.username }} {{ $filters.formatDate(image.istoria.created_at) }}</small></p>
                                             </span>
                                         </div>
                                     </div>
