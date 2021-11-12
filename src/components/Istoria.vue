@@ -77,11 +77,11 @@
             ...mapState(['istoria', 'images']),
         },
         methods: {
-            ...mapActions(['requestIstoria', 'requestImages']),
+            ...mapActions(['requestImages', 'requestIstoria']),
         },
         mounted() {
-            this.requestIstoria();
             this.requestImages();
+            this.requestIstoria();
         },
     }
 </script>
