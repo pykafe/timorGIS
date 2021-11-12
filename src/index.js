@@ -24,6 +24,19 @@ export function mountApp(element, properties) {
                return moment(String(value)).format('MMMM MM, YYYY hh:mm a')
             }
         },
+        formatDuration(value){
+            if (value){
+                let duration_of_trip = [];
+                let date_slice = value.slice(2, -2);
+                let date_str = date_slice.toString();
+                let date_split = date_str.split(',');
+                date_split.forEach(function(date){
+                    const data = moment(date).format('LL');
+                    duration_of_trip.push(data);
+                })
+                return duration_of_trip.join(" - ");
+            }
+        },
     }
     app.use(VueViewer)
 

@@ -9,6 +9,7 @@ from psycopg2.extras import DateRange
 from django.core.exceptions import ValidationError
 from map.gps_images import ImageMetaData
 from django.conf import settings
+import json
 
 COMMENT_MAX_LENGTH = getattr(settings, 'COMMENT_MAX_LENGTH', 3000)
 
@@ -63,11 +64,14 @@ class IstoriaViazen(models.Model):
         return f'{self.title}, {self.pk}'
 
     def to_json(self):
+        duration_of_trip = json.dumps(self.duration_of_trip, default=str)
         return {
             "pk": self.pk,
             "title": self.title,
             "description": self.description,
             "created_at": self.created_at,
+            "modified_at": self.modified_at,
+            "duration_of_trip": duration_of_trip,
             "creator" : {
                 "pk": self.creator.pk,
                 "username": self.creator.username,
