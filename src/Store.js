@@ -110,7 +110,7 @@ export default function getStore(properties, router) {
                     state.comments.list.unshift(payload.comment);
                 }
             },
-            setAddIstoriaError(state, payload) {
+            setAddCommentError(state, payload) {
                 state.add_comment.error = payload;
             },
         },
