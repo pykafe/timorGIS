@@ -170,6 +170,8 @@
 .size_images {
     height: 100%;
     width: 100%;
+    object-position: center;
+    object-fit: cover;
 }
 .modal-img {
    height: calc(88vh - 64px - 14px); 
