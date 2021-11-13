@@ -52,7 +52,9 @@ export default function getStore(properties, router) {
             },
             setAddIstoriaList(state, payload) {
                 if (state.images.list !== null) {
-                    state.images.list.unshift(payload.photos);
+                    payload.photos.forEach(function(photos){
+                        state.images.list.unshift(photos);
+                    });
                 }
                 if (state.istoria.list !== null) {
                     state.istoria.list.unshift(payload.istoria);
