@@ -8,6 +8,10 @@ from django.utils import timezone
 from psycopg2.extras import DateRange
 from django.core.exceptions import ValidationError
 from map.gps_images import ImageMetaData
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
+from resizeimage import resizeimage
 
 
 class Suco(models.Model):
@@ -105,6 +109,15 @@ class PhotoTimor(models.Model):
             if not lat and not lon:
                 raise ValidationError(_("This image has no GPS details" ))
 
+    def save(self, *args, **kwargs):
+        image_pil = Image.open(self.image)
+        new_image = resizeimage.resize_cover(image_pil, [300, 200])
+        new_image_io = BytesIO()
+        new_image.save(new_image_io, format="JPEG")
+        image_name = self.image.name
+        self.image.delete(save=False)
+        self.image.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
+        super(PhotoTimor, self).save(*args, **kwargs)
 
     @cached_property
     def point(self):
