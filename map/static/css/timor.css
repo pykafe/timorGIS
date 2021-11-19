@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Comfortaa';
-    src: url(../fonts/Comfortaa_Thin.woff2);
+    src: url('../fonts/Comfortaa-Regular.woff');
 }
 
 @font-face {
@@ -83,8 +83,8 @@ input[type=text]:focus, [type=email]:focus, [name=messages]:focus, textarea:not(
 
 input:not([type="submit"]), textarea:not([type="submit"]) {
     border-radius: 2px;
-    border: 1px solid #31d9ff;
-    background: #f0f2f5;
+    border: 1px solid var(--gray);
+    background: var(--white-1);
     color: #151313;
     width: 100%;
     padding: 11px;
@@ -94,6 +94,7 @@ input:not([type="submit"]), textarea:not([type="submit"]) {
 input[type="file"] {
     cursor: pointer;
 }
+
 
 /* BUTTONS STYLES */
 /* This button using for "Add" and  "Cancel", This is only on gray theme*/
@@ -287,16 +288,6 @@ span.person-name {
     grid-gap: 1px;
 }
 
-/* CREATE FORM */
-
-.form-group {
-    color: #555;
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 2px;
-    padding: 10px;
-}
-
 select#id_creator {
     inline-size: auto;
     padding: 10px;
@@ -463,8 +454,9 @@ span.blue-text {
     line-height: 3;
 }
 
-.navbar_header{
-    box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.25);
+.navbar_header {
+    background-color: var(--white-2);
+    border-bottom: 1px solid #ffffff;
 }
 
 /* set font-family for every h3 to use comfortaa */
@@ -654,5 +646,11 @@ ul.dropdown-menu.show > a li img {
     margin-bottom: 8px;
     padding: 8px;
     border-radius: 2px;
+}
+.viewer-toolbar > ul > li.viewer-reset {
+    display: none;
+}
+.viewer-toolbar > ul > li.viewer-play {
+    display: none;
 }
 
