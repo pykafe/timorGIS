@@ -11,7 +11,6 @@ from map.gps_images import ImageMetaData
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
-from resizeimage import resizeimage
 
 
 class Suco(models.Model):
@@ -113,9 +112,9 @@ class PhotoTimor(models.Model):
 
     def save(self, *args, **kwargs):
         image_pil = Image.open(self.image)
-        new_image = resizeimage.resize_cover(image_pil, [300, 200])
+        image_pil.thumbnail((450, 200))
         new_image_io = BytesIO()
-        new_image.save(new_image_io, format="JPEG")
+        image_pil.save(new_image_io, format="JPEG")
         image_name = self.image.name
         self.image_thumbnail.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
         super(PhotoTimor, self).save(*args, **kwargs)
