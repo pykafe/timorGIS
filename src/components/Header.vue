@@ -1,7 +1,9 @@
 <template>
     <nav class="navbar navbar_header navbar-expand-md navbar-light bg-light">
         <div class="container">
-            <a href="" class="navbar-brand logo">Timor Journey</a>
+            <a href="" class="navbar-brand logo">
+                <header-logo />
+            </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -44,10 +46,14 @@
 </template>
 
 <script>
+    import HeaderLogo from './HeaderLogo.vue'
     import { mapState } from 'vuex'
     import { mapActions } from 'vuex'
 
     export default {
+        components: {
+            HeaderLogo
+        },
         computed: {
             ...mapState(['amILoggedIn', 'userName']),
         },
