@@ -7,7 +7,7 @@
     
     <div class="images_container" v-if="images.list">
         <div 
-            v-for="image in images.list" v-bind:key="image.id" @click="selectImgObject(image.image)">
+            v-for="image in images.list" v-bind:key="image.id" @click="selectImgObject(image)">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
@@ -95,7 +95,7 @@
                 this.rollover_image_id = id;
             },
             imageCardStyle(image) {
-                return `background-image: url(${ this.url_media }${ image.image})`;
+                return `background-image: url(${ this.url_media }${ image.image_thumbnail})`;
             },
             selectImgObject (image) {
                 let img = [];
@@ -103,7 +103,7 @@
                 this.images.list.forEach( function(image){
                     img.push(urlMedia + image.image)
                 });
-                const indexId = img.indexOf(urlMedia + image);
+                const indexId = img.indexOf(urlMedia + image.image);
                 const $viewer = viewerApi({
                     options: {
                         toolbar: true,

@@ -38,7 +38,7 @@ class AddIstoriaView(View):
             "photos": [],
         }
         for photo_file in self.request.FILES.getlist('photos'):
-            photo = PhotoTimor.objects.create(istoriaviazen=istoria, image=photo_file, image_thumbnail=photo_file)
+            photo = PhotoTimor.objects.create(istoriaviazen=istoria, image=photo_file)
             response_data["photos"].append(photo.to_json())
 
         return JsonResponse(response_data)
