@@ -112,10 +112,12 @@ class PhotoTimor(models.Model):
 
     def save(self, *args, **kwargs):
         image_pil = Image.open(self.image)
+        if image_pil.mode != "RGB":
+            image_pil = image_pil.convert("RGB")
         image_pil.thumbnail((450, 200))
         new_image_io = BytesIO()
         image_pil.save(new_image_io, format="JPEG")
-        image_name = self.image.name
+        image_name = f"{image_pil.size}_{self.image.name}"
         self.image_thumbnail.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
         super(PhotoTimor, self).save(*args, **kwargs)
 
