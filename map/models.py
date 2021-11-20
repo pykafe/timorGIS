@@ -84,13 +84,14 @@ def queryobject(obj, point):
 class PhotoTimor(models.Model):
     istoriaviazen = models.ForeignKey(IstoriaViazen, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
+    image_thumbnail = models.ImageField(upload_to='photos/thumbnail', verbose_name='Timor Photo')
     created_at = models.DateTimeField(null=False, blank=False, default=timezone.now)
     modified_at = models.DateTimeField(auto_now=True)
 
     def to_json(self):
         return {
             "id": self.pk,
-            "image": self.image.name,
+            "image": self.image_thumbnail.name,
             "istoria": self.istoriaviazen.to_json(),
         }
 
@@ -110,13 +111,12 @@ class PhotoTimor(models.Model):
                 raise ValidationError(_("This image has no GPS details" ))
 
     def save(self, *args, **kwargs):
-        image_pil = Image.open(self.image)
+        image_pil = Image.open(self.image_thumbnail)
         new_image = resizeimage.resize_cover(image_pil, [300, 200])
         new_image_io = BytesIO()
         new_image.save(new_image_io, format="JPEG")
-        image_name = self.image.name
-        self.image.delete(save=False)
-        self.image.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
+        image_name = self.image_thumbnail.name
+        self.image_thumbnail.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
         super(PhotoTimor, self).save(*args, **kwargs)
 
     @cached_property
