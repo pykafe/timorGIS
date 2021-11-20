@@ -114,8 +114,7 @@ class HatamaViazenView(CreateView):
         redirect = super().form_valid(form)
 
         for photo_file in self.request.FILES.getlist('photos'):
-            photos = PhotoTimor.save(photo_file)
-            photo = PhotoTimor.objects.create(istoriaviazen=self.object, image=photos)
+            photo = PhotoTimor.objects.create(istoriaviazen=self.object, image=photo_file)
             self.object.photos.add(photo)
 
         return redirect
