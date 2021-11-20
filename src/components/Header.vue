@@ -15,7 +15,9 @@
                                 <b>
                                     Welcome 
                                     {{ userName }}
+                                    &nbsp;
                                 </b>
+                                <img src="../icons/people-circle.svg" class="rounded-circle" alt="{{ userName }}" width="25" height="25"> 
                                 <span class="vertical-line"></span>
                             </template>
 
@@ -44,7 +46,13 @@
         </div>
     </nav>
 </template>
-
+<style scoped>
+    span.vertical-line {
+        border-left: 1px solid #1b1a1838;
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+</style>
 <script>
     import HeaderLogo from './HeaderLogo.vue'
     import { mapState } from 'vuex'
