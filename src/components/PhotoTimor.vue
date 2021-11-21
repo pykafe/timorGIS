@@ -1,13 +1,13 @@
 <template>
     <span class="loader" v-if="images.requesting">Loading...</span>
     <span class="loader" v-if="images.error">Sorry!</span>
+    <input class="form-control" type="text" v-model="searchJourney" placeholder="Search journey">
     <router-link :to="{name: 'new_istoria'}">
         <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
     </router-link>
-    
     <div class="images_container" v-if="images.list">
         <div 
-            v-for="image in images.list" v-bind:key="image.id" @click="selectImgObject(image.image)">
+            v-for="image in resultJourneyQuery" v-bind:key="image.id" @click="selectImgObject(image)">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
@@ -84,10 +84,23 @@
         data() {
             return {
                 rollover_image_id: 0,
+                searchJourney: null,
             }
         },
         computed: {
             ...mapState(['images']),
+            resultJourneyQuery() {
+                if (this.searchJourney) {
+                    return this.images.list.filter(journey => {
+                        return this.searchJourney
+                            .toLowerCase()
+                            .split(" ")
+                            .every(v => journey.istoria.title.toLowerCase().includes(v));
+                    });
+                } else {
+                    return this.images.list;
+                }
+            },
         },
         methods: {
             ...mapActions(['requestImages']),
