@@ -7,7 +7,7 @@
     </router-link>
     <div class="images_container" v-if="images.list">
         <div 
-            v-for="image in resultJourneyQuery" v-bind:key="image.id" @click="selectImgObject(image)">
+            v-for="image in resultJourneyQuery" v-bind:key="image.id" @click="selectImgObject(image.image)">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
