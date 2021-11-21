@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+        <p v-if="resultJourneyQuery.length === 0">No results found for query "{{ searchJourney }}"</p>
     </div>
 </template>
 <style scoped>
