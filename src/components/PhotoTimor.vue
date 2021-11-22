@@ -1,7 +1,9 @@
 <template>
     <span class="loader" v-if="images.requesting">Loading...</span>
     <span class="loader" v-if="images.error">Sorry!</span>
-    <input class="form-control" type="text" v-model="searchJourney" placeholder="Search journey">
+    <div class="search-input-container">
+        <input class="form-control" type="text" v-model="searchJourney" placeholder="Search journey">
+    </div>
     <router-link :to="{name: 'new_istoria'}">
         <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
     </router-link>
@@ -69,6 +71,15 @@
     font-size: 32px;
     background-color: rgb(8 8 8 / 87%);
     color: var(--white);
+}
+.search-input-container {
+    z-index: 1;
+    width: 100%;
+    max-width: 628px;
+    margin: 0 auto;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 </style>
 
