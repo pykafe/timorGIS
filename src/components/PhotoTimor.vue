@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <p v-if="resultJourneyQuery.length === 0">No results found for query "{{ searchJourney }}"</p>
+        <p class="centered" v-if="resultJourneyQuery.length === 0">No results found for query "{{ searchJourney }}"</p>
     </div>
 </template>
 <style scoped>
@@ -80,6 +80,15 @@
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+.centered {
+    position: absolute;
+    margin: auto;
+    display: block;
+    bottom: 0px;
+    top: 120px;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 </style>
 
