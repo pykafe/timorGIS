@@ -27,9 +27,6 @@ export default function getRouter(properties) {
                     'url_login': properties.urls.login_django,
                     'url_logout': properties.urls.logout_django,
                 },
-                map: {
-                    'url_openstreetmap': properties.urls.openstreetmap,
-                }
             },
         },
         {
@@ -39,7 +36,6 @@ export default function getRouter(properties) {
                 default: Istoria,
                 header: Header,
                 footer: Footer,
-                map: Map,
             },
             props: {
                 default: {
@@ -49,9 +45,25 @@ export default function getRouter(properties) {
                     'url_login': properties.urls.login_django,
                     'url_logout': properties.urls.logout_django,
                 },
-                map: {
+            },
+        },
+        { 
+            path: '/map',
+            name: 'map',
+            components: {
+                default: Map,
+                header: Header,
+                footer: Footer,
+            },
+            props: {
+                default: {
                     'url_openstreetmap': properties.urls.openstreetmap,
-                }
+                },
+                header: {
+                    'url_changepassord': properties.urls.changepassword_django,
+                    'url_login': properties.urls.login_django,
+                    'url_logout': properties.urls.logout_django,
+                },
             },
         },
         {
