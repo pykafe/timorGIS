@@ -1,6 +1,6 @@
 <template>
-    <div id="expand">
-            <span>Click the map icon for expand</span>
+    <div>
+        <a href="#" class="btn btn-default">Back</a>
     </div>
     <div id="map_container">
         <div id="mapid">
@@ -10,15 +10,22 @@
 </template>
 
 <style  scoped>
+.btn-default {
+    margin-top: 20px;
+}
 #expand {
     position: fixed;
     top: 140px;
     right: 170px;
 }
 #map_container {
-    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: inherit;
     top: 90px;
     right: 12px;
+    margin-top: 20px;
 }
 #map_container button {
     position: absolute;
@@ -31,8 +38,8 @@
     border-width: 5px;
     border-color: black;
     padding: 5px;
-    height: 70px;
-    width: 140px;
+    height: 600px;
+    width: 1300px;
 }
 .loader {
     position: absolute;
@@ -58,7 +65,7 @@
         ],
         data() {
             return {
-                expanded: false,
+                isHidden: true,
             }
         },
         computed: {
@@ -66,9 +73,6 @@
         },
         methods: {
             ...mapActions(['requestMap']),
-            toggleExpand() {
-                this.expanded = !this.expanded;
-            },
             renderMap: function() {
                 const points = {
                     'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],

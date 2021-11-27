@@ -1,10 +1,18 @@
 <template>
     <span class="loader" v-if="images.requesting">Loading...</span>
     <span class="loader" v-if="images.error">Sorry!</span>
-    <router-link :to="{name: 'new_istoria'}">
-        <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
-    </router-link>
-    
+    <div class="addjourney-mapicon">
+        <router-link :to="{name: 'new_istoria'}">
+            <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
+        </router-link>
+
+        <router-link :to="{name: 'map'}">
+            <a href="#">
+                <img src="./icons/maps.svg" alt="maps" width="50" height="50">
+            </a>
+        </router-link>
+    </div>
+
     <div class="images_container" v-if="images.list">
         <div 
             v-for="image in images.list" v-bind:key="image.id" @click="selectImgObject(image.image)">
@@ -28,8 +36,13 @@
     </div>
 </template>
 <style scoped>
+.addjourney-mapicon {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+}
 .images_container {
-    padding-top: 80px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     column-gap: 15px;
