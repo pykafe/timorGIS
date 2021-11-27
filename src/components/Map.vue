@@ -99,7 +99,11 @@
         },
         mounted() {
             this.renderMap();
-            this.requestMap();
+            if (this.map.list) {
+                this.renderGeoJSON(this.map.list);
+            } else {
+                this.requestMap();
+            }
         },
     }
 </script>
