@@ -4,9 +4,17 @@
     <div class="search-input-container">
         <input class="form-control" type="text" v-model="searchJourney" placeholder="Search journey">
     </div>
-    <router-link :to="{name: 'new_istoria'}">
-        <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
-    </router-link>
+    <div class="addjourney-mapicon">
+        <router-link :to="{name: 'new_istoria'}">
+            <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
+        </router-link>
+
+        <router-link :to="{name: 'map'}">
+            <a href="#">
+                <img src="./icons/maps.svg" alt="maps" width="50" height="50">
+            </a>
+        </router-link>
+    </div>
     <div class="images_container" v-if="images.list">
         <div 
             v-for="image in resultJourneyQuery" v-bind:key="image.id" @click="selectImgObject(image.image)">
@@ -31,8 +39,13 @@
     </div>
 </template>
 <style scoped>
+.addjourney-mapicon {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+}
 .images_container {
-    padding-top: 15px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     column-gap: 15px;
