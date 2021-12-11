@@ -63,39 +63,22 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="row modal-img">
-                                        <div class="col-md-12">
-                                            <img v-bind:src="selectedImageSrc" class="size_images rounded"/>
-                                        </div>
+                                    <div class="modal-img">
+                                        <img v-bind:src="selectedImageSrc" class="size_images rounded"/>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12" v-for="image in images.list" v-bind:key="image.id">
-                                            <span v-if="image.id == $route.params.selected_id">
-                                                <p class="card-text"><small class="text-muted">Foto hosi {{ image.istoria.creator.fullname !== "" ? image.istoria.creator.fullname: image.istoria.creator.username }} {{ $filters.formatDate(image.istoria.created_at) }}</small></p>
-                                            </span>
-                                        </div>
+                                    <div v-for="image in images.list" v-bind:key="image.id">
+                                        <p class="posted-by" v-if="image.id == $route.params.selected_id">
+                                            Posted by
+                                            <b class="your-name">{{ image.istoria.creator.fullname !== "" ? image.istoria.creator.fullname: image.istoria.creator.username }}</b> in <small>{{ $filters.formatDate(image.istoria.created_at) }}</small>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="row">
-                                        <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
-                                        <div class="col-md-12 comment_scroll">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <span v-for="comment in comments.list" v-bind:key="comment.id">
-                                                        <span v-if="comment.phototimor == $route.params.selected_id">
-                                                            <b>{{ comment.user.fullname != "" ? comment.user.fullname : comment.user.username }} - <small>{{ $filters.formatDate(comment.sutmit_at) }}</small></b>
-                                                            <p>{{ comment.comment }}</p>
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
                                             <div v-if="amILoggedIn === null">Detecting login...</div>
-                                            <div v-if="add_comment.requesting === true">Adding comment...</div>
+                                            <div v-if="add_comment.requesting === true">Adding a comment . . .</div>
                                             <div v-if="amILoggedIn === false">
                                                 You must
                                                 <a v-bind:href="loginUrl" >Login</a>
@@ -105,10 +88,18 @@
                                                 <span v-html="csrfTokenInput" />
                                                 <span class="comment_input">
                                                     <input type="hidden" name="phototimor" :value="$route.params.selected_id">
-                                                    <input type="text" name="comments" placeholder="Comments..."/>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <input type="text" name="comments" placeholder="Write a comment . . ."/>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
                                                 </span>
                                             </form>
+                                            <div class="comment_scroll">
+                                                <span v-for="comment in comments.list" v-bind:key="comment.id">
+                                                    <span v-if="comment.phototimor == $route.params.selected_id">
+                                                        <b class="your-name">{{ comment.user.fullname != "" ? comment.user.fullname : comment.user.username }}</b> - <small>{{ $filters.formatDate(comment.sutmit_at) }}</small>
+                                                        <p>{{ comment.comment }}</p>
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -185,11 +176,25 @@
         bottom: -0.5rem;
         white-space: nowrap;
     }
+    .comment_input input {
+        margin-right: 5px;
+        border-radius: 0.25rem;
+    }
+    .comment_input button {
+        padding: 9px;
+    }
     .comment_scroll {
         overflow-y: auto;
         min-height: 0;
         right: 20px;
         height: calc(77vh - 64px - 14px);
+    }
+    .your-name {
+        text-transform: capitalize;
+    }
+    .posted-by {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     /* width */
