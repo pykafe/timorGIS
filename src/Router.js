@@ -21,13 +21,15 @@ export default function getRouter(properties) {
             },
         },
         { 
-            path: '/istoria',
+            path: '/istoria/:journey_selected(\\d+)?',
+            //path: '/istoria',
             name: 'istoria',
             components: {
                 default: Istoria,
             },
             props: {
                 default: {
+                    'url_media': properties.urls.media_url,
                 },
             },
         },
