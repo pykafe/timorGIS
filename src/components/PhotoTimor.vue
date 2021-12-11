@@ -36,11 +36,6 @@
                 </div>
             </div>
             <span>
-                <!--
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
-                    <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
-                </svg>
-                -->
                 <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
                         <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
@@ -68,13 +63,6 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <!--
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p>Hosi | April 22, 2021 - April 23, 2021</p>
-                                        </div>
-                                    </div>
-                                    -->
                                     <div class="row modal-img">
                                         <div class="col-md-12">
                                             <img v-bind:src="selectedImageSrc" class="size_images rounded"/>
@@ -106,9 +94,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <!-- Default form -->
                                             <div v-if="amILoggedIn === null">Detecting login...</div>
-                                            <div v-if="add_comment.requesting === true">Detecting add Comment...</div>
+                                            <div v-if="add_comment.requesting === true">Adding comment...</div>
                                             <div v-if="amILoggedIn === false">
                                                 You must
                                                 <a v-bind:href="loginUrl" >Login</a>
@@ -134,127 +121,127 @@
     </div>
 </template>
 <style scoped>
-.addjourney-mapicon {
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-    padding-top: 8px;
-}
-.images_container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: 15px;
-    row-gap: 15px;
-}
-.image_card {
-    height: 200px;
-    background-size: cover;
-    cursor: pointer;
-}
-.image_card .istoria_title {
-    color:  rgb(255, 255, 255);
-    margin: 5px;
-    padding: 3px;
-    background-color: rgba(44, 44, 43, 0.336);
-    border-radius: 3px;
-}
-.image_selected {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 1px;
-    right: 10px;
-    top: 1px;
-}
-.modals-lg {
-    max-width: 100%!important;
-    margin: 0px!important;
-}
-.modals-header {
-    display: -ms-flexbox;
-    /* display: flex; */
-    -ms-flex-align: start;
-    align-items: flex-start;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 1rem 1rem;
-    /* border-bottom: 1px solid #dee2e6; */
-    border-top-left-radius: calc(.3rem - 1px);
-    border-top-right-radius: calc(.3rem - 1px);
-}
-.size_images {
-    height: 100%;
-    width: 100%;
-    object-position: center;
-    object-fit: cover;
-}
-.modal-img {
-   height: calc(88vh - 64px - 14px); 
-}
-.comment_input {
-    display: inline-block;
-    width: 85%;
-    position: relative;
-    bottom: -0.5rem;
-    white-space: nowrap;
-}
-.comment_scroll {
-    overflow-y: auto;
-    min-height: 0;
-    right: 20px;
-    height: calc(77vh - 64px - 14px);
-}
+    .addjourney-mapicon {
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        padding-top: 8px;
+    }
+    .images_container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        column-gap: 15px;
+        row-gap: 15px;
+    }
+    .image_card {
+        height: 200px;
+        background-size: cover;
+        cursor: pointer;
+    }
+    .image_card .istoria_title {
+        color:  rgb(255, 255, 255);
+        margin: 5px;
+        padding: 3px;
+        background-color: rgba(44, 44, 43, 0.336);
+        border-radius: 3px;
+    }
+    .image_selected {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 1px;
+        right: 10px;
+        top: 1px;
+    }
+    .modals-lg {
+        max-width: 100%!important;
+        margin: 0px!important;
+    }
+    .modals-header {
+        display: -ms-flexbox;
+        /* display: flex; */
+        -ms-flex-align: start;
+        align-items: flex-start;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 1rem 1rem;
+        /* border-bottom: 1px solid #dee2e6; */
+        border-top-left-radius: calc(.3rem - 1px);
+        border-top-right-radius: calc(.3rem - 1px);
+    }
+    .size_images {
+        height: 100%;
+        width: 100%;
+        object-position: center;
+        object-fit: cover;
+    }
+    .modal-img {
+        height: calc(88vh - 64px - 14px);
+    }
+    .comment_input {
+        display: inline-block;
+        width: 85%;
+        position: relative;
+        bottom: -0.5rem;
+        white-space: nowrap;
+    }
+    .comment_scroll {
+        overflow-y: auto;
+        min-height: 0;
+        right: 20px;
+        height: calc(77vh - 64px - 14px);
+    }
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
 
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
+    /* Track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: grey;
-  border-radius: 10px;
-}
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 10px;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--blue-2);
-}
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--blue-2);
+    }
 
-.loader {
-    position: absolute;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 401;
-    font-size: 32px;
-    background-color: rgb(8 8 8 / 87%);
-    color: var(--white);
-}
-.expand-arrows {
-    right: 0;
-    bottom: 1em;
-    background-color: hsla(0,0%,100%,.4);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    border-radius: 5px;
-    height: 32px;
-    width: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .loader {
+        position: absolute;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 401;
+        font-size: 32px;
+        background-color: rgb(8 8 8 / 87%);
+        color: var(--white);
+    }
+    .expand-arrows {
+        right: 0;
+        bottom: 1em;
+        background-color: hsla(0,0%,100%,.4);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        border-radius: 5px;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 
 <script>
