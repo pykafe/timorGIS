@@ -1,7 +1,7 @@
 <template>
     <span class="loader" v-if="istoria.requesting">Loading...</span>
     <span class="loader" v-if="istoria.error">Sorry!</span>
-    <div class="row">
+    <div class="row" v-if="istoria.list !== null">
         <div class="col-md-5">
             <div class="row">
                 <div class="col-md-12">
