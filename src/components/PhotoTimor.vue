@@ -76,22 +76,24 @@
                                 <div class="col-md-6">
                                     <div class="modal-content">
                                         <div class="modal-body">
-                                            <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
-                                            <div v-if="amILoggedIn === null">Detecting login...</div>
-                                            <div v-if="add_comment.requesting === true">Adding a comment . . .</div>
-                                            <div v-if="amILoggedIn === false">
-                                                You must
-                                                <a v-bind:href="loginUrl" >Login</a>
-                                                to add a comment
+                                            <div class="comment-header">
+                                                <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
+                                                <div v-if="amILoggedIn === null">Detecting login...</div>
+                                                <div v-if="add_comment.requesting === true">Adding a comment . . .</div>
+                                                <div v-if="amILoggedIn === false">
+                                                    You must
+                                                    <a v-bind:href="loginUrl" >Login</a>
+                                                    to add a comment
+                                                </div>
+                                                <form @submit.prevent="submitNewComment" v-if="amILoggedIn === true">
+                                                    <span v-html="csrfTokenInput" />
+                                                    <span class="comment_input">
+                                                        <input type="hidden" name="phototimor" :value="$route.params.selected_id">
+                                                        <input type="text" name="comments" placeholder="Write a comment . . ."/>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </span>
+                                                </form>
                                             </div>
-                                            <form @submit.prevent="submitNewComment" v-if="amILoggedIn === true">
-                                                <span v-html="csrfTokenInput" />
-                                                <span class="comment_input">
-                                                    <input type="hidden" name="phototimor" :value="$route.params.selected_id">
-                                                    <input type="text" name="comments" placeholder="Write a comment . . ."/>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </span>
-                                            </form>
                                             <div class="comment_scroll">
                                                 <span v-for="comment in comments.list" v-bind:key="comment.id">
                                                     <span v-if="comment.phototimor == $route.params.selected_id">
@@ -169,6 +171,10 @@
     .modal-img {
         height: calc(88vh - 64px - 14px);
     }
+    .comment-header {
+        border-bottom: 1px solid rgba(0,0,0,.2);
+        padding-bottom: 12px;
+    }
     .comment_input {
         display: inline-block;
         width: 85%;
@@ -184,6 +190,7 @@
         padding: 9px;
     }
     .comment_scroll {
+        padding-top: 12px;
         overflow-y: auto;
         min-height: 0;
         right: 20px;
