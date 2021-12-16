@@ -1,4 +1,5 @@
 <template>
+:qa
     <span class="loader" v-if="images.requesting">Loading...</span>
     <span class="loader" v-if="images.error">Sorry!</span>
     <div class="addjourney-mapicon">
@@ -88,7 +89,7 @@
                                                 <span v-html="csrfTokenInput" />
                                                 <span class="comment_input">
                                                     <input type="hidden" name="phototimor" :value="$route.params.selected_id">
-                                                    <input type="text" name="comments" placeholder="Write a comment . . ."/>
+                                                    <discord-picker input type="text" git-format="html" :value="value" @update:value="value = $event" name="comments" placeholder="Write a comment . . ."/>
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </span>
                                             </form>
@@ -255,8 +256,10 @@
     import { mapGetters } from 'vuex'
     import 'viewerjs/dist/viewer.css'
     import { api as viewerApi } from "v-viewer"
+    import DiscordPicker from 'vue3-discordpicker'
 
     export default {
+        components: { DiscordPicker },
         props: [
             'url_media',
         ],
@@ -264,6 +267,7 @@
             return {
                 rollover_image_id: 0,
                 selected_image_id: 0,
+                value: '',
             }
         },
         computed: {
@@ -292,7 +296,7 @@
             selectImgObject (image) {
                 let img = [];
                 const urlMedia = this.url_media;
-                this.images.list.forEach( function(image){
+                this.images.list.forEach((image) =>{
                     img.push(urlMedia + image.image)
                 });
                 const indexId = img.indexOf(urlMedia + image);
