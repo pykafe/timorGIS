@@ -89,11 +89,19 @@ def commentphoto_api(request):
 
 class AddCommentView(View):
     def post(self, request, *args, **kwargs):
+
+        if "comments" not in request.POST:
+            return HttpResponseForbidden()
+
+        if "phototimor" not in request.POST:
+            return HttpResponseForbidden()
+
         http_x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if http_x_forwarded_for:
             ip_address = http_x_forwarded_for.split(',')[0]
         else:
             ip_address = request.META.get('REMOTE_ADDR')
+
         comment = CommentPhoto.objects.create(
             phototimor=PhotoTimor.objects.get(id=request.POST["phototimor"]),
             comment=request.POST["comments"],
