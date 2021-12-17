@@ -90,7 +90,7 @@
                                                    <span class="comment_input">
                                                       <input type="hidden" name="phototimor" :value="$route.params.selected_id">
                                                       <discord-picker input type="text" git-format="html" :value="value" @update:value="value = $event" name="comments" placeholder="Write a comment . . ."/>
-                                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                                      <button type="submit" class="btn btn-primary button_submit">Submit</button>
                                                   </span>
                                                 </form>
                                             </div>
@@ -176,8 +176,8 @@
         padding-bottom: 12px;
     }
     .comment_input {
-        display: inline-block;
-        width: 85%;
+        display: flex;
+        width: 99%;
         position: relative;
         bottom: -0.5rem;
         white-space: nowrap;
@@ -253,6 +253,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .button_submit {
+        margin-top: 25px;
     }
 </style>
 
