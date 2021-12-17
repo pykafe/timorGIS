@@ -77,7 +77,7 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="comment-header">
-                                                <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
+                                                <h4 class="modal-title" id="gridSystemModalLabel">Comments ({{ commentsList.length }})</h4>
                                                 <div v-if="amILoggedIn === null">Detecting login...</div>
                                                 <div v-if="add_comment.requesting === true">Adding a comment . . .</div>
                                                 <div v-if="amILoggedIn === false">
@@ -95,8 +95,8 @@
                                                 </form>
                                             </div>
                                             <div class="comment_scroll">
-                                                <span v-for="comment in comments.list" v-bind:key="comment.id">
-                                                    <span v-if="comment.phototimor == $route.params.selected_id">
+                                                <span v-if="comments.list">
+                                                    <span v-for="comment in commentsList" v-bind:key="comment.id">
                                                         <b class="your-name">{{ comment.user.fullname != "" ? comment.user.fullname : comment.user.username }}</b> - <small>{{ $filters.formatDate(comment.sutmit_at) }}</small>
                                                         <p>{{ comment.comment }}</p>
                                                     </span>
@@ -287,6 +287,9 @@
                 return this.selectedImage !== undefined
                     ? `${ this.url_media }${ this.selectedImage.image}`
                     : ""
+            },
+            commentsList(){
+                return this.comments.list.filter(comment => comment.phototimor == this.$route.params.selected_id);
             },
             ...mapState(['images', 'comments', 'add_comment', 'amILoggedIn']),
             ...mapGetters(['csrfTokenInput']),
