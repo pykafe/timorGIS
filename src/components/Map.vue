@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <a href="#" class="btn btn-default">Back</a>
+    <div class="back-button">
+        <a href="#" class="btn btn-default">Close map</a>
     </div>
     <div id="map_container">
         <div id="mapid">
@@ -17,6 +17,9 @@
     position: fixed;
     top: 140px;
     right: 170px;
+}
+.back-button {
+    text-align: right;
 }
 #map_container {
     display: flex;
