@@ -66,58 +66,6 @@ a:hover {
 label {
     font-weight: 600;
 }
-/* STYLING FOR INPUT ELEMENTS */
-
-.white-theme textarea {
-    height: 125px;
-    border: 1px solid var(--blue-1);
-    background: var(--white-2);
-}
-
-input[type=text]:focus, [type=email]:focus, [name=messages]:focus, textarea:not([type="submit"]):focus {
-    z-index: 2;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px var(--blue-2);
-    border-radius: 2px;
-    position: sticky;
-}
-
-input:not([type="submit"]), textarea:not([type="submit"]) {
-    border-radius: 2px;
-    border: 1px solid var(--gray);
-    background: var(--white-1);
-    color: #151313;
-    width: 100%;
-    padding: 11px;
-    cursor: unset;
-}
-
-input[type="file"] {
-    cursor: pointer;
-}
-
-
-/* BUTTONS STYLES */
-/* This button using for "Add" and  "Cancel", This is only on gray theme*/
-.btn-default {
-    background-color: var(--white-2);
-    border-color: var(--blue-1);
-}
-
-.btn-default:hover {
-    background-color: var(--white-1);
-}
-
-/* This button using for "Submit" form*/
-.btn-primary {
-    color: var(--white-1);
-    background-color: var(--blue-2);
-    border-color: var(--blue-1);
-}
-
-.btn-primary:hover {
-    background-color: var(--blue-1);
-    border-color: var(--blue-2);
-}
 
 /* This button using for "Delete" some data */
 .btn-danger {
@@ -353,7 +301,7 @@ button.btn.btn-success.btn-lg {
 
 .btn-pull-right {
     float: right;
-    margin: 4px;
+    margin: 8px;
 }
 
 .row.choose-files {
@@ -647,10 +595,10 @@ ul.dropdown-menu.show > a li img {
     padding: 8px;
     border-radius: 2px;
 }
+
 .viewer-toolbar > ul > li.viewer-reset {
     display: none;
 }
 .viewer-toolbar > ul > li.viewer-play {
     display: none;
 }
-
