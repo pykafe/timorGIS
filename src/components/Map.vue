@@ -12,6 +12,8 @@
 <style  scoped>
 .btn-default {
     margin-top: 20px;
+    background-color: #f0f2f5;
+    border-color: #117a8b;
 }
 #expand {
     position: fixed;
