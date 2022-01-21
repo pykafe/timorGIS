@@ -7,6 +7,13 @@
                 <div class="col-md-12">
                     <a href="#" type="button" class="btn btn-default back-button">Back</a>
                     <h5 class="card-title">{{ selectedIstoria.title}}</h5>
+                    <p class="edit_istotia">
+                        <router-link :to="{name: 'update_istoria' }">
+                            <a href="#">
+                                <img src = "./icons/edit.svg" alt="edit" border = "0"/>
+                            </a>
+                        </router-link>
+                    </p>
                     <p class="card-text">
                         <small class="text-muted">Hosi | {{ $filters.formatDuration(selectedIstoria.duration_of_trip) }}</small>
                     </p>
@@ -67,6 +74,10 @@
         border-color: rgba(29,161,242,1.00);
         margin-top: 0.9rem;
         font-weight: bolder;
+    }
+    p.edit_istotia {
+        position: relative;
+        margin-left: 475px;
     }
 </style>
 
