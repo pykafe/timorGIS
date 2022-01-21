@@ -14,28 +14,34 @@ export default function getRouter(properties) {
             name: 'photos',
             components: {
                 default: PhotoTimor,
-                map: Map,
             },
             props: {
                 default: {
                     'url_media': properties.urls.media_url,
                 },
-                map: {
-                    'url_openstreetmap': properties.urls.openstreetmap,
-                }
             },
         },
         { 
-            path: '/istoria',
+            path: '/istoria/:journey_selected(\\d+)?',
+            //path: '/istoria',
             name: 'istoria',
             components: {
                 default: Istoria,
-                map: Map,
             },
             props: {
                 default: {
+                    'url_media': properties.urls.media_url,
                 },
-                map: {
+            },
+        },
+        { 
+            path: '/map',
+            name: 'map',
+            components: {
+                default: Map,
+            },
+            props: {
+                default: {
                     'url_openstreetmap': properties.urls.openstreetmap,
                 }
             },
