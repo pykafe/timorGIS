@@ -1,14 +1,11 @@
 <template>
     <span class="loader" v-if="images.requesting">Loading...</span>
     <span class="loader" v-if="images.error">Sorry!</span>
-    <div class="search-input-container">
-        <input class="form-control" type="text" v-model="searchJourney" placeholder="Search journey">
-    </div>
     <div class="addjourney-mapicon">
         <router-link :to="{name: 'new_istoria'}">
             <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
         </router-link>
-
+        <input class="form-control search-input-container" type="text" v-model="searchJourney" placeholder="Search journey">
         <router-link :to="{name: 'map'}">
             <a href="#">
                 <img src="./icons/maps.svg" alt="maps" width="50" height="50">
