@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.serializers import serialize
 from django.http import JsonResponse, HttpResponse
-from django.http.response import HttpResponseForbidden
+from django.http.response import HttpResponseForbidden, HttpResponseBadRequest
 from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
@@ -91,7 +91,7 @@ class AddCommentView(View):
     def post(self, request, *args, **kwargs):
 
         if "comments" not in request.POST:
-            return HttpResponseForbidden()
+            return HttpResponseBadRequest()
 
         if "phototimor" not in request.POST:
             return HttpResponseForbidden()
