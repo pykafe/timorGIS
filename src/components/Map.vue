@@ -1,19 +1,36 @@
 <template>
+    <div class="back-button">
+        <a href="#" class="btn btn-default">Close map</a>
+    </div>
     <div id="map_container">
         <div id="mapid">
             <span class="loader" v-if="map.requesting">Loading Districts...</span>
         </div>
-        <button @click="toggleExpand">
-            {{ expanded ? 'SHRINK' : 'EXPAND' }}
-        </button>
     </div>
 </template>
 
 <style  scoped>
-#map_container {
+.btn-default {
+    margin-top: 20px;
+    background-color: #f0f2f5;
+    border-color: #117a8b;
+}
+#expand {
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    top: 140px;
+    right: 170px;
+}
+.back-button {
+    text-align: right;
+}
+#map_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: inherit;
+    top: 90px;
+    right: 12px;
+    margin-top: 20px;
 }
 #map_container button {
     position: absolute;
@@ -26,8 +43,8 @@
     border-width: 5px;
     border-color: black;
     padding: 5px;
-    height: 250px;
-    width: 600px;
+    height: 600px;
+    width: 1300px;
 }
 .loader {
     position: absolute;
@@ -53,7 +70,7 @@
         ],
         data() {
             return {
-                expanded: false,
+                isHidden: true,
             }
         },
         computed: {
@@ -61,9 +78,6 @@
         },
         methods: {
             ...mapActions(['requestMap']),
-            toggleExpand() {
-                this.expanded = !this.expanded;
-            },
             renderMap: function() {
                 const points = {
                     'DEFAULT_CENTER': [-8.8315139, 125.6199236,9],
@@ -90,7 +104,11 @@
         },
         mounted() {
             this.renderMap();
-            this.requestMap();
+            if (this.map.list) {
+                this.renderGeoJSON(this.map.list);
+            } else {
+                this.requestMap();
+            }
         },
     }
 </script>

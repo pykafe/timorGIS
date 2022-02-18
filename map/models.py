@@ -11,6 +11,10 @@ from map.gps_images import ImageMetaData
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.conf import settings
+import json
+
+COMMENT_MAX_LENGTH = getattr(settings, 'COMMENT_MAX_LENGTH', 3000)
 
 
 class Suco(models.Model):
@@ -63,11 +67,14 @@ class IstoriaViazen(models.Model):
         return f'{self.title}, {self.pk}'
 
     def to_json(self):
+        duration_of_trip = json.dumps(self.duration_of_trip, default=str)
         return {
             "pk": self.pk,
             "title": self.title,
             "description": self.description,
             "created_at": self.created_at,
+            "modified_at": self.modified_at,
+            "duration_of_trip": duration_of_trip,
             "creator" : {
                 "pk": self.creator.pk,
                 "username": self.creator.username,
@@ -166,3 +173,40 @@ class PhotoTimor(models.Model):
     def district(self):
         ''' return the district the photo was taken in '''
         return ', '.join(self.get_areas(District).values_list('name', flat=True))
+
+
+class CommentPhoto(models.Model):
+    phototimor = models.ForeignKey(PhotoTimor, verbose_name=_('PhotoTimor'), related_name="comments", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=_('User'), blank=True, null=True, related_name='%(class)s_comments', on_delete=models.SET_NULL)
+    comment = models.TextField(_('Comment'), max_length=COMMENT_MAX_LENGTH)
+    submit_at = models.DateTimeField(_("Submit at"), auto_now_add=True, db_index=True)
+    modified_at= models.DateTimeField(_("Modified at"), auto_now=True)
+    ip_address = models.GenericIPAddressField(_('IP address'), unpack_ipv4=True, blank=True, null=True)
+    is_public = models.BooleanField(_('Is public'), default=True,
+                                    help_text=_('Uncheck this box to make the comment effectively '
+                                                'disappear from the site.'))
+    is_removed = models.BooleanField(_('is removed'), default=False, db_index=True,
+                                     help_text=_('Check this box if the comment is inappropriate. '
+                                                 'A "This comment has been removed" message will '
+                                                 'be displayed instead.'))
+    class Meta:
+        ordering = ('submit_at',)
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
+
+    def __str__(self):
+        return "%s: %s..." % (self.user, self.comment[:50])
+
+    def to_json(self):
+        return {
+            "id": self.pk,
+            "phototimor": str(self.phototimor.pk),
+            "user" : {
+                "pk": self.user.pk,
+                "username": self.user.username,
+                "fullname": self.user.get_full_name(),
+            },
+            "comment": self.comment,
+            "sutmit_at": self.submit_at,
+            "modified_at": self.modified_at,
+        }
