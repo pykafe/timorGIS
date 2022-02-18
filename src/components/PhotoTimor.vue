@@ -95,7 +95,11 @@
                 this.rollover_image_id = id;
             },
             imageCardStyle(image) {
-                return `background-image: url(${ this.url_media }${ image.image_thumbnail})`;
+                if(image.image_thumbnail == ""){
+                    return ""
+                }else{
+                    return `background-image: url(${ this.url_media }${ image.image_thumbnail})`;
+                };
             },
             selectImgObject (image) {
                 let img = [];
