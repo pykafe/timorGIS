@@ -115,7 +115,6 @@
 </template>
 <style scoped>
     .search-input-container {
-        z-index: 1;
         width: 100%;
         max-width: 628px;
         margin: 0 auto;
