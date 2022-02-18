@@ -80,6 +80,12 @@ def queryobject(obj, point):
     queryset = obj.objects.filter(geom__contains=point)
     return queryset
 
+def image_thumbnail(self):
+    if self.image_thumbnail.name != None:
+        return self.image_thumbnail.name
+    else:
+        return ""
+
 class PhotoTimor(models.Model):
     istoriaviazen = models.ForeignKey(IstoriaViazen, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
@@ -91,7 +97,7 @@ class PhotoTimor(models.Model):
         return {
             "id": self.pk,
             "image": self.image.name,
-            "image_thumbnail": self.image_thumbnail.name,
+            "image_thumbnail": image_thumbnail(self),
             "istoria": self.istoriaviazen.to_json(),
         }
 
@@ -112,15 +118,12 @@ class PhotoTimor(models.Model):
 
     def save(self, *args, **kwargs):
         image_pil = Image.open(self.image)
-        if image_pil.mode != "RGB":
-            image_pil = image_pil.convert("RGB")
         image_pil.thumbnail((450, 200))
-        image_pil.rotate(90)
         new_image_io = BytesIO()
         image_pil.save(new_image_io, format="JPEG")
-        image_name = f"{image_pil.width}_{image_pil.height}_{self.image.name}"
+        image_name = f"{self.image.name}"
         self.image_thumbnail.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
-        super(PhotoTimor, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @cached_property
     def point(self):
