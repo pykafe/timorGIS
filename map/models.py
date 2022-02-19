@@ -87,11 +87,6 @@ def queryobject(obj, point):
     queryset = obj.objects.filter(geom__contains=point)
     return queryset
 
-def image_thumbnail(self):
-    if self.image_thumbnail.name != None:
-        return self.image_thumbnail.name
-    else:
-        return ""
 
 class PhotoTimor(models.Model):
     istoriaviazen = models.ForeignKey(IstoriaViazen, related_name='photos', on_delete=models.CASCADE)
@@ -104,7 +99,7 @@ class PhotoTimor(models.Model):
         return {
             "id": self.pk,
             "image": self.image.name,
-            "image_thumbnail": image_thumbnail(self),
+            "image_thumbnail": self.image_thumbnail.name,
             "istoria": self.istoriaviazen.to_json(),
         }
 
@@ -128,7 +123,7 @@ class PhotoTimor(models.Model):
         image_pil.thumbnail((450, 200))
         new_image_io = BytesIO()
         image_pil.save(new_image_io, format="JPEG")
-        image_name = f"{self.image.name}"
+        image_name = f"{image_pil.width}_{image_pil.height}_{self.image.name}"
         self.image_thumbnail.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
         super().save(*args, **kwargs)
 
