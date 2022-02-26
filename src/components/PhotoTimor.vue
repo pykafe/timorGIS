@@ -29,7 +29,7 @@
                             {{ $filters.shorten(image.istoria.description, 75) }}
                         </p>
                         <span>Uploaded by {{ image.istoria.creator.fullname }}</span>
-                        <span class="expand-arrows">
+                        <span class="expand-arrows comment_icon">
                             <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
                                     <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
@@ -274,6 +274,11 @@
     .arrows_icon {
         position: relative;
         top: -129px;
+        margin-left: 220px;
+    }
+    .comment_icon {
+        position: relative;
+        top: 56px;
         margin-left: 220px;
     }
 </style>
