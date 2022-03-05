@@ -325,7 +325,11 @@
                 this.rollover_image_id = id;
             },
             imageCardStyle(image) {
-                return `background-image: url(${ this.url_media }${ image.image})`;
+                if(image.image_thumbnail == ""){
+                    return ""
+                }else{
+                    return `background-image: url(${ this.url_media }${ image.image_thumbnail})`;
+                };
             },
             selectImgObject (image) {
                 let img = [];
@@ -333,7 +337,7 @@
                 this.images.list.forEach( function(image){
                     img.push(urlMedia + image.image)
                 });
-                const indexId = img.indexOf(urlMedia + image);
+                const indexId = img.indexOf(urlMedia + image.image);
                 const $viewer = viewerApi({
                     options: {
                         toolbar: true,
