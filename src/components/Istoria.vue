@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <a href="#" type="button" class="btn btn-default back-button">Back</a>
                     <h5 class="card-title">{{ selectedIstoria.title}}</h5>
-                    <p class="edit_istotia">
+                    <p class="edit_istoria">
                         <router-link :to="{name: 'update_istoria' }">
                             <a href="#">
                                 <img src = "./icons/edit.svg" alt="edit" border = "0"/>
@@ -75,7 +75,7 @@
         margin-top: 0.9rem;
         font-weight: bolder;
     }
-    p.edit_istotia {
+    p.edit_istoria {
         position: relative;
         margin-left: 475px;
     }
