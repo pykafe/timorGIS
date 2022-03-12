@@ -1,6 +1,8 @@
-const { When, Then, After } = require('@cucumber/cucumber');
+const { When, Then, After, setDefaultTimeout } = require('@cucumber/cucumber');
 const assert = require('assert');
 const { Builder, By, until } = require('selenium-webdriver');
+
+setDefaultTimeout(10 * 1000);
 
 When('we visit Timor Journey', async function () {
     // Write code here that turns the phrase above into concrete actions
@@ -8,9 +10,14 @@ When('we visit Timor Journey', async function () {
         .forBrowser('chrome')
         .build();
 
-    //this.driver.wait(until.elementLocated(By.css('nav')));
+    this.driver.wait(until.elementLocated(By.css('body')));
 
     await this.driver.get('http://127.0.0.1:8000/en/vue/');
+});
+
+Then('we should see the app is loading photos', async function () {
+    // Write code here that turns the phrase above into concrete actions
+    return 'pending';
 });
 
 Then('we should see many photos in a grid', async function () {
