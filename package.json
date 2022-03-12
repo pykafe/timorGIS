@@ -31,9 +31,11 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^7.3.2",
     "@vue/compiler-sfc": "^3.0.5",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
+    "selenium-webdriver": "^4.1.1",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
     "vue-loader": "^16.1.2",
