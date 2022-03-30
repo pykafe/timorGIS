@@ -5,17 +5,16 @@
         <router-link :to="{name: 'new_istoria'}">
             <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
         </router-link>
-
+        <input class="form-control search-input-container" type="text" v-model="searchJourney" placeholder="Search journey">
         <router-link :to="{name: 'map'}">
             <a href="#">
                 <img src="./icons/maps.svg" alt="maps" width="50" height="50">
             </a>
         </router-link>
     </div>
-
     <div class="images_container" v-if="images.list">
         <div 
-            v-for="image in images.list" v-bind:key="image.id">
+            v-for="image in resultJourneyQuery" v-bind:key="image.id">
             <div
                 @mouseover="rolloverImage(image.id)"
                 @mouseleave="rollover_image_id = 0"
@@ -112,9 +111,27 @@
                 </div>
             </div>
         </div>
+        <p class="centered" v-if="resultJourneyQuery.length === 0">No results found for query "{{ searchJourney }}"</p>
     </div>
 </template>
 <style scoped>
+    .search-input-container {
+        width: 100%;
+        max-width: 628px;
+        margin: 0 auto;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+    .centered {
+        position: absolute;
+        margin: auto;
+        display: block;
+        bottom: 0px;
+        top: 120px;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
     .addjourney-mapicon {
         justify-content: space-between;
         display: flex;
@@ -279,9 +296,23 @@
                 selected_image_id: 0,
                 value: '',
                 errors:"",
+                searchJourney: null,
             }
         },
         computed: {
+            ...mapState(['images']),
+            resultJourneyQuery() {
+                if (this.searchJourney) {
+                    return this.images.list.filter(journey => {
+                        return this.searchJourney
+                            .toLowerCase()
+                            .split(" ")
+                            .every(v => journey.istoria.title.toLowerCase().includes(v));
+                    });
+                } else {
+                    return this.images.list;
+                }
+            },
             selectedImage() {
                 return this.images.list.find(image => image.id == this.$route.params.selected_id);
             },
@@ -312,7 +343,11 @@
                 this.rollover_image_id = id;
             },
             imageCardStyle(image) {
-                return `background-image: url(${ this.url_media }${ image.image})`;
+                if(image.image_thumbnail == ""){
+                    return ""
+                }else{
+                    return `background-image: url(${ this.url_media }${ image.image_thumbnail})`;
+                };
             },
             selectImgObject (image) {
                 let img = [];
@@ -320,7 +355,7 @@
                 this.images.list.forEach((image) =>{
                     img.push(urlMedia + image.image)
                 });
-                const indexId = img.indexOf(urlMedia + image);
+                const indexId = img.indexOf(urlMedia + image.image);
                 const $viewer = viewerApi({
                     options: {
                         toolbar: true,
