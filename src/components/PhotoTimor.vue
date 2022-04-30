@@ -20,13 +20,13 @@
                 @mouseleave="rollover_image_id = 0"
                 class="image_card rounded" v-bind:style="imageCardStyle(image)">
                 <div class="istoria_title">
-                    {{ image.istoria.title }}
+                    {{ $filters.shorten(image.istoria.title, 30) }}
                     <div v-if="image.id == rollover_image_id">
                         <router-link :to="{name: 'istoria', params: {journey_selected: image.istoria.pk }}">
                             <a href="#">See more..</a>
                         </router-link>
                         <p>
-                            {{ $filters.shorten(image.istoria.description, 75) }}
+                            {{ $filters.shorten(image.istoria.description, 32) }}
                         </p>
                         <span>Uploaded by {{ image.istoria.creator.fullname }}</span>
                         <span class="expand-arrows comment_icon">
