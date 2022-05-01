@@ -76,7 +76,7 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="comment-header">
-                                                <h4 class="modal-title" id="gridSystemModalLabel">Comments</h4>
+                                                <h4 class="modal-title" id="gridSystemModalLabel">Comments ({{ commentsList.length }})</h4>
                                                 <div v-if="amILoggedIn === null">Detecting login...</div>
                                                 <div v-if="add_comment.requesting === true">Adding a comment . . .</div>
                                                 <div v-if="amILoggedIn === false">
@@ -84,18 +84,19 @@
                                                     <a v-bind:href="loginUrl" >Login</a>
                                                     to add a comment
                                                 </div>
-                                                <form @submit.prevent="submitNewComment" v-if="amILoggedIn === true">
-                                                    <span v-html="csrfTokenInput" />
-                                                    <span class="comment_input">
-                                                        <input type="hidden" name="phototimor" :value="$route.params.selected_id">
-                                                        <input type="text" name="comments" placeholder="Write a comment . . ."/>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </span>
+                                                <form @submit.prevent="submitNewCommentCheck" v-if="amILoggedIn === true">
+                                                  <span v-html="csrfTokenInput" />
+                                                   <span class="comment_input">
+                                                      <input type="hidden" name="phototimor" :value="$route.params.selected_id">
+                                                      <discord-picker input type="text" git-format="html" :value="value" @update:value="value = $event" name="comments" placeholder="Write a comment . . ."/>
+                                                      <button type="submit" class="btn btn-primary button_submit">Submit</button>
+                                                  </span>
                                                 </form>
+                                                <p v-if="errors" style="color: red;">{{ errors }}</p>
                                             </div>
                                             <div class="comment_scroll">
-                                                <span v-for="comment in comments.list" v-bind:key="comment.id">
-                                                    <span v-if="comment.phototimor == $route.params.selected_id">
+                                                <span v-if="comments.list">
+                                                    <span v-for="comment in commentsList" v-bind:key="comment.id">
                                                         <b class="your-name">{{ comment.user.fullname != "" ? comment.user.fullname : comment.user.username }}</b> - <small>{{ $filters.formatDate(comment.sutmit_at) }}</small>
                                                         <p>{{ comment.comment }}</p>
                                                     </span>
@@ -193,8 +194,8 @@
         padding-bottom: 12px;
     }
     .comment_input {
-        display: inline-block;
-        width: 85%;
+        display: flex;
+        width: 99%;
         position: relative;
         bottom: -0.5rem;
         white-space: nowrap;
@@ -271,6 +272,9 @@
         align-items: center;
         justify-content: center;
     }
+    .button_submit {
+        margin-top: 25px;
+    }
 </style>
 
 <script>
@@ -279,8 +283,10 @@
     import { mapGetters } from 'vuex'
     import 'viewerjs/dist/viewer.css'
     import { api as viewerApi } from "v-viewer"
+    import DiscordPicker from 'vue3-discordpicker'
 
     export default {
+        components: { DiscordPicker },
         props: [
             'url_media',
         ],
@@ -288,6 +294,8 @@
             return {
                 rollover_image_id: 0,
                 selected_image_id: 0,
+                value: '',
+                errors:"",
                 searchJourney: null,
             }
         },
@@ -313,6 +321,9 @@
                     ? `${ this.url_media }${ this.selectedImage.image}`
                     : ""
             },
+            commentsList(){
+                return this.comments.list.filter(comment => comment.phototimor == this.$route.params.selected_id);
+            },
             ...mapState(['images', 'comments', 'add_comment', 'amILoggedIn']),
             ...mapGetters(['csrfTokenInput']),
             loginUrl() {
@@ -321,6 +332,13 @@
         },
         methods: {
             ...mapActions(['requestImages', 'requestComment', 'submitNewComment', 'detectLogin']),
+            submitNewCommentCheck(e){
+                if(this.value){
+                    this.submitNewComment(e);
+                }else{
+                    this.errors = "Please, write a comment...!!!"
+                }
+            },
             rolloverImage(id){
                 this.rollover_image_id = id;
             },
@@ -334,7 +352,7 @@
             selectImgObject (image) {
                 let img = [];
                 const urlMedia = this.url_media;
-                this.images.list.forEach( function(image){
+                this.images.list.forEach((image) =>{
                     img.push(urlMedia + image.image)
                 });
                 const indexId = img.indexOf(urlMedia + image.image);
