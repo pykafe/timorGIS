@@ -20,28 +20,28 @@
                 @mouseleave="rollover_image_id = 0"
                 class="image_card rounded" v-bind:style="imageCardStyle(image)">
                 <div class="istoria_title">
-                    {{ image.istoria.title }}
+                    {{ $filters.shorten(image.istoria.title, 30) }}
                     <div v-if="image.id == rollover_image_id">
                         <router-link :to="{name: 'istoria', params: {journey_selected: image.istoria.pk }}">
                             <a href="#">See more..</a>
                         </router-link>
                         <p>
-                            {{ $filters.shorten(image.istoria.description, 75) }}
+                            {{ $filters.shorten(image.istoria.description, 32) }}
                         </p>
                         <span>Uploaded by {{ image.istoria.creator.fullname }}</span>
-                        <span class="expand-arrows"><svg  @click="selectImgObject(image.image)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096
+                        <span class="expand-arrows comment_icon">
+                            <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+                                    <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                    <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
+                                </svg>
+                            </router-link>
+                        </span>
+                        <span class="expand-arrows arrows_icon"><svg  @click="selectImgObject(image.image)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096
                         4.096a.5.5 0 0 0 0 .707z"/></svg></span>
                     </div>
                 </div>
             </div>
-            <span>
-                <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
-                        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
-                    </svg>
-                </router-link>
-            </span>
         </div>
         <div class="image_selected" v-show="!!$route.params.selected_id">
             <div tabindex="-1" role="dialog">
@@ -271,6 +271,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .arrows_icon {
+        position: relative;
+        top: -129px;
+        margin-left: 220px;
+    }
+    .comment_icon {
+        position: relative;
+        top: 56px;
+        margin-left: 220px;
     }
     .button_submit {
         margin-top: 25px;
