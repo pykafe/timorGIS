@@ -8,6 +8,9 @@ from django.utils import timezone
 from psycopg2.extras import DateRange
 from django.core.exceptions import ValidationError
 from map.gps_images import ImageMetaData
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
 from django.conf import settings
 import json
 
@@ -84,9 +87,11 @@ def queryobject(obj, point):
     queryset = obj.objects.filter(geom__contains=point)
     return queryset
 
+
 class PhotoTimor(models.Model):
     istoriaviazen = models.ForeignKey(IstoriaViazen, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos', verbose_name='Timor Photo')
+    image_thumbnail = models.ImageField(upload_to='photos/thumbnail', verbose_name='Timor Photo thumbnail', blank=True, null=True)
     created_at = models.DateTimeField(null=False, blank=False, default=timezone.now)
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -94,6 +99,7 @@ class PhotoTimor(models.Model):
         return {
             "id": self.pk,
             "image": self.image.name,
+            "image_thumbnail": self.image_thumbnail.name,
             "istoria": self.istoriaviazen.to_json(),
         }
 
@@ -112,6 +118,14 @@ class PhotoTimor(models.Model):
             if not lat and not lon:
                 raise ValidationError(_("This image has no GPS details" ))
 
+    def save(self, *args, **kwargs):
+        image_pil = Image.open(self.image)
+        image_pil.thumbnail((450, 200))
+        new_image_io = BytesIO()
+        image_pil.save(new_image_io, format="JPEG")
+        image_name = f"{image_pil.width}_{image_pil.height}_{self.image.name}"
+        self.image_thumbnail.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
+        super().save(*args, **kwargs)
 
     @cached_property
     def point(self):

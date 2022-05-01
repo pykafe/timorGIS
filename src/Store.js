@@ -136,7 +136,9 @@ export default function getStore(properties, router) {
             submitNewComment(context, payload) {
                 context.commit('requestingAddComment', {requesting: true});
                 // build the body required
+                const emojiComment = $('.vue3-discord-emojipicker__input').val();
                 const formData = new FormData(payload.srcElement);
+                formData.append('comments', emojiComment);
 
                 fetch(properties.urls.add_comment, { method: 'POST', body: formData }).then(response=> {
                     // react to success or failure of request
