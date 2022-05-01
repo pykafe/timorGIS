@@ -84,7 +84,7 @@
                                                     <a v-bind:href="loginUrl" >Login</a>
                                                     to add a comment
                                                 </div>
-                                                <form @submit.prevent="submitNewComment" v-if="amILoggedIn === true">
+                                                <form @submit.prevent="submitNewCommentCheck" v-if="amILoggedIn === true">
                                                   <span v-html="csrfTokenInput" />
                                                    <span class="comment_input">
                                                       <input type="hidden" name="phototimor" :value="$route.params.selected_id">
@@ -92,6 +92,7 @@
                                                       <button type="submit" class="btn btn-primary button_submit">Submit</button>
                                                   </span>
                                                 </form>
+                                                <p v-if="errors" style="color: red;">{{ errors }}</p>
                                             </div>
                                             <div class="comment_scroll">
                                                 <span v-if="comments.list">
@@ -294,6 +295,7 @@
                 rollover_image_id: 0,
                 selected_image_id: 0,
                 value: '',
+                errors:"",
                 searchJourney: null,
             }
         },
@@ -330,6 +332,13 @@
         },
         methods: {
             ...mapActions(['requestImages', 'requestComment', 'submitNewComment', 'detectLogin']),
+            submitNewCommentCheck(e){
+                if(this.value){
+                    this.submitNewComment(e);
+                }else{
+                    this.errors = "Please, write a comment...!!!"
+                }
+            },
             rolloverImage(id){
                 this.rollover_image_id = id;
             },
