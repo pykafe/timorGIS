@@ -28,7 +28,7 @@
                         <p>
                             {{ $filters.shorten(image.istoria.description, 32) }}
                         </p>
-                        <span>Uploaded by {{ image.istoria.creator.fullname }}</span>
+                        <span>Uploaded by {{ image.istoria.creator.fullname? image.istoria.creator.fullname: image.istoria.creator.username }}</span>
                         <span class="expand-arrows comment_icon">
                             <router-link :to="{name: 'photos', params: {selected_id: image.id }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
