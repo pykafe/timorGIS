@@ -8,7 +8,7 @@
         <input class="form-control search-input-container" type="text" v-model="searchJourney" placeholder="Search journey">
         <router-link :to="{name: 'map'}">
             <a href="#">
-                <img src="./icons/maps.svg" alt="maps" width="50" height="50">
+                <img src="./icons/location_maps.svg" alt="maps" width="50" height="50">
             </a>
         </router-link>
     </div>
