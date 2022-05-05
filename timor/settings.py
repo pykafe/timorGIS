@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'timor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'timor_db',
+        'NAME': 'timorgis_db',
     }
 }
 
