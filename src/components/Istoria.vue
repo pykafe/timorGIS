@@ -6,7 +6,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <a href="#" type="button" class="btn btn-default back-button">Back</a>
-                    <h5 class="card-title">{{ selectedIstoria.title}}</h5>
                     <p class="card-text">
                         <small class="text-muted">Hosi | {{ $filters.formatDuration(selectedIstoria.duration_of_trip) }}</small>
                     </p>
@@ -25,6 +24,7 @@
         </div>
         <div class="col-md-7">
             <div class="card-body">
+                <h5 class="card-title">{{ selectedIstoria.title}}</h5>
                 <p class="card-text">{{ selectedIstoria.description }}</p>
             </div>
         </div>

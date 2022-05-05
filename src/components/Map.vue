@@ -1,6 +1,6 @@
 <template>
     <div class="back-button">
-        <a href="#" class="btn btn-default">Close map</a>
+        <a href="#" class="btn btn-default">Back</a>
     </div>
     <div id="map_container">
         <div id="mapid">

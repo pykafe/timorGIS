@@ -49,16 +49,16 @@
                 </fieldset>
             </form>
         </div>
+        <div v-if="amILoggedIn === null">Detecting login...</div>
+        <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
+        <div v-if="amILoggedIn === false">
+            You must
+            <a v-bind:href="loginUrl" >Login</a>
+            to add a journey
+        </div>
+        <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
+        <span class="loader" v-if="add_istoria.error">Sorry!</span>
     </div>
-    <div v-if="amILoggedIn === null">Detecting login...</div>
-    <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
-    <div v-if="amILoggedIn === false">
-        You must
-        <a v-bind:href="loginUrl" >Login</a>
-        to add a journey
-    </div>
-    <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
-    <span class="loader" v-if="add_istoria.error">Sorry!</span>
 </template>
 <style scoped>
     input.fromDate, input.toDate {

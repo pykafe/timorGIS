@@ -3,7 +3,7 @@
     <span class="loader" v-if="images.error">Sorry!</span>
     <div class="addjourney-mapicon">
         <router-link :to="{name: 'new_istoria'}">
-            <a href="#" class="btn btn-primary add-new-journey">Add my journey</a>
+            <a href="#" class="btn btn-primary add-new-journey">Add your journey</a>
         </router-link>
         <input class="form-control search-input-container" type="text" v-model="searchJourney" placeholder="Search journey">
         <router-link :to="{name: 'map'}">
@@ -346,7 +346,7 @@
                 if(this.value){
                     this.submitNewComment(e);
                 }else{
-                    this.errors = "Please, write a comment...!!!"
+                    this.errors = "Please, write a comment...!"
                 }
             },
             rolloverImage(id){
@@ -365,7 +365,7 @@
                 this.images.list.forEach((image) =>{
                     img.push(urlMedia + image.image)
                 });
-                const indexId = img.indexOf(urlMedia + image.image);
+                const indexId = img.indexOf(urlMedia + image);
                 const $viewer = viewerApi({
                     options: {
                         toolbar: true,
