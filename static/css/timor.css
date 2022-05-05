@@ -1,0 +1,604 @@
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('../fonts/Comfortaa-Regular.woff');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(../fonts/Montserrat-Regular.woff2);
+}
+
+body {
+    margin: 0px;
+    background-color: var(--white-2);
+    color: var(--black-1);
+    font-family: 'Montserrat';
+    font-size: 14px;
+}
+
+:root {
+    --white-1: #FFFFFF;
+    --white-2: #f0f2f5;
+    --black: #000000;
+    --yellow-1: #FFFF00;
+    --yellow-2: #d39e00;
+    --blue-1: #117a8b;
+    --blue-2: #007bff;
+    --red-1: #c0392b;
+    --red-2: #FF0000;
+    --red-3: #f2dede;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Comfortaa';
+}
+
+a {
+    color: var(--red-2);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--blue-1);
+    text-decoration: none
+}
+
+label {
+    font-weight: 600;
+}
+
+/* This button using for "Delete" some data */
+.btn-danger {
+    color: var(--white-1);
+    background-color: var(--red-2);
+    border-color: var(--red-3);
+}
+
+.btn-danger:hover {
+    color: var(--white-1);
+    background-color: var(--red-1);
+    border-color: var(--red-2);
+}
+
+/* This button not REALLY to use it yet */
+.btn-warning {
+    background-color: var(--yellow-1);
+    border-color: var(--yellow-2);
+}
+
+.btn-warning:hover {
+    background-color: var(--yellow-2);
+    border-color: var(--yellow-1);
+}
+.gray-theme {
+    padding: 36px;
+}
+
+/* SPECIFIC COLORS SCHEME FOR WHITE THEME */
+.white-theme {
+    background-color: var(--white-1);
+    padding: 36px;
+}
+
+/* This button using for "Add" and  "Cancel", This is only on white theme*/
+.white-theme .btn-default {
+    background-color: var(--white-1);
+    border-color: var(--blue-1);
+}
+
+.white-theme .btn-default:hover {
+    background-color: var(--white-2);
+}
+
+body .default-gray-theme {
+    border-bottom: 1px solid var(--white-1);
+    background-color: var(--white-2)!important;
+}
+
+.col.form-title {
+    width: 100%;
+    text-align: center;
+    margin: 24px;
+    margin-top: 10px;
+}
+
+.col.form-title > h3:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    left: 0;
+    top: 15px;
+    height: 1px;
+    border-top: 1px solid #31d9ff;
+}
+
+.col.form-title > h3 > span {
+    font-style: normal;
+    background: var(--white-1);
+    position: relative;
+    padding: 10px;
+}
+
+.ui-datepicker .ui-widget-header .ui-icon {
+    background-image: url(../icons/ui-icons_555555_256x240.png);
+}
+
+span.black_text {
+    color: #000000;
+}
+
+span.white_text {
+    color: #FFFFFF;
+}
+
+span.yellow_text {
+    color: #FFFF00;
+}
+
+span.red_text {
+    color: #FF0000;
+}
+
+figure > a.top-right, button.top-right {
+    position: absolute;
+    top: 2px;
+    right: 18px;
+    padding: 1px 10px;
+    margin: 2px;
+    font-weight: 600;
+    background: white;
+    opacity: .6;
+    border-radius: 2px;
+    color: #bbbcbe;
+
+}
+
+a.close.top-right {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 4px 12px;
+    margin: 2px;
+    background: white;
+    opacity: .6;
+    border-radius: 2px;
+}
+
+figure > a.top-right:hover, a.close.top-right:hover {
+    color: var(--white-1);
+    background-color: var(--black);
+    cursor: pointer;
+}
+
+p.detail {
+    color: rgb(0, 123, 255);
+    cursor: pointer;
+}
+
+.view-map {
+    margin: 0px;
+}
+
+.logo {
+    font-size: 46px;
+}
+
+.text {
+    font-size: 18px;
+}
+
+.add-journey {
+    float: right;
+    background-color: white;
+    color: #0062cc;
+}
+
+.list-users {
+    position: sticky;
+    height: 100%;
+    top: 75px;
+    margin-top: 25px;
+}
+
+span.person-name {
+    padding: 8px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1px;
+}
+
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+}
+
+select#id_creator {
+    inline-size: auto;
+    padding: 10px;
+    margin: 5px;
+    background: #e5e5e56b;
+    border-radius: 5px;
+    padding: 3px 22px;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+input#id_duration_of_trip_0, input#id_duration_of_trip_1 {
+    inline-size: auto;
+    padding: 3px 22px;
+    color: #555;
+    display: inline-block;
+    margin: 4px;
+    max-width: 37%;
+}
+
+.select-date-trip {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+span.ui-icon.ui-icon-circle-triangle-w, span.ui-icon.ui-icon-circle-triangle-e {
+    display: contents;
+}
+
+input#id_image_trip {
+    inline-size: auto;
+    background: #e5e5e56b;
+    margin-top: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+}
+
+.form-group.col-12 {
+    max-width: 117%;
+    margin-top: 19px;
+}
+
+.form-group-button {
+    margin: 29px;
+    margin-left: 30px;
+    max-width: ;
+}
+
+a.btn.btn-default.btn-lg {
+    margin-left: 25px;
+    border-radius: 7px;
+    padding: 8px;
+    border-radius: 7px;
+    background-color: darkgrey;
+    font-family: auto;
+}
+
+button.btn.btn-success.btn-lg {
+    font-family: auto;
+}
+
+.btn-pull-right {
+    float: right;
+    margin: 8px;
+}
+
+.row.choose-files {
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+img.gallery-img.add-pointer {
+    cursor: pointer;
+}
+
+img.gallery-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+img.edit-img-display {
+    max-width: 100%;
+    height: 109px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.col-md-6.search-journey {
+    line-height: 2;
+}
+
+.col-9 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.col {
+    margin-bottom: 10px;
+}
+
+span.logo-2 {
+    font-family: 'Comfortaa';
+    color: #32CD32;
+    font-size: 44px;
+}
+
+span.blue-text {
+    color: #4169E1;
+    font-weight: 600;
+}
+
+.row.navbar-journey {
+    border-radius: 4px;
+    position: sticky;
+    z-index: 1;
+    background: #ffffff;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-top: 15px!important;
+}
+
+.display-all-post {
+    padding: 0px;
+    margin-top: 25px;
+}
+
+.each-upload {
+    border-radius: 4px;
+    background-color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.display-all-users {
+    padding-left: 0px;
+    margin-top: 25px;
+}
+
+.each-users {
+    border-radius: 4px;
+    background-color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.footer {
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #ffffff;
+    margin: 75px;
+    margin-bottom: 0px;
+    line-height: 3;
+}
+
+.navbar_header {
+    background-color: var(--white-2);
+    border-bottom: 1px solid #ffffff;
+}
+
+/* set font-family for every h3 to use comfortaa */
+h3 {
+    font-family: 'Comfortaa';
+}
+
+.edit-journey {
+    background-color: #fff;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 900px;
+}
+
+.text-muted {
+    font-size: 12px;
+}
+a.logo {
+    font-family: 'Comfortaa';
+    text-shadow: 0px 1px 2px #444;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.dropdown-edit-and-delete {
+    float: right;
+}
+
+.edit-and-delete-toggle::after {
+    display: inline-block;
+    content: '\2807';
+	font-size: 2em;
+    color: #828282;
+    border-top: unset;
+}
+
+li.hover-list {
+	padding-left: 12px;
+    padding-right: 12px;
+    line-height: 2;
+}
+li.hover-list:hover a {
+    text-decoration: none;
+}
+
+li.hover-list:hover {
+    background-color: rgba(0,0,0,.075);
+}
+
+ul.dropdown-menu.show > li.hover-list.visble-pointer {
+    cursor: pointer;
+}
+
+a.btn.btn-primary.timorgis-login {
+    background-color: white;
+    color: #0062cc;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#language_form > select:hover {
+    cursor: pointer;
+    background-color: #f0f2f5;
+}
+
+
+span.vertical-line {
+    border-left: 1px solid #1b1a1838;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+ul.dropdown-menu.show > li {
+    padding: 8px;
+}
+
+ul.dropdown-menu.show {
+    padding: 12px;
+    line-height: 2;
+    width: 100%;
+    font-size: 12px;
+    right: 0;
+    left: auto;
+}
+
+ul.dropdown-menu.show > a li:hover {
+    background-color: rgba(0,123,255,.25);
+}
+
+ul.dropdown-menu.show > a li {
+    padding: 6px;
+}
+
+ul.dropdown-menu.show > a li img {
+    width: 23px;
+    margin-right: 12px;
+}
+
+.cont-modal {
+    margin-top: 50px;
+}
+
+.button-modal {
+    float: right;
+    background-color: white;
+    color: #0062cc;
+}
+
+.modal-dialog.modal-img {
+    max-width: max-content;
+    height: max-content;
+}
+
+.modal-body.modal-img-body {
+    padding: 1px;
+}
+
+.active {
+    color: black!important;
+    font-weight: bold;
+}
+
+.header-users {
+    border-bottom: 1px solid #f0f2f5
+}
+
+.active-users {
+    background-color: rgba(0,123,255,.25);
+    font-weight: 600;
+    color: var(--blue-1);
+    border-radius: 2px;
+    padding: 6px;
+}
+
+.show-users {
+    padding: 6px;
+}
+.show-users:hover {
+    background-color: #f0f2f5;
+    font-weight: 600;
+    color: var(--blue-1);
+    border-radius: 2px;
+}
+
+.active-users > a {
+    color: var(--blue-1);
+}
+
+.group-upload {
+    margin-top: 50px;
+}
+
+.delete-journey {
+    border: 1px solid #f8f9fa;
+    box-shadow: 0 16px 48px #adb5bd;
+}
+
+.form-delete {
+    margin-bottom: 0px;
+}
+
+.cancel-delete {
+    border-color: var(--gray);
+    background-color: white;
+    color: var(--gray);
+}
+
+.cancel-delete:hover {
+    color: #f8f9fa;
+    background-color: #adb5bd;
+    border-color: #adb5bd;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #ff0019;
+    border-color: #ff0019;
+}
+
+.invalid-feedback {
+    color: #c0392b;
+    background-color: #f2dede;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.viewer-toolbar > ul > li.viewer-reset {
+    display: none;
+}
+.viewer-toolbar > ul > li.viewer-play {
+    display: none;
+}
