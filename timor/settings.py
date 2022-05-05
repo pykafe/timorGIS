@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(g_ipc8-#q9-4a*vwbz)3!47j-8r4_y2tm4$2k8yyo5z$l$30c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -166,12 +166,12 @@ INTERNAL_IPS = [
 # url ba mapa leaflat
 OPENSTREETMAP_URL = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
-CACHES = {
-    'default': {
-        'BACKEND': "django.core.cache.backends.filebased.FileBasedCache",
-        'LOCATION': os.path.join(BASE_DIR, "FileCache"),
-    }
-}
+#CACHES = {
+    #'default': {
+        #'BACKEND': "django.core.cache.backends.filebased.FileBasedCache",
+        #'LOCATION': os.path.join(BASE_DIR, "FileCache"),
+    #}
+#}
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
