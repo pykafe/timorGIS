@@ -18,6 +18,6 @@ class Command(BaseCommand):
                 image_name = f"{image_pil.width}_{image_pil.height}_{photo.image.name}"
                 photo.image_thumbnail.save(image_name, content=ContentFile(new_image_io.getvalue()), save=False)
                 photo.save()
-            self.stdout.write(self.style.SUCCESS('Successfully imported PhotoTimor'))
+                self.stdout.write(self.style.SUCCESS('Successfully imported PhotoTimor'))
         except:
             raise CommandError('Error importing PhotoTimor')
