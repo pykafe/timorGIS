@@ -50,15 +50,17 @@ class DetailMapView(TemplateView):
             except ObjectDoesNotExist:
                 raise Http404()
 
-
         context['districts'] = serialize('geojson', selected_photo.districts(), geometry_field='geom')
         context['subdistricts'] = serialize('geojson', selected_photo.subdistricts(), geometry_field='geom')
         context['sucos'] = serialize('geojson', selected_photo.sucos(), geometry_field='geom')
-        context['DEFAULT_CENTER'] = [selected_photo.point.y, selected_photo.point.x, 10]
-        context['DEFAULT_ZOOM'] = 10
+        try:
+            context['DEFAULT_CENTER'] = [selected_photo.point.y, selected_photo.point.x, 10]
+        except AttributeError:
+            context['DEFAULT_CENTER'] = [-8.8315139, 125.6199236,8],
 
-        context['viazen'] = viazen
+        context['DEFAULT_ZOOM'] = 10
         context['selected_photo'] = selected_photo
+        context['viazen'] = viazen
         context['geoimages'] = images
         context['url_openstreetmap'] = settings.OPENSTREETMAP_URL
         return context
