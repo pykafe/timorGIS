@@ -3,7 +3,7 @@
     <span class="loader" v-if="images.error">Sorry!</span>
     <div class="addjourney-mapicon">
         <router-link :to="{name: 'new_istoria'}">
-            <a href="#" class="btn btn-primary add-new-journey">Add your journey</a>
+            <a href="#" class="btn btn-primary">Add your journey</a>
         </router-link>
         <input class="form-control search-input-container" type="text" v-model="searchJourney" placeholder="Search journey">
         <router-link :to="{name: 'map'}">
@@ -337,7 +337,7 @@
             ...mapState(['images', 'comments', 'add_comment', 'amILoggedIn']),
             ...mapGetters(['csrfTokenInput']),
             loginUrl() {
-                return `/en/accounts/login?next=${location.origin}/en/vue/#/photos/${this.$route.params.selected_id}`;
+                return `/en/accounts/login?next=${location.origin}/en/#/photos/${this.$route.params.selected_id}`;
             }
         },
         methods: {
