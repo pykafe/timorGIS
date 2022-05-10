@@ -274,7 +274,7 @@
     }
     .arrows_icon {
         position: relative;
-        top: -129px;
+        top: -119px;
         margin-left: 220px;
     }
     .comment_icon {
