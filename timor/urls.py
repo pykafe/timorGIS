@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = i18n_patterns(
-    path('', include('map.urls')),
-    path('vue/', include('vue_ui.urls')),
+    path('old/', include('map.urls')),
+    path('', include('vue_ui.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
