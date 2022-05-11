@@ -22,7 +22,7 @@
                 <div class="istoria_title">
                     {{ $filters.shorten(image.istoria.title, 30) }}
                     <div v-if="image.id == rollover_image_id">
-                        <router-link :to="{name: 'istoria', params: {journey_selected: image.istoria.pk }}">
+                        <router-link :to="{name: 'istoria', params: { journey_selected: image.istoria.pk, selected_image: image.id }}">
                             <a href="#">See more..</a>
                         </router-link>
                         <p>

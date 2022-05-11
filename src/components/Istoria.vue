@@ -80,7 +80,7 @@
         ],
         computed: {
             selectedImage() {
-                return this.images.list.find(image => image.istoria.pk == this.$route.params.journey_selected);
+                return this.images.list.find(image => image.id == this.$route.params.selected_image);
             },
             selectedImageSrc() {
                 return this.selectedImage !== undefined
