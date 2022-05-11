@@ -5,7 +5,7 @@
             <form v-if="amILoggedIn === true" @submit.prevent="validateAndSubmitNewJourney" >
                 <fieldset v-bind:disabled="add_istoria.requesting">
                     <span v-html="csrfTokenInput" />
-                    <a href="#" type="button" class="btn btn-outline-info">Back</a>
+                    <a href="#" type="button" class="btn back-button">Back</a>
                     <br/>
                     <div class="row">
                         <div class="col"> <!-- Title -->
@@ -42,7 +42,7 @@
                     <br/>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <button class="btn btn-primary btn-pull-right" >Save journey</button>
+                            <button class="btn btn-primary btn-pull-right add_new_journey" >Save journey</button>
                             <a href="#" class="btn btn-default btn-pull-right">Cancel</a>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
     /* This button using for "Submit" form*/
     .btn-primary {
         color: var(--white-1);
-        background-color: var(--blue-2);
+        background-color: #04bffa;
         border-radius: 15px;
     }
 
@@ -139,6 +139,24 @@
     .card.mb-3 {
         margin-left: 40px;
         margin-right: 40px;
+    }
+    .back-button {
+        font-size: .7rem ;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        margin-right: 0.5rem;
+        border-radius: 2rem;
+        background: #fff;
+        color: rgba(29,161,242,1.00);
+        padding-right: 1rem;
+        padding-left: 1rem;
+        padding-top: 7px;
+        padding-bottom: 4px;
+        border: 1px solid rgba(29,161,242,1.00);
+        letter-spacing: .8px;
+        border-color: rgba(29,161,242,1.00);
+        margin-top: 0.9rem;
+        font-weight: bolder;
     }
 </style>
 

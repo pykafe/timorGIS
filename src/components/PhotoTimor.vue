@@ -3,7 +3,7 @@
     <span class="loader" v-if="images.error">Sorry!</span>
     <div class="addjourney-mapicon">
         <router-link :to="{name: 'new_istoria'}">
-            <a href="#" class="btn btn-primary">Add your journey</a>
+            <a href="#" class="btn btn-primary add_new_journey">Add journey</a>
         </router-link>
         <input class="form-control search-input-container" type="text" v-model="searchJourney" placeholder="Search journey">
         <router-link :to="{name: 'map'}">
@@ -284,6 +284,28 @@
     }
     .button_submit {
         margin-top: 25px;
+    }
+    .add_new_journey {
+        background-color: #04bffa;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.125rem;
+        border: none;
+        border-radius: 9999px;
+        text-align: center;
+        font-weight: 700;
+        transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;
+        transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+        transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;
+        transition-timing-function: cubic-bezier(.4,0,.2,1);
+        transition-duration: .3s;
+        min-height: 40px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 16px;
+        line-height: 23px;
     }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="back-button">
-        <a href="#" class="btn btn-default">Back</a>
+        <a href="#" class="btn btn-back-button">Back</a>
     </div>
     <div id="map_container">
         <div id="mapid">
@@ -57,6 +57,24 @@
     height: 100%;
     z-index: 401;
     font-size: 32px;
+}
+.btn-back-button {
+    font-size: .7rem ;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    margin-right: 0.5rem;
+    border-radius: 2rem;
+    background: #fff;
+    color: rgba(29,161,242,1.00);
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 7px;
+    padding-bottom: 4px;
+    border: 1px solid rgba(29,161,242,1.00);
+    letter-spacing: .8px;
+    border-color: rgba(29,161,242,1.00);
+    margin-top: 0.9rem;
+    font-weight: bolder;
 }
 </style>
 
