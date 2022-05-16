@@ -22,7 +22,6 @@ export default function getRouter(properties) {
         },
         { 
             path: '/istoria/:journey_selected(\\d+)?/:selected_image(\\d+)?',
-            //path: '/istoria',
             name: 'istoria',
             components: {
                 default: Istoria,

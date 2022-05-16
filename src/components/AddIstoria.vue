@@ -52,8 +52,9 @@
         <div v-if="amILoggedIn === null">Detecting login...</div>
         <div v-if="add_istoria.requesting === true">Detecting add Istoria...</div>
         <div v-if="amILoggedIn === false">
+            <a href="#" type="button" class="btn back-button">Back</a>
             You must
-            <a v-bind:href="loginUrl" >Login</a>
+            <a v-bind:href="loginUrl">Login</a>
             to add a journey
         </div>
         <span class="loader" v-if="add_istoria.requesting">Submitting please wait...</span>
