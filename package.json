@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/pykafe/timorGIS#readme",
   "dependencies": {
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "v-viewer": "^3.0.9",
     "vue": "^3.0.5",
     "vue-router": "^4.0.8",
