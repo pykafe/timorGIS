@@ -16,6 +16,10 @@ export default function getStore(properties, router) {
                     requesting: false,
                     error: null,
                 },
+                edit_istoria: {
+                    requesting: false,
+                    error: null,
+                },
                 istoria: {
                     list: null,
                     requesting: false,
@@ -62,6 +66,25 @@ export default function getStore(properties, router) {
             },
             setAddIstoriaError(state, payload) {
                 state.add_istoria.error = payload;
+            },
+
+            requestingUpdateIstoria(state, payload) {
+                state.edit_istoria.requesting = payload.requesting;
+            },
+
+            setUpdateIstoriaList(state, payload) {
+                if (state.images.list !== null) {
+                    payload.photos.forEach(function(photos){
+                        state.images.list.unshift(photos);
+                    });
+                }
+                if (state.istoria.list !== null) {
+                    state.istoria.list.unshift(payload.istoria);
+                }
+            },
+
+            setUpdateIstoriaError(state, payload) {
+                state.edit_istoria.error = payload;
             },
 
             requestingImages(state, payload) {
@@ -133,6 +156,25 @@ export default function getStore(properties, router) {
                     context.commit('requestingAddIstoria', {requesting: false});
                 });
             },
+            submitUpdateJourney(context, payload) {
+                context.commit('requestingUpdateIstoria', {requesting: true});
+                // build the body required
+                const formData = new FormData(payload.srcElement);
+
+                fetch(properties.urls.edit_journey, { method: 'POST', body: formData }).then(response=> {
+                    // react to success or failure of request
+                    return response.json()
+                }).then(response_data => {
+                    context.commit('setUpdateIstoriaList', response_data);
+                    router.push(`/istoria/${ response_data.istoria.pk }`);
+                }).catch((err) => {
+                    // TODO We have an error, tel the user about it
+                    context.commit('setUpdateIstoriaError', {err});
+                }).finally(() => {
+                    context.commit('requestingUpdateIstoria', {requesting: false});
+                });
+            },
+            
             submitNewComment(context, payload) {
                 context.commit('requestingAddComment', {requesting: true});
                 // build the body required

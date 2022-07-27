@@ -5,7 +5,6 @@ from django.http.response import HttpResponseForbidden, HttpResponseBadRequest
 from django.views.generic.base import TemplateView, View
 from django.urls import reverse
 from django.core.cache import cache
-
 from map.models import District, PhotoTimor, IstoriaViazen, CommentPhoto
 
 class VueView(TemplateView):
@@ -44,6 +43,26 @@ class AddIstoriaView(View):
             response_data["photos"].append(photo.to_json())
 
         return JsonResponse(response_data)
+
+def update_view(request, id):
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            if request.POST.get('title') and request.POST.get('description') and request.POST.get('fromDate') and request.POST.get('toDate'):
+                update_istoria = IstoriaViazen.objects.filter(id = id).update(title= request.POST.get('title'), description= request.POST.get('description'), fromDate= request.POST.get('fromDate'), toDate= request.POST.get('toDate'))
+
+            response_data = {
+                "update_istoria": update_istoria.to_json(),
+                "photos": [],
+            }
+            return HttpResponse(response_data)
+
+    def form_valid(self, form):
+        for photo_file in self.request.FILES.getlist('photos'):
+            photo = PhotoTimor.objects.create(istoriaviazen=self.object, image=photo_file)
+            response_data["photos"].append(photo.to_json())
+
+        return JsonResponse(response_data)
+
 
 def login_api(request):
     if request.user.is_authenticated:
@@ -112,5 +131,3 @@ class AddCommentView(View):
             "comment": comment.to_json(),
         }
         return JsonResponse(response_data)
-
-
